@@ -52,6 +52,10 @@ public:
 	void Rotate(const Quaternionf &q);
 	void Move(const Vector3f &dir, float amount);
 
+	inline void SetTranslation(const Vector3f &translation) { m_translation.Set(translation); }
+	inline void SetRotation(const Quaternionf &rotation) { m_rotation.Set(rotation); }
+	inline void SetScaling(const Vector3f &scaling) { m_scaling.Set(scaling); }
+
 	inline Vector3f GetTranslation() const { return m_translation; }
 	inline Quaternionf GetRotation() const { return m_rotation; }
 	inline Vector3f GetScaling() const { return m_scaling; }

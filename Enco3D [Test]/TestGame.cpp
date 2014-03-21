@@ -26,7 +26,7 @@ void TestGame::Init()
 	fieldMaterial->AddFloat("specularIntensity", 1.0f);
 	fieldMaterial->AddFloat("specularExponent", 64.0f);
 
-	GameObject *fieldMeshObject = new GameObject;
+	GameObject *fieldMeshObject = new GameObject("field");
 	fieldMeshObject->GetTransform()->Translate(Vector3f(0, -4, 0));
 	fieldMeshObject->AddComponent(new MeshRenderer(fieldMesh, fieldMaterial));
 	fieldMeshObject->AddComponent(new RigidBodyComponent(new RigidBody(0, 0.8f, 1.0f, 0.2f, 0.1f, new StaticPlaneCollisionShape(Vector3f(0, 1, 0), 0))));
@@ -151,7 +151,11 @@ void TestGame::Init()
 	AddGameObject(fieldMeshObject);
 	//GetRootObject()->AddChild(cubeMeshObject);
 
-	GetRootObject()->AddComponent(new FirstPersonController);
+	GameObject *cameraObject = new GameObject("mainCamera");
+	cameraObject->AddComponent(new CameraComponent(new Camera));
+	cameraObject->AddComponent(new FirstPersonController);
+
+	AddGameObject(cameraObject);
 
 	//GetRenderingEngine()->SetClearColor(0.5f, 0.8f, 1.0f);
 	//GetRenderingEngine()->SetGlobalAmbientColor(Vector3f(0.4f, 0.4f, 0.4f));
@@ -213,7 +217,7 @@ void TestGame::Update()
 			sphereMaterial->AddFloat("specularExponent", 64.0f);
 		}
 
-		GameObject *sphereObject = new GameObject;
+		GameObject *sphereObject = new GameObject("sphere");
 		sphereObject->GetTransform()->Translate(Vector3f(Random::NextFloat() * 4.0f - 2.0f, 10, Random::NextFloat() * 4.0f - 2.0f));
 		sphereObject->AddComponent(new MeshRenderer(sphereMesh, sphereMaterial));
 		sphereObject->AddComponent(new RigidBodyComponent(new RigidBody(1, 0.8f, 1.0f, 0.2f, 0.1f, new SphereCollisionShape(1))));

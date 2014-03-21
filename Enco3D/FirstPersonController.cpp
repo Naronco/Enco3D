@@ -36,19 +36,19 @@ void FirstPersonController::Update()
 	{
 		if (Input::IsKeyDown(SDLK_w))
 		{
-			GetRenderingEngine()->GetMainCamera()->Move(GetRenderingEngine()->GetMainCamera()->GetRotation().GetForward(), speed);
+			GetTransform()->SetTranslation(GetTransform()->GetTranslation() + (GetRenderingEngine()->GetMainCamera()->GetRotation().GetForward() * speed));
 		}
 		if (Input::IsKeyDown(SDLK_s))
 		{
-			GetRenderingEngine()->GetMainCamera()->Move(-GetRenderingEngine()->GetMainCamera()->GetRotation().GetForward(), speed);
+			GetTransform()->SetTranslation(GetTransform()->GetTranslation() + (-GetRenderingEngine()->GetMainCamera()->GetRotation().GetForward() * speed));
 		}
 		if (Input::IsKeyDown(SDLK_a))
 		{
-			GetRenderingEngine()->GetMainCamera()->Move(-GetRenderingEngine()->GetMainCamera()->GetRotation().GetRight(), speed);
+			GetTransform()->SetTranslation(GetTransform()->GetTranslation() + (-GetRenderingEngine()->GetMainCamera()->GetRotation().GetRight() * speed));
 		}
 		if (Input::IsKeyDown(SDLK_d))
 		{
-			GetRenderingEngine()->GetMainCamera()->Move(GetRenderingEngine()->GetMainCamera()->GetRotation().GetRight(), speed);
+			GetTransform()->SetTranslation(GetTransform()->GetTranslation() + (GetRenderingEngine()->GetMainCamera()->GetRotation().GetRight() * speed));
 		}
 
 		int relativeX = Input::GetMouseX() - (GetWindow()->GetWidth() >> 1);
@@ -59,11 +59,13 @@ void FirstPersonController::Update()
 
 		if (rotateY)
 		{
-			GetRenderingEngine()->GetMainCamera()->Rotate(Quaternionf(Vector3f(0, 1, 0), ToRadians(relativeX * m_rotateSpeed)));
+			Quaternionf rotationAmount = Quaternionf(Vector3f(0, 1, 0), ToRadians(relativeX * m_rotateSpeed));
+			GetTransform()->SetRotation((rotationAmount * GetTransform()->GetRotation()).Normalize());
 		}
 		if (rotateX)
 		{
-			GetRenderingEngine()->GetMainCamera()->Rotate(Quaternionf(GetRenderingEngine()->GetMainCamera()->GetRotation().GetRight(), ToRadians(relativeY * m_rotateSpeed)));
+			Quaternionf rotationAmount = Quaternionf(GetRenderingEngine()->GetMainCamera()->GetRotation().GetRight(), ToRadians(relativeY * m_rotateSpeed));
+			GetTransform()->SetRotation((rotationAmount * GetTransform()->GetRotation()).Normalize());
 		}
 
 		if (rotateY || rotateX)

@@ -20,6 +20,7 @@ public:
 	virtual void Init() {  }
 	virtual void Deinit() {  }
 
+	virtual void InitRendering() {  }
 	virtual void InitPhysics() {  }
 
 	virtual void Update() {  }

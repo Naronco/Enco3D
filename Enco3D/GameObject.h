@@ -10,6 +10,7 @@
 
 #include <vector>
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -17,6 +18,7 @@ class GameObject
 {
 private:
 	Transform *m_transform{ nullptr };
+	string m_name;
 
 	vector<GameObject *> m_children;
 	vector<IGameComponent *> m_components;
@@ -28,6 +30,7 @@ private:
 
 public:
 	GameObject();
+	GameObject(const string &name);
 	~GameObject();
 
 	void Update();
@@ -70,6 +73,7 @@ public:
 		for (unsigned int i = 0; i < m_components.size(); i++)
 		{
 			m_components[i]->SetRenderingEngine(renderingEngine);
+			m_components[i]->InitRendering();
 		}
 	}
 
@@ -118,8 +122,11 @@ public:
 			m_components[i]->SetTimer(timer);
 		}
 	}
+
+	inline void SetName(const string &name) { m_name = name; }
 	
 	inline Transform *GetTransform() const { return m_transform; }
+	inline string GetName() const { return m_name; }
 	inline vector<GameObject *> GetChildren() const { return m_children; }
 	inline vector<IGameComponent *> GetComponents() const { return m_components; }
 	inline RenderingEngine *GetRenderingEngine() const { return m_renderingEngine; }

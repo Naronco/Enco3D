@@ -5,6 +5,12 @@ GameObject::GameObject()
 	m_transform = new Transform;
 }
 
+GameObject::GameObject(const string &name)
+{
+	m_name = name;
+	m_transform = new Transform;
+}
+
 GameObject::~GameObject()
 {
 	for (unsigned int i = 0; i < m_children.size(); i++)
