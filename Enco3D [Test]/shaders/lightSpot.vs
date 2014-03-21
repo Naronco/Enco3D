@@ -14,7 +14,7 @@ uniform mat4 projectedMatrix;
 void main()
 {
 	texCoord = in_texCoord;
-	normal = in_normal;
+	normal = mat3(worldMatrix) * in_normal;
 	worldPos = vec3(worldMatrix * vec4(in_position, 1));
 	gl_Position = projectedMatrix * vec4(in_position, 1);
 }
