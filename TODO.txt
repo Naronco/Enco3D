@@ -1,5 +1,0 @@
-- Shadows (Shadow Mapping, Shadow Volumes)
-- Bump Mapping (Normal Mapping, Parallax Mapping, Displacement Mapping)
-- Frustum Culling
-- Deferred Shading
-- Animations
