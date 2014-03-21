@@ -1,14 +1,13 @@
 #include "Mesh.h"
 
+map<string, MeshResource *> Mesh::s_loadedModels;
+
 Mesh::Mesh()
 {
-	GenerateBuffers();
 }
 
 Mesh::Mesh(Vertex *vertices, unsigned int vertexCount)
 {
-	GenerateBuffers();
-
 	unsigned int *indices = new unsigned int[vertexCount];
 	for (unsigned int i = 0; i < vertexCount; i++)
 	{
@@ -20,11 +19,46 @@ Mesh::Mesh(Vertex *vertices, unsigned int vertexCount)
 
 Mesh::Mesh(Vertex *vertices, unsigned int vertexCount, unsigned int *indices, unsigned int indexCount)
 {
-	GenerateBuffers();
 	BuildBuffers(vertices, vertexCount, indices, indexCount);
 }
 
 Mesh::Mesh(const string &filename)
+{
+	m_filename = filename;
+
+	map<string, MeshResource *>::iterator it = s_loadedModels.find(filename);
+	if (it != s_loadedModels.end())
+	{
+		m_resource = s_loadedModels.at(filename);
+		m_resource->AddReference();
+	}
+	else
+	{
+		LoadMesh(filename);
+		s_loadedModels.insert(pair<string, MeshResource *>(m_filename, m_resource));
+	}
+}
+
+Mesh::~Mesh()
+{
+	if (m_resource->RemoveReference() && m_filename.size() > 0)
+	{
+		s_loadedModels.erase(m_filename);
+	}
+}
+
+void Mesh::BuildBuffers(Vertex *vertices, unsigned int vertexCount, unsigned int *indices, unsigned int indexCount)
+{
+	m_resource = new MeshResource(vertexCount, indexCount);
+
+	glBindBuffer(GL_ARRAY_BUFFER, m_resource->GetVBO());
+	glBufferData(GL_ARRAY_BUFFER, m_resource->GetVertexCount() * sizeof(Vertex), vertices, GL_STATIC_DRAW);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_resource->GetIBO());
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_resource->GetIndexCount() * sizeof(unsigned int), indices, GL_STATIC_DRAW);
+}
+
+void Mesh::LoadMesh(const string &filename)
 {
 	OBJModel objModel(filename);
 
@@ -47,7 +81,6 @@ Mesh::Mesh(const string &filename)
 		indices[i] = indexedModel.GetIndices()[i];
 	}
 
-	GenerateBuffers();
 	BuildBuffers(vertices, indexedModel.GetPositions().size(), indices, indexedModel.GetIndices().size());
 
 	if (vertices)
@@ -63,37 +96,19 @@ Mesh::Mesh(const string &filename)
 	}
 }
 
-void Mesh::GenerateBuffers()
-{
-	glGenBuffers(1, &m_vbo);
-	glGenBuffers(1, &m_ibo);
-}
-
-void Mesh::BuildBuffers(Vertex *vertices, unsigned int vertexCount, unsigned int *indices, unsigned int indexCount)
-{
-	m_vertexCount = vertexCount;
-	m_indexCount = indexCount;
-
-	glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
-	glBufferData(GL_ARRAY_BUFFER, m_vertexCount * sizeof(Vertex), vertices, GL_STATIC_DRAW);
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ibo);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_indexCount * sizeof(unsigned int), indices, GL_STATIC_DRAW);
-}
-
 void Mesh::Render()
 {
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
 	glEnableVertexAttribArray(2);
 
-	glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, m_resource->GetVBO());
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *)(sizeof(float) * 3));
 	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *)(sizeof(float) * 5));
 
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ibo);
-	glDrawElements(GL_TRIANGLES, m_indexCount, GL_UNSIGNED_INT, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_resource->GetIBO());
+	glDrawElements(GL_TRIANGLES, m_resource->GetIndexCount(), GL_UNSIGNED_INT, 0);
 
 	glDisableVertexAttribArray(2);
 	glDisableVertexAttribArray(1);

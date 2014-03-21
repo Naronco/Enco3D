@@ -86,7 +86,7 @@
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;opengl32.lib;glu32.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;opengl32.lib;glu32.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;opengl32.lib;glu32.lib;glew32.lib;BulletCollision.lib;BulletDynamics.lib;LinearMath.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <Lib>
       <AdditionalLibraryDirectories>..\Library\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -100,19 +100,27 @@
     <ClInclude Include="DirectionalLightShader.h" />
     <ClInclude Include="FirstPersonController.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="ICollisionShape.h" />
     <ClInclude Include="IGame.h" />
     <ClInclude Include="IGameComponent.h" />
     <ClInclude Include="IndexedModel.h" />
     <ClInclude Include="LightGlobalAmbientShader.h" />
     <ClInclude Include="MathUtil.h" />
     <ClInclude Include="MeshRenderer.h" />
+    <ClInclude Include="MeshResource.h" />
     <ClInclude Include="OBJModel.h" />
+    <ClInclude Include="PhysicsEngine.h" />
+    <ClInclude Include="PhysicsHelper.h" />
     <ClInclude Include="PointLight.h" />
     <ClInclude Include="PointLightShader.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="RenderingEngine.h" />
+    <ClInclude Include="RigidBody.h" />
+    <ClInclude Include="RigidBodyComponent.h" />
+    <ClInclude Include="SphereCollisionShape.h" />
     <ClInclude Include="SpotLight.h" />
     <ClInclude Include="SpotLightShader.h" />
+    <ClInclude Include="StaticPlaneCollisionShape.h" />
     <ClInclude Include="TextureShader.h" />
     <ClInclude Include="Enco3D.h" />
     <ClInclude Include="Error.h" />
@@ -143,11 +151,17 @@
     <ClCompile Include="IndexedModel.cpp" />
     <ClCompile Include="LightGlobalAmbientShader.cpp" />
     <ClCompile Include="MeshRenderer.cpp" />
+    <ClCompile Include="MeshResource.cpp" />
     <ClCompile Include="OBJModel.cpp" />
+    <ClCompile Include="PhysicsEngine.cpp" />
     <ClCompile Include="PointLightShader.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="RenderingEngine.cpp" />
+    <ClCompile Include="RigidBody.cpp" />
+    <ClCompile Include="RigidBodyComponent.cpp" />
+    <ClCompile Include="SphereCollisionShape.cpp" />
     <ClCompile Include="SpotLightShader.cpp" />
+    <ClCompile Include="StaticPlaneCollisionShape.cpp" />
     <ClCompile Include="TextureShader.cpp" />
     <ClCompile Include="GLWindow.cpp" />
     <ClCompile Include="Input.cpp" />

@@ -52,16 +52,3 @@ void GameObject::Render()
 		m_components[i]->Render();
 	}
 }
-
-void GameObject::AddToRenderingEngine()
-{
-	for (unsigned int i = 0; i < m_children.size(); i++)
-	{
-		m_children[i]->AddToRenderingEngine();
-	}
-
-	for (unsigned int i = 0; i < m_components.size(); i++)
-	{
-		m_components[i]->AddToRenderingEngine();
-	}
-}

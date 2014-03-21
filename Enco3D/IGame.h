@@ -2,6 +2,7 @@
 #define _ENCO3D_IGAME_H_
 
 #include "RenderingEngine.h"
+#include "PhysicsEngine.h"
 #include "GLWindow.h"
 #include "Timer.h"
 #include "GameObject.h"
@@ -12,6 +13,9 @@ class IGame
 private:
 	/// <summary>Pointer to the rendering engine</summary>
 	RenderingEngine *m_renderingEngine{ nullptr };
+
+	/// <summary>Pointer to the physics engine</summary>
+	PhysicsEngine *m_physicsEngine{ nullptr };
 
 	/// <summary>Pointer to the GL window</summary>
 	GLWindow *m_window{ nullptr };
@@ -55,12 +59,27 @@ public:
 		GetRootObject()->AddChild(gameObject);
 	}
 
+	/// <summary>Adds the given game component to the scene hierarchy</summary>
+	/// <param name="gameComponent">The game component to add</param>
+	inline void AddGameComponent(IGameComponent *gameComponent)
+	{
+		GetRootObject()->AddComponent(gameComponent);
+	}
+
 	/// <summary>Sets the rendering engine of the hierarchy</summary>
 	/// <param name="renderingEngine">The new rendering engine</param>
 	inline void SetRenderingEngine(RenderingEngine *renderingEngine)
 	{
 		m_renderingEngine = renderingEngine;
 		GetRootObject()->SetRenderingEngine(renderingEngine);
+	}
+
+	/// <summary>Sets the physics engine of the hierarchy</summary>
+	/// <param name="physicsEngine">The new physics engine</param>
+	inline void SetPhysicsEngine(PhysicsEngine *physicsEngine)
+	{
+		m_physicsEngine = physicsEngine;
+		GetRootObject()->SetPhysicsEngine(physicsEngine);
 	}
 
 	/// <summary>Sets the main GL window of the hierarchy</summary>
@@ -81,6 +100,9 @@ public:
 
 	/// <summary>Returns the rendering engine</summary>
 	inline RenderingEngine *GetRenderingEngine() const { return m_renderingEngine; }
+
+	/// <summary>Returns the physics engine</summary>
+	inline PhysicsEngine *GetPhysicsEngine() const { return m_physicsEngine; }
 
 	/// <summary>Returns the main GL window</summary>
 	inline GLWindow *GetWindow() const { return m_window; }

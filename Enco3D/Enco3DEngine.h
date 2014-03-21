@@ -5,6 +5,7 @@
 #include "Timer.h"
 #include "IGame.h"
 #include "RenderingEngine.h"
+#include "PhysicsEngine.h"
 
 class Enco3DEngine
 {
@@ -13,6 +14,7 @@ private:
 	Timer *m_timer{ nullptr };
 	IGame *m_game{ nullptr };
 	RenderingEngine *m_renderingEngine{ nullptr };
+	PhysicsEngine *m_physicsEngine{ nullptr };
 
 public:
 	inline Enco3DEngine() {  }
@@ -25,6 +27,7 @@ public:
 	inline Timer *GetTimer() const { return m_timer; }
 	inline IGame *GetGame() const { return m_game; }
 	inline RenderingEngine *GetRenderingEngine() const { return m_renderingEngine; }
+	inline PhysicsEngine *GetPhysicsEngine() const { return m_physicsEngine; }
 
 public:
 	inline static Enco3DEngine *GetInstance()

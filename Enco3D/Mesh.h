@@ -3,30 +3,34 @@
 
 #include <GL/glew.h>
 #include <string>
+#include <map>
 
 #include "Vertex.h"
 #include "OBJModel.h"
 #include "IndexedModel.h"
+#include "MeshResource.h"
 
 using namespace std;
 
 class Mesh
 {
 private:
-	GLuint m_vbo, m_ibo;
-	unsigned int m_vertexCount, m_indexCount;
+	MeshResource *m_resource;
+	string m_filename;
 
 private:
-	void GenerateBuffers();
+	static map<string, MeshResource *> s_loadedModels;
+
+private:
 	void BuildBuffers(Vertex *vertices, unsigned int vertexCount, unsigned int *indices, unsigned int indexCount);
+	void LoadMesh(const string &filename);
 
 public:
 	Mesh();
-
 	Mesh(Vertex *vertices, unsigned int vertexCount);
 	Mesh(Vertex *vertices, unsigned int vertexCount, unsigned int *indices, unsigned int indexCount);
-	
 	Mesh(const string &filename);
+	~Mesh();
 
 	void Render();
 };

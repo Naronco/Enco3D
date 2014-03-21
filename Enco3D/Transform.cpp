@@ -65,5 +65,5 @@ Matrix4x4f Transform::GetTransformation()
 	Matrix4x4f rotationMatrix = m_rotation.ToRotationMatrix4x4();
 	Matrix4x4f scalingMatrix = Matrix4x4f().Scale(m_scaling.x, m_scaling.y, m_scaling.z);
 
-	return GetParentMatrix() * rotationMatrix * translationMatrix * scalingMatrix;
+	return scalingMatrix * translationMatrix * rotationMatrix * GetParentMatrix();
 }

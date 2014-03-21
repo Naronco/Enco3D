@@ -29,61 +29,7 @@ void TestGame::Init()
 	GameObject *fieldMeshObject = new GameObject;
 	fieldMeshObject->GetTransform()->Translate(Vector3f(0, -4, 0));
 	fieldMeshObject->AddComponent(new MeshRenderer(fieldMesh, fieldMaterial));
-
-	Vertex cubeVertices[24] =
-	{
-		Vertex(-1, -1, -1).SetTexCoord(0, 0).SetNormal( 0, -1,  0),
-		Vertex( 1, -1, -1).SetTexCoord(1, 0).SetNormal( 0, -1,  0),
-		Vertex( 1, -1,  1).SetTexCoord(1, 1).SetNormal( 0, -1,  0),
-		Vertex(-1, -1,  1).SetTexCoord(0, 1).SetNormal( 0, -1,  0),
-		
-		Vertex(-1,  1, -1).SetTexCoord(0, 0).SetNormal( 0,  1,  0),
-		Vertex( 1,  1, -1).SetTexCoord(1, 0).SetNormal( 0,  1,  0),
-		Vertex( 1,  1,  1).SetTexCoord(1, 1).SetNormal( 0,  1,  0),
-		Vertex(-1,  1,  1).SetTexCoord(0, 1).SetNormal( 0,  1,  0),
-
-		Vertex(-1, -1, -1).SetTexCoord(0, 0).SetNormal( 0,  0, -1),
-		Vertex( 1, -1, -1).SetTexCoord(1, 0).SetNormal( 0,  0, -1),
-		Vertex( 1,  1, -1).SetTexCoord(1, 1).SetNormal( 0,  0, -1),
-		Vertex(-1,  1, -1).SetTexCoord(0, 1).SetNormal( 0,  0, -1),
-
-		Vertex(-1, -1,  1).SetTexCoord(0, 0).SetNormal( 0,  0,  1),
-		Vertex( 1, -1,  1).SetTexCoord(1, 0).SetNormal( 0,  0,  1),
-		Vertex( 1,  1,  1).SetTexCoord(1, 1).SetNormal( 0,  0,  1),
-		Vertex(-1,  1,  1).SetTexCoord(0, 1).SetNormal( 0,  0,  1),
-
-		Vertex(-1, -1, -1).SetTexCoord(0, 0).SetNormal(-1,  0,  0),
-		Vertex(-1,  1, -1).SetTexCoord(1, 0).SetNormal(-1,  0,  0),
-		Vertex(-1,  1,  1).SetTexCoord(1, 1).SetNormal(-1,  0,  0),
-		Vertex(-1, -1,  1).SetTexCoord(0, 1).SetNormal(-1,  0,  0),
-
-		Vertex( 1, -1, -1).SetTexCoord(0, 0).SetNormal( 1,  0,  0),
-		Vertex( 1,  1, -1).SetTexCoord(1, 0).SetNormal( 1,  0,  0),
-		Vertex( 1,  1,  1).SetTexCoord(1, 1).SetNormal( 1,  0,  0),
-		Vertex( 1, -1,  1).SetTexCoord(0, 1).SetNormal( 1,  0,  0),
-	};
-
-	unsigned int cubeIndices[36] =
-	{
-		 0,  1,  2,  0,  2,  3,
-		 4,  5,  6,  4,  6,  7,
-		 8,  9, 10,  8, 10, 11,
-		12, 13, 14, 12, 14, 15,
-		16, 17, 18, 16, 18, 19,
-		20, 21, 22, 20, 22, 23
-	};
-
-	Mesh *cubeMesh = new Mesh(cubeVertices, 24, cubeIndices, 36);
-
-	Material *cubeMaterial = new Material;
-	cubeMaterial->AddTexture("diffuse", Texture("texture/test.png", TextureTarget::Texture2D, TextureFilter::Nearest));
-	cubeMaterial->AddFloat("specularIntensity", 1.0f);
-	cubeMaterial->AddFloat("specularExponent", 16.0f);
-
-	GameObject *cubeMeshObject = new GameObject;
-	cubeMeshObject->GetTransform()->Translate(Vector3f(20, -4, 20));
-	cubeMeshObject->AddComponent(new MeshRenderer(cubeMesh, cubeMaterial));
-	//cubeMeshObject->AddComponent(new ChaseComponent);
+	fieldMeshObject->AddComponent(new RigidBodyComponent(new RigidBody(0, new StaticPlaneCollisionShape(Vector3f(0, 1, 0), 0))));
 
 /*	string models[] =
 	{
@@ -181,7 +127,7 @@ void TestGame::Init()
 		Vector3Template::One,
 	};
 
-	GameObject *ponyObject = new GameObject;
+/*	GameObject *ponyObject = new GameObject;
 	
 	for (unsigned int i = 0; i < 10; i++)
 	{
@@ -200,7 +146,8 @@ void TestGame::Init()
 		ponyObject->AddComponent(new MeshRenderer(ponyMesh, ponyMaterial));
 	}
 
-	AddGameObject(ponyObject);
+	AddGameObject(ponyObject);*/
+
 	AddGameObject(fieldMeshObject);
 	//GetRootObject()->AddChild(cubeMeshObject);
 
@@ -249,6 +196,37 @@ void TestGame::Update()
 {
 	m_spotLight->position = GetRenderingEngine()->GetMainCamera()->GetTranslation();
 	m_spotLight->direction = GetRenderingEngine()->GetMainCamera()->GetForward();
+
+	static float timeout = 0.0f;
+
+	if (Input::IsKeyDown(SDLK_e) && timeout < 0.1f)
+	{
+		Mesh *sphereMesh = new Mesh("models/sphere.obj");
+
+		static Material *sphereMaterial = nullptr;
+
+		if (sphereMaterial == nullptr)
+		{
+			sphereMaterial = new Material;
+			sphereMaterial->AddTexture("diffuse", Texture("texture/test.png", TextureTarget::Texture2D, TextureFilter::Nearest));
+			sphereMaterial->AddFloat("specularIntensity", 1.0f);
+			sphereMaterial->AddFloat("specularExponent", 64.0f);
+		}
+
+		GameObject *sphereObject = new GameObject;
+		sphereObject->GetTransform()->Translate(Vector3f(Random::NextFloat() * 4.0f - 2.0f, 10, Random::NextFloat() * 4.0f - 2.0f));
+		sphereObject->AddComponent(new MeshRenderer(sphereMesh, sphereMaterial));
+		sphereObject->AddComponent(new RigidBodyComponent(new RigidBody(1, 0.8f, 1.0f, 0.2f, 0.1f, new SphereCollisionShape(1))));
+
+		AddGameObject(sphereObject);
+
+		timeout = 1.0f;
+	}
+
+	if (timeout > 0.0f)
+	{
+		timeout -= GetTimer()->GetDeltaTime();
+	}
 }
 
 void TestGame::Render()

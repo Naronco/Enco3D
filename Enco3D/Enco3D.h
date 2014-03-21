@@ -11,6 +11,13 @@ namespace Enco3D
 
 // HEADER FILE INCLUDES
 
+// Audio Engine Headers
+
+// Component Headers
+#include "FirstPersonController.h"
+#include "MeshRenderer.h"
+#include "RigidBodyComponent.h"
+
 // Core Engine Headers
 #include "Enco3DEngine.h"
 #include "Error.h"
@@ -31,6 +38,14 @@ namespace Enco3D
 #include "Vector3.h"
 #include "Vector4.h"
 
+// Physics Engine Headers
+#include "ICollisionShape.h"
+#include "PhysicsEngine.h"
+#include "PhysicsHelper.h"
+#include "RigidBody.h"
+#include "SphereCollisionShape.h"
+#include "StaticPlaneCollisionShape.h"
+
 // Rendering Engine Headers
 #include "BaseLight.h"
 #include "Camera.h"
@@ -50,13 +65,5 @@ namespace Enco3D
 #include "Texture.h"
 #include "TextureShader.h"
 #include "Vertex.h"
-
-// Physics Engine Headers
-
-// Audio Engine Headers
-
-// Component Headers
-#include "FirstPersonController.h"
-#include "MeshRenderer.h"
 
 #endif

@@ -6,10 +6,14 @@ void Enco3DEngine::Init(char *windowTitle, unsigned int windowWidth, unsigned in
 	m_timer = new Timer(true);
 	m_game = game;
 	m_renderingEngine = new RenderingEngine;
+	m_physicsEngine = new PhysicsEngine;
+
+	m_physicsEngine->SetTimer(m_timer);
 
 	m_window->Show();
 
 	m_game->SetRenderingEngine(m_renderingEngine);
+	m_game->SetPhysicsEngine(m_physicsEngine);
 	m_game->SetWindow(m_window);
 	m_game->SetTimer(m_timer);
 
@@ -18,17 +22,23 @@ void Enco3DEngine::Init(char *windowTitle, unsigned int windowWidth, unsigned in
 
 void Enco3DEngine::Deinit()
 {
-	if (m_renderingEngine)
-	{
-		delete m_renderingEngine;
-		m_renderingEngine = nullptr;
-	}
-
 	if (m_game)
 	{
 		m_game->Deinit();
 		delete m_game;
 		m_game = nullptr;
+	}
+
+	if (m_physicsEngine)
+	{
+		delete m_physicsEngine;
+		m_physicsEngine = nullptr;
+	}
+
+	if (m_renderingEngine)
+	{
+		delete m_renderingEngine;
+		m_renderingEngine = nullptr;
 	}
 
 	if (m_timer)
@@ -55,6 +65,8 @@ void Enco3DEngine::MainLoop()
 		{
 			m_window->SetFullscreen(false);
 		}
+
+		m_physicsEngine->Update();
 
 		m_timer->Update();
 
