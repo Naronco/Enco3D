@@ -29,7 +29,7 @@ void TestGame::Init()
 	GameObject *fieldMeshObject = new GameObject("field");
 	fieldMeshObject->GetTransform()->Translate(Vector3f(0, -4, 0));
 	fieldMeshObject->AddComponent(new MeshRenderer(fieldMesh, fieldMaterial));
-	fieldMeshObject->AddComponent(new RigidBodyComponent(new RigidBody(0, 0.8f, 1.0f, 0.2f, 0.1f, new StaticPlaneCollisionShape(Vector3f(0, 1, 0), 0))));
+	fieldMeshObject->AddComponent(new RigidBodyComponent(new RigidBody(0, 0.8f, 1.0f, 0.2f, 0.1f, new StaticPlaneCollisionShape(Vector3f(0, 1, 0)))));
 
 /*	string models[] =
 	{
