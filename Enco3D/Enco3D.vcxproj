@@ -116,7 +116,6 @@
     <ClInclude Include="Random.h" />
     <ClInclude Include="RenderingEngine.h" />
     <ClInclude Include="RigidBody.h" />
-    <ClInclude Include="RigidBodyComponent.h" />
     <ClInclude Include="SphereCollisionShape.h" />
     <ClInclude Include="SpotLight.h" />
     <ClInclude Include="SpotLightShader.h" />
@@ -158,7 +157,6 @@
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="RenderingEngine.cpp" />
     <ClCompile Include="RigidBody.cpp" />
-    <ClCompile Include="RigidBodyComponent.cpp" />
     <ClCompile Include="SphereCollisionShape.cpp" />
     <ClCompile Include="SpotLightShader.cpp" />
     <ClCompile Include="StaticPlaneCollisionShape.cpp" />

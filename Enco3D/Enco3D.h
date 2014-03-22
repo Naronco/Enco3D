@@ -20,7 +20,7 @@ namespace Enco3D
 #include "Light.h"
 #include "MeshRenderer.h"
 #include "PointLight.h"
-#include "RigidBodyComponent.h"
+#include "RigidBody.h"
 #include "SpotLight.h"
 
 // Core Engine Headers
@@ -47,7 +47,6 @@ namespace Enco3D
 #include "ICollisionShape.h"
 #include "PhysicsEngine.h"
 #include "PhysicsHelper.h"
-#include "RigidBody.h"
 #include "SphereCollisionShape.h"
 #include "StaticPlaneCollisionShape.h"
 

@@ -165,14 +165,8 @@
     <ClInclude Include="SphereCollisionShape.h">
       <Filter>Headerdateien\Physics</Filter>
     </ClInclude>
-    <ClInclude Include="RigidBody.h">
-      <Filter>Headerdateien\Physics</Filter>
-    </ClInclude>
     <ClInclude Include="PhysicsHelper.h">
       <Filter>Headerdateien\Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="RigidBodyComponent.h">
-      <Filter>Headerdateien\Components</Filter>
     </ClInclude>
     <ClInclude Include="MeshResource.h">
       <Filter>Headerdateien\Rendering</Filter>
@@ -190,6 +184,9 @@
       <Filter>Headerdateien\Components</Filter>
     </ClInclude>
     <ClInclude Include="SpotLight.h">
+      <Filter>Headerdateien\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="RigidBody.h">
       <Filter>Headerdateien\Components</Filter>
     </ClInclude>
   </ItemGroup>
@@ -266,16 +263,13 @@
     <ClCompile Include="SphereCollisionShape.cpp">
       <Filter>Quelldateien\Physics</Filter>
     </ClCompile>
-    <ClCompile Include="RigidBodyComponent.cpp">
-      <Filter>Quelldateien\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="RigidBody.cpp">
-      <Filter>Quelldateien\Physics</Filter>
-    </ClCompile>
     <ClCompile Include="MeshResource.cpp">
       <Filter>Quelldateien\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
+      <Filter>Quelldateien\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="RigidBody.cpp">
       <Filter>Quelldateien\Components</Filter>
     </ClCompile>
   </ItemGroup>

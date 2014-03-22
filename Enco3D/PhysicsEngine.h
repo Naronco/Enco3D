@@ -3,9 +3,10 @@
 
 #include "Vector3.h"
 #include "Timer.h"
-#include "RigidBody.h"
 
 #include <btBulletDynamicsCommon.h>
+
+class RigidBody;
 
 class PhysicsEngine
 {

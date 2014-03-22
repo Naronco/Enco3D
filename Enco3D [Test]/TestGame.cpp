@@ -12,7 +12,9 @@ void TestGame::Init()
 	GameObject *fieldMeshObject = new GameObject("field");
 	fieldMeshObject->GetTransform()->Translate(Vector3f(0, -4, 0));
 	fieldMeshObject->AddComponent(new MeshRenderer(fieldMesh, fieldMaterial));
-	fieldMeshObject->AddComponent(new RigidBodyComponent(new RigidBody(0, 0.8f, 1.0f, 0.2f, 0.1f, new StaticPlaneCollisionShape(Vector3f(0, 1, 0)))));
+	fieldMeshObject->AddComponent(new RigidBody(0, 0.8f, 1.0f, 0.2f, 0.1f, new StaticPlaneCollisionShape(Vector3f(0, 1, 0))));
+
+	AddGameObject(fieldMeshObject);
 
 /*	string models[] =
 	{
@@ -131,9 +133,6 @@ void TestGame::Init()
 
 	AddGameObject(ponyObject);*/
 
-	AddGameObject(fieldMeshObject);
-	//GetRootObject()->AddChild(cubeMeshObject);
-
 	SpotLight *flashLight = new SpotLight;
 	flashLight->SetColor(Vector3f(1, 1, 1));
 	flashLight->SetIntensity(3.0f);
@@ -165,8 +164,6 @@ void TestGame::Init()
 		pointLightObject->AddComponent(pointLight);
 
 		AddGameObject(pointLightObject);
-
-		//GetRenderingEngine()->AddLight(pointLight);
 	}
 }
 
@@ -176,9 +173,6 @@ void TestGame::Deinit()
 
 void TestGame::Update()
 {
-	//m_spotLight->position = GetRenderingEngine()->GetMainCamera()->GetTransform()->GetTranslation();
-	//m_spotLight->direction = GetRenderingEngine()->GetMainCamera()->GetForward();
-
 	static float timeout = 0.0f;
 
 	if (Input::IsKeyDown(SDLK_e) && timeout < 0.1f)
@@ -198,7 +192,7 @@ void TestGame::Update()
 		GameObject *sphereObject = new GameObject("sphere");
 		sphereObject->GetTransform()->Translate(Vector3f(Random::NextFloat() * 4.0f - 2.0f, 10, Random::NextFloat() * 4.0f - 2.0f));
 		sphereObject->AddComponent(new MeshRenderer(sphereMesh, sphereMaterial));
-		sphereObject->AddComponent(new RigidBodyComponent(new RigidBody(1, 0.8f, 1.0f, 0.2f, 0.1f, new SphereCollisionShape(1))));
+		sphereObject->AddComponent(new RigidBody(1, 0.8f, 1.0f, 0.2f, 0.1f, new SphereCollisionShape(1)));
 
 		AddGameObject(sphereObject);
 

@@ -5,8 +5,10 @@
 #include "Vector3.h"
 #include "Quaternion.h"
 #include "PhysicsHelper.h"
+#include "IGameComponent.h"
+#include "PhysicsEngine.h"
 
-class RigidBody
+class RigidBody : public IGameComponent
 {
 private:
 	float m_mass{ 0.0f };
@@ -15,8 +17,6 @@ private:
 	float m_linearDamping{ 0.0f };
 	float m_angularDamping{ 0.0f };
 	ICollisionShape *m_collisionShape{ nullptr };
-	Vector3f m_position;
-	Quaternionf m_rotation;
 
 	btRigidBody *m_bulletPhysicsInstance{ nullptr };
 	btTransform m_transform;
@@ -26,6 +26,9 @@ public:
 	RigidBody(float mass, ICollisionShape *collisionShape);
 	RigidBody(float mass, float restitution, float friction, float linearDamping, float angularDamping, ICollisionShape *collisionShape);
 	
+	void InitPhysics();
+	void Deinit();
+
 	void Update();
 	btRigidBody *CreateBulletPhysicsInstance();
 
@@ -35,8 +38,6 @@ public:
 	inline void SetLinearDamping(float linearDamping) { m_linearDamping = linearDamping; }
 	inline void SetAngularDamping(float angularDamping) { m_angularDamping = angularDamping; }
 	inline void SetCollisionShape(ICollisionShape *collisionShape) { m_collisionShape = collisionShape; }
-	inline void SetPosition(const Vector3f &position) { m_position.Set(position); }
-	inline void SetRotation(const Quaternionf &rotation) { m_rotation.Set(rotation); }
 
 	inline float GetMass() const { return m_mass; }
 	inline float GetRestitution() const { return m_restitution; }
@@ -44,8 +45,6 @@ public:
 	inline float GetLinearDamping() const { return m_linearDamping; }
 	inline float GetAngularDamping() const { return m_angularDamping; }
 	inline ICollisionShape *GetCollisionShape() const { return m_collisionShape; }
-	inline Vector3f GetPosition() const { return m_position; }
-	inline Quaternionf GetRotation() const { return m_rotation; }
 	inline btRigidBody *GetBulletPhysicsInstance() const { return m_bulletPhysicsInstance; }
 };
 

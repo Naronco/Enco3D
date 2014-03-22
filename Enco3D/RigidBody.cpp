@@ -12,6 +12,16 @@ RigidBody::RigidBody(float mass, float restitution, float friction, float linear
 {
 }
 
+void RigidBody::InitPhysics()
+{
+	GetPhysicsEngine()->AddRigidBody(this);
+}
+
+void RigidBody::Deinit()
+{
+	GetPhysicsEngine()->RemoveRigidBody(this);
+}
+
 void RigidBody::Update()
 {
 	if (m_bulletPhysicsInstance == nullptr)
@@ -20,13 +30,13 @@ void RigidBody::Update()
 	}
 
 	m_bulletPhysicsInstance->getMotionState()->getWorldTransform(m_transform);
-	m_position.Set(PhysicsHelper::ToEnco3DVec3<float>(m_transform.getOrigin()));
-	m_rotation.Set(PhysicsHelper::ToEnco3DQuat<float>(m_transform.getRotation()));
+	GetTransform()->SetTranslation(PhysicsHelper::ToEnco3DVec3<float>(m_transform.getOrigin()));
+	GetTransform()->SetRotation(PhysicsHelper::ToEnco3DQuat<float>(m_transform.getRotation()));
 }
 
 btRigidBody *RigidBody::CreateBulletPhysicsInstance()
 {
-	btDefaultMotionState *motionState = new btDefaultMotionState(btTransform(PhysicsHelper::ToBulletPhysicsQuat(m_rotation), PhysicsHelper::ToBulletPhysicsVec3(m_position)));
+	btDefaultMotionState *motionState = new btDefaultMotionState(btTransform(PhysicsHelper::ToBulletPhysicsQuat(GetTransform()->GetRotation()), PhysicsHelper::ToBulletPhysicsVec3(GetTransform()->GetTranslation())));
 	btCollisionShape *shape = m_collisionShape->ToBulletPhysicsCollisionShape();
 	btVector3 inertia(0, 0, 0);
 
