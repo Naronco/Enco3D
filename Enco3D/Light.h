@@ -15,6 +15,7 @@ protected:
 	
 public:
 	void InitRendering() { GetRenderingEngine()->AddLight(this); }
+	void Deinit() { GetRenderingEngine()->RemoveLight(this); }
 
 	virtual void BindToShader(const Vector3f &eyePos) {  }
 

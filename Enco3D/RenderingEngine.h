@@ -6,6 +6,7 @@
 
 #include <vector>
 #include <GL/glew.h>
+#include <algorithm>
 
 using namespace std;
 
@@ -29,6 +30,7 @@ public:
 	Matrix4x4f GetProjectedMatrix(const Matrix4x4f &worldMatrix);
 
 	inline void AddLight(Light *light) { m_lights.push_back(light); }
+	inline void RemoveLight(Light *light) { m_lights.erase(remove(m_lights.begin(), m_lights.end(), light), m_lights.end()); }
 
 	inline void SetClearColor(float r, float g, float b) const { glClearColor(r, g, b, 1); }
 
