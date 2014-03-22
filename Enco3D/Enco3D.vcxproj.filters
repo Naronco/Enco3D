@@ -51,15 +51,6 @@
     <ClInclude Include="stb_image.h">
       <Filter>stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="BaseLight.h">
-      <Filter>Headerdateien\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Headerdateien\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="DirectionalLight.h">
-      <Filter>Headerdateien\Rendering</Filter>
-    </ClInclude>
     <ClInclude Include="DirectionalLightShader.h">
       <Filter>Headerdateien\Rendering</Filter>
     </ClInclude>
@@ -93,9 +84,6 @@
     <ClInclude Include="Mesh.h">
       <Filter>Headerdateien\Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="PointLight.h">
-      <Filter>Headerdateien\Rendering</Filter>
-    </ClInclude>
     <ClInclude Include="PointLightShader.h">
       <Filter>Headerdateien\Rendering</Filter>
     </ClInclude>
@@ -106,9 +94,6 @@
       <Filter>Headerdateien\Core</Filter>
     </ClInclude>
     <ClInclude Include="Shader.h">
-      <Filter>Headerdateien\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="SpotLight.h">
       <Filter>Headerdateien\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="SpotLightShader.h">
@@ -192,13 +177,25 @@
     <ClInclude Include="MeshResource.h">
       <Filter>Headerdateien\Rendering</Filter>
     </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Headerdateien\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectionalLight.h">
+      <Filter>Headerdateien\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>Headerdateien\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="PointLight.h">
+      <Filter>Headerdateien\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SpotLight.h">
+      <Filter>Headerdateien\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stb_image.c">
       <Filter>stb_image</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Quelldateien\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="DirectionalLightShader.cpp">
       <Filter>Quelldateien\Rendering</Filter>
@@ -277,6 +274,9 @@
     </ClCompile>
     <ClCompile Include="MeshResource.cpp">
       <Filter>Quelldateien\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Quelldateien\Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

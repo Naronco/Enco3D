@@ -7,7 +7,7 @@ using namespace Enco3D;
 class TestGame : public IGame
 {
 private:
-	SpotLight *m_spotLight{ nullptr };
+	//SpotLight *m_spotLight{ nullptr };
 	
 public:
 	void Init();

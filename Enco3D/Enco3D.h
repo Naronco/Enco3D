@@ -14,9 +14,14 @@ namespace Enco3D
 // Audio Engine Headers
 
 // Component Headers
+#include "Camera.h"
+#include "DirectionalLight.h"
 #include "FirstPersonController.h"
+#include "Light.h"
 #include "MeshRenderer.h"
+#include "PointLight.h"
 #include "RigidBodyComponent.h"
+#include "SpotLight.h"
 
 // Core Engine Headers
 #include "Enco3DEngine.h"
@@ -47,20 +52,15 @@ namespace Enco3D
 #include "StaticPlaneCollisionShape.h"
 
 // Rendering Engine Headers
-#include "BaseLight.h"
-#include "Camera.h"
-#include "DirectionalLight.h"
 #include "DirectionalLightShader.h"
 #include "IndexedModel.h"
 #include "LightGlobalAmbientShader.h"
 #include "Material.h"
 #include "Mesh.h"
 #include "OBJModel.h"
-#include "PointLight.h"
 #include "PointLightShader.h"
 #include "RenderingEngine.h"
 #include "Shader.h"
-#include "SpotLight.h"
 #include "SpotLightShader.h"
 #include "Texture.h"
 #include "TextureShader.h"

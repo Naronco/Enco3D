@@ -1,24 +1,28 @@
 #ifndef _ENCO3D_POINTLIGHT_H_
 #define _ENCO3D_POINTLIGHT_H_
 
-#include "BaseLight.h"
+#include "Light.h"
 #include "PointLightShader.h"
 
-struct PointLight : public BaseLight
+class PointLight : public Light
 {
-	Vector3f position;
-	float range{ 0.0f };
+private:
+	float m_range{ 0.0f };
 	
+public:
 	PointLight()
 	{
-		shader = PointLightShader::GetInstance();
+		m_shader = PointLightShader::GetInstance();
 	}
 
 	void BindToShader(const Vector3f &eyePos)
 	{
-		((PointLightShader *)shader)->SetEyePos(eyePos);
-		((PointLightShader *)shader)->SetPointLight(color, intensity, position, range);
+		((PointLightShader *)m_shader)->SetEyePos(eyePos);
+		((PointLightShader *)m_shader)->SetPointLight(m_color, m_intensity, GetTransform()->GetTranslation(), m_range);
 	}
+
+	inline void SetRange(float range) { m_range = range; }
+	inline float GetRange() const { return m_range; }
 };
 
 #endif

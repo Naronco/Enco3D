@@ -14,6 +14,7 @@
 using namespace std;
 
 class IGameComponent;
+class Shader;
 
 class GameObject
 {

@@ -134,9 +134,16 @@ void TestGame::Init()
 	AddGameObject(fieldMeshObject);
 	//GetRootObject()->AddChild(cubeMeshObject);
 
+	SpotLight *flashLight = new SpotLight;
+	flashLight->SetColor(Vector3f(1, 1, 1));
+	flashLight->SetIntensity(3.0f);
+	flashLight->SetRange(20.0f);
+	flashLight->SetCutoff(DegreesToSpotCutoff(35.0f));
+
 	GameObject *cameraObject = new GameObject("mainCamera");
 	cameraObject->AddComponent(new Camera);
 	cameraObject->AddComponent(new FirstPersonController);
+	cameraObject->AddComponent(flashLight);
 
 	AddGameObject(cameraObject);
 
@@ -149,30 +156,18 @@ void TestGame::Init()
 	for (int i = 0; i < 30; i++)
 	{
 		PointLight *pointLight = new PointLight;
-		pointLight->color = Vector3f(Random::NextFloat(), Random::NextFloat(), Random::NextFloat());
-		pointLight->intensity = 3.0f;
-		pointLight->position = Vector3f(Random::NextFloat() * 12.0f - 6.0f, -3.9f, Random::NextFloat() * 12.0f - 6.0f);
-		pointLight->range = Random::NextFloat() * 5.0f + 5.0f;
+		pointLight->SetColor(Vector3f(Random::NextFloat(), Random::NextFloat(), Random::NextFloat()));
+		pointLight->SetIntensity(3.0f);
+		pointLight->SetRange(Random::NextFloat() * 5.0f + 5.0f);
 
-		GetRenderingEngine()->AddLight(pointLight);
+		GameObject *pointLightObject = new GameObject("pointLight");
+		pointLightObject->GetTransform()->SetTranslation(Vector3f(Random::NextFloat() * 12.0f - 6.0f, -3.9f, Random::NextFloat() * 12.0f - 6.0f));
+		pointLightObject->AddComponent(pointLight);
+
+		AddGameObject(pointLightObject);
+
+		//GetRenderingEngine()->AddLight(pointLight);
 	}
-
-	m_spotLight = new SpotLight;
-	m_spotLight->color = Vector3f(1, 1, 1);
-	m_spotLight->intensity = 3.0f;
-	m_spotLight->position = GetRenderingEngine()->GetMainCamera()->GetTransform()->GetTranslation();
-	m_spotLight->direction = GetRenderingEngine()->GetMainCamera()->GetForward();
-	m_spotLight->range = 20.0f;
-	m_spotLight->cutoff = DegreesToSpotCutoff(35.0f);
-
-	GetRenderingEngine()->AddLight(m_spotLight);
-	
-	DirectionalLight *directionalLight = new DirectionalLight;
-	directionalLight->color = Vector3f(1, 1, 1);
-	directionalLight->direction = Vector3f(-1, -1, -1).Normalize();
-	directionalLight->intensity = 1.0f;
-
-	//GetRenderingEngine()->AddLight(directionalLight);
 }
 
 void TestGame::Deinit()
@@ -181,8 +176,8 @@ void TestGame::Deinit()
 
 void TestGame::Update()
 {
-	m_spotLight->position = GetRenderingEngine()->GetMainCamera()->GetTransform()->GetTranslation();
-	m_spotLight->direction = GetRenderingEngine()->GetMainCamera()->GetForward();
+	//m_spotLight->position = GetRenderingEngine()->GetMainCamera()->GetTransform()->GetTranslation();
+	//m_spotLight->direction = GetRenderingEngine()->GetMainCamera()->GetForward();
 
 	static float timeout = 0.0f;
 

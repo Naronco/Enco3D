@@ -1,22 +1,21 @@
 #ifndef _ENCO3D_DIRECTIONALLIGHT_H_
 #define _ENCO3D_DIRECTIONALLIGHT_H_
 
-#include "BaseLight.h"
+#include "Light.h"
 #include "DirectionalLightShader.h"
 
-struct DirectionalLight : public BaseLight
+class DirectionalLight : public Light
 {
-	Vector3f direction;
-	
+public:
 	DirectionalLight()
 	{
-		shader = DirectionalLightShader::GetInstance();
+		m_shader = DirectionalLightShader::GetInstance();
 	}
 
 	void BindToShader(const Vector3f &eyePos)
 	{
-		((DirectionalLightShader *)shader)->SetEyePos(eyePos);
-		((DirectionalLightShader *)shader)->SetDirectionalLight(color, intensity, direction);
+		((DirectionalLightShader *)m_shader)->SetEyePos(eyePos);
+		((DirectionalLightShader *)m_shader)->SetDirectionalLight(m_color, m_intensity, GetTransform()->GetRotation().GetForward());
 	}
 };
 

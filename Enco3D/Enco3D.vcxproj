@@ -93,7 +93,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="BaseLight.h" />
+    <ClInclude Include="Light.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Enco3DEngine.h" />
     <ClInclude Include="DirectionalLight.h" />
