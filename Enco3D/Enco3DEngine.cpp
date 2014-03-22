@@ -66,14 +66,14 @@ void Enco3DEngine::MainLoop()
 			m_window->SetFullscreen(false);
 		}
 
+		m_game->GetRootObject()->Update();
+
 		m_physicsEngine->Update();
+		m_renderingEngine->Render(m_game->GetRootObject());
 
 		m_timer->Update();
 
-		m_game->UpdateGameObjects();
 		m_game->Update();
-
-		m_game->RenderGameObjects();
 		m_game->Render();
 	}
 }

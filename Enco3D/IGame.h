@@ -39,19 +39,6 @@ public:
 	/// <summary>Virtual void, which will be called if the game renders (Called once per frame)</summary>
 	virtual void Render() {  }
 
-	/// <summary>Updates all the game objects</summary>
-	inline void UpdateGameObjects()
-	{
-		GetRootObject()->Update();
-	}
-
-	/// <summary>Renders all the game objects and clears the screen</summary>
-	inline void RenderGameObjects()
-	{
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		GetRootObject()->Render();
-	}
-
 	/// <summary>Adds the given game object to the scene hierarchy</summary>
 	/// <param name="gameObject">The game object to add</param>
 	inline void AddGameObject(GameObject *gameObject)

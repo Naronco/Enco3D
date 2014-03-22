@@ -1,4 +1,6 @@
 #include "RenderingEngine.h"
+#include "GameObject.h"
+#include "LightGlobalAmbientShader.h"
 
 RenderingEngine::RenderingEngine()
 {
@@ -26,6 +28,28 @@ RenderingEngine::~RenderingEngine()
 			m_lights[i] = nullptr;
 		}
 	}
+}
+
+void RenderingEngine::Render(GameObject *gameObject)
+{
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	LightGlobalAmbientShader::GetInstance()->SetGlobalAmbientLight(m_globalAmbientColor);
+
+	gameObject->Render(LightGlobalAmbientShader::GetInstance());
+
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_ONE, GL_ONE);
+	glDepthMask(GL_FALSE);
+
+	for (unsigned int i = 0; i < m_lights.size(); i++)
+	{
+		m_lights[i]->BindToShader(m_mainCamera->GetTranslation());
+		gameObject->Render(m_lights[i]->shader);
+	}
+
+	glDepthMask(GL_TRUE);
+	glDisable(GL_BLEND);
 }
 
 Matrix4x4f RenderingEngine::GetProjectedMatrix(const Matrix4x4f &worldMatrix)

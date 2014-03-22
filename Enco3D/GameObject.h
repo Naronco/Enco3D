@@ -2,7 +2,6 @@
 #define _ENCO3D_GAMEOBJECT_H_
 
 #include "Transform.h"
-#include "IGameComponent.h"
 #include "RenderingEngine.h"
 #include "PhysicsEngine.h"
 #include "GLWindow.h"
@@ -13,6 +12,8 @@
 #include <string>
 
 using namespace std;
+
+class IGameComponent;
 
 class GameObject
 {
@@ -34,94 +35,15 @@ public:
 	~GameObject();
 
 	void Update();
-	void Render();
+	void Render(Shader *shader);
 
-	inline GameObject *AddChild(GameObject *child)
-	{
-		child->SetRenderingEngine(m_renderingEngine);
-		child->SetPhysicsEngine(m_physicsEngine);
-		child->SetWindow(m_window);
-		child->SetTimer(m_timer);
-		child->GetTransform()->SetParentTransform(m_transform);
-		m_children.push_back(child);
+	GameObject *AddChild(GameObject *child);
+	GameObject *AddComponent(IGameComponent *component);
 
-		return this;
-	}
-
-	inline GameObject *AddComponent(IGameComponent *component)
-	{
-		component->SetTransform(m_transform);
-		component->SetRenderingEngine(m_renderingEngine);
-		component->SetPhysicsEngine(m_physicsEngine);
-		component->SetWindow(m_window);
-		component->SetTimer(m_timer);
-		component->Init();
-		m_components.push_back(component);
-
-		return this;
-	}
-
-	inline void SetRenderingEngine(RenderingEngine *renderingEngine)
-	{
-		m_renderingEngine = renderingEngine;
-
-		for (unsigned int i = 0; i < m_children.size(); i++)
-		{
-			m_children[i]->SetRenderingEngine(renderingEngine);
-		}
-
-		for (unsigned int i = 0; i < m_components.size(); i++)
-		{
-			m_components[i]->SetRenderingEngine(renderingEngine);
-			m_components[i]->InitRendering();
-		}
-	}
-
-	inline void SetPhysicsEngine(PhysicsEngine *physicsEngine)
-	{
-		m_physicsEngine = physicsEngine;
-
-		for (unsigned int i = 0; i < m_children.size(); i++)
-		{
-			m_children[i]->SetPhysicsEngine(physicsEngine);
-		}
-
-		for (unsigned int i = 0; i < m_components.size(); i++)
-		{
-			m_components[i]->SetPhysicsEngine(physicsEngine);
-			m_components[i]->InitPhysics();
-		}
-	}
-
-	inline void SetWindow(GLWindow *window)
-	{
-		m_window = window;
-
-		for (unsigned int i = 0; i < m_children.size(); i++)
-		{
-			m_children[i]->SetWindow(window);
-		}
-
-		for (unsigned int i = 0; i < m_components.size(); i++)
-		{
-			m_components[i]->SetWindow(window);
-		}
-	}
-
-	inline void SetTimer(Timer *timer)
-	{
-		m_timer = timer;
-
-		for (unsigned int i = 0; i < m_children.size(); i++)
-		{
-			m_children[i]->SetTimer(timer);
-		}
-
-		for (unsigned int i = 0; i < m_components.size(); i++)
-		{
-			m_components[i]->SetTimer(timer);
-		}
-	}
+	void SetRenderingEngine(RenderingEngine *renderingEngine);
+	void SetPhysicsEngine(PhysicsEngine *physicsEngine);
+	void SetWindow(GLWindow *window);
+	void SetTimer(Timer *timer);
 
 	inline void SetName(const string &name) { m_name = name; }
 	

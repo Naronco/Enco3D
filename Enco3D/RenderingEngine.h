@@ -10,6 +10,8 @@
 
 using namespace std;
 
+class GameObject;
+
 class RenderingEngine
 {
 private:
@@ -20,6 +22,8 @@ private:
 public:
 	RenderingEngine();
 	~RenderingEngine();
+
+	void Render(GameObject *gameObject);
 
 	Matrix4x4f GetProjectedMatrix(const Matrix4x4f &worldMatrix);
 

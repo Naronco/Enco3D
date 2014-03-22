@@ -16,7 +16,7 @@ public:
 	MeshRenderer();
 	MeshRenderer(Mesh *mesh, Material *material);
 
-	void Render();
+	void Render(Shader *shader);
 };
 
 #endif

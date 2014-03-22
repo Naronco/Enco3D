@@ -11,8 +11,8 @@ RigidBodyComponent::RigidBodyComponent(RigidBody *rigidBody)
 
 void RigidBodyComponent::InitPhysics()
 {
-	m_rigidBody->SetPosition(m_transform->GetTranslation());
-	m_rigidBody->SetRotation(m_transform->GetRotation());
+	m_rigidBody->SetPosition(GetTransform()->GetTranslation());
+	m_rigidBody->SetRotation(GetTransform()->GetRotation());
 	GetPhysicsEngine()->AddRigidBody(m_rigidBody);
 }
 

@@ -10,18 +10,21 @@ MeshRenderer::MeshRenderer(Mesh *mesh, Material *material)
 	m_material = material;
 }
 
-void MeshRenderer::Render()
+void MeshRenderer::Render(Shader *shader)
 {
-	Matrix4x4f worldMatrix = m_transform->GetTransformation();
-	Matrix4x4f projectedMatrix = m_renderingEngine->GetProjectedMatrix(worldMatrix);
+	Matrix4x4f worldMatrix = GetTransform()->GetTransformation();
+	Matrix4x4f projectedMatrix = GetRenderingEngine()->GetProjectedMatrix(worldMatrix);
 
-	LightGlobalAmbientShader::GetInstance()->SetGlobalAmbientLight(m_renderingEngine->GetGlobalAmbientColor());
+/*	LightGlobalAmbientShader::GetInstance()->SetGlobalAmbientLight(GetRenderingEngine()->GetGlobalAmbientColor());
 
 	LightGlobalAmbientShader::GetInstance()->Bind();
-	LightGlobalAmbientShader::GetInstance()->UpdateUniforms(worldMatrix, projectedMatrix, *m_material);
+	LightGlobalAmbientShader::GetInstance()->UpdateUniforms(worldMatrix, projectedMatrix, *m_material);*/
+
+	shader->Bind();
+	shader->UpdateUniforms(worldMatrix, projectedMatrix, *m_material);
 	m_mesh->Render();
 
-	vector<BaseLight *> lights = m_renderingEngine->GetLights();
+/*	vector<BaseLight *> lights = GetRenderingEngine()->GetLights();
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_ONE, GL_ONE);
@@ -29,7 +32,7 @@ void MeshRenderer::Render()
 
 	for (unsigned int i = 0; i < lights.size(); i++)
 	{
-		lights[i]->BindToShader(m_renderingEngine->GetMainCamera()->GetTranslation());
+		lights[i]->BindToShader(GetRenderingEngine()->GetMainCamera()->GetTranslation());
 
 		lights[i]->shader->Bind();
 		lights[i]->shader->UpdateUniforms(worldMatrix, projectedMatrix, *m_material);
@@ -38,5 +41,5 @@ void MeshRenderer::Render()
 	}
 
 	glDepthMask(GL_TRUE);
-	glDisable(GL_BLEND);
+	glDisable(GL_BLEND);*/
 }
