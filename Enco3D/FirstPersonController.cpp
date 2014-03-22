@@ -64,7 +64,7 @@ void FirstPersonController::Update()
 		}
 		if (rotateX)
 		{
-			Quaternionf rotationAmount = Quaternionf(GetRenderingEngine()->GetMainCamera()->GetRotation().GetRight(), ToRadians(relativeY * m_rotateSpeed));
+			Quaternionf rotationAmount = Quaternionf(GetTransform()->GetRotation().GetRight(), ToRadians(relativeY * m_rotateSpeed));
 			GetTransform()->SetRotation((rotationAmount * GetTransform()->GetRotation()).Normalize());
 		}
 

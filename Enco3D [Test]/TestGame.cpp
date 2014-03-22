@@ -2,24 +2,7 @@
 
 void TestGame::Init()
 {
-	float fieldSize = 8.0f;
-	float textureSize = fieldSize * 2.0f;
-
-	Vertex fieldVertices[4] =
-	{
-		Vertex(-fieldSize, 0,  fieldSize).SetTexCoord(0,           0          ).SetNormal(0, 1, 0),
-		Vertex(-fieldSize, 0, -fieldSize).SetTexCoord(0,           textureSize).SetNormal(0, 1, 0),
-		Vertex( fieldSize, 0,  fieldSize).SetTexCoord(textureSize, 0          ).SetNormal(0, 1, 0),
-		Vertex( fieldSize, 0, -fieldSize).SetTexCoord(textureSize, textureSize).SetNormal(0, 1, 0),
-	};
-
-	unsigned int fieldIndices[6] =
-	{
-		0, 1, 2,
-		1, 3, 2,
-	};
-
-	Mesh *fieldMesh = new Mesh(fieldVertices, 4, fieldIndices, 6);
+	Mesh *fieldMesh = new Mesh("models/field.obj");
 
 	Material *fieldMaterial = new Material;
 	fieldMaterial->AddTexture("diffuse", Texture("texture/test.png", TextureTarget::Texture2D, TextureFilter::Nearest));
@@ -158,7 +141,7 @@ void TestGame::Init()
 	AddGameObject(cameraObject);
 
 	//GetRenderingEngine()->SetClearColor(0.5f, 0.8f, 1.0f);
-	//GetRenderingEngine()->SetGlobalAmbientColor(Vector3f(0.4f, 0.4f, 0.4f));
+	GetRenderingEngine()->SetGlobalAmbientColor(Vector3f(0.0f, 0.0f, 0.0f));
 
 	GetRenderingEngine()->GetMainCamera()->SetPerspectiveProjection(ToRadians(70.0f), (float)GetWindow()->GetWidth() / (float)GetWindow()->GetHeight(), 0.01f, 100.0f);
 	GetRenderingEngine()->GetMainCamera()->Move(Vector3f(0, 0, -1), 5);
