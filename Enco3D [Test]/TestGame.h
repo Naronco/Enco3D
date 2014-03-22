@@ -4,8 +4,6 @@
 #include <Enco3D.h>
 using namespace Enco3D;
 
-#include "ChaseComponent.h"
-
 class TestGame : public IGame
 {
 private:

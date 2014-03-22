@@ -36,19 +36,19 @@ void FirstPersonController::Update()
 	{
 		if (Input::IsKeyDown(SDLK_w))
 		{
-			GetTransform()->SetTranslation(GetTransform()->GetTranslation() + (GetRenderingEngine()->GetMainCamera()->GetRotation().GetForward() * speed));
+			GetTransform()->SetTranslation(GetTransform()->GetTranslation() + (GetTransform()->GetRotation().GetForward() * speed));
 		}
 		if (Input::IsKeyDown(SDLK_s))
 		{
-			GetTransform()->SetTranslation(GetTransform()->GetTranslation() + (-GetRenderingEngine()->GetMainCamera()->GetRotation().GetForward() * speed));
+			GetTransform()->SetTranslation(GetTransform()->GetTranslation() + (-GetTransform()->GetRotation().GetForward() * speed));
 		}
 		if (Input::IsKeyDown(SDLK_a))
 		{
-			GetTransform()->SetTranslation(GetTransform()->GetTranslation() + (-GetRenderingEngine()->GetMainCamera()->GetRotation().GetRight() * speed));
+			GetTransform()->SetTranslation(GetTransform()->GetTranslation() + (-GetTransform()->GetRotation().GetRight() * speed));
 		}
 		if (Input::IsKeyDown(SDLK_d))
 		{
-			GetTransform()->SetTranslation(GetTransform()->GetTranslation() + (GetRenderingEngine()->GetMainCamera()->GetRotation().GetRight() * speed));
+			GetTransform()->SetTranslation(GetTransform()->GetTranslation() + (GetTransform()->GetRotation().GetRight() * speed));
 		}
 
 		int relativeX = Input::GetMouseX() - (GetWindow()->GetWidth() >> 1);

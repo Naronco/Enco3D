@@ -1,6 +1,7 @@
 #include "RenderingEngine.h"
 #include "GameObject.h"
 #include "LightGlobalAmbientShader.h"
+#include "Camera.h"
 
 RenderingEngine::RenderingEngine()
 {
@@ -44,7 +45,7 @@ void RenderingEngine::Render(GameObject *gameObject)
 
 	for (unsigned int i = 0; i < m_lights.size(); i++)
 	{
-		m_lights[i]->BindToShader(m_mainCamera->GetTranslation());
+		m_lights[i]->BindToShader(m_mainCamera->GetTransform()->GetTranslation());
 		gameObject->Render(m_lights[i]->shader);
 	}
 

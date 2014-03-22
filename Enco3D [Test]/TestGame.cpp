@@ -135,7 +135,7 @@ void TestGame::Init()
 	//GetRootObject()->AddChild(cubeMeshObject);
 
 	GameObject *cameraObject = new GameObject("mainCamera");
-	cameraObject->AddComponent(new CameraComponent(new Camera));
+	cameraObject->AddComponent(new Camera);
 	cameraObject->AddComponent(new FirstPersonController);
 
 	AddGameObject(cameraObject);
@@ -144,7 +144,7 @@ void TestGame::Init()
 	GetRenderingEngine()->SetGlobalAmbientColor(Vector3f(0.0f, 0.0f, 0.0f));
 
 	GetRenderingEngine()->GetMainCamera()->SetPerspectiveProjection(ToRadians(70.0f), (float)GetWindow()->GetWidth() / (float)GetWindow()->GetHeight(), 0.01f, 100.0f);
-	GetRenderingEngine()->GetMainCamera()->Move(Vector3f(0, 0, -1), 5);
+	//GetRenderingEngine()->GetMainCamera()->Move(Vector3f(0, 0, -1), 5);
 
 	for (int i = 0; i < 30; i++)
 	{
@@ -160,7 +160,7 @@ void TestGame::Init()
 	m_spotLight = new SpotLight;
 	m_spotLight->color = Vector3f(1, 1, 1);
 	m_spotLight->intensity = 3.0f;
-	m_spotLight->position = GetRenderingEngine()->GetMainCamera()->GetTranslation();
+	m_spotLight->position = GetRenderingEngine()->GetMainCamera()->GetTransform()->GetTranslation();
 	m_spotLight->direction = GetRenderingEngine()->GetMainCamera()->GetForward();
 	m_spotLight->range = 20.0f;
 	m_spotLight->cutoff = DegreesToSpotCutoff(35.0f);
@@ -181,7 +181,7 @@ void TestGame::Deinit()
 
 void TestGame::Update()
 {
-	m_spotLight->position = GetRenderingEngine()->GetMainCamera()->GetTranslation();
+	m_spotLight->position = GetRenderingEngine()->GetMainCamera()->GetTransform()->GetTranslation();
 	m_spotLight->direction = GetRenderingEngine()->GetMainCamera()->GetForward();
 
 	static float timeout = 0.0f;

@@ -2,7 +2,6 @@
 #define _ENCO3D_RENDERINGENGINE_H_
 
 #include "Matrix4x4.h"
-#include "Camera.h"
 #include "Transform.h"
 #include "BaseLight.h"
 
@@ -11,6 +10,7 @@
 using namespace std;
 
 class GameObject;
+class Camera;
 
 class RenderingEngine
 {
