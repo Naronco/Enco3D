@@ -5,11 +5,12 @@ void Enco3DEngine::Init(char *windowTitle, unsigned int windowWidth, unsigned in
 	m_window = new GLWindow(windowTitle, windowWidth, windowHeight);
 	m_timer = new Timer(true);
 	m_game = game;
-	m_renderingEngine = new RenderingEngine;
+	m_renderingEngine = new RenderingEngine(windowWidth, windowHeight);
 	m_physicsEngine = new PhysicsEngine;
 
 	m_physicsEngine->SetTimer(m_timer);
-
+	Random::SetSeed(m_timer->GetTime());
+	
 	m_window->Show();
 
 	m_game->SetRenderingEngine(m_renderingEngine);

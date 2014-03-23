@@ -6,6 +6,7 @@
 #include "IGame.h"
 #include "RenderingEngine.h"
 #include "PhysicsEngine.h"
+#include "Random.h"
 
 class Enco3DEngine
 {
