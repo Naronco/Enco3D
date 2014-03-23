@@ -9,10 +9,6 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Ressourcendateien">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="stb_image">
       <UniqueIdentifier>{b4ea0383-0828-4a40-a2b5-d6a792198ad9}</UniqueIdentifier>
     </Filter>
@@ -210,6 +206,9 @@
     <ClInclude Include="ConeCollisionShape.h">
       <Filter>Headerdateien\Physics</Filter>
     </ClInclude>
+    <ClInclude Include="MeshCollisionShape.h">
+      <Filter>Headerdateien\Physics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stb_image.c">
@@ -312,6 +311,9 @@
       <Filter>Quelldateien\Physics</Filter>
     </ClCompile>
     <ClCompile Include="ConeCollisionShape.cpp">
+      <Filter>Quelldateien\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshCollisionShape.cpp">
       <Filter>Quelldateien\Physics</Filter>
     </ClCompile>
   </ItemGroup>

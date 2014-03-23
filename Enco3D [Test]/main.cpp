@@ -1,6 +1,3 @@
-#include <Enco3D.h>
-using namespace Enco3D;
-
 #include "TestGame.h"
 
 int main(int argc, char *argv[])

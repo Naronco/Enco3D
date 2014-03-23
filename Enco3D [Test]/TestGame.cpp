@@ -150,7 +150,7 @@ void TestGame::Init()
 	AddGameObject(cameraObject);
 
 	//GetRenderingEngine()->SetClearColor(0.5f, 0.8f, 1.0f);
-	GetRenderingEngine()->SetGlobalAmbientColor(Vector3f(0.0f, 0.0f, 0.0f));
+	//GetRenderingEngine()->SetGlobalAmbientColor(Vector3f(0.0f, 0.0f, 0.0f));
 
 	//GetRenderingEngine()->GetMainCamera()->Move(Vector3f(0, 0, -1), 5);
 
@@ -179,7 +179,7 @@ void TestGame::Update()
 
 	if (Input::IsKeyDown(SDLK_e) && timeout < 0.1f)
 	{
-		int rand = Random::NextInt(5);
+		int rand = Random::NextInt(6);
 
 		switch (rand)
 		{
@@ -295,6 +295,29 @@ void TestGame::Update()
 				  sphereObject->AddComponent(new RigidBody(1, 0.8f, 1.0f, 0.2f, 0.1f, new SphereCollisionShape(1)));
 
 				  AddGameObject(sphereObject);
+				  break;
+		}
+
+		case 5:
+		{
+				  Mesh *convexMesh = new Mesh("models/convex.obj");
+
+				  static Material *convexMaterial = nullptr;
+
+				  if (convexMaterial == nullptr)
+				  {
+					  convexMaterial = new Material;
+					  convexMaterial->AddTexture("diffuse", Texture("texture/test.png", TextureTarget::Texture2D, TextureFilter::Nearest));
+					  convexMaterial->AddFloat("specularIntensity", 1.0f);
+					  convexMaterial->AddFloat("specularExponent", 64.0f);
+				  }
+
+				  GameObject *convexObject = new GameObject("convex");
+				  convexObject->GetTransform()->Translate(Vector3f(Random::NextFloat() * 4.0f - 2.0f, 10, Random::NextFloat() * 4.0f - 2.0f));
+				  convexObject->AddComponent(new MeshRenderer(convexMesh, convexMaterial));
+				  convexObject->AddComponent(new RigidBody(1, 0.8f, 1.0f, 0.2f, 0.1f, new MeshCollisionShape(convexMesh)));
+
+				  AddGameObject(convexObject);
 				  break;
 		}
 		}

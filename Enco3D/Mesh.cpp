@@ -45,10 +45,34 @@ Enco3D::Rendering::Mesh::~Mesh()
 	{
 		s_loadedModels.erase(m_filename);
 	}
+
+	if (m_vertices)
+	{
+		delete[] m_vertices;
+		m_vertices = nullptr;
+	}
+
+	if (m_indices)
+	{
+		delete[] m_indices;
+		m_indices = nullptr;
+	}
 }
 
 void Enco3D::Rendering::Mesh::BuildBuffers(Vertex *vertices, unsigned int vertexCount, unsigned int *indices, unsigned int indexCount)
 {
+	m_vertices = new Vertex[vertexCount];
+	for (unsigned int i = 0; i < vertexCount; i++)
+	{
+		m_vertices[i] = vertices[i];
+	}
+
+	m_indices = new unsigned int[indexCount];
+	for (unsigned int i = 0; i < indexCount; i++)
+	{
+		m_indices[i] = indices[i];
+	}
+
 	m_resource = new MeshResource(vertexCount, indexCount);
 
 	glBindBuffer(GL_ARRAY_BUFFER, m_resource->GetVBO());

@@ -112,6 +112,7 @@
     <ClInclude Include="IndexedModel.h" />
     <ClInclude Include="LightGlobalAmbientShader.h" />
     <ClInclude Include="MathUtil.h" />
+    <ClInclude Include="MeshCollisionShape.h" />
     <ClInclude Include="MeshRenderer.h" />
     <ClInclude Include="MeshResource.h" />
     <ClInclude Include="OBJModel.h" />
@@ -162,6 +163,7 @@
     <ClCompile Include="GeometryPassShader.cpp" />
     <ClCompile Include="IndexedModel.cpp" />
     <ClCompile Include="LightGlobalAmbientShader.cpp" />
+    <ClCompile Include="MeshCollisionShape.cpp" />
     <ClCompile Include="MeshRenderer.cpp" />
     <ClCompile Include="MeshResource.cpp" />
     <ClCompile Include="OBJModel.cpp" />

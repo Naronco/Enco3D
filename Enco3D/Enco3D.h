@@ -45,6 +45,7 @@
 #include "ConeCollisionShape.h"
 #include "CylinderCollisionShape.h"
 #include "ICollisionShape.h"
+#include "MeshCollisionShape.h"
 #include "PhysicsEngine.h"
 #include "PhysicsHelper.h"
 #include "SphereCollisionShape.h"
