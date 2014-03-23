@@ -4,18 +4,53 @@
 #include "Camera.h"
 #include "Light.h"
 
+#include "GeometryPassShader.h"
+#include "PostProcessShader.h"
+
 RenderingEngine::RenderingEngine()
 {
-	m_mainCamera = new Camera;
 	m_globalAmbientColor.Set(0.1f, 0.1f, 0.1f);
+	m_gbuffer = new GBuffer;
 
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
 	glClearDepth(1.0);
 }
 
+RenderingEngine::RenderingEngine(unsigned int width, unsigned int height)
+{
+	m_globalAmbientColor.Set(0.1f, 0.1f, 0.1f);
+	m_gbuffer = new GBuffer(width, height);
+
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LEQUAL);
+	glClearDepth(1.0);
+
+	Vertex vertices[4] =
+	{
+		Vertex(-1, -1,  0).SetTexCoord(0, 0).SetNormal(0, 0, 1),
+		Vertex(-1,  1,  0).SetTexCoord(0, 1).SetNormal(0, 0, 1),
+		Vertex( 1,  1,  0).SetTexCoord(1, 1).SetNormal(0, 0, 1),
+		Vertex( 1, -1,  0).SetTexCoord(1, 0).SetNormal(0, 0, 1),
+	};
+
+	unsigned int indices[6] =
+	{
+		0, 1, 2,
+		0, 2, 3,
+	};
+
+	m_renderWindow = new Mesh(vertices, 4, indices, 6);
+}
+
 RenderingEngine::~RenderingEngine()
 {
+	if (m_gbuffer)
+	{
+		delete m_gbuffer;
+		m_gbuffer = nullptr;
+	}
+
 	if (m_mainCamera)
 	{
 		delete m_mainCamera;
@@ -34,6 +69,22 @@ RenderingEngine::~RenderingEngine()
 
 void RenderingEngine::Render(GameObject *gameObject)
 {
+/*	m_gbuffer->Bind();
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	gameObject->Render(GeometryPassShader::GetInstance());
+	m_gbuffer->Debind();
+	
+	Matrix4x4f postProcessWorldMatrix;
+	Matrix4x4f postProcessProjectedMatrix;
+
+	postProcessProjectedMatrix.SetOrthographicProjection(-1, 1, -1, 1, -1, 1);
+
+	PostProcessShader::GetInstance()->SetGBuffer(m_gbuffer);
+	PostProcessShader::GetInstance()->Bind();
+	PostProcessShader::GetInstance()->UpdateUniforms(postProcessWorldMatrix, postProcessProjectedMatrix, m_renderWindowMaterial);
+
+	m_renderWindow->Render();*/
+
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	LightGlobalAmbientShader::GetInstance()->SetGlobalAmbientLight(m_globalAmbientColor);

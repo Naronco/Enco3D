@@ -3,6 +3,9 @@
 
 #include "Matrix4x4.h"
 #include "Transform.h"
+#include "GBuffer.h"
+#include "Mesh.h"
+#include "Material.h"
 
 #include <vector>
 #include <GL/glew.h>
@@ -21,8 +24,14 @@ private:
 	vector<Light *> m_lights;
 	Vector3f m_globalAmbientColor;
 
+	GBuffer *m_gbuffer{ nullptr };
+	unsigned int m_width, m_height;
+	Mesh *m_renderWindow{ nullptr };
+	Material m_renderWindowMaterial;
+
 public:
 	RenderingEngine();
+	RenderingEngine(unsigned int width, unsigned int height);
 	~RenderingEngine();
 
 	void Render(GameObject *gameObject);
@@ -36,10 +45,14 @@ public:
 
 	inline void SetMainCamera(Camera *mainCamera) { m_mainCamera = mainCamera; }
 	inline void SetGlobalAmbientColor(const Vector3f &globalAmbientColor) { m_globalAmbientColor = globalAmbientColor; }
+	inline void SetWidth(unsigned int width) { m_width = width; }
+	inline void SetHeight(unsigned int height) { m_height = height; }
 
 	inline Camera *GetMainCamera() const { return m_mainCamera; }
 	inline vector<Light *> GetLights() const { return m_lights; }
 	inline Vector3f GetGlobalAmbientColor() const { return m_globalAmbientColor; }
+	inline unsigned int GetWidth() const { return m_width; }
+	inline unsigned int GetHeight() const { return m_height; }
 };
 
 #endif
