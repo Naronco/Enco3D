@@ -246,7 +246,7 @@ void TestGame::Update()
 				  GameObject *coneObject = new GameObject("cone");
 				  coneObject->GetTransform()->Translate(Vector3f(Random::NextFloat() * 4.0f - 2.0f, 10, Random::NextFloat() * 4.0f - 2.0f));
 				  coneObject->AddComponent(new MeshRenderer(coneMesh, coneMaterial));
-				  coneObject->AddComponent(new RigidBody(1, 0.8f, 1.0f, 0.2f, 0.1f, new ConeCollisionShape(0.5f, 1)));
+				  coneObject->AddComponent(new RigidBody(1, 0.8f, 1.0f, 0.2f, 0.1f, new ConeCollisionShape(1, 2)));
 
 				  AddGameObject(coneObject);
 				  break;
