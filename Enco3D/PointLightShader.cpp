@@ -1,6 +1,6 @@
 #include "PointLightShader.h"
 
-PointLightShader::PointLightShader()
+Enco3D::Rendering::PointLightShader::PointLightShader()
 {
 	AddVertexShaderFromFile("shaders/lightPoint.vs");
 	AddFragmentShaderFromFile("shaders/lightPoint.fs");
@@ -27,7 +27,7 @@ PointLightShader::PointLightShader()
 	AddUniform("eyePos");
 }
 
-void PointLightShader::UpdateUniforms(const Matrix4x4f &worldMatrix, const Matrix4x4f projectedMatrix, Material &material) const
+void Enco3D::Rendering::PointLightShader::UpdateUniforms(const Enco3D::Core::Matrix4x4f &worldMatrix, const Enco3D::Core::Matrix4x4f projectedMatrix, Material &material) const
 {
 	SetUniformMatrix4x4f("worldMatrix", worldMatrix);
 	SetUniformMatrix4x4f("projectedMatrix", projectedMatrix);

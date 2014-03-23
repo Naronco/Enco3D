@@ -4,31 +4,37 @@
 #include "Shader.h"
 #include "GBuffer.h"
 
-class PostProcessShader : public Shader
+namespace Enco3D
 {
-private:
-	GBuffer *m_gbuffer{ nullptr };
-
-public:
-	PostProcessShader();
-
-	void UpdateUniforms(const Matrix4x4f &worldMatrix, const Matrix4x4f &projectedMatrix, Material &material) const;
-
-	inline void SetGBuffer(GBuffer *gbuffer) { m_gbuffer = gbuffer; }
-	inline GBuffer *GetGBuffer() const { return m_gbuffer; }
-
-public:
-	inline static PostProcessShader *GetInstance()
+	namespace Rendering
 	{
-		static PostProcessShader *instance = nullptr;
-
-		if (instance == nullptr)
+		class PostProcessShader : public Shader
 		{
-			instance = new PostProcessShader;
-		}
+		private:
+			GBuffer *m_gbuffer{ nullptr };
 
-		return instance;
+		public:
+			PostProcessShader();
+
+			void UpdateUniforms(const Matrix4x4f &worldMatrix, const Matrix4x4f &projectedMatrix, Material &material) const;
+
+			inline void SetGBuffer(GBuffer *gbuffer) { m_gbuffer = gbuffer; }
+			inline GBuffer *GetGBuffer() const { return m_gbuffer; }
+
+		public:
+			inline static PostProcessShader *GetInstance()
+			{
+				static PostProcessShader *instance = nullptr;
+
+				if (instance == nullptr)
+				{
+					instance = new PostProcessShader;
+				}
+
+				return instance;
+			}
+		};
 	}
-};
+}
 
 #endif

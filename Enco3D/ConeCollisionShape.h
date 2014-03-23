@@ -3,22 +3,28 @@
 
 #include "ICollisionShape.h"
 
-class ConeCollisionShape : public ICollisionShape
+namespace Enco3D
 {
-private:
-	float m_radius, m_height;
+	namespace Physics
+	{
+		class ConeCollisionShape : public ICollisionShape
+		{
+		private:
+			float m_radius, m_height;
 
-public:
-	ConeCollisionShape();
-	ConeCollisionShape(float radius, float height);
+		public:
+			ConeCollisionShape();
+			ConeCollisionShape(float radius, float height);
 
-	btCollisionShape *ToBulletPhysicsCollisionShape();
+			btCollisionShape *ToBulletPhysicsCollisionShape();
 
-	inline void SetRadius(float radius) { m_radius = radius; }
-	inline void SetHeight(float height) { m_height = height; }
+			inline void SetRadius(float radius) { m_radius = radius; }
+			inline void SetHeight(float height) { m_height = height; }
 
-	inline float GetRadius() const { return m_radius; }
-	inline float GetHeight() const { return m_height; }
-};
+			inline float GetRadius() const { return m_radius; }
+			inline float GetHeight() const { return m_height; }
+		};
+	}
+}
 
 #endif

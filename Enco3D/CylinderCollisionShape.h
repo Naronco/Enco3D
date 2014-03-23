@@ -5,22 +5,30 @@
 #include "Vector3.h"
 #include "PhysicsHelper.h"
 
-class CylinderCollisionShape : public ICollisionShape
+namespace Enco3D
 {
-private:
-	Vector3f m_halfSize;
+	namespace Physics
+	{
+		using namespace Core;
 
-public:
-	CylinderCollisionShape();
-	CylinderCollisionShape(const Vector3f &size);
+		class CylinderCollisionShape : public ICollisionShape
+		{
+		private:
+			Vector3f m_halfSize;
 
-	btCollisionShape *ToBulletPhysicsCollisionShape();
+		public:
+			CylinderCollisionShape();
+			CylinderCollisionShape(const Vector3f &size);
 
-	inline void SetHalfSize(const Vector3f &halfSize) { m_halfSize.Set(halfSize); }
-	inline void SetSize(const Vector3f &size) { m_halfSize.Set(size * 0.5f); }
+			btCollisionShape *ToBulletPhysicsCollisionShape();
 
-	inline Vector3f GetHalfSize() const { return m_halfSize; }
-	inline Vector3f GetSize() const { return m_halfSize * 2.0f; }
-};
+			inline void SetHalfSize(const Vector3f &halfSize) { m_halfSize.Set(halfSize); }
+			inline void SetSize(const Vector3f &size) { m_halfSize.Set(size * 0.5f); }
+
+			inline Vector3f GetHalfSize() const { return m_halfSize; }
+			inline Vector3f GetSize() const { return m_halfSize * 2.0f; }
+		};
+	}
+}
 
 #endif

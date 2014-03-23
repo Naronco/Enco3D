@@ -13,49 +13,68 @@
 
 using namespace std;
 
-class IGameComponent;
-class Shader;
-
-class GameObject
+namespace Enco3D
 {
-private:
-	Transform *m_transform{ nullptr };
-	string m_name;
+	namespace Core
+	{
+		class IGameComponent;
+	}
 
-	vector<GameObject *> m_children;
-	vector<IGameComponent *> m_components;
+	namespace Rendering
+	{
+		class Shader;
+	}
+}
 
-	RenderingEngine *m_renderingEngine{ nullptr };
-	PhysicsEngine *m_physicsEngine{ nullptr };
-	GLWindow *m_window{ nullptr };
-	Timer *m_timer{ nullptr };
+namespace Enco3D
+{
+	namespace Core
+	{
+		using namespace Rendering;
+		using namespace Physics;
 
-public:
-	GameObject();
-	GameObject(const string &name);
-	~GameObject();
+		class GameObject
+		{
+		private:
+			Transform *m_transform{ nullptr };
+			string m_name;
 
-	void Update();
-	void Render(Shader *shader);
+			vector<GameObject *> m_children;
+			vector<IGameComponent *> m_components;
 
-	GameObject *AddChild(GameObject *child);
-	GameObject *AddComponent(IGameComponent *component);
+			RenderingEngine *m_renderingEngine{ nullptr };
+			PhysicsEngine *m_physicsEngine{ nullptr };
+			GLWindow *m_window{ nullptr };
+			Timer *m_timer{ nullptr };
 
-	void SetRenderingEngine(RenderingEngine *renderingEngine);
-	void SetPhysicsEngine(PhysicsEngine *physicsEngine);
-	void SetWindow(GLWindow *window);
-	void SetTimer(Timer *timer);
+		public:
+			GameObject();
+			GameObject(const string &name);
+			~GameObject();
 
-	inline void SetName(const string &name) { m_name = name; }
-	
-	inline Transform *GetTransform() const { return m_transform; }
-	inline string GetName() const { return m_name; }
-	inline vector<GameObject *> GetChildren() const { return m_children; }
-	inline vector<IGameComponent *> GetComponents() const { return m_components; }
-	inline RenderingEngine *GetRenderingEngine() const { return m_renderingEngine; }
-	inline PhysicsEngine *GetPhysicsEngine() const { return m_physicsEngine; }
-	inline GLWindow *GetWindow() const { return m_window; }
-	inline Timer *GetTimer() const { return m_timer; }
-};
+			void Update();
+			void Render(Shader *shader);
+
+			GameObject *AddChild(GameObject *child);
+			GameObject *AddComponent(IGameComponent *component);
+
+			void SetRenderingEngine(RenderingEngine *renderingEngine);
+			void SetPhysicsEngine(PhysicsEngine *physicsEngine);
+			void SetWindow(GLWindow *window);
+			void SetTimer(Timer *timer);
+
+			inline void SetName(const string &name) { m_name = name; }
+
+			inline Transform *GetTransform() const { return m_transform; }
+			inline string GetName() const { return m_name; }
+			inline vector<GameObject *> GetChildren() const { return m_children; }
+			inline vector<IGameComponent *> GetComponents() const { return m_components; }
+			inline RenderingEngine *GetRenderingEngine() const { return m_renderingEngine; }
+			inline PhysicsEngine *GetPhysicsEngine() const { return m_physicsEngine; }
+			inline GLWindow *GetWindow() const { return m_window; }
+			inline Timer *GetTimer() const { return m_timer; }
+		};
+	}
+}
 
 #endif

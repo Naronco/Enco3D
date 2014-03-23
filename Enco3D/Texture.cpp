@@ -1,9 +1,9 @@
 #include "Texture.h"
 
-const Texture *Texture::s_lastBind = nullptr;
-Texture *Texture::s_blankTexture = nullptr;
+const Enco3D::Rendering::Texture *Enco3D::Rendering::Texture::s_lastBind = nullptr;
+Enco3D::Rendering::Texture *Enco3D::Rendering::Texture::s_blankTexture = nullptr;
 
-Texture::Texture(const string &filename, TextureTarget target, TextureFilter filter, TextureWrap wrap)
+Enco3D::Rendering::Texture::Texture(const string &filename, TextureTarget target, TextureFilter filter, TextureWrap wrap)
 {
 	int width, height, bytesPerPixel;
 	unsigned char *data = stbi_load(filename.c_str(), &width, &height, &bytesPerPixel, 4);
@@ -22,12 +22,12 @@ Texture::Texture(const string &filename, TextureTarget target, TextureFilter fil
 	stbi_image_free(data);
 }
 
-Texture::Texture(int width, int height, unsigned char *data, TextureTarget target, TextureFilter filter, TextureWrap wrap)
+Enco3D::Rendering::Texture::Texture(int width, int height, unsigned char *data, TextureTarget target, TextureFilter filter, TextureWrap wrap)
 {
 	InitTexture(width, height, data, target, filter, wrap);
 }
 
-void Texture::InitTexture(int width, int height, unsigned char *data, TextureTarget target, TextureFilter filter, TextureWrap wrap)
+void Enco3D::Rendering::Texture::InitTexture(int width, int height, unsigned char *data, TextureTarget target, TextureFilter filter, TextureWrap wrap)
 {
 	m_textureTarget = target;
 
@@ -50,7 +50,7 @@ void Texture::InitTexture(int width, int height, unsigned char *data, TextureTar
 	}
 }
 
-void Texture::Bind(unsigned int unit) const
+void Enco3D::Rendering::Texture::Bind(unsigned int unit) const
 {
 	if (s_lastBind != this)
 	{
@@ -63,12 +63,12 @@ void Texture::Bind(unsigned int unit) const
 	}
 }
 
-void Texture::Release()
+void Enco3D::Rendering::Texture::Release()
 {
 	glDeleteTextures(1, &m_textureID);
 }
 
-Texture *Texture::GetBlankTexture()
+Enco3D::Rendering::Texture *Enco3D::Rendering::Texture::GetBlankTexture()
 {
 	if (s_blankTexture == nullptr)
 	{

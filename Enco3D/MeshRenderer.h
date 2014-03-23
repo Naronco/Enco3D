@@ -6,17 +6,26 @@
 #include "Material.h"
 #include "LightGlobalAmbientShader.h"
 
-class MeshRenderer : public IGameComponent
+namespace Enco3D
 {
-private:
-	Mesh *m_mesh{ nullptr };
-	Material *m_material{ nullptr };
+	namespace Component
+	{
+		using namespace Core;
+		using namespace Rendering;
 
-public:
-	MeshRenderer();
-	MeshRenderer(Mesh *mesh, Material *material);
+		class MeshRenderer : public IGameComponent
+		{
+		private:
+			Mesh *m_mesh{ nullptr };
+			Material *m_material{ nullptr };
 
-	void Render(Shader *shader);
-};
+		public:
+			MeshRenderer();
+			MeshRenderer(Mesh *mesh, Material *material);
+
+			void Render(Shader *shader);
+		};
+	}
+}
 
 #endif

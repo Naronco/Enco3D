@@ -3,25 +3,31 @@
 
 #include "Shader.h"
 
-class TextureShader : public Shader
+namespace Enco3D
 {
-public:
-	TextureShader();
-
-	void UpdateUniforms(const Matrix4x4f &worldMatrix, const Matrix4x4f &projectedMatrix, Material &material) const;
-
-public:
-	inline static TextureShader *GetInstance()
+	namespace Rendering
 	{
-		static TextureShader *instance = nullptr;
-
-		if (instance == nullptr)
+		class TextureShader : public Shader
 		{
-			instance = new TextureShader;
-		}
+		public:
+			TextureShader();
 
-		return instance;
+			void UpdateUniforms(const Matrix4x4f &worldMatrix, const Matrix4x4f &projectedMatrix, Material &material) const;
+
+		public:
+			inline static TextureShader *GetInstance()
+			{
+				static TextureShader *instance = nullptr;
+
+				if (instance == nullptr)
+				{
+					instance = new TextureShader;
+				}
+
+				return instance;
+			}
+		};
 	}
-};
+}
 
 #endif

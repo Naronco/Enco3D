@@ -8,28 +8,36 @@
 
 using namespace std;
 
-class IndexedModel
+namespace Enco3D
 {
-private:
-	vector<Vector3f> m_positions;
-	vector<Vector2f> m_texCoords;
-	vector<Vector3f> m_normals;
-	vector<unsigned int> m_indices;
+	namespace Rendering
+	{
+		using namespace Core;
 
-public:
-	IndexedModel();
+		class IndexedModel
+		{
+		private:
+			vector<Vector3f> m_positions;
+			vector<Vector2f> m_texCoords;
+			vector<Vector3f> m_normals;
+			vector<unsigned int> m_indices;
 
-	void CalcNormals();
+		public:
+			IndexedModel();
 
-	inline void AddPosition(const Vector3f &position) { m_positions.push_back(position); }
-	inline void AddTexCoord(const Vector2f &texCoord) { m_texCoords.push_back(texCoord); }
-	inline void AddNormal(const Vector3f &normal) { m_normals.push_back(normal); }
-	inline void AddIndex(unsigned int index) { m_indices.push_back(index); }
+			void CalcNormals();
 
-	inline vector<Vector3f> GetPositions() const { return m_positions; }
-	inline vector<Vector2f> GetTexCoords() const { return m_texCoords; }
-	inline vector<Vector3f> GetNormals() const { return m_normals; }
-	inline vector<unsigned int> GetIndices() const { return m_indices; }
-};
+			inline void AddPosition(const Vector3f &position) { m_positions.push_back(position); }
+			inline void AddTexCoord(const Vector2f &texCoord) { m_texCoords.push_back(texCoord); }
+			inline void AddNormal(const Vector3f &normal) { m_normals.push_back(normal); }
+			inline void AddIndex(unsigned int index) { m_indices.push_back(index); }
+
+			inline vector<Vector3f> GetPositions() const { return m_positions; }
+			inline vector<Vector2f> GetTexCoords() const { return m_texCoords; }
+			inline vector<Vector3f> GetNormals() const { return m_normals; }
+			inline vector<unsigned int> GetIndices() const { return m_indices; }
+		};
+	}
+}
 
 #endif

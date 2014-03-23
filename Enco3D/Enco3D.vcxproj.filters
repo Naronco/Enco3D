@@ -189,6 +189,27 @@
     <ClInclude Include="RigidBody.h">
       <Filter>Headerdateien\Components</Filter>
     </ClInclude>
+    <ClInclude Include="GBuffer.h">
+      <Filter>Headerdateien\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="GeometryPassShader.h">
+      <Filter>Headerdateien\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="PostProcessShader.h">
+      <Filter>Headerdateien\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxCollisionShape.h">
+      <Filter>Headerdateien\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="CylinderCollisionShape.h">
+      <Filter>Headerdateien\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="CapsuleCollisionShape.h">
+      <Filter>Headerdateien\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="ConeCollisionShape.h">
+      <Filter>Headerdateien\Physics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stb_image.c">
@@ -271,6 +292,27 @@
     </ClCompile>
     <ClCompile Include="RigidBody.cpp">
       <Filter>Quelldateien\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="GBuffer.cpp">
+      <Filter>Quelldateien\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="GeometryPassShader.cpp">
+      <Filter>Quelldateien\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="PostProcessShader.cpp">
+      <Filter>Quelldateien\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxCollisionShape.cpp">
+      <Filter>Quelldateien\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="CylinderCollisionShape.cpp">
+      <Filter>Quelldateien\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="CapsuleCollisionShape.cpp">
+      <Filter>Quelldateien\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="ConeCollisionShape.cpp">
+      <Filter>Quelldateien\Physics</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

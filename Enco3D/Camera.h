@@ -6,31 +6,39 @@
 #include "Quaternion.h"
 #include "IGameComponent.h"
 
-class Camera : public IGameComponent
+namespace Enco3D
 {
-private:
-	Matrix4x4f m_projection;
+	namespace Component
+	{
+		using namespace Core;
 
-public:
-	Camera();
-	Camera(float fov, float aspect, float zNear, float zFar);
-	Camera(float left, float right, float bottom, float top, float zNear, float zFar);
+		class Camera : public IGameComponent
+		{
+		private:
+			Matrix4x4f m_projection;
 
-	void InitRendering();
+		public:
+			Camera();
+			Camera(float fov, float aspect, float zNear, float zFar);
+			Camera(float left, float right, float bottom, float top, float zNear, float zFar);
 
-	void SetPerspectiveProjection(float fov, float aspect, float zNear, float zFar);
-	void SetOrthographicProjection(float left, float right, float bottom, float top, float zNear, float zFar);
+			void InitRendering();
 
-	Matrix4x4f GetViewProjection() const;
+			void SetPerspectiveProjection(float fov, float aspect, float zNear, float zFar);
+			void SetOrthographicProjection(float left, float right, float bottom, float top, float zNear, float zFar);
 
-	inline void SetTranslation(const Vector3f &translation) { GetTransform()->SetTranslation(translation); }
-	inline void SetRotation(const Quaternionf &rotation) { GetTransform()->SetRotation(rotation); }
-	inline void SetScaling(const Vector3f &scaling) { GetTransform()->SetScaling(scaling); }
+			Matrix4x4f GetViewProjection() const;
 
-	inline Matrix4x4f GetProjection() const { return m_projection; }
-	inline Vector3f GetForward() const { return GetTransform()->GetRotation().GetForward(); }
-	inline Vector3f GetUp() const { return GetTransform()->GetRotation().GetUp(); }
-	inline Vector3f GetRight() const { return GetTransform()->GetRotation().GetRight(); }
-};
+			inline void SetTranslation(const Vector3f &translation) { GetTransform()->SetTranslation(translation); }
+			inline void SetRotation(const Quaternionf &rotation) { GetTransform()->SetRotation(rotation); }
+			inline void SetScaling(const Vector3f &scaling) { GetTransform()->SetScaling(scaling); }
+
+			inline Matrix4x4f GetProjection() const { return m_projection; }
+			inline Vector3f GetForward() const { return GetTransform()->GetRotation().GetForward(); }
+			inline Vector3f GetUp() const { return GetTransform()->GetRotation().GetUp(); }
+			inline Vector3f GetRight() const { return GetTransform()->GetRotation().GetRight(); }
+		};
+	}
+}
 
 #endif

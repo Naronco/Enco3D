@@ -8,29 +8,35 @@
 #include "Transform.h"
 #include "GameObject.h"
 
-class IGameComponent
+namespace Enco3D
 {
-protected:
-	GameObject *m_gameObject;
+	namespace Core
+	{
+		class IGameComponent
+		{
+		protected:
+			GameObject *m_gameObject;
 
-public:
-	virtual void Init() {  }
-	virtual void Deinit() {  }
+		public:
+			virtual void Init() {  }
+			virtual void Deinit() {  }
 
-	virtual void InitRendering() {  }
-	virtual void InitPhysics() {  }
+			virtual void InitRendering() {  }
+			virtual void InitPhysics() {  }
 
-	virtual void Update() {  }
-	virtual void Render(Shader *shader) {  }
+			virtual void Update() {  }
+			virtual void Render(Shader *shader) {  }
 
-	inline void SetGameObject(GameObject *gameObject) { m_gameObject = gameObject; }
+			inline void SetGameObject(GameObject *gameObject) { m_gameObject = gameObject; }
 
-	inline GameObject *GetGameObject() const { return m_gameObject; }
-	inline RenderingEngine *GetRenderingEngine() const { return m_gameObject->GetRenderingEngine(); }
-	inline PhysicsEngine *GetPhysicsEngine() const { return m_gameObject->GetPhysicsEngine(); }
-	inline GLWindow *GetWindow() const { return m_gameObject->GetWindow(); }
-	inline Timer *GetTimer() const { return m_gameObject->GetTimer(); }
-	inline Transform *GetTransform() const { return m_gameObject->GetTransform(); }
-};
+			inline GameObject *GetGameObject() const { return m_gameObject; }
+			inline RenderingEngine *GetRenderingEngine() const { return m_gameObject->GetRenderingEngine(); }
+			inline PhysicsEngine *GetPhysicsEngine() const { return m_gameObject->GetPhysicsEngine(); }
+			inline GLWindow *GetWindow() const { return m_gameObject->GetWindow(); }
+			inline Timer *GetTimer() const { return m_gameObject->GetTimer(); }
+			inline Transform *GetTransform() const { return m_gameObject->GetTransform(); }
+		};
+	}
+}
 
 #endif

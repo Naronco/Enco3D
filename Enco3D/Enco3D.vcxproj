@@ -93,6 +93,12 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BoxCollisionShape.h" />
+    <ClInclude Include="CapsuleCollisionShape.h" />
+    <ClInclude Include="ConeCollisionShape.h" />
+    <ClInclude Include="CylinderCollisionShape.h" />
+    <ClInclude Include="GBuffer.h" />
+    <ClInclude Include="GeometryPassShader.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Enco3DEngine.h" />
@@ -113,6 +119,7 @@
     <ClInclude Include="PhysicsHelper.h" />
     <ClInclude Include="PointLight.h" />
     <ClInclude Include="PointLightShader.h" />
+    <ClInclude Include="PostProcessShader.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="RenderingEngine.h" />
     <ClInclude Include="RigidBody.h" />
@@ -142,11 +149,17 @@
     <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BoxCollisionShape.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CapsuleCollisionShape.cpp" />
+    <ClCompile Include="ConeCollisionShape.cpp" />
+    <ClCompile Include="CylinderCollisionShape.cpp" />
     <ClCompile Include="Enco3DEngine.cpp" />
     <ClCompile Include="DirectionalLightShader.cpp" />
     <ClCompile Include="FirstPersonController.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GBuffer.cpp" />
+    <ClCompile Include="GeometryPassShader.cpp" />
     <ClCompile Include="IndexedModel.cpp" />
     <ClCompile Include="LightGlobalAmbientShader.cpp" />
     <ClCompile Include="MeshRenderer.cpp" />
@@ -154,6 +167,7 @@
     <ClCompile Include="OBJModel.cpp" />
     <ClCompile Include="PhysicsEngine.cpp" />
     <ClCompile Include="PointLightShader.cpp" />
+    <ClCompile Include="PostProcessShader.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="RenderingEngine.cpp" />
     <ClCompile Include="RigidBody.cpp" />

@@ -1,13 +1,13 @@
 #include "Timer.h"
 
-Timer::Timer()
+Enco3D::Core::Timer::Timer()
 {
 	CURRENT_TIME(&m_lastTime);
 	CURRENT_TIME(&m_time);
 	CURRENT_TIME(&m_lastFrameTime);
 }
 
-Timer::Timer(bool printFps)
+Enco3D::Core::Timer::Timer(bool printFps)
 {
 	m_printFps = printFps;
 
@@ -16,7 +16,7 @@ Timer::Timer(bool printFps)
 	CURRENT_TIME(&m_lastFrameTime);
 }
 
-void Timer::Update()
+void Enco3D::Core::Timer::Update()
 {
 	CURRENT_TIME(&m_time);
 	m_deltaTime = (m_time - m_lastTime) * 0.001f;

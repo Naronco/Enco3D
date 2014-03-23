@@ -7,7 +7,7 @@
 #include "GeometryPassShader.h"
 #include "PostProcessShader.h"
 
-RenderingEngine::RenderingEngine()
+Enco3D::Rendering::RenderingEngine::RenderingEngine()
 {
 	m_globalAmbientColor.Set(0.1f, 0.1f, 0.1f);
 	m_gbuffer = new GBuffer;
@@ -17,7 +17,7 @@ RenderingEngine::RenderingEngine()
 	glClearDepth(1.0);
 }
 
-RenderingEngine::RenderingEngine(unsigned int width, unsigned int height)
+Enco3D::Rendering::RenderingEngine::RenderingEngine(unsigned int width, unsigned int height)
 {
 	m_globalAmbientColor.Set(0.1f, 0.1f, 0.1f);
 	m_gbuffer = new GBuffer(width, height);
@@ -43,7 +43,7 @@ RenderingEngine::RenderingEngine(unsigned int width, unsigned int height)
 	m_renderWindow = new Mesh(vertices, 4, indices, 6);
 }
 
-RenderingEngine::~RenderingEngine()
+Enco3D::Rendering::RenderingEngine::~RenderingEngine()
 {
 	if (m_gbuffer)
 	{
@@ -67,7 +67,7 @@ RenderingEngine::~RenderingEngine()
 	}
 }
 
-void RenderingEngine::Render(GameObject *gameObject)
+void Enco3D::Rendering::RenderingEngine::Render(Enco3D::Core::GameObject *gameObject)
 {
 /*	m_gbuffer->Bind();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -105,7 +105,7 @@ void RenderingEngine::Render(GameObject *gameObject)
 	glDisable(GL_BLEND);
 }
 
-Matrix4x4f RenderingEngine::GetProjectedMatrix(const Matrix4x4f &worldMatrix)
+Enco3D::Core::Matrix4x4f Enco3D::Rendering::RenderingEngine::GetProjectedMatrix(const Enco3D::Core::Matrix4x4f &worldMatrix)
 {
 	return m_mainCamera->GetViewProjection() * worldMatrix;
 }

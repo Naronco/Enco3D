@@ -4,21 +4,29 @@
 #include "ICollisionShape.h"
 #include "Vector3.h"
 
-class StaticPlaneCollisionShape : public ICollisionShape
+namespace Enco3D
 {
-private:
-	Vector3f m_normal;
-	
-public:
-	StaticPlaneCollisionShape();
-	StaticPlaneCollisionShape(const Vector3f &normal);
-	StaticPlaneCollisionShape(const Vector3f &p0, const Vector3f &p1, const Vector3f &p2);
-	~StaticPlaneCollisionShape();
+	namespace Physics
+	{
+		using namespace Core;
 
-	btCollisionShape *ToBulletPhysicsCollisionShape();
-	
-	inline void SetNormal(const Vector3f &normal) { m_normal.Set(normal); }
-	inline Vector3f GetNormal() const { return m_normal; }
-};
+		class StaticPlaneCollisionShape : public ICollisionShape
+		{
+		private:
+			Vector3f m_normal;
+
+		public:
+			StaticPlaneCollisionShape();
+			StaticPlaneCollisionShape(const Vector3f &normal);
+			StaticPlaneCollisionShape(const Vector3f &p0, const Vector3f &p1, const Vector3f &p2);
+			~StaticPlaneCollisionShape();
+
+			btCollisionShape *ToBulletPhysicsCollisionShape();
+
+			inline void SetNormal(const Vector3f &normal) { m_normal.Set(normal); }
+			inline Vector3f GetNormal() const { return m_normal; }
+		};
+	}
+}
 
 #endif

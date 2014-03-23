@@ -12,27 +12,33 @@
 
 using namespace std;
 
-class Mesh
+namespace Enco3D
 {
-private:
-	MeshResource *m_resource;
-	string m_filename;
+	namespace Rendering
+	{
+		class Mesh
+		{
+		private:
+			MeshResource *m_resource;
+			string m_filename;
 
-private:
-	static map<string, MeshResource *> s_loadedModels;
+		private:
+			static map<string, MeshResource *> s_loadedModels;
 
-private:
-	void BuildBuffers(Vertex *vertices, unsigned int vertexCount, unsigned int *indices, unsigned int indexCount);
-	void LoadMesh(const string &filename);
+		private:
+			void BuildBuffers(Vertex *vertices, unsigned int vertexCount, unsigned int *indices, unsigned int indexCount);
+			void LoadMesh(const string &filename);
 
-public:
-	Mesh();
-	Mesh(Vertex *vertices, unsigned int vertexCount);
-	Mesh(Vertex *vertices, unsigned int vertexCount, unsigned int *indices, unsigned int indexCount);
-	Mesh(const string &filename);
-	~Mesh();
+		public:
+			Mesh();
+			Mesh(Vertex *vertices, unsigned int vertexCount);
+			Mesh(Vertex *vertices, unsigned int vertexCount, unsigned int *indices, unsigned int indexCount);
+			Mesh(const string &filename);
+			~Mesh();
 
-	void Render();
-};
+			void Render();
+		};
+	}
+}
 
 #endif

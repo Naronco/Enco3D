@@ -1,10 +1,10 @@
 #include "MeshResource.h"
 
-MeshResource::MeshResource()
+Enco3D::Rendering::MeshResource::MeshResource()
 {
 }
 
-MeshResource::MeshResource(unsigned int vertexCount, unsigned int indexCount)
+Enco3D::Rendering::MeshResource::MeshResource(unsigned int vertexCount, unsigned int indexCount)
 {
 	glGenBuffers(1, &m_vbo);
 	glGenBuffers(1, &m_ibo);
@@ -13,7 +13,7 @@ MeshResource::MeshResource(unsigned int vertexCount, unsigned int indexCount)
 	m_indexCount = indexCount;
 }
 
-MeshResource::~MeshResource()
+Enco3D::Rendering::MeshResource::~MeshResource()
 {
 	glDeleteBuffers(1, &m_vbo);
 	glDeleteBuffers(1, &m_ibo);

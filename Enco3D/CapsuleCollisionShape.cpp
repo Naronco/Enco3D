@@ -1,16 +1,16 @@
 #include "CapsuleCollisionShape.h"
 
-CapsuleCollisionShape::CapsuleCollisionShape()
+Enco3D::Physics::CapsuleCollisionShape::CapsuleCollisionShape()
 {
 }
 
-CapsuleCollisionShape::CapsuleCollisionShape(float radius, float height)
+Enco3D::Physics::CapsuleCollisionShape::CapsuleCollisionShape(float radius, float height)
 {
 	m_radius = radius;
 	m_height = height;
 }
 
-btCollisionShape *CapsuleCollisionShape::ToBulletPhysicsCollisionShape()
+btCollisionShape *Enco3D::Physics::CapsuleCollisionShape::ToBulletPhysicsCollisionShape()
 {
 	return new btCapsuleShape(m_radius, m_height);
 }

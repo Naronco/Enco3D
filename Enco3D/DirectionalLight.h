@@ -4,19 +4,25 @@
 #include "Light.h"
 #include "DirectionalLightShader.h"
 
-class DirectionalLight : public Light
+namespace Enco3D
 {
-public:
-	DirectionalLight()
+	namespace Component
 	{
-		m_shader = DirectionalLightShader::GetInstance();
-	}
+		class DirectionalLight : public Light
+		{
+		public:
+			DirectionalLight()
+			{
+				m_shader = DirectionalLightShader::GetInstance();
+			}
 
-	void BindToShader(const Vector3f &eyePos)
-	{
-		((DirectionalLightShader *)m_shader)->SetEyePos(eyePos);
-		((DirectionalLightShader *)m_shader)->SetDirectionalLight(m_color, m_intensity, GetTransform()->GetRotation().GetForward());
+			void BindToShader(const Vector3f &eyePos)
+			{
+				((DirectionalLightShader *)m_shader)->SetEyePos(eyePos);
+				((DirectionalLightShader *)m_shader)->SetDirectionalLight(m_color, m_intensity, GetTransform()->GetRotation().GetForward());
+			}
+		};
 	}
-};
+}
 
 #endif

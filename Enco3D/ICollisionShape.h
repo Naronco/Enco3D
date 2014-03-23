@@ -5,10 +5,16 @@
 
 #include <btBulletDynamicsCommon.h>
 
-class ICollisionShape
+namespace Enco3D
 {
-public:
-	virtual btCollisionShape *ToBulletPhysicsCollisionShape() = 0;
-};
+	namespace Physics
+	{
+		class ICollisionShape
+		{
+		public:
+			virtual btCollisionShape *ToBulletPhysicsCollisionShape() = 0;
+		};
+	}
+}
 
 #endif

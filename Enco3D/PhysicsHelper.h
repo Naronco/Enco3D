@@ -6,43 +6,51 @@
 
 #include <btBulletDynamicsCommon.h>
 
-namespace PhysicsHelper
+namespace Enco3D
 {
-	template <typename T>
-	inline static btVector3 ToBulletPhysicsVec3(const Vector3<T> &v)
+	namespace Physics
 	{
-		btVector3 result;
+		using namespace Core;
 
-		result.setX(v.x);
-		result.setY(v.y);
-		result.setZ(v.z);
+		namespace PhysicsHelper
+		{
+			template <typename T>
+			inline static btVector3 ToBulletPhysicsVec3(const Vector3<T> &v)
+			{
+				btVector3 result;
 
-		return result;
-	}
+				result.setX(v.x);
+				result.setY(v.y);
+				result.setZ(v.z);
 
-	template <typename T>
-	inline static btQuaternion ToBulletPhysicsQuat(const Quaternion<T> &q)
-	{
-		btQuaternion result;
+				return result;
+			}
 
-		result.setX(q.x);
-		result.setY(q.y);
-		result.setZ(q.z);
-		result.setW(q.w);
+			template <typename T>
+			inline static btQuaternion ToBulletPhysicsQuat(const Quaternion<T> &q)
+			{
+				btQuaternion result;
 
-		return result;
-	}
+				result.setX(q.x);
+				result.setY(q.y);
+				result.setZ(q.z);
+				result.setW(q.w);
 
-	template <typename T>
-	inline static Vector3<T> ToEnco3DVec3(const btVector3 &v)
-	{
-		return Vector3<T>(v.x(), v.y(), v.z());
-	}
+				return result;
+			}
 
-	template <typename T>
-	inline static Quaternion<T> ToEnco3DQuat(const btQuaternion &q)
-	{
-		return Quaternion<T>(q.x(), q.y(), q.z(), q.w());
+			template <typename T>
+			inline static Vector3<T> ToEnco3DVec3(const btVector3 &v)
+			{
+				return Vector3<T>(v.x(), v.y(), v.z());
+			}
+
+			template <typename T>
+			inline static Quaternion<T> ToEnco3DQuat(const btQuaternion &q)
+			{
+				return Quaternion<T>(q.x(), q.y(), q.z(), q.w());
+			}
+		}
 	}
 }
 

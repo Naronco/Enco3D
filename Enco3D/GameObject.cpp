@@ -1,18 +1,18 @@
 #include "GameObject.h"
 #include "IGameComponent.h"
 
-GameObject::GameObject()
+Enco3D::Core::GameObject::GameObject()
 {
 	m_transform = new Transform;
 }
 
-GameObject::GameObject(const string &name)
+Enco3D::Core::GameObject::GameObject(const string &name)
 {
 	m_name = name;
 	m_transform = new Transform;
 }
 
-GameObject::~GameObject()
+Enco3D::Core::GameObject::~GameObject()
 {
 	for (unsigned int i = 0; i < m_children.size(); i++)
 	{
@@ -34,7 +34,7 @@ GameObject::~GameObject()
 	}
 }
 
-void GameObject::Update()
+void Enco3D::Core::GameObject::Update()
 {
 	for (unsigned int i = 0; i < m_children.size(); i++)
 	{
@@ -47,7 +47,7 @@ void GameObject::Update()
 	}
 }
 
-void GameObject::Render(Shader *shader)
+void Enco3D::Core::GameObject::Render(Enco3D::Rendering::Shader *shader)
 {
 	for (unsigned int i = 0; i < m_children.size(); i++)
 	{
@@ -61,7 +61,7 @@ void GameObject::Render(Shader *shader)
 }
 
 
-GameObject *GameObject::AddChild(GameObject *child)
+Enco3D::Core::GameObject *Enco3D::Core::GameObject::AddChild(GameObject *child)
 {
 	child->SetRenderingEngine(m_renderingEngine);
 	child->SetPhysicsEngine(m_physicsEngine);
@@ -73,7 +73,7 @@ GameObject *GameObject::AddChild(GameObject *child)
 	return this;
 }
 
-GameObject *GameObject::AddComponent(IGameComponent *component)
+Enco3D::Core::GameObject *Enco3D::Core::GameObject::AddComponent(IGameComponent *component)
 {
 	component->SetGameObject(this);
 	component->Init();
@@ -82,7 +82,7 @@ GameObject *GameObject::AddComponent(IGameComponent *component)
 	return this;
 }
 
-void GameObject::SetRenderingEngine(RenderingEngine *renderingEngine)
+void Enco3D::Core::GameObject::SetRenderingEngine(Enco3D::Rendering::RenderingEngine *renderingEngine)
 {
 	m_renderingEngine = renderingEngine;
 
@@ -97,7 +97,7 @@ void GameObject::SetRenderingEngine(RenderingEngine *renderingEngine)
 	}
 }
 
-void GameObject::SetPhysicsEngine(PhysicsEngine *physicsEngine)
+void Enco3D::Core::GameObject::SetPhysicsEngine(Enco3D::Physics::PhysicsEngine *physicsEngine)
 {
 	m_physicsEngine = physicsEngine;
 
@@ -112,7 +112,7 @@ void GameObject::SetPhysicsEngine(PhysicsEngine *physicsEngine)
 	}
 }
 
-void GameObject::SetWindow(GLWindow *window)
+void Enco3D::Core::GameObject::SetWindow(GLWindow *window)
 {
 	m_window = window;
 
@@ -122,7 +122,7 @@ void GameObject::SetWindow(GLWindow *window)
 	}
 }
 
-void GameObject::SetTimer(Timer *timer)
+void Enco3D::Core::GameObject::SetTimer(Timer *timer)
 {
 	m_timer = timer;
 

@@ -1,11 +1,11 @@
 #include "GLWindow.h"
 
-GLWindow::GLWindow()
+Enco3D::Core::GLWindow::GLWindow()
 {
 	Input::Init();
 }
 
-GLWindow::GLWindow(char *title, unsigned int width, unsigned int height)
+Enco3D::Core::GLWindow::GLWindow(char *title, unsigned int width, unsigned int height)
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
 
@@ -46,7 +46,7 @@ GLWindow::GLWindow(char *title, unsigned int width, unsigned int height)
 	Input::Init();
 }
 
-ErrorResult GLWindow::Show()
+Enco3D::Core::ErrorResult Enco3D::Core::GLWindow::Show()
 {
 	if (m_window != nullptr)
 	{
@@ -57,7 +57,7 @@ ErrorResult GLWindow::Show()
 	return Error::Failed;
 }
 
-ErrorResult GLWindow::Hide()
+Enco3D::Core::ErrorResult Enco3D::Core::GLWindow::Hide()
 {
 	if (m_window != nullptr)
 	{
@@ -68,7 +68,7 @@ ErrorResult GLWindow::Hide()
 	return Error::Failed;
 }
 
-ErrorResult GLWindow::Close()
+Enco3D::Core::ErrorResult Enco3D::Core::GLWindow::Close()
 {
 	if (m_window != nullptr)
 	{
@@ -80,7 +80,7 @@ ErrorResult GLWindow::Close()
 	return Error::Failed;
 }
 
-ErrorResult GLWindow::Resize(unsigned int width, unsigned int height)
+Enco3D::Core::ErrorResult Enco3D::Core::GLWindow::Resize(unsigned int width, unsigned int height)
 {
 	if (m_window)
 	{
@@ -96,7 +96,7 @@ ErrorResult GLWindow::Resize(unsigned int width, unsigned int height)
 	return Error::Failed;
 }
 
-ErrorResult GLWindow::SetFullscreen(bool fullscreen)
+Enco3D::Core::ErrorResult Enco3D::Core::GLWindow::SetFullscreen(bool fullscreen)
 {
 	if (m_window && SDL_SetWindowFullscreen(m_window, fullscreen) == 0)
 	{
@@ -107,7 +107,7 @@ ErrorResult GLWindow::SetFullscreen(bool fullscreen)
 	return Error::Failed;
 }
 
-ErrorResult GLWindow::SetPosition(int x, int y)
+Enco3D::Core::ErrorResult Enco3D::Core::GLWindow::SetPosition(int x, int y)
 {
 	if (m_window)
 	{
@@ -118,7 +118,7 @@ ErrorResult GLWindow::SetPosition(int x, int y)
 	return Error::Failed;
 }
 
-bool GLWindow::PollEvent(Event *e)
+bool Enco3D::Core::GLWindow::PollEvent(Event *e)
 {
 	SDL_Event ev;
 	SDL_PollEvent(&ev);
@@ -328,7 +328,7 @@ bool GLWindow::PollEvent(Event *e)
 	return true;
 }
 
-bool GLWindow::Update(Event *e)
+bool Enco3D::Core::GLWindow::Update(Event *e)
 {
 	PollEvent(e);
 	SDL_GL_SwapWindow(m_window);

@@ -3,25 +3,31 @@
 
 #include "Shader.h"
 
-class GeometryPassShader : public Shader
+namespace Enco3D
 {
-public:
-	GeometryPassShader();
-
-	void UpdateUniforms(const Matrix4x4f &worldMatrix, const Matrix4x4f &projectedMatrix, Material &material) const;
-
-public:
-	inline static GeometryPassShader *GetInstance()
+	namespace Rendering
 	{
-		static GeometryPassShader *instance = nullptr;
-
-		if (instance == nullptr)
+		class GeometryPassShader : public Shader
 		{
-			instance = new GeometryPassShader;
-		}
+		public:
+			GeometryPassShader();
 
-		return instance;
+			void UpdateUniforms(const Matrix4x4f &worldMatrix, const Matrix4x4f &projectedMatrix, Material &material) const;
+
+		public:
+			inline static GeometryPassShader *GetInstance()
+			{
+				static GeometryPassShader *instance = nullptr;
+
+				if (instance == nullptr)
+				{
+					instance = new GeometryPassShader;
+				}
+
+				return instance;
+			}
+		};
 	}
-};
+}
 
 #endif

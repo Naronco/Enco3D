@@ -1,10 +1,10 @@
 #include "IndexedModel.h"
 
-IndexedModel::IndexedModel()
+Enco3D::Rendering::IndexedModel::IndexedModel()
 {
 }
 
-void IndexedModel::CalcNormals()
+void Enco3D::Rendering::IndexedModel::CalcNormals()
 {
 	for (unsigned int i = 0; i < m_indices.size(); i += 3)
 	{

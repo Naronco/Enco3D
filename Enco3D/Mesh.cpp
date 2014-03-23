@@ -1,12 +1,12 @@
 #include "Mesh.h"
 
-map<string, MeshResource *> Mesh::s_loadedModels;
+map<string, Enco3D::Rendering::MeshResource *> Enco3D::Rendering::Mesh::s_loadedModels;
 
-Mesh::Mesh()
+Enco3D::Rendering::Mesh::Mesh()
 {
 }
 
-Mesh::Mesh(Vertex *vertices, unsigned int vertexCount)
+Enco3D::Rendering::Mesh::Mesh(Vertex *vertices, unsigned int vertexCount)
 {
 	unsigned int *indices = new unsigned int[vertexCount];
 	for (unsigned int i = 0; i < vertexCount; i++)
@@ -17,12 +17,12 @@ Mesh::Mesh(Vertex *vertices, unsigned int vertexCount)
 	BuildBuffers(vertices, vertexCount, indices, vertexCount);
 }
 
-Mesh::Mesh(Vertex *vertices, unsigned int vertexCount, unsigned int *indices, unsigned int indexCount)
+Enco3D::Rendering::Mesh::Mesh(Vertex *vertices, unsigned int vertexCount, unsigned int *indices, unsigned int indexCount)
 {
 	BuildBuffers(vertices, vertexCount, indices, indexCount);
 }
 
-Mesh::Mesh(const string &filename)
+Enco3D::Rendering::Mesh::Mesh(const string &filename)
 {
 	m_filename = filename;
 
@@ -39,7 +39,7 @@ Mesh::Mesh(const string &filename)
 	}
 }
 
-Mesh::~Mesh()
+Enco3D::Rendering::Mesh::~Mesh()
 {
 	if (m_resource->RemoveReference() && m_filename.size() > 0)
 	{
@@ -47,7 +47,7 @@ Mesh::~Mesh()
 	}
 }
 
-void Mesh::BuildBuffers(Vertex *vertices, unsigned int vertexCount, unsigned int *indices, unsigned int indexCount)
+void Enco3D::Rendering::Mesh::BuildBuffers(Vertex *vertices, unsigned int vertexCount, unsigned int *indices, unsigned int indexCount)
 {
 	m_resource = new MeshResource(vertexCount, indexCount);
 
@@ -58,7 +58,7 @@ void Mesh::BuildBuffers(Vertex *vertices, unsigned int vertexCount, unsigned int
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_resource->GetIndexCount() * sizeof(unsigned int), indices, GL_STATIC_DRAW);
 }
 
-void Mesh::LoadMesh(const string &filename)
+void Enco3D::Rendering::Mesh::LoadMesh(const string &filename)
 {
 	OBJModel objModel(filename);
 
@@ -96,7 +96,7 @@ void Mesh::LoadMesh(const string &filename)
 	}
 }
 
-void Mesh::Render()
+void Enco3D::Rendering::Mesh::Render()
 {
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);

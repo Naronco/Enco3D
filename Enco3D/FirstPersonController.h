@@ -5,24 +5,32 @@
 #include "Input.h"
 #include "MathUtil.h"
 
-class FirstPersonController : public IGameComponent
+namespace Enco3D
 {
-private:
-	bool m_mouseLocked{ false };
-	float m_moveSpeed{ 4.0f };
-	float m_rotateSpeed{ 0.1f };
+	namespace Component
+	{
+		using namespace Core;
 
-public:
-	FirstPersonController();
-	FirstPersonController(float moveSpeed, float rotateSpeed);
+		class FirstPersonController : public IGameComponent
+		{
+		private:
+			bool m_mouseLocked{ false };
+			float m_moveSpeed{ 4.0f };
+			float m_rotateSpeed{ 0.1f };
 
-	void Update();
+		public:
+			FirstPersonController();
+			FirstPersonController(float moveSpeed, float rotateSpeed);
 
-	inline void SetMoveSpeed(float moveSpeed) { m_moveSpeed = moveSpeed; }
-	inline void SetRotateSpeed(float rotateSpeed) { m_rotateSpeed = rotateSpeed; }
+			void Update();
 
-	inline float GetMoveSpeed() const { return m_moveSpeed; }
-	inline float GetRotateSpeed() const { return m_rotateSpeed; }
-};
+			inline void SetMoveSpeed(float moveSpeed) { m_moveSpeed = moveSpeed; }
+			inline void SetRotateSpeed(float rotateSpeed) { m_rotateSpeed = rotateSpeed; }
+
+			inline float GetMoveSpeed() const { return m_moveSpeed; }
+			inline float GetRotateSpeed() const { return m_rotateSpeed; }
+		};
+	}
+}
 
 #endif

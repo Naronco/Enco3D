@@ -1,16 +1,16 @@
 #include "SphereCollisionShape.h"
 
-SphereCollisionShape::SphereCollisionShape()
+Enco3D::Physics::SphereCollisionShape::SphereCollisionShape()
 {
 	m_radius = 0;
 }
 
-SphereCollisionShape::SphereCollisionShape(float radius)
+Enco3D::Physics::SphereCollisionShape::SphereCollisionShape(float radius)
 {
 	m_radius = radius;
 }
 
-btCollisionShape *SphereCollisionShape::ToBulletPhysicsCollisionShape()
+btCollisionShape *Enco3D::Physics::SphereCollisionShape::ToBulletPhysicsCollisionShape()
 {
 	return new btSphereShape(m_radius);
 }

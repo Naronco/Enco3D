@@ -6,34 +6,49 @@
 
 #include <btBulletDynamicsCommon.h>
 
-class RigidBody;
-
-class PhysicsEngine
+namespace Enco3D
 {
-private:
-	btBroadphaseInterface *m_broadphase{ nullptr };
-	btDefaultCollisionConfiguration *m_collisionConfiguration{ nullptr };
-	btCollisionDispatcher *m_dispatcher{ nullptr };
-	btSequentialImpulseConstraintSolver *m_solver{ nullptr };
-	btDiscreteDynamicsWorld *m_dynamicsWorld{ nullptr };
+	namespace Component
+	{
+		class RigidBody;
+	}
+}
 
-	Vector3f m_gravity;
-	Timer *m_timer{ nullptr };
+namespace Enco3D
+{
+	namespace Physics
+	{
+		using namespace Core;
+		using namespace Component;
 
-public:
-	PhysicsEngine();
-	~PhysicsEngine();
+		class PhysicsEngine
+		{
+		private:
+			btBroadphaseInterface *m_broadphase{ nullptr };
+			btDefaultCollisionConfiguration *m_collisionConfiguration{ nullptr };
+			btCollisionDispatcher *m_dispatcher{ nullptr };
+			btSequentialImpulseConstraintSolver *m_solver{ nullptr };
+			btDiscreteDynamicsWorld *m_dynamicsWorld{ nullptr };
 
-	void Update();
+			Vector3f m_gravity;
+			Timer *m_timer{ nullptr };
 
-	void AddRigidBody(RigidBody *rigidBody);
-	void RemoveRigidBody(RigidBody *rigidBody);
+		public:
+			PhysicsEngine();
+			~PhysicsEngine();
 
-	inline void SetGravity(const Vector3f &gravity) { m_gravity.Set(gravity); }
-	inline void SetTimer(Timer *timer) { m_timer = timer; }
+			void Update();
 
-	inline Vector3f GetGravity() const { return m_gravity; }
-	inline Timer *GetTimer() const { return m_timer; }
-};
+			void AddRigidBody(RigidBody *rigidBody);
+			void RemoveRigidBody(RigidBody *rigidBody);
+
+			inline void SetGravity(const Vector3f &gravity) { m_gravity.Set(gravity); }
+			inline void SetTimer(Timer *timer) { m_timer = timer; }
+
+			inline Vector3f GetGravity() const { return m_gravity; }
+			inline Timer *GetTimer() const { return m_timer; }
+		};
+	}
+}
 
 #endif

@@ -1,20 +1,20 @@
 #include "OBJModel.h"
 
-inline static bool CompareOBJIndexPtr(const OBJIndex *a, const OBJIndex *b);
+inline static bool CompareOBJIndexPtr(const Enco3D::Rendering::OBJIndex *a, const Enco3D::Rendering::OBJIndex *b);
 inline static unsigned int FindNextChar(unsigned int start, const char *str, unsigned int length, char token);
 inline static unsigned int ParseOBJIndexValue(const string &token, unsigned int start, unsigned int end);
 inline static float ParseOBJFloatValue(const string &token, unsigned int start, unsigned int end);
 inline static vector<string> SplitString(const string &s, char delim);
 
-inline static Vector2f ParseOBJVec2(const string &line);
-inline static Vector3f ParseOBJVec3(const string &line);
-inline static OBJIndex ParseOBJIndex(const string &token, bool *hasTexCoords, bool *hasNormals);
+inline static Enco3D::Core::Vector2f ParseOBJVec2(const string &line);
+inline static Enco3D::Core::Vector3f ParseOBJVec3(const string &line);
+inline static Enco3D::Rendering::OBJIndex ParseOBJIndex(const string &token, bool *hasTexCoords, bool *hasNormals);
 
-OBJModel::OBJModel()
+Enco3D::Rendering::OBJModel::OBJModel()
 {
 }
 
-OBJModel::OBJModel(const string &filename)
+Enco3D::Rendering::OBJModel::OBJModel(const string &filename)
 {
 	m_hasTexCoords = false;
 	m_hasNormals = false;
@@ -72,7 +72,7 @@ OBJModel::OBJModel(const string &filename)
 	}
 }
 
-IndexedModel OBJModel::ToIndexedModel()
+Enco3D::Rendering::IndexedModel Enco3D::Rendering::OBJModel::ToIndexedModel()
 {
 	IndexedModel result, normalModel;
 	vector<OBJIndex *> indexLookup;
@@ -163,7 +163,7 @@ IndexedModel OBJModel::ToIndexedModel()
 	return result;
 }
 
-unsigned int OBJModel::FindLastVertexIndex(const vector<OBJIndex *> &indexLookup, const OBJIndex *currentIndex, const IndexedModel &result) const
+unsigned int Enco3D::Rendering::OBJModel::FindLastVertexIndex(const vector<OBJIndex *> &indexLookup, const OBJIndex *currentIndex, const IndexedModel &result) const
 {
 	unsigned int start = 0;
 	unsigned int end = (unsigned int)indexLookup.size();
@@ -263,7 +263,7 @@ unsigned int OBJModel::FindLastVertexIndex(const vector<OBJIndex *> &indexLookup
 	return (unsigned int)-1;
 }
 
-void OBJModel::CreateOBJFace(const string &line)
+void Enco3D::Rendering::OBJModel::CreateOBJFace(const string &line)
 {
 	vector<string> tokens = SplitString(line, ' ');
 
@@ -275,12 +275,12 @@ void OBJModel::CreateOBJFace(const string &line)
 	}
 }
 
-inline static OBJIndex ParseOBJIndex(const string &token, bool *hasTexCoords, bool *hasNormals)
+inline static Enco3D::Rendering::OBJIndex ParseOBJIndex(const string &token, bool *hasTexCoords, bool *hasNormals)
 {
 	unsigned int vertIndexStart = 0;
 	unsigned int vertIndexEnd = FindNextChar(vertIndexStart, token.c_str(), token.length(), '/');
 
-	OBJIndex result;
+	Enco3D::Rendering::OBJIndex result;
 	result.vertexIndex = ParseOBJIndexValue(token, vertIndexStart, vertIndexEnd);
 	result.texCoordIndex = 0;
 	result.normalIndex = 0;
@@ -310,7 +310,7 @@ inline static OBJIndex ParseOBJIndex(const string &token, bool *hasTexCoords, bo
 	return result;
 }
 
-inline static Vector3f ParseOBJVec3(const std::string& line)
+inline static Enco3D::Core::Vector3f ParseOBJVec3(const std::string& line)
 {
 	unsigned int tokenLength = (unsigned int)line.length();
 	const char* tokenString = line.c_str();
@@ -341,10 +341,10 @@ inline static Vector3f ParseOBJVec3(const std::string& line)
 
 	float z = ParseOBJFloatValue(line, vertIndexStart, vertIndexEnd);
 
-	return Vector3f(x, y, z);
+	return Enco3D::Core::Vector3f(x, y, z);
 }
 
-inline static Vector2f ParseOBJVec2(const std::string& line)
+inline static Enco3D::Core::Vector2f ParseOBJVec2(const std::string& line)
 {
 	unsigned int tokenLength = (unsigned int)line.length();
 	const char* tokenString = line.c_str();
@@ -367,10 +367,10 @@ inline static Vector2f ParseOBJVec2(const std::string& line)
 
 	float y = ParseOBJFloatValue(line, vertIndexStart, vertIndexEnd);
 
-	return Vector2f(x, y);
+	return Enco3D::Core::Vector2f(x, y);
 }
 
-inline static bool CompareOBJIndexPtr(const OBJIndex* a, const OBJIndex* b)
+inline static bool CompareOBJIndexPtr(const Enco3D::Rendering::OBJIndex* a, const Enco3D::Rendering::OBJIndex* b)
 {
 	return a->vertexIndex < b->vertexIndex;
 }

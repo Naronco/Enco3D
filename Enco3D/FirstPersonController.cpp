@@ -1,16 +1,16 @@
 #include "FirstPersonController.h"
 
-FirstPersonController::FirstPersonController()
+Enco3D::Component::FirstPersonController::FirstPersonController()
 {
 }
 
-FirstPersonController::FirstPersonController(float moveSpeed, float rotateSpeed)
+Enco3D::Component::FirstPersonController::FirstPersonController(float moveSpeed, float rotateSpeed)
 {
 	m_moveSpeed = moveSpeed;
 	m_rotateSpeed = rotateSpeed;
 }
 
-void FirstPersonController::Update()
+void Enco3D::Component::FirstPersonController::Update()
 {
 	float speed = GetTimer()->GetDeltaTime() * m_moveSpeed;
 
@@ -59,12 +59,12 @@ void FirstPersonController::Update()
 
 		if (rotateY)
 		{
-			Quaternionf rotationAmount = Quaternionf(Vector3f(0, 1, 0), ToRadians(relativeX * m_rotateSpeed));
+			Quaternionf rotationAmount = Quaternionf(Vector3f(0, 1, 0), MathUtil::ToRadians(relativeX * m_rotateSpeed));
 			GetTransform()->SetRotation((rotationAmount * GetTransform()->GetRotation()).Normalize());
 		}
 		if (rotateX)
 		{
-			Quaternionf rotationAmount = Quaternionf(GetTransform()->GetRotation().GetRight(), ToRadians(relativeY * m_rotateSpeed));
+			Quaternionf rotationAmount = Quaternionf(GetTransform()->GetRotation().GetRight(), MathUtil::ToRadians(relativeY * m_rotateSpeed));
 			GetTransform()->SetRotation((rotationAmount * GetTransform()->GetRotation()).Normalize());
 		}
 

@@ -1,6 +1,6 @@
 #include "GeometryPassShader.h"
 
-GeometryPassShader::GeometryPassShader()
+Enco3D::Rendering::GeometryPassShader::GeometryPassShader()
 {
 	AddVertexShaderFromFile("shaders/geometryPass.vs");
 	AddFragmentShaderFromFile("shaders/geometryPass.fs");
@@ -15,7 +15,7 @@ GeometryPassShader::GeometryPassShader()
 	AddUniform("projectedMatrix");
 }
 
-void GeometryPassShader::UpdateUniforms(const Matrix4x4f &worldMatrix, const Matrix4x4f &projectedMatrix, Material &material) const
+void Enco3D::Rendering::GeometryPassShader::UpdateUniforms(const Enco3D::Core::Matrix4x4f &worldMatrix, const Enco3D::Core::Matrix4x4f &projectedMatrix, Material &material) const
 {
 	SetUniformMatrix4x4f("worldMatrix", worldMatrix);
 	SetUniformMatrix4x4f("projectedMatrix", projectedMatrix);

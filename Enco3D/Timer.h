@@ -14,26 +14,32 @@
 
 using namespace std;
 
-class Timer
+namespace Enco3D
 {
-private:
-	unsigned int m_lastTime, m_time, m_fpsCounter{ 0 }, m_fps{ 0 };
-	float m_deltaTime;
+	namespace Core
+	{
+		class Timer
+		{
+		private:
+			unsigned int m_lastTime, m_time, m_fpsCounter{ 0 }, m_fps{ 0 };
+			float m_deltaTime;
 
-	unsigned int m_lastFrameTime;
-	bool m_printFps{ false };
-	
-public:
-	Timer();
-	Timer(bool printFps);
+			unsigned int m_lastFrameTime;
+			bool m_printFps{ false };
 
-	void Update();
+		public:
+			Timer();
+			Timer(bool printFps);
 
-	inline void SetPrintFps(bool printFps) { m_printFps = printFps; }
+			void Update();
 
-	inline unsigned int GetFPS() const { return m_fps; }
-	inline float GetDeltaTime() const { return m_deltaTime; }
-	inline unsigned int GetTime() const { return m_time; }
-};
+			inline void SetPrintFps(bool printFps) { m_printFps = printFps; }
+
+			inline unsigned int GetFPS() const { return m_fps; }
+			inline float GetDeltaTime() const { return m_deltaTime; }
+			inline unsigned int GetTime() const { return m_time; }
+		};
+	}
+}
 
 #endif

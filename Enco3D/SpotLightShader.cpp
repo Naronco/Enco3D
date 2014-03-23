@@ -1,6 +1,6 @@
 #include "SpotLightShader.h"
 
-SpotLightShader::SpotLightShader()
+Enco3D::Rendering::SpotLightShader::SpotLightShader()
 {
 	AddVertexShaderFromFile("shaders/lightSpot.vs");
 	AddFragmentShaderFromFile("shaders/lightSpot.fs");
@@ -29,7 +29,7 @@ SpotLightShader::SpotLightShader()
 	AddUniform("eyePos");
 }
 
-void SpotLightShader::UpdateUniforms(const Matrix4x4f &worldMatrix, const Matrix4x4f projectedMatrix, Material &material) const
+void Enco3D::Rendering::SpotLightShader::UpdateUniforms(const Enco3D::Core::Matrix4x4f &worldMatrix, const Enco3D::Core::Matrix4x4f projectedMatrix, Material &material) const
 {
 	SetUniformMatrix4x4f("worldMatrix", worldMatrix);
 	SetUniformMatrix4x4f("projectedMatrix", projectedMatrix);

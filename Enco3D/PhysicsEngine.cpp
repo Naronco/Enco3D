@@ -1,7 +1,7 @@
 #include "PhysicsEngine.h"
 #include "RigidBody.h"
 
-PhysicsEngine::PhysicsEngine()
+Enco3D::Physics::PhysicsEngine::PhysicsEngine()
 {
 	m_gravity.Set(0, -9.81f, 0);
 
@@ -16,7 +16,7 @@ PhysicsEngine::PhysicsEngine()
 	m_dynamicsWorld->setGravity(PhysicsHelper::ToBulletPhysicsVec3(m_gravity));
 }
 
-PhysicsEngine::~PhysicsEngine()
+Enco3D::Physics::PhysicsEngine::~PhysicsEngine()
 {
 	if (m_dynamicsWorld)
 	{
@@ -49,17 +49,17 @@ PhysicsEngine::~PhysicsEngine()
 	}
 }
 
-void PhysicsEngine::Update()
+void Enco3D::Physics::PhysicsEngine::Update()
 {
 	m_dynamicsWorld->stepSimulation(m_timer->GetDeltaTime(), 10);
 }
 
-void PhysicsEngine::AddRigidBody(RigidBody *rigidBody)
+void Enco3D::Physics::PhysicsEngine::AddRigidBody(Enco3D::Component::RigidBody *rigidBody)
 {
 	m_dynamicsWorld->addRigidBody(rigidBody->CreateBulletPhysicsInstance());
 }
 
-void PhysicsEngine::RemoveRigidBody(RigidBody *rigidBody)
+void Enco3D::Physics::PhysicsEngine::RemoveRigidBody(Enco3D::Component::RigidBody *rigidBody)
 {
 	btRigidBody *btInstance = rigidBody->GetBulletPhysicsInstance();
 

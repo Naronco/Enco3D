@@ -1,6 +1,6 @@
 #include "PostProcessShader.h"
 
-PostProcessShader::PostProcessShader()
+Enco3D::Rendering::PostProcessShader::PostProcessShader()
 {
 	AddVertexShaderFromFile("shaders/postProcess.vs");
 	AddFragmentShaderFromFile("shaders/postProcess.fs");
@@ -19,7 +19,7 @@ PostProcessShader::PostProcessShader()
 	AddUniform("gbuffer_depth");
 }
 
-void PostProcessShader::UpdateUniforms(const Matrix4x4f &worldMatrix, const Matrix4x4f &projectedMatrix, Material &material) const
+void Enco3D::Rendering::PostProcessShader::UpdateUniforms(const Enco3D::Core::Matrix4x4f &worldMatrix, const Enco3D::Core::Matrix4x4f &projectedMatrix, Material &material) const
 {
 	SetUniformMatrix4x4f("worldMatrix", worldMatrix);
 	SetUniformMatrix4x4f("projectedMatrix", projectedMatrix);

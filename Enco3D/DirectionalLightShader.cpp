@@ -1,6 +1,6 @@
 #include "DirectionalLightShader.h"
 
-DirectionalLightShader::DirectionalLightShader()
+Enco3D::Rendering::DirectionalLightShader::DirectionalLightShader()
 {
 	AddVertexShaderFromFile("shaders/lightDirectional.vs");
 	AddFragmentShaderFromFile("shaders/lightDirectional.fs");
@@ -26,7 +26,7 @@ DirectionalLightShader::DirectionalLightShader()
 	AddUniform("eyePos");
 }
 
-void DirectionalLightShader::UpdateUniforms(const Matrix4x4f &worldMatrix, const Matrix4x4f projectedMatrix, Material &material) const
+void Enco3D::Rendering::DirectionalLightShader::UpdateUniforms(const Enco3D::Core::Matrix4x4f &worldMatrix, const Enco3D::Core::Matrix4x4f projectedMatrix, Material &material) const
 {
 	SetUniformMatrix4x4f("worldMatrix", worldMatrix);
 	SetUniformMatrix4x4f("projectedMatrix", projectedMatrix);

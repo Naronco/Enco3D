@@ -1,6 +1,6 @@
 #include "LightGlobalAmbientShader.h"
 
-LightGlobalAmbientShader::LightGlobalAmbientShader()
+Enco3D::Rendering::LightGlobalAmbientShader::LightGlobalAmbientShader()
 {
 	AddVertexShaderFromFile("shaders/lightGlobalAmbient.vs");
 	AddFragmentShaderFromFile("shaders/lightGlobalAmbient.fs");
@@ -21,7 +21,7 @@ LightGlobalAmbientShader::LightGlobalAmbientShader()
 	m_globalAmbientLight = Vector3f(0.2f, 0.2f, 0.2f);
 }
 
-void LightGlobalAmbientShader::UpdateUniforms(const Matrix4x4f &worldMatrix, const Matrix4x4f projectedMatrix, Material &material) const
+void Enco3D::Rendering::LightGlobalAmbientShader::UpdateUniforms(const Enco3D::Core::Matrix4x4f &worldMatrix, const Enco3D::Core::Matrix4x4f projectedMatrix, Material &material) const
 {
 	SetUniformMatrix4x4f("worldMatrix", worldMatrix);
 	SetUniformMatrix4x4f("projectedMatrix", projectedMatrix);

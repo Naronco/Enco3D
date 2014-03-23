@@ -137,10 +137,13 @@ void TestGame::Init()
 	flashLight->SetColor(Vector3f(1, 1, 1));
 	flashLight->SetIntensity(3.0f);
 	flashLight->SetRange(20.0f);
-	flashLight->SetCutoff(DegreesToSpotCutoff(35.0f));
+	flashLight->SetCutoff(MathUtil::DegreesToSpotCutoff(35.0f));
+
+	Camera *mainCamera = new Camera;
+	mainCamera->SetPerspectiveProjection(MathUtil::ToRadians(70.0f), (float)GetWindow()->GetWidth() / (float)GetWindow()->GetHeight(), 0.01f, 100.0f);
 
 	GameObject *cameraObject = new GameObject("mainCamera");
-	cameraObject->AddComponent(new Camera);
+	cameraObject->AddComponent(mainCamera);
 	cameraObject->AddComponent(new FirstPersonController);
 	cameraObject->AddComponent(flashLight);
 
@@ -149,7 +152,6 @@ void TestGame::Init()
 	//GetRenderingEngine()->SetClearColor(0.5f, 0.8f, 1.0f);
 	GetRenderingEngine()->SetGlobalAmbientColor(Vector3f(0.0f, 0.0f, 0.0f));
 
-	GetRenderingEngine()->GetMainCamera()->SetPerspectiveProjection(ToRadians(70.0f), (float)GetWindow()->GetWidth() / (float)GetWindow()->GetHeight(), 0.01f, 100.0f);
 	//GetRenderingEngine()->GetMainCamera()->Move(Vector3f(0, 0, -1), 5);
 
 	for (int i = 0; i < 30; i++)

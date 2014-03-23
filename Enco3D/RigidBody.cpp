@@ -1,28 +1,28 @@
 #include "RigidBody.h"
 
-RigidBody::RigidBody()
+Enco3D::Component::RigidBody::RigidBody()
 {
 }
 
-RigidBody::RigidBody(float mass, ICollisionShape *collisionShape) : m_mass(mass), m_collisionShape(collisionShape)
+Enco3D::Component::RigidBody::RigidBody(float mass, Enco3D::Physics::ICollisionShape *collisionShape) : m_mass(mass), m_collisionShape(collisionShape)
 {
 }
 
-RigidBody::RigidBody(float mass, float restitution, float friction, float linearDamping, float angularDamping, ICollisionShape *collisionShape) : m_mass(mass), m_restitution(restitution), m_friction(friction), m_linearDamping(linearDamping), m_angularDamping(angularDamping), m_collisionShape(collisionShape)
+Enco3D::Component::RigidBody::RigidBody(float mass, float restitution, float friction, float linearDamping, float angularDamping, Enco3D::Physics::ICollisionShape *collisionShape) : m_mass(mass), m_restitution(restitution), m_friction(friction), m_linearDamping(linearDamping), m_angularDamping(angularDamping), m_collisionShape(collisionShape)
 {
 }
 
-void RigidBody::InitPhysics()
+void Enco3D::Component::RigidBody::InitPhysics()
 {
 	GetPhysicsEngine()->AddRigidBody(this);
 }
 
-void RigidBody::Deinit()
+void Enco3D::Component::RigidBody::Deinit()
 {
 	GetPhysicsEngine()->RemoveRigidBody(this);
 }
 
-void RigidBody::Update()
+void Enco3D::Component::RigidBody::Update()
 {
 	if (m_bulletPhysicsInstance == nullptr)
 	{
@@ -34,7 +34,7 @@ void RigidBody::Update()
 	GetTransform()->SetRotation(PhysicsHelper::ToEnco3DQuat<float>(m_transform.getRotation()));
 }
 
-btRigidBody *RigidBody::CreateBulletPhysicsInstance()
+btRigidBody *Enco3D::Component::RigidBody::CreateBulletPhysicsInstance()
 {
 	btDefaultMotionState *motionState = new btDefaultMotionState(btTransform(PhysicsHelper::ToBulletPhysicsQuat(GetTransform()->GetRotation()), PhysicsHelper::ToBulletPhysicsVec3(GetTransform()->GetTranslation())));
 	btCollisionShape *shape = m_collisionShape->ToBulletPhysicsCollisionShape();

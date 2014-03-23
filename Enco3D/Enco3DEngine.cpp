@@ -1,6 +1,6 @@
 #include "Enco3DEngine.h"
 
-void Enco3DEngine::Init(char *windowTitle, unsigned int windowWidth, unsigned int windowHeight, IGame *game)
+void Enco3D::Core::Enco3DEngine::Init(char *windowTitle, unsigned int windowWidth, unsigned int windowHeight, IGame *game)
 {
 	m_window = new GLWindow(windowTitle, windowWidth, windowHeight);
 	m_timer = new Timer(true);
@@ -21,7 +21,7 @@ void Enco3DEngine::Init(char *windowTitle, unsigned int windowWidth, unsigned in
 	m_game->Init();
 }
 
-void Enco3DEngine::Deinit()
+void Enco3D::Core::Enco3DEngine::Deinit()
 {
 	if (m_game)
 	{
@@ -56,7 +56,7 @@ void Enco3DEngine::Deinit()
 	}
 }
 
-void Enco3DEngine::MainLoop()
+void Enco3D::Core::Enco3DEngine::MainLoop()
 {
 	Event event;
 

@@ -1,10 +1,10 @@
 #include "GBuffer.h"
 
-GBuffer::GBuffer()
+Enco3D::Rendering::GBuffer::GBuffer()
 {
 }
 
-GBuffer::GBuffer(unsigned int width, unsigned int height)
+Enco3D::Rendering::GBuffer::GBuffer(unsigned int width, unsigned int height)
 {
 	glGenFramebuffers(1, &m_fbo);
 	glBindFramebuffer(GL_FRAMEBUFFER, m_fbo);
@@ -55,16 +55,16 @@ GBuffer::GBuffer(unsigned int width, unsigned int height)
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-GBuffer::~GBuffer()
+Enco3D::Rendering::GBuffer::~GBuffer()
 {
 }
 
-void GBuffer::Bind()
+void Enco3D::Rendering::GBuffer::Bind()
 {
 	glBindFramebuffer(GL_FRAMEBUFFER, m_fbo);
 }
 
-void GBuffer::Debind()
+void Enco3D::Rendering::GBuffer::Debind()
 {
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }

@@ -1,6 +1,6 @@
 #include "TextureShader.h"
 
-TextureShader::TextureShader()
+Enco3D::Rendering::TextureShader::TextureShader()
 {
 	AddVertexShaderFromFile("shaders/texture.vs");
 	AddFragmentShaderFromFile("shaders/texture.fs");
@@ -17,7 +17,7 @@ TextureShader::TextureShader()
 	AddUniform("diffuseTexture");
 }
 
-void TextureShader::UpdateUniforms(const Matrix4x4f &worldMatrix, const Matrix4x4f &projectedMatrix, Material &material) const
+void Enco3D::Rendering::TextureShader::UpdateUniforms(const Enco3D::Core::Matrix4x4f &worldMatrix, const Enco3D::Core::Matrix4x4f &projectedMatrix, Material &material) const
 {
 	SetUniformMatrix4x4f("worldMatrix", worldMatrix);
 	SetUniformMatrix4x4f("projectedMatrix", projectedMatrix);

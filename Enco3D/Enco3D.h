@@ -5,10 +5,6 @@
 #	undef main
 #endif
 
-namespace Enco3D
-{
-}
-
 // HEADER FILE INCLUDES
 
 // Audio Engine Headers
@@ -44,6 +40,10 @@ namespace Enco3D
 #include "Vector4.h"
 
 // Physics Engine Headers
+#include "BoxCollisionShape.h"
+#include "CapsuleCollisionShape.h"
+#include "ConeCollisionShape.h"
+#include "CylinderCollisionShape.h"
 #include "ICollisionShape.h"
 #include "PhysicsEngine.h"
 #include "PhysicsHelper.h"
@@ -52,12 +52,15 @@ namespace Enco3D
 
 // Rendering Engine Headers
 #include "DirectionalLightShader.h"
+#include "GBuffer.h"
+#include "GeometryPassShader.h"
 #include "IndexedModel.h"
 #include "LightGlobalAmbientShader.h"
 #include "Material.h"
 #include "Mesh.h"
 #include "OBJModel.h"
 #include "PointLightShader.h"
+#include "PostProcessShader.h"
 #include "RenderingEngine.h"
 #include "Shader.h"
 #include "SpotLightShader.h"

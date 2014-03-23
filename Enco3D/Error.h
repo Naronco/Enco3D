@@ -5,12 +5,18 @@
 
 using namespace std;
 
-enum Error
+namespace Enco3D
 {
-	Success,
-	Failed,
-};
+	namespace Core
+	{
+		enum Error
+		{
+			Success,
+			Failed,
+		};
 
-typedef int ErrorResult;
+		typedef int ErrorResult;
+	}
+}
 
 #endif
