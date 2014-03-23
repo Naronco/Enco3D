@@ -177,24 +177,125 @@ void TestGame::Update()
 
 	if (Input::IsKeyDown(SDLK_e) && timeout < 0.1f)
 	{
-		Mesh *sphereMesh = new Mesh("models/sphere.obj");
+		int rand = Random::NextInt(5);
 
-		static Material *sphereMaterial = nullptr;
-
-		if (sphereMaterial == nullptr)
+		switch (rand)
 		{
-			sphereMaterial = new Material;
-			sphereMaterial->AddTexture("diffuse", Texture("texture/test.png", TextureTarget::Texture2D, TextureFilter::Nearest));
-			sphereMaterial->AddFloat("specularIntensity", 1.0f);
-			sphereMaterial->AddFloat("specularExponent", 64.0f);
+		case 0:
+		{
+				  Mesh *boxMesh = new Mesh("models/box.obj");
+
+				  static Material *boxMaterial = nullptr;
+
+				  if (boxMaterial == nullptr)
+				  {
+					  boxMaterial = new Material;
+					  boxMaterial->AddTexture("diffuse", Texture("texture/test.png", TextureTarget::Texture2D, TextureFilter::Nearest));
+					  boxMaterial->AddFloat("specularIntensity", 1.0f);
+					  boxMaterial->AddFloat("specularExponent", 64.0f);
+				  }
+
+				  GameObject *boxObject = new GameObject("box");
+				  boxObject->GetTransform()->Translate(Vector3f(Random::NextFloat() * 4.0f - 2.0f, 10, Random::NextFloat() * 4.0f - 2.0f));
+				  boxObject->AddComponent(new MeshRenderer(boxMesh, boxMaterial));
+				  boxObject->AddComponent(new RigidBody(1, 0.8f, 1.0f, 0.2f, 0.1f, new BoxCollisionShape(Vector3f(2, 2, 2))));
+
+				  AddGameObject(boxObject);
+				  break;
 		}
 
-		GameObject *sphereObject = new GameObject("sphere");
-		sphereObject->GetTransform()->Translate(Vector3f(Random::NextFloat() * 4.0f - 2.0f, 10, Random::NextFloat() * 4.0f - 2.0f));
-		sphereObject->AddComponent(new MeshRenderer(sphereMesh, sphereMaterial));
-		sphereObject->AddComponent(new RigidBody(1, 0.8f, 1.0f, 0.2f, 0.1f, new SphereCollisionShape(1)));
+		case 1:
+		{
+				  Mesh *capsuleMesh = new Mesh("models/capsule.obj");
 
-		AddGameObject(sphereObject);
+				  static Material *capsuleMaterial = nullptr;
+
+				  if (capsuleMaterial == nullptr)
+				  {
+					  capsuleMaterial = new Material;
+					  capsuleMaterial->AddTexture("diffuse", Texture("texture/test.png", TextureTarget::Texture2D, TextureFilter::Nearest));
+					  capsuleMaterial->AddFloat("specularIntensity", 1.0f);
+					  capsuleMaterial->AddFloat("specularExponent", 64.0f);
+				  }
+
+				  GameObject *capsuleObject = new GameObject("capsule");
+				  capsuleObject->GetTransform()->Translate(Vector3f(Random::NextFloat() * 4.0f - 2.0f, 10, Random::NextFloat() * 4.0f - 2.0f));
+				  capsuleObject->AddComponent(new MeshRenderer(capsuleMesh, capsuleMaterial));
+				  capsuleObject->AddComponent(new RigidBody(1, 0.8f, 1.0f, 0.2f, 0.1f, new CapsuleCollisionShape(1, 2)));
+
+				  AddGameObject(capsuleObject);
+				  break;
+		}
+
+		case 2:
+		{
+				  Mesh *coneMesh = new Mesh("models/cone.obj");
+
+				  static Material *coneMaterial = nullptr;
+
+				  if (coneMaterial == nullptr)
+				  {
+					  coneMaterial = new Material;
+					  coneMaterial->AddTexture("diffuse", Texture("texture/test.png", TextureTarget::Texture2D, TextureFilter::Nearest));
+					  coneMaterial->AddFloat("specularIntensity", 1.0f);
+					  coneMaterial->AddFloat("specularExponent", 64.0f);
+				  }
+
+				  GameObject *coneObject = new GameObject("cone");
+				  coneObject->GetTransform()->Translate(Vector3f(Random::NextFloat() * 4.0f - 2.0f, 10, Random::NextFloat() * 4.0f - 2.0f));
+				  coneObject->AddComponent(new MeshRenderer(coneMesh, coneMaterial));
+				  coneObject->AddComponent(new RigidBody(1, 0.8f, 1.0f, 0.2f, 0.1f, new ConeCollisionShape(0.5f, 1)));
+
+				  AddGameObject(coneObject);
+				  break;
+		}
+
+		case 3:
+		{
+				  Mesh *cylinderMesh = new Mesh("models/cylinder.obj");
+
+				  static Material *cylinderMaterial = nullptr;
+
+				  if (cylinderMaterial == nullptr)
+				  {
+					  cylinderMaterial = new Material;
+					  cylinderMaterial->AddTexture("diffuse", Texture("texture/test.png", TextureTarget::Texture2D, TextureFilter::Nearest));
+					  cylinderMaterial->AddFloat("specularIntensity", 1.0f);
+					  cylinderMaterial->AddFloat("specularExponent", 64.0f);
+				  }
+
+				  GameObject *cylinderObject = new GameObject("cylinder");
+				  cylinderObject->GetTransform()->Translate(Vector3f(Random::NextFloat() * 4.0f - 2.0f, 10, Random::NextFloat() * 4.0f - 2.0f));
+				  cylinderObject->AddComponent(new MeshRenderer(cylinderMesh, cylinderMaterial));
+				  cylinderObject->AddComponent(new RigidBody(1, 0.8f, 1.0f, 0.2f, 0.1f, new CylinderCollisionShape(Vector3f(2, 2, 2))));
+
+				  AddGameObject(cylinderObject);
+				  break;
+		}
+
+		case 4:
+		{
+				  Mesh *sphereMesh = new Mesh("models/sphere.obj");
+
+				  static Material *sphereMaterial = nullptr;
+
+				  if (sphereMaterial == nullptr)
+				  {
+					  sphereMaterial = new Material;
+					  sphereMaterial->AddTexture("diffuse", Texture("texture/test.png", TextureTarget::Texture2D, TextureFilter::Nearest));
+					  sphereMaterial->AddFloat("specularIntensity", 1.0f);
+					  sphereMaterial->AddFloat("specularExponent", 64.0f);
+				  }
+
+				  GameObject *sphereObject = new GameObject("sphere");
+				  sphereObject->GetTransform()->Translate(Vector3f(Random::NextFloat() * 4.0f - 2.0f, 10, Random::NextFloat() * 4.0f - 2.0f));
+				  sphereObject->AddComponent(new MeshRenderer(sphereMesh, sphereMaterial));
+				  sphereObject->AddComponent(new RigidBody(1, 0.8f, 1.0f, 0.2f, 0.1f, new SphereCollisionShape(1)));
+
+				  AddGameObject(sphereObject);
+				  break;
+		}
+		}
 
 		timeout = 1.0f;
 	}
