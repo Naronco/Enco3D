@@ -21,8 +21,6 @@ namespace Enco3D
 		private:
 			MeshResource *m_resource{ nullptr };
 			string m_filename;
-			Vertex *m_vertices{ nullptr };
-			unsigned int *m_indices{ nullptr };
 
 		private:
 			static map<string, MeshResource *> s_loadedModels;
@@ -40,10 +38,10 @@ namespace Enco3D
 
 			void Render();
 
-			inline Vertex *GetVertices() const { return m_vertices; }
+			inline Vertex *GetVertices() const { return m_resource->GetVertices(); }
 			inline unsigned int GetVertexCount() const { return m_resource->GetVertexCount(); }
 
-			inline unsigned int *GetIndices() const { return m_indices; }
+			inline unsigned int *GetIndices() const { return m_resource->GetIndices(); }
 			inline unsigned int GetIndexCount() const { return m_resource->GetIndexCount(); }
 		};
 	}

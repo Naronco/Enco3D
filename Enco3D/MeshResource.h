@@ -2,6 +2,7 @@
 #define _ENCO3D_MESHRESOURCE_H_
 
 #include <GL\glew.h>
+#include "Vertex.h"
 
 namespace Enco3D
 {
@@ -11,11 +12,13 @@ namespace Enco3D
 		{
 		private:
 			GLuint m_vbo{ 0 }, m_ibo{ 0 };
+			Vertex *m_vertices;
+			unsigned int *m_indices;
 			unsigned int m_vertexCount{ 0 }, m_indexCount{ 0 }, m_refCount{ 0 };
 
 		public:
 			MeshResource();
-			MeshResource(unsigned int vertexCount, unsigned int indexCount);
+			MeshResource(Vertex *vertices, unsigned int vertexCount, unsigned int *indices, unsigned int indexCount);
 			~MeshResource();
 
 			inline void AddReference() { m_refCount++; }
@@ -25,6 +28,8 @@ namespace Enco3D
 			inline GLuint GetIBO() const { return m_ibo; }
 			inline unsigned int GetVertexCount() const { return m_vertexCount; }
 			inline unsigned int GetIndexCount() const { return m_indexCount; }
+			inline Vertex *GetVertices() const { return m_vertices; }
+			inline unsigned int *GetIndices() const { return m_indices; }
 		};
 	}
 }

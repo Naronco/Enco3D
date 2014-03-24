@@ -20,18 +20,20 @@ namespace Enco3D
 		class MeshCollisionShape : public ICollisionShape
 		{
 		private:
-			vector<Vector3f> m_points;
+			Mesh *m_mesh{ nullptr };
+			bool m_convex{ true };
 
 		public:
 			MeshCollisionShape();
-			MeshCollisionShape(const vector<Vector3f> &points);
-			MeshCollisionShape(const Mesh *mesh);
+			MeshCollisionShape(Mesh *mesh, bool convex = true);
 
 			btCollisionShape *ToBulletPhysicsCollisionShape();
 
-			inline void AddPoint(const Vector3f &point) { m_points.push_back(point); }
+			inline void SetMesh(Mesh *mesh) { m_mesh = mesh; }
+			inline void SetConvex(bool convex) { m_convex = convex; }
 
-			inline vector<Vector3f> GetPoints() const { return m_points; }
+			inline Mesh *GetMesh() const { return m_mesh; }
+			inline bool IsConvex() const { return m_convex; }
 		};
 	}
 }

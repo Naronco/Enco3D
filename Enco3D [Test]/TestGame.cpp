@@ -16,8 +16,8 @@ void TestGame::Init()
 
 	AddGameObject(fieldMeshObject);
 
-/*	string models[] =
-	{
+	/*	string models[] =
+		{
 		"applejack/applejack_eyelashes.obj",
 		"applejack/applejack_hair_back_lower.obj",
 		"applejack/applejack_hair_back_upper.obj",
@@ -32,10 +32,10 @@ void TestGame::Init()
 		"pony_teeth_lower.obj",
 		"pony_teeth_upper.obj",
 		"pony_tongue.obj",
-	};
+		};
 
-	string textures[] =
-	{
+		string textures[] =
+		{
 		"",
 		"applejack/applejack_hair_back_lower.png",
 		"applejack/applejack_hair_back_upper.png",
@@ -50,10 +50,10 @@ void TestGame::Init()
 		"",
 		"",
 		"pony_tongue.png",
-	};
+		};
 
-	Vector3f colors[] =
-	{
+		Vector3f colors[] =
+		{
 		Vector3Template::Zero,
 		Vector3Template::One,
 		Vector3Template::One,
@@ -68,7 +68,7 @@ void TestGame::Init()
 		Vector3Template::One,
 		Vector3Template::One,
 		Vector3Template::One,
-	};*/
+		};*/
 
 	string models[] =
 	{
@@ -112,10 +112,10 @@ void TestGame::Init()
 		Vector3Template::One,
 	};
 
-/*	GameObject *ponyObject = new GameObject;
-	
-	for (unsigned int i = 0; i < 10; i++)
-	{
+	/*	GameObject *ponyObject = new GameObject;
+
+		for (unsigned int i = 0; i < 10; i++)
+		{
 		Mesh *ponyMesh = new Mesh(string("models/") + models[i]);
 
 		Material *ponyMaterial = new Material;
@@ -125,13 +125,13 @@ void TestGame::Init()
 
 		if (textures[i].length() > 0)
 		{
-			ponyMaterial->AddTexture("diffuse", Texture(string("texture/") + textures[i], TextureTarget::Texture2D, TextureFilter::Linear));
+		ponyMaterial->AddTexture("diffuse", Texture(string("texture/") + textures[i], TextureTarget::Texture2D, TextureFilter::Linear));
 		}
 
 		ponyObject->AddComponent(new MeshRenderer(ponyMesh, ponyMaterial));
-	}
+		}
 
-	AddGameObject(ponyObject);*/
+		AddGameObject(ponyObject);*/
 
 	SpotLight *flashLight = new SpotLight;
 	flashLight->SetColor(Vector3f(1, 1, 1));
@@ -179,7 +179,7 @@ void TestGame::Update()
 
 	if (Input::IsKeyDown(SDLK_e) && timeout < 0.1f)
 	{
-		int rand = Random::NextInt(6);
+		int rand = 5;// Random::NextInt(6);
 
 		switch (rand)
 		{
@@ -318,6 +318,29 @@ void TestGame::Update()
 				  convexObject->AddComponent(new RigidBody(1, 0.8f, 1.0f, 0.2f, 0.1f, new MeshCollisionShape(convexMesh)));
 
 				  AddGameObject(convexObject);
+				  break;
+		}
+
+		case 6:
+		{
+				  Mesh *NOconvexMesh = new Mesh("models/NOconvex.obj");
+
+				  static Material *NOconvexMaterial = nullptr;
+
+				  if (NOconvexMaterial == nullptr)
+				  {
+					  NOconvexMaterial = new Material;
+					  NOconvexMaterial->AddTexture("diffuse", Texture("texture/test.png", TextureTarget::Texture2D, TextureFilter::Nearest));
+					  NOconvexMaterial->AddFloat("specularIntensity", 1.0f);
+					  NOconvexMaterial->AddFloat("specularExponent", 64.0f);
+				  }
+
+				  GameObject *NOconvexObject = new GameObject("NOconvex");
+				  NOconvexObject->GetTransform()->Translate(Vector3f(Random::NextFloat() * 4.0f - 2.0f, 10, Random::NextFloat() * 4.0f - 2.0f));
+				  NOconvexObject->AddComponent(new MeshRenderer(NOconvexMesh, NOconvexMaterial));
+				  NOconvexObject->AddComponent(new RigidBody(1, 0.8f, 1.0f, 0.2f, 0.1f, new MeshCollisionShape(NOconvexMesh, false)));
+
+				  AddGameObject(NOconvexObject);
 				  break;
 		}
 		}
