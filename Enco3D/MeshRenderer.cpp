@@ -19,3 +19,18 @@ void Enco3D::Component::MeshRenderer::Render(Enco3D::Rendering::Shader *shader)
 	shader->UpdateUniforms(worldMatrix, projectedMatrix, *m_material);
 	m_mesh->Render();
 }
+
+void Enco3D::Component::MeshRenderer::Deinit()
+{
+	if (m_mesh)
+	{
+		delete m_mesh;
+		m_mesh = nullptr;
+	}
+
+	if (m_material)
+	{
+		delete m_material;
+		m_material = nullptr;
+	}
+}

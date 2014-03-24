@@ -24,6 +24,8 @@ namespace Enco3D
 			MeshRenderer(Mesh *mesh, Material *material);
 
 			void Render(Shader *shader);
+
+			void Deinit();
 		};
 	}
 }

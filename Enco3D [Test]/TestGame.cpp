@@ -179,7 +179,7 @@ void TestGame::Update()
 
 	if (Input::IsKeyDown(SDLK_e) && timeout < 0.1f)
 	{
-		int rand = 5;// Random::NextInt(6);
+		int rand = Random::NextInt(6);
 
 		switch (rand)
 		{
