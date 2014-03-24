@@ -1,5 +1,5 @@
-#ifndef _ENCO3D_MESHCOLLISIONSHAPE_H_
-#define _ENCO3D_MESHCOLLISIONSHAPE_H_
+#ifndef _ENCO3D_STATICCONCAVEMESHCOLLISIONSHAPE_H_
+#define _ENCO3D_STATICCONCAVEMESHCOLLISIONSHAPE_H_
 
 #include "ICollisionShape.h"
 #include "Vector3.h"
@@ -17,23 +17,19 @@ namespace Enco3D
 		using namespace Core;
 		using namespace Rendering;
 
-		class MeshCollisionShape : public ICollisionShape
+		class StaticConcaveMeshCollisionShape : public ICollisionShape
 		{
 		private:
 			Mesh *m_mesh{ nullptr };
-			bool m_convex{ true };
 
 		public:
-			MeshCollisionShape();
-			MeshCollisionShape(Mesh *mesh, bool convex = true);
+			StaticConcaveMeshCollisionShape();
+			StaticConcaveMeshCollisionShape(Mesh *mesh);
 
 			btCollisionShape *ToBulletPhysicsCollisionShape();
 
 			inline void SetMesh(Mesh *mesh) { m_mesh = mesh; }
-			inline void SetConvex(bool convex) { m_convex = convex; }
-
 			inline Mesh *GetMesh() const { return m_mesh; }
-			inline bool IsConvex() const { return m_convex; }
 		};
 	}
 }

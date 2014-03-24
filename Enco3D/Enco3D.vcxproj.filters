@@ -206,7 +206,10 @@
     <ClInclude Include="ConeCollisionShape.h">
       <Filter>Headerdateien\Physics</Filter>
     </ClInclude>
-    <ClInclude Include="MeshCollisionShape.h">
+    <ClInclude Include="ConvexMeshCollisionShape.h">
+      <Filter>Headerdateien\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticConcaveMeshCollisionShape.h">
       <Filter>Headerdateien\Physics</Filter>
     </ClInclude>
   </ItemGroup>
@@ -313,7 +316,10 @@
     <ClCompile Include="ConeCollisionShape.cpp">
       <Filter>Quelldateien\Physics</Filter>
     </ClCompile>
-    <ClCompile Include="MeshCollisionShape.cpp">
+    <ClCompile Include="ConvexMeshCollisionShape.cpp">
+      <Filter>Quelldateien\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticConcaveMeshCollisionShape.cpp">
       <Filter>Quelldateien\Physics</Filter>
     </ClCompile>
   </ItemGroup>

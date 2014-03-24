@@ -315,32 +315,9 @@ void TestGame::Update()
 				  GameObject *convexObject = new GameObject("convex");
 				  convexObject->GetTransform()->Translate(Vector3f(Random::NextFloat() * 4.0f - 2.0f, 10, Random::NextFloat() * 4.0f - 2.0f));
 				  convexObject->AddComponent(new MeshRenderer(convexMesh, convexMaterial));
-				  convexObject->AddComponent(new RigidBody(1, 0.8f, 1.0f, 0.2f, 0.1f, new MeshCollisionShape(convexMesh)));
+				  convexObject->AddComponent(new RigidBody(1, 0.8f, 1.0f, 0.2f, 0.1f, new ConvexMeshCollisionShape(convexMesh)));
 
 				  AddGameObject(convexObject);
-				  break;
-		}
-
-		case 6:
-		{
-				  Mesh *NOconvexMesh = new Mesh("models/NOconvex.obj");
-
-				  static Material *NOconvexMaterial = nullptr;
-
-				  if (NOconvexMaterial == nullptr)
-				  {
-					  NOconvexMaterial = new Material;
-					  NOconvexMaterial->AddTexture("diffuse", Texture("texture/test.png", TextureTarget::Texture2D, TextureFilter::Nearest));
-					  NOconvexMaterial->AddFloat("specularIntensity", 1.0f);
-					  NOconvexMaterial->AddFloat("specularExponent", 64.0f);
-				  }
-
-				  GameObject *NOconvexObject = new GameObject("NOconvex");
-				  NOconvexObject->GetTransform()->Translate(Vector3f(Random::NextFloat() * 4.0f - 2.0f, 10, Random::NextFloat() * 4.0f - 2.0f));
-				  NOconvexObject->AddComponent(new MeshRenderer(NOconvexMesh, NOconvexMaterial));
-				  NOconvexObject->AddComponent(new RigidBody(1, 0.8f, 1.0f, 0.2f, 0.1f, new MeshCollisionShape(NOconvexMesh, false)));
-
-				  AddGameObject(NOconvexObject);
 				  break;
 		}
 		}

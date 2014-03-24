@@ -112,7 +112,7 @@
     <ClInclude Include="IndexedModel.h" />
     <ClInclude Include="LightGlobalAmbientShader.h" />
     <ClInclude Include="MathUtil.h" />
-    <ClInclude Include="MeshCollisionShape.h" />
+    <ClInclude Include="ConvexMeshCollisionShape.h" />
     <ClInclude Include="MeshRenderer.h" />
     <ClInclude Include="MeshResource.h" />
     <ClInclude Include="OBJModel.h" />
@@ -127,6 +127,7 @@
     <ClInclude Include="SphereCollisionShape.h" />
     <ClInclude Include="SpotLight.h" />
     <ClInclude Include="SpotLightShader.h" />
+    <ClInclude Include="StaticConcaveMeshCollisionShape.h" />
     <ClInclude Include="StaticPlaneCollisionShape.h" />
     <ClInclude Include="TextureShader.h" />
     <ClInclude Include="Enco3D.h" />
@@ -154,6 +155,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CapsuleCollisionShape.cpp" />
     <ClCompile Include="ConeCollisionShape.cpp" />
+    <ClCompile Include="ConvexMeshCollisionShape.cpp" />
     <ClCompile Include="CylinderCollisionShape.cpp" />
     <ClCompile Include="Enco3DEngine.cpp" />
     <ClCompile Include="DirectionalLightShader.cpp" />
@@ -163,7 +165,6 @@
     <ClCompile Include="GeometryPassShader.cpp" />
     <ClCompile Include="IndexedModel.cpp" />
     <ClCompile Include="LightGlobalAmbientShader.cpp" />
-    <ClCompile Include="MeshCollisionShape.cpp" />
     <ClCompile Include="MeshRenderer.cpp" />
     <ClCompile Include="MeshResource.cpp" />
     <ClCompile Include="OBJModel.cpp" />
@@ -175,6 +176,7 @@
     <ClCompile Include="RigidBody.cpp" />
     <ClCompile Include="SphereCollisionShape.cpp" />
     <ClCompile Include="SpotLightShader.cpp" />
+    <ClCompile Include="StaticConcaveMeshCollisionShape.cpp" />
     <ClCompile Include="StaticPlaneCollisionShape.cpp" />
     <ClCompile Include="TextureShader.cpp" />
     <ClCompile Include="GLWindow.cpp" />

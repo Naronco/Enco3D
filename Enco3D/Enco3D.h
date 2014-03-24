@@ -45,10 +45,11 @@
 #include "ConeCollisionShape.h"
 #include "CylinderCollisionShape.h"
 #include "ICollisionShape.h"
-#include "MeshCollisionShape.h"
+#include "ConvexMeshCollisionShape.h"
 #include "PhysicsEngine.h"
 #include "PhysicsHelper.h"
 #include "SphereCollisionShape.h"
+#include "StaticConcaveMeshCollisionShape.h"
 #include "StaticPlaneCollisionShape.h"
 
 // Rendering Engine Headers
