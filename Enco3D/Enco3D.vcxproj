@@ -99,6 +99,8 @@
     <ClInclude Include="CylinderCollisionShape.h" />
     <ClInclude Include="GBuffer.h" />
     <ClInclude Include="GeometryPassShader.h" />
+    <ClInclude Include="IGUIElement.h" />
+    <ClInclude Include="GUITexture.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Enco3DEngine.h" />
@@ -163,6 +165,7 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GBuffer.cpp" />
     <ClCompile Include="GeometryPassShader.cpp" />
+    <ClCompile Include="GUITexture.cpp" />
     <ClCompile Include="IndexedModel.cpp" />
     <ClCompile Include="LightGlobalAmbientShader.cpp" />
     <ClCompile Include="MeshRenderer.cpp" />

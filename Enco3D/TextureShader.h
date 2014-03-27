@@ -12,7 +12,7 @@ namespace Enco3D
 		public:
 			TextureShader();
 
-			void UpdateUniforms(const Matrix4x4f &worldMatrix, const Matrix4x4f &projectedMatrix, Material &material) const;
+			void UpdateUniforms(const Matrix4x4f &worldMatrix, const Matrix4x4f projectedMatrix, Material &material) const;
 
 		public:
 			inline static TextureShader *GetInstance()

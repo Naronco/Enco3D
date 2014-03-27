@@ -37,7 +37,7 @@ namespace Enco3D
 		class RenderingEngine
 		{
 		private:
-			Camera *m_mainCamera{ nullptr };
+			Camera *m_mainCamera{ nullptr }, *m_GUICamera{ nullptr };
 			vector<Light *> m_lights;
 			Vector3f m_globalAmbientColor;
 
@@ -53,8 +53,9 @@ namespace Enco3D
 
 			void Render(GameObject *gameObject);
 
-			Matrix4x4f GetProjectedMatrix(const Matrix4x4f &worldMatrix);
-
+			Matrix4x4f GetProjectedMatrix(const Camera *camera, const Matrix4x4f &worldMatrix);
+			Matrix4x4f GetViewProjectedMatrix(const Camera *camera, const Matrix4x4f &worldMatrix);
+			
 			inline void AddLight(Light *light) { m_lights.push_back(light); }
 			inline void RemoveLight(Light *light) { m_lights.erase(remove(m_lights.begin(), m_lights.end(), light), m_lights.end()); }
 
@@ -66,8 +67,10 @@ namespace Enco3D
 			inline void SetHeight(unsigned int height) { m_height = height; }
 
 			inline Camera *GetMainCamera() const { return m_mainCamera; }
+			inline Camera *GetGUICamera() const { return m_GUICamera; }
 			inline vector<Light *> GetLights() const { return m_lights; }
 			inline Vector3f GetGlobalAmbientColor() const { return m_globalAmbientColor; }
+
 			inline unsigned int GetWidth() const { return m_width; }
 			inline unsigned int GetHeight() const { return m_height; }
 		};

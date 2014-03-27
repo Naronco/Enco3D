@@ -35,6 +35,21 @@ namespace Enco3D
 				textureValues.insert(pair<char *, Texture>(name, texture));
 			}
 
+			inline void SetFloat(char *name, float value)
+			{
+				floatValues[name] = value;
+			}
+
+			inline void SetVector3f(char *name, const Vector3f &vector)
+			{
+				vector3fValues[name] = vector;
+			}
+
+			inline void SetTexture(char *name, const Texture &texture)
+			{
+				textureValues[name] = texture;
+			}
+
 			inline float GetFloat(char *name)
 			{
 				map<char *, float>::iterator it = floatValues.find(name);

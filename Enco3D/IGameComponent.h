@@ -25,7 +25,8 @@ namespace Enco3D
 			virtual void InitPhysics() {  }
 
 			virtual void Update() {  }
-			virtual void Render(Shader *shader) {  }
+			virtual void Render(const Camera *camera, Shader *shader) {  }
+			virtual void RenderGUI(const Camera *camera, Shader *shader) {  }
 
 			inline void SetGameObject(GameObject *gameObject) { m_gameObject = gameObject; }
 

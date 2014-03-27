@@ -10,10 +10,10 @@ Enco3D::Component::MeshRenderer::MeshRenderer(Enco3D::Rendering::Mesh *mesh, Enc
 	m_material = material;
 }
 
-void Enco3D::Component::MeshRenderer::Render(Enco3D::Rendering::Shader *shader)
+void Enco3D::Component::MeshRenderer::Render(const Enco3D::Rendering::Camera *camera, Enco3D::Rendering::Shader *shader)
 {
 	Matrix4x4f worldMatrix = GetTransform()->GetTransformation();
-	Matrix4x4f projectedMatrix = GetRenderingEngine()->GetProjectedMatrix(worldMatrix);
+	Matrix4x4f projectedMatrix = GetRenderingEngine()->GetViewProjectedMatrix(camera, worldMatrix);
 
 	shader->Bind();
 	shader->UpdateUniforms(worldMatrix, projectedMatrix, *m_material);

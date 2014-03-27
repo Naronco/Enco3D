@@ -23,7 +23,7 @@ namespace Enco3D
 			MeshRenderer();
 			MeshRenderer(Mesh *mesh, Material *material);
 
-			void Render(Shader *shader);
+			void Render(const Camera *camera, Shader *shader);
 
 			void Deinit();
 		};

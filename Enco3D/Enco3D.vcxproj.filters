@@ -212,6 +212,12 @@
     <ClInclude Include="StaticConcaveMeshCollisionShape.h">
       <Filter>Headerdateien\Physics</Filter>
     </ClInclude>
+    <ClInclude Include="GUITexture.h">
+      <Filter>Headerdateien\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="IGUIElement.h">
+      <Filter>Headerdateien\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stb_image.c">
@@ -321,6 +327,9 @@
     </ClCompile>
     <ClCompile Include="StaticConcaveMeshCollisionShape.cpp">
       <Filter>Quelldateien\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="GUITexture.cpp">
+      <Filter>Quelldateien\Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

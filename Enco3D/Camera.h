@@ -29,6 +29,7 @@ namespace Enco3D
 
 			Matrix4x4f GetViewProjection() const;
 
+			inline void SetProjection(const Matrix4x4f &projection) { m_projection.Set(projection); }
 			inline void SetTranslation(const Vector3f &translation) { GetTransform()->SetTranslation(translation); }
 			inline void SetRotation(const Quaternionf &rotation) { GetTransform()->SetRotation(rotation); }
 			inline void SetScaling(const Vector3f &scaling) { GetTransform()->SetScaling(scaling); }

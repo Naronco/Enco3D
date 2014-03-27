@@ -53,7 +53,8 @@ namespace Enco3D
 			~GameObject();
 
 			void Update();
-			void Render(Shader *shader);
+			void Render(const Camera *camera, Shader *shader);
+			void RenderGUI(const Camera *camera, Shader *shader);
 
 			GameObject *AddChild(GameObject *child);
 			GameObject *AddComponent(IGameComponent *component);

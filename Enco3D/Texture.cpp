@@ -3,6 +3,10 @@
 const Enco3D::Rendering::Texture *Enco3D::Rendering::Texture::s_lastBind = nullptr;
 Enco3D::Rendering::Texture *Enco3D::Rendering::Texture::s_blankTexture = nullptr;
 
+Enco3D::Rendering::Texture::Texture()
+{
+}
+
 Enco3D::Rendering::Texture::Texture(const string &filename, TextureTarget target, TextureFilter filter, TextureWrap wrap)
 {
 	int width, height, bytesPerPixel;

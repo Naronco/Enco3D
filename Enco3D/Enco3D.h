@@ -13,6 +13,8 @@
 #include "Camera.h"
 #include "DirectionalLight.h"
 #include "FirstPersonController.h"
+#include "IGUIElement.h"
+#include "GUITexture.h"
 #include "Light.h"
 #include "MeshRenderer.h"
 #include "PointLight.h"

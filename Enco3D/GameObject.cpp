@@ -1,5 +1,6 @@
 #include "GameObject.h"
 #include "IGameComponent.h"
+#include "Camera.h"
 
 Enco3D::Core::GameObject::GameObject()
 {
@@ -47,19 +48,31 @@ void Enco3D::Core::GameObject::Update()
 	}
 }
 
-void Enco3D::Core::GameObject::Render(Enco3D::Rendering::Shader *shader)
+void Enco3D::Core::GameObject::Render(const Enco3D::Rendering::Camera *camera, Enco3D::Rendering::Shader *shader)
 {
 	for (unsigned int i = 0; i < m_children.size(); i++)
 	{
-		m_children[i]->Render(shader);
+		m_children[i]->Render(camera, shader);
 	}
 
 	for (unsigned int i = 0; i < m_components.size(); i++)
 	{
-		m_components[i]->Render(shader);
+		m_components[i]->Render(camera, shader);
 	}
 }
 
+void Enco3D::Core::GameObject::RenderGUI(const Enco3D::Rendering::Camera *camera, Enco3D::Rendering::Shader *shader)
+{
+	for (unsigned int i = 0; i < m_children.size(); i++)
+	{
+		m_children[i]->RenderGUI(camera, shader);
+	}
+
+	for (unsigned int i = 0; i < m_components.size(); i++)
+	{
+		m_components[i]->RenderGUI(camera, shader);
+	}
+}
 
 Enco3D::Core::GameObject *Enco3D::Core::GameObject::AddChild(GameObject *child)
 {

@@ -167,6 +167,14 @@ void TestGame::Init()
 
 		AddGameObject(pointLightObject);
 	}
+
+//	GUITexture *guiTexture = new GUITexture("texture/test.png");
+//
+//	GameObject *guiTextureObject = new GameObject("guiTexture");
+//	guiTextureObject->AddComponent(guiTexture);
+//	guiTextureObject->GetTransform()->Scale(Vector3f(0.2f, 0.2f, 0.2f));
+//
+//	AddGameObject(guiTextureObject);
 }
 
 void TestGame::Deinit()

@@ -45,6 +45,7 @@ namespace Enco3D
 			static Texture *s_blankTexture;
 
 		public:
+			Texture();
 			Texture(const string &filename, TextureTarget target = TextureTarget::Texture2D, TextureFilter filter = TextureFilter::Linear, TextureWrap wrap = TextureWrap::Repeat);
 			Texture(int width, int height, unsigned char *data, TextureTarget target = TextureTarget::Texture2D, TextureFilter filter = TextureFilter::Linear, TextureWrap wrap = TextureWrap::Repeat);
 
