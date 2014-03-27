@@ -149,10 +149,10 @@ void TestGame::Init()
 
 	AddGameObject(cameraObject);
 
-	//GetRenderingEngine()->SetClearColor(0.5f, 0.8f, 1.0f);
-	//GetRenderingEngine()->SetGlobalAmbientColor(Vector3f(0.0f, 0.0f, 0.0f));
-
-	//GetRenderingEngine()->GetMainCamera()->Move(Vector3f(0, 0, -1), 5);
+//	GetRenderingEngine()->SetClearColor(0.5f, 0.8f, 1.0f);
+//	GetRenderingEngine()->SetGlobalAmbientColor(Vector3f(0.0f, 0.0f, 0.0f));
+//
+//	GetRenderingEngine()->GetMainCamera()->Move(Vector3f(0, 0, -1), 5);
 
 	for (int i = 0; i < 30; i++)
 	{

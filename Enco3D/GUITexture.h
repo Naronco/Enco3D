@@ -18,6 +18,7 @@ namespace Enco3D
 		{
 		private:
 			Texture *m_texture;
+			Vector3f m_color;
 			Material m_material;
 
 		private:
@@ -30,14 +31,19 @@ namespace Enco3D
 		public:
 			GUITexture();
 			GUITexture(Texture *texture);
+			GUITexture(Texture *texture, const Vector3f &color);
 			GUITexture(const string &filename);
+			GUITexture(const string &filename, const Vector3f &color);
 
 			void RenderGUI(const Camera *camera, Shader *shader);
 
 			void Deinit();
 
 			inline void SetTexture(Texture *texture) { ReleaseTexture(); m_material.SetTexture("diffuse", *texture); m_texture = texture; }
+			inline void SetColor(const Vector3f &color) { m_material.SetVector3f("diffuse", color); m_color.Set(color); }
+
 			inline Texture *GetTexture() const { return m_texture; }
+			inline Vector3f GetColor() const { return m_color; }
 		};
 	}
 }
