@@ -7,6 +7,7 @@ using namespace Enco3D::Core;
 using namespace Enco3D::Component;
 using namespace Enco3D::Rendering;
 using namespace Enco3D::Physics;
+using namespace Enco3D::Audio;
 
 class TestGame : public IGame
 {

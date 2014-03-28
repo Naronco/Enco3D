@@ -8,6 +8,7 @@
 // HEADER FILE INCLUDES
 
 // Audio Engine Headers
+#include "AudioEngine.h"
 
 // Component Headers
 #include "Camera.h"

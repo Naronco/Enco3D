@@ -218,6 +218,9 @@
     <ClInclude Include="IGUIElement.h">
       <Filter>Headerdateien\Components</Filter>
     </ClInclude>
+    <ClInclude Include="AudioEngine.h">
+      <Filter>Headerdateien\Audio</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stb_image.c">
@@ -330,6 +333,9 @@
     </ClCompile>
     <ClCompile Include="GUITexture.cpp">
       <Filter>Quelldateien\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioEngine.cpp">
+      <Filter>Quelldateien\Audio</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

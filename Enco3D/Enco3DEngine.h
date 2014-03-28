@@ -6,12 +6,17 @@
 #include "IGame.h"
 #include "RenderingEngine.h"
 #include "PhysicsEngine.h"
+#include "AudioEngine.h"
 #include "Random.h"
 
 namespace Enco3D
 {
 	namespace Core
 	{
+		using namespace Rendering;
+		using namespace Physics;
+		using namespace Audio;
+
 		class Enco3DEngine
 		{
 		private:
@@ -20,6 +25,7 @@ namespace Enco3D
 			IGame *m_game{ nullptr };
 			RenderingEngine *m_renderingEngine{ nullptr };
 			PhysicsEngine *m_physicsEngine{ nullptr };
+			AudioEngine *m_audioEngine{ nullptr };
 
 		public:
 			inline Enco3DEngine() {  }
@@ -33,6 +39,7 @@ namespace Enco3D
 			inline IGame *GetGame() const { return m_game; }
 			inline RenderingEngine *GetRenderingEngine() const { return m_renderingEngine; }
 			inline PhysicsEngine *GetPhysicsEngine() const { return m_physicsEngine; }
+			inline AudioEngine *GetAudioEngine() const { return m_audioEngine; }
 
 		public:
 			inline static Enco3DEngine *GetInstance()

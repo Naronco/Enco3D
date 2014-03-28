@@ -7,6 +7,7 @@ void Enco3D::Core::Enco3DEngine::Init(char *windowTitle, unsigned int windowWidt
 	m_game = game;
 	m_renderingEngine = new RenderingEngine(windowWidth, windowHeight);
 	m_physicsEngine = new PhysicsEngine;
+	m_audioEngine = new AudioEngine;
 
 	m_physicsEngine->SetTimer(m_timer);
 	Random::SetSeed(m_timer->GetTime());
@@ -15,6 +16,7 @@ void Enco3D::Core::Enco3DEngine::Init(char *windowTitle, unsigned int windowWidt
 
 	m_game->SetRenderingEngine(m_renderingEngine);
 	m_game->SetPhysicsEngine(m_physicsEngine);
+	m_game->SetAudioEngine(m_audioEngine);
 	m_game->SetWindow(m_window);
 	m_game->SetTimer(m_timer);
 
@@ -28,6 +30,12 @@ void Enco3D::Core::Enco3DEngine::Deinit()
 		m_game->Deinit();
 		delete m_game;
 		m_game = nullptr;
+	}
+
+	if (m_audioEngine)
+	{
+		delete m_audioEngine;
+		m_audioEngine = nullptr;
 	}
 
 	if (m_physicsEngine)

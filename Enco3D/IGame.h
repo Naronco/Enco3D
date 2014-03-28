@@ -3,6 +3,7 @@
 
 #include "RenderingEngine.h"
 #include "PhysicsEngine.h"
+#include "AudioEngine.h"
 #include "GLWindow.h"
 #include "Timer.h"
 #include "GameObject.h"
@@ -11,6 +12,10 @@ namespace Enco3D
 {
 	namespace Core
 	{
+		using namespace Rendering;
+		using namespace Physics;
+		using namespace Audio;
+
 		/// <summary>Main interface class for a game</summary>
 		class IGame
 		{
@@ -20,6 +25,9 @@ namespace Enco3D
 
 			/// <summary>Pointer to the physics engine</summary>
 			PhysicsEngine *m_physicsEngine{ nullptr };
+
+			/// <summary>Pointer to the audio engine</summary>
+			AudioEngine *m_audioEngine{ nullptr };
 
 			/// <summary>Pointer to the GL window</summary>
 			GLWindow *m_window{ nullptr };
@@ -73,6 +81,13 @@ namespace Enco3D
 				GetRootObject()->SetPhysicsEngine(physicsEngine);
 			}
 
+			/// <summary>Sets the audio engine of the hierarchy</summary>
+			/// <param name="audioEngine">The new audio engine</param>
+			inline void SetAudioEngine(AudioEngine *audioEngine)
+			{
+				m_audioEngine = audioEngine;
+			}
+
 			/// <summary>Sets the main GL window of the hierarchy</summary>
 			/// <param name="window">The new main GL window</param>
 			inline void SetWindow(GLWindow *window)
@@ -94,6 +109,9 @@ namespace Enco3D
 
 			/// <summary>Returns the physics engine</summary>
 			inline PhysicsEngine *GetPhysicsEngine() const { return m_physicsEngine; }
+
+			/// <summary>Returns the audio engine</summary>
+			inline AudioEngine *GetAudioEngine() const { return m_audioEngine; }
 
 			/// <summary>Returns the main GL window</summary>
 			inline GLWindow *GetWindow() const { return m_window; }

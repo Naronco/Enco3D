@@ -175,6 +175,12 @@ void TestGame::Init()
 //	guiTextureObject->GetTransform()->Scale(Vector3f(0.2f, 0.2f, 0.2f));
 //
 //	AddGameObject(guiTextureObject);
+
+	GetAudioEngine()->MusicLoad("sounds/kokiri_forest.wav", 50);
+	GetAudioEngine()->MusicPlay();
+
+//	GetAudioEngine()->SoundLoad("sounds/test.wav", 50);
+//	GetAudioEngine()->SoundPlay();
 }
 
 void TestGame::Deinit()
