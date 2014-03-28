@@ -65,5 +65,5 @@ Enco3D::Core::Matrix4x4f Enco3D::Core::Transform::GetTransformation()
 	Matrix4x4f rotationMatrix = m_rotation.ToRotationMatrix4x4();
 	Matrix4x4f scalingMatrix = Matrix4x4f().Scale(m_scaling.x, m_scaling.y, m_scaling.z);
 
-	return scalingMatrix * translationMatrix * rotationMatrix * GetParentMatrix();
+	return translationMatrix * scalingMatrix * rotationMatrix * GetParentMatrix();
 }

@@ -56,6 +56,9 @@ namespace Enco3D
 			Matrix4x4f GetProjectedMatrix(const Camera *camera, const Matrix4x4f &worldMatrix);
 			Matrix4x4f GetViewProjectedMatrix(const Camera *camera, const Matrix4x4f &worldMatrix);
 			
+			inline Vector3f PixelsToScreenCoords(float x, float y) const { return Vector3f(x / (float)m_width * 2.0f - 1.0f, y / (float)m_height * 2.0f - 1.0f, 0.0f); }
+			inline Vector3f PixelsToImageScale(float width, float height) const { return Vector3f(width / (float)m_width, height / (float)m_height, 1.0f); }
+
 			inline void AddLight(Light *light) { m_lights.push_back(light); }
 			inline void RemoveLight(Light *light) { m_lights.erase(remove(m_lights.begin(), m_lights.end(), light), m_lights.end()); }
 

@@ -16,24 +16,37 @@ Enco3D::Rendering::RenderingEngine::RenderingEngine()
 	m_gbuffer = new GBuffer;
 	m_GUICamera = new Camera;
 
-	m_GUICamera->SetOrthographicProjection(-1, 1, -1, 1, -1, 1);
+	m_GUICamera->SetOrthographicProjection(-1, 1, 1, -1, -1, 1);
 
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
 	glClearDepth(1.0);
+
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_ALPHA_TEST);
+	glAlphaFunc(GL_GREATER, 0.5f);
 }
 
 Enco3D::Rendering::RenderingEngine::RenderingEngine(unsigned int width, unsigned int height)
 {
+	m_width = width;
+	m_height = height;
+
 	m_globalAmbientColor.Set(0.1f, 0.1f, 0.1f);
 	m_gbuffer = new GBuffer(width, height);
 	m_GUICamera = new Camera;
 
-	m_GUICamera->SetOrthographicProjection(-1, 1, -1, 1, -1, 1);
+	m_GUICamera->SetOrthographicProjection(-1, 1, 1, -1, -1, 1);
 
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
 	glClearDepth(1.0);
+
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_ALPHA_TEST);
+	glAlphaFunc(GL_GREATER, 0.5f);
 
 	Vertex vertices[4] =
 	{

@@ -176,8 +176,20 @@ void TestGame::Init()
 //
 //	AddGameObject(guiTextureObject);
 
-	GetAudioEngine()->MusicLoad("sounds/kokiri_forest.wav", 50);
-	GetAudioEngine()->MusicPlay();
+	for (unsigned int i = 0; i < 3; i++)
+	{
+		GUITexture *heartTexture = new GUITexture("texture/heart.png");
+
+		GameObject *heartObject = new GameObject("heart");
+		heartObject->AddComponent(heartTexture);
+		heartObject->GetTransform()->Scale(GetRenderingEngine()->PixelsToImageScale(40.0f, 40.0f));
+		heartObject->GetTransform()->SetTranslation(GetRenderingEngine()->PixelsToScreenCoords(40.0f + 35.0f * i, 40.0f));
+
+		AddGameObject(heartObject);
+	}
+
+//	GetAudioEngine()->MusicLoad("sounds/kokiri_forest.wav", 10);
+//	GetAudioEngine()->MusicPlay();
 
 //	GetAudioEngine()->SoundLoad("sounds/test.wav", 50);
 //	GetAudioEngine()->SoundPlay();
@@ -193,7 +205,7 @@ void TestGame::Update()
 
 	if (Input::IsKeyDown(SDLK_e) && timeout < 0.1f)
 	{
-		int rand = Random::NextInt(6);
+		int rand = 1;// Random::NextInt(6);
 
 		switch (rand)
 		{
@@ -237,7 +249,8 @@ void TestGame::Update()
 				  GameObject *capsuleObject = new GameObject("capsule");
 				  capsuleObject->GetTransform()->Translate(Vector3f(Random::NextFloat() * 4.0f - 2.0f, 10, Random::NextFloat() * 4.0f - 2.0f));
 				  capsuleObject->AddComponent(new MeshRenderer(capsuleMesh, capsuleMaterial));
-				  capsuleObject->AddComponent(new RigidBody(1, 0.8f, 1.0f, 0.2f, 0.1f, new CapsuleCollisionShape(1, 2)));
+				  //capsuleObject->AddComponent(new RigidBody(1, 0.8f, 1.0f, 0.2f, 0.1f, new CapsuleCollisionShape(1, 2)));
+				  capsuleObject->AddComponent(new RigidBody(1, 0.0f, 0.0f, 0.0f, 0.0f, new CapsuleCollisionShape(1, 2)));
 
 				  AddGameObject(capsuleObject);
 				  break;
