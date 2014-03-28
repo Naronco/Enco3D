@@ -21,7 +21,7 @@ Enco3D::Component::GUITexture::GUITexture(Enco3D::Rendering::Texture *texture)
 	s_numReferences++;
 }
 
-Enco3D::Component::GUITexture::GUITexture(Enco3D::Rendering::Texture *texture, const Vector3f &color)
+Enco3D::Component::GUITexture::GUITexture(Enco3D::Rendering::Texture *texture, const Enco3D::Core::Vector3f &color)
 {
 	m_texture = texture;
 	m_color.Set(color);
@@ -43,7 +43,7 @@ Enco3D::Component::GUITexture::GUITexture(const string &filename)
 	s_numReferences++;
 }
 
-Enco3D::Component::GUITexture::GUITexture(const string &filename, const Vector3f &color)
+Enco3D::Component::GUITexture::GUITexture(const string &filename, const Enco3D::Core::Vector3f &color)
 {
 	m_texture = new Texture(filename);
 	m_color.Set(color);
