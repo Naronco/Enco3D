@@ -2,7 +2,7 @@
 
 void TestGame::Init()
 {
-	Mesh *fieldMesh = new Mesh("models/field.obj");
+/*	Mesh *fieldMesh = new Mesh("models/field.obj");
 
 	Material *fieldMaterial = new Material;
 	fieldMaterial->AddTexture("diffuse", Texture("texture/test.png", TextureTarget::Texture2D, TextureFilter::Nearest));
@@ -14,7 +14,7 @@ void TestGame::Init()
 	fieldMeshObject->AddComponent(new MeshRenderer(fieldMesh, fieldMaterial));
 	fieldMeshObject->AddComponent(new RigidBody(0, 0.8f, 1.0f, 0.2f, 0.1f, new StaticPlaneCollisionShape(Vector3f(0, 1, 0))));
 
-	AddGameObject(fieldMeshObject);
+	AddGameObject(fieldMeshObject);*/
 
 	/*	string models[] =
 		{
@@ -133,28 +133,70 @@ void TestGame::Init()
 
 		AddGameObject(ponyObject);*/
 
+/*	Camera *mainCamera = new Camera;
+	mainCamera->SetName("camera");
+	mainCamera->SetPerspectiveProjection(MathUtil::ToRadians(70.0f), (float)GetWindow()->GetWidth() / (float)GetWindow()->GetHeight(), 0.01f, 100.0f);
+	
+	GameObject *cameraObject = new GameObject("mainCamera");
+	cameraObject->AddComponent(mainCamera);
+	cameraObject->GetTransform()->SetTranslation(Vector3f(0.0f, 5.0f, -5.0f));
+	cameraObject->GetTransform()->SetRotation(Quaternionf(Vector3f(1, 0, 0), MathUtil::ToRadians(45.0f)));
+
 	SpotLight *flashLight = new SpotLight;
 	flashLight->SetColor(Vector3f(1, 1, 1));
 	flashLight->SetIntensity(3.0f);
 	flashLight->SetRange(20.0f);
 	flashLight->SetCutoff(MathUtil::DegreesToSpotCutoff(35.0f));
 
+	Player *playerComponent = new Player;
+
+	//RigidBody *playerRigidBody = new RigidBody(1, 0.8f, 1.0f, 0.2f, 0.1f, new CapsuleCollisionShape(1, 2));
+	RigidBody *playerRigidBody = new RigidBody(1, 0.0f, 1.0f, 0.0f, 0.0f, new CapsuleCollisionShape(1, 2));
+	playerRigidBody->SetAlwaysStanding(true);
+	playerRigidBody->SetName("rigidBody");
+
+	WavefrontMesh *playerMesh = new WavefrontMesh("models/link.obj");
+
+	GameObject *playerObject = new GameObject("player");
+	playerObject->AddComponent(playerComponent);
+	playerObject->AddComponent(playerRigidBody);
+	playerObject->AddComponent(flashLight);
+	playerObject->AddComponent(playerMesh);
+
+	playerObject->AddChild(cameraObject);
+	*/
+
+	GameObject *linkObject = new GameObject;
+	linkObject->AddComponent(new WavefrontMesh("models/link.obj"));
+
 	Camera *mainCamera = new Camera;
+	mainCamera->SetName("camera");
 	mainCamera->SetPerspectiveProjection(MathUtil::ToRadians(70.0f), (float)GetWindow()->GetWidth() / (float)GetWindow()->GetHeight(), 0.01f, 100.0f);
 
-	GameObject *cameraObject = new GameObject("mainCamera");
-	cameraObject->AddComponent(mainCamera);
-	cameraObject->AddComponent(new FirstPersonController);
-	cameraObject->AddComponent(flashLight);
+	GameObject *mainCameraObject = new GameObject("mainCamera");
+	mainCameraObject->AddComponent(mainCamera);
+	mainCameraObject->AddComponent(new FirstPersonController);
 
-	AddGameObject(cameraObject);
+	AddGameObject(linkObject);
+	AddGameObject(mainCameraObject);
 
-//	GetRenderingEngine()->SetClearColor(0.5f, 0.8f, 1.0f);
-//	GetRenderingEngine()->SetGlobalAmbientColor(Vector3f(0.0f, 0.0f, 0.0f));
+	DirectionalLight *sunLight = new DirectionalLight;
+	sunLight->SetColor(Vector3f(1, 1, 1));
+	sunLight->SetIntensity(1.5f);
+
+	GameObject *sunLightObject = new GameObject;
+	sunLightObject->AddComponent(sunLight);
+	sunLightObject->GetTransform()->SetRotation(Quaternionf(MathUtil::ToRadians(135.0f), MathUtil::ToRadians(-45.0f), 0.0f));
+
+	AddGameObject(sunLightObject);
+
+	GetRenderingEngine()->SetClearColor(0.5f, 0.8f, 1.0f);
+	GetRenderingEngine()->SetGlobalAmbientColor(Vector3f(0.2f, 0.2f, 0.2f));
+	
 //
 //	GetRenderingEngine()->GetMainCamera()->Move(Vector3f(0, 0, -1), 5);
 
-	for (int i = 0; i < 30; i++)
+/*	for (int i = 0; i < 30; i++)
 	{
 		PointLight *pointLight = new PointLight;
 		pointLight->SetColor(Vector3f(Random::NextFloat(), Random::NextFloat(), Random::NextFloat()));
@@ -166,7 +208,7 @@ void TestGame::Init()
 		pointLightObject->AddComponent(pointLight);
 
 		AddGameObject(pointLightObject);
-	}
+	}*/
 
 //	GUITexture *guiTexture = new GUITexture("texture/test.png");
 //
@@ -203,9 +245,9 @@ void TestGame::Update()
 {
 	static float timeout = 0.0f;
 
-	if (Input::IsKeyDown(SDLK_e) && timeout < 0.1f)
+/*	if (Input::IsKeyDown(SDLK_e) && timeout < 0.1f)
 	{
-		int rand = 1;// Random::NextInt(6);
+		int rand = Random::NextInt(6);
 
 		switch (rand)
 		{
@@ -249,8 +291,7 @@ void TestGame::Update()
 				  GameObject *capsuleObject = new GameObject("capsule");
 				  capsuleObject->GetTransform()->Translate(Vector3f(Random::NextFloat() * 4.0f - 2.0f, 10, Random::NextFloat() * 4.0f - 2.0f));
 				  capsuleObject->AddComponent(new MeshRenderer(capsuleMesh, capsuleMaterial));
-				  //capsuleObject->AddComponent(new RigidBody(1, 0.8f, 1.0f, 0.2f, 0.1f, new CapsuleCollisionShape(1, 2)));
-				  capsuleObject->AddComponent(new RigidBody(1, 0.0f, 0.0f, 0.0f, 0.0f, new CapsuleCollisionShape(1, 2)));
+				  capsuleObject->AddComponent(new RigidBody(1, 0.8f, 1.0f, 0.2f, 0.1f, new CapsuleCollisionShape(1, 2)));
 
 				  AddGameObject(capsuleObject);
 				  break;
@@ -355,7 +396,7 @@ void TestGame::Update()
 	if (timeout > 0.0f)
 	{
 		timeout -= GetTimer()->GetDeltaTime();
-	}
+	}*/
 }
 
 void TestGame::Render()

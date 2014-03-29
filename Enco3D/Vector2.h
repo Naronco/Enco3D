@@ -58,6 +58,12 @@ namespace Enco3D
 
 		typedef Vector2<float> Vector2f;
 		typedef Vector2<double> Vector2d;
+
+		namespace Vector2Template
+		{
+			static Vector2f Zero(0, 0);
+			static Vector2f One(1, 1);
+		}
 	}
 }
 

@@ -26,5 +26,8 @@
     <ClInclude Include="TestGame.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

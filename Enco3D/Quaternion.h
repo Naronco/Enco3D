@@ -16,7 +16,8 @@ namespace Enco3D
 		{
 			T x, y, z, w;
 
-			inline Quaternion(T _x = 0, T _y = 0, T _z = 0, T _w = 0) : x(_x), y(_y), z(_z), w(_w) {  }
+			inline Quaternion() : x(0), y(0), z(0), w(0) {  }
+			inline Quaternion(T _x, T _y, T _z, T _w) : x(_x), y(_y), z(_z), w(_w) {  }
 			inline Quaternion(const Quaternion<T> &q) : x(q.x), y(q.y), z(q.z), w(q.w) {  }
 
 			inline Quaternion(const Vector3<T> &axis, T angle)
@@ -25,6 +26,32 @@ namespace Enco3D
 				T c = (T)cos(angle * 0.5);
 
 				Set(axis.x * s, axis.y * s, axis.z * s, c);
+			}
+
+			inline Quaternion(const Vector3<T> &forward, const Vector3<T> &right, const Vector3<T> &up)
+			{
+				w = (T)sqrt(1.0f + right.x + up.y + forward.z) * 0.5f;
+				float w4_recip = 1.0f / (4.0f * w);
+				x = (forward.y - up.z) * w4_recip;
+				y = (right.z - forward.x) * w4_recip;
+				z = (up.x - right.y) * w4_recip;
+			}
+
+			inline Quaternion(T rotX, T rotY, T rotZ)
+			{
+				T srx = (T)sin(rotX * 0.5);
+				T crx = (T)cos(rotX * 0.5);
+				
+				T sry = (T)sin(rotY * 0.5);
+				T cry = (T)cos(rotY * 0.5);
+
+				T srz = (T)sin(rotZ * 0.5);
+				T crz = (T)cos(rotZ * 0.5);
+
+				w = crx * cry * crz + srx * sry * srz;
+				x = srx * cry * crz - crx * sry * srz;
+				y = crx * sry * crz + srx * cry * srz;
+				z = crx * cry * srz - srx * sry * crz;
 			}
 
 			inline Quaternion<T> &Clear() { x = y = z = w = 0; return *this; }

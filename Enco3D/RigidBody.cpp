@@ -51,5 +51,11 @@ btRigidBody *Enco3D::Component::RigidBody::CreateBulletPhysicsInstance()
 	m_bulletPhysicsInstance->setFriction(m_friction);
 	m_bulletPhysicsInstance->setDamping(m_linearDamping, m_angularDamping);
 
+	if (m_alwaysStanding)
+	{
+		m_bulletPhysicsInstance->setInvInertiaDiagLocal(btVector3(0, 0, 0));
+		m_bulletPhysicsInstance->updateInertiaTensor();
+	}
+
 	return m_bulletPhysicsInstance;
 }

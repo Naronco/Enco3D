@@ -18,25 +18,19 @@ namespace Enco3D
 	{
 		class Mesh
 		{
-		private:
+		protected:
 			MeshResource *m_resource{ nullptr };
-			string m_filename;
-
-		private:
-			static map<string, MeshResource *> s_loadedModels;
-
-		private:
+			
+		protected:
 			void BuildBuffers(Vertex *vertices, unsigned int vertexCount, unsigned int *indices, unsigned int indexCount);
-			void LoadMesh(const string &filename);
-
+			
 		public:
 			Mesh();
 			Mesh(Vertex *vertices, unsigned int vertexCount);
 			Mesh(Vertex *vertices, unsigned int vertexCount, unsigned int *indices, unsigned int indexCount);
-			Mesh(const string &filename);
 			~Mesh();
 
-			void Render();
+			virtual void Render() {  }
 
 			inline Vertex *GetVertices() const { return m_resource->GetVertices(); }
 			inline unsigned int GetVertexCount() const { return m_resource->GetVertexCount(); }

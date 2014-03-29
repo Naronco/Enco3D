@@ -37,6 +37,8 @@ Enco3D::Core::GameObject::~GameObject()
 
 void Enco3D::Core::GameObject::Update()
 {
+	m_transform->Update();
+
 	for (unsigned int i = 0; i < m_children.size(); i++)
 	{
 		m_children[i]->Update();
@@ -76,8 +78,16 @@ void Enco3D::Core::GameObject::RenderGUI(const Enco3D::Rendering::Camera *camera
 
 Enco3D::Core::GameObject *Enco3D::Core::GameObject::AddChild(GameObject *child)
 {
-	child->SetRenderingEngine(m_renderingEngine);
-	child->SetPhysicsEngine(m_physicsEngine);
+	if (m_renderingEngine)
+	{
+		child->SetRenderingEngine(m_renderingEngine);
+	}
+
+	if (m_physicsEngine)
+	{
+		child->SetPhysicsEngine(m_physicsEngine);
+	}
+
 	child->SetWindow(m_window);
 	child->SetTimer(m_timer);
 	child->GetTransform()->SetParentTransform(m_transform);
@@ -143,4 +153,30 @@ void Enco3D::Core::GameObject::SetTimer(Timer *timer)
 	{
 		m_children[i]->SetTimer(timer);
 	}
+}
+
+Enco3D::Core::GameObject *Enco3D::Core::GameObject::GetChild(const string &name) const
+{
+	for (unsigned int i = m_children.size() - 1; i >= 0; i--)
+	{
+		if (m_children[i]->GetName() == name)
+		{
+			return m_children[i];
+		}
+	}
+
+	return nullptr;
+}
+
+Enco3D::Core::IGameComponent *Enco3D::Core::GameObject::GetGameComponent(const string &name) const
+{
+	for (unsigned int i = m_components.size() - 1; i >= 0; i--)
+	{
+		if (m_components[i]->GetName() == name)
+		{
+			return m_components[i];
+		}
+	}
+
+	return nullptr;
 }

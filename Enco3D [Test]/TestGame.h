@@ -1,6 +1,8 @@
 #ifndef _TESTGAME_H_
 #define _TESTGAME_H_
 
+#include "Player.h"
+
 #include <Enco3D.h>
 
 using namespace Enco3D::Core;

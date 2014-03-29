@@ -221,6 +221,9 @@
     <ClInclude Include="AudioEngine.h">
       <Filter>Headerdateien\Audio</Filter>
     </ClInclude>
+    <ClInclude Include="WavefrontMesh.h">
+      <Filter>Headerdateien\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stb_image.c">
@@ -336,6 +339,9 @@
     </ClCompile>
     <ClCompile Include="AudioEngine.cpp">
       <Filter>Quelldateien\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="WavefrontMesh.cpp">
+      <Filter>Quelldateien\Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

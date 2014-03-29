@@ -23,6 +23,12 @@ Enco3D::Rendering::MeshResource::MeshResource(Vertex *vertices, unsigned int ver
 
 	m_vertexCount = vertexCount;
 	m_indexCount = indexCount;
+
+	glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
+	glBufferData(GL_ARRAY_BUFFER, m_vertexCount * sizeof(Vertex), vertices, GL_STATIC_DRAW);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ibo);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_indexCount * sizeof(unsigned int), indices, GL_STATIC_DRAW);
 }
 
 Enco3D::Rendering::MeshResource::~MeshResource()

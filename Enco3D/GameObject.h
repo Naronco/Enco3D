@@ -66,6 +66,9 @@ namespace Enco3D
 
 			inline void SetName(const string &name) { m_name = name; }
 
+			GameObject *GetChild(const string &name) const;
+			IGameComponent *GetGameComponent(const string &name) const;
+
 			inline Transform *GetTransform() const { return m_transform; }
 			inline string GetName() const { return m_name; }
 			inline vector<GameObject *> GetChildren() const { return m_children; }

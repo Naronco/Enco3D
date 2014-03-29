@@ -20,6 +20,18 @@ void Enco3D::Component::Camera::InitRendering()
 	GetRenderingEngine()->SetMainCamera(this);
 }
 
+void Enco3D::Component::Camera::LookAt(const Enco3D::Core::Vector3f &pos, const Enco3D::Core::Vector3f &lookAt)
+{
+	GetTransform()->SetTranslation(pos);
+
+	Vector3f forward = (lookAt - pos).Normalize();
+	Vector3f up = Vector3f(0, 1, 0);
+	Vector3f right = up.Cross(forward).Normalize();
+	up = forward.Cross(right).Normalize();
+
+	GetTransform()->SetRotation(Quaternionf(forward, right, up));
+}
+
 void Enco3D::Component::Camera::SetPerspectiveProjection(float fov, float aspect, float zNear, float zFar)
 {
 	m_projection.SetPerspectiveProjection(fov, aspect, zNear, zFar);

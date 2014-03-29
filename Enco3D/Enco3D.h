@@ -21,6 +21,7 @@
 #include "PointLight.h"
 #include "RigidBody.h"
 #include "SpotLight.h"
+#include "WavefrontMesh.h"
 
 // Core Engine Headers
 #include "Enco3DEngine.h"

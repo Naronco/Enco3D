@@ -17,31 +17,15 @@ Enco3D::Core::Transform::Transform(const Transform &other)
 
 void Enco3D::Core::Transform::Update()
 {
-}
-
-bool Enco3D::Core::Transform::HasChanged()
-{
 	if (m_parentTransform != nullptr && m_parentTransform->HasChanged())
 	{
-		return true;
+		m_parentMatrix = m_parentTransform->GetTransformation();
 	}
+}
 
-	if (m_translation != m_oldTranslation)
-	{
-		return true;
-	}
-
-	if (m_rotation != m_oldRotation)
-	{
-		return true;
-	}
-
-	if (m_scaling != m_oldScaling)
-	{
-		return true;
-	}
-
-	return false;
+bool Enco3D::Core::Transform::HasChanged() const
+{
+	return true;
 }
 
 void Enco3D::Core::Transform::Translate(const Vector3f &translation)
@@ -65,5 +49,5 @@ Enco3D::Core::Matrix4x4f Enco3D::Core::Transform::GetTransformation()
 	Matrix4x4f rotationMatrix = m_rotation.ToRotationMatrix4x4();
 	Matrix4x4f scalingMatrix = Matrix4x4f().Scale(m_scaling.x, m_scaling.y, m_scaling.z);
 
-	return translationMatrix * scalingMatrix * rotationMatrix * GetParentMatrix();
+	return GetParentMatrix() * translationMatrix * scalingMatrix * rotationMatrix;
 }

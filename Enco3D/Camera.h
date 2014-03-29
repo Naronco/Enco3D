@@ -24,6 +24,8 @@ namespace Enco3D
 
 			void InitRendering();
 
+			void LookAt(const Vector3f &pos, const Vector3f &lookAt);
+
 			void SetPerspectiveProjection(float fov, float aspect, float zNear, float zFar);
 			void SetOrthographicProjection(float left, float right, float bottom, float top, float zNear, float zFar);
 
