@@ -26,7 +26,7 @@ void Enco3D::Rendering::LightGlobalAmbientShader::UpdateUniforms(const Enco3D::C
 	SetUniformMatrix4x4f("worldMatrix", worldMatrix);
 	SetUniformMatrix4x4f("projectedMatrix", projectedMatrix);
 
-	material.GetTexture("diffuse").Bind(0);
+	material.GetTexture("diffuse")->Bind(0);
 
 	SetUniformVector3f("globalAmbientLight", m_globalAmbientLight);
 

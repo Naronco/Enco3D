@@ -23,7 +23,7 @@ void Enco3D::Rendering::TextureShader::UpdateUniforms(const Enco3D::Core::Matrix
 	SetUniformMatrix4x4f("worldMatrix", worldMatrix);
 	SetUniformMatrix4x4f("projectedMatrix", projectedMatrix);
 
-	material.GetTexture("diffuse").Bind(0);
+	material.GetTexture("diffuse")->Bind(0);
 
 	SetUniformVector3f("diffuseColor", material.GetVector3f("diffuse"));
 	SetUniformInt("diffuseTexture", 0);

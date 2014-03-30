@@ -39,7 +39,7 @@ namespace Enco3D
 
 			void Deinit();
 
-			inline void SetTexture(Texture *texture) { ReleaseTexture(); m_material.SetTexture("diffuse", *texture); m_texture = texture; }
+			inline void SetTexture(Texture *texture) { ReleaseTexture(); m_material.SetTexture("diffuse", texture); m_texture = texture; }
 			inline void SetColor(const Vector3f &color) { m_material.SetVector3f("diffuse", color); m_color.Set(color); }
 
 			inline Texture *GetTexture() const { return m_texture; }

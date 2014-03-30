@@ -24,6 +24,7 @@ namespace Enco3D
 	{
 		class Camera;
 		class Light;
+		class Skybox;
 	}
 }
 
@@ -38,9 +39,10 @@ namespace Enco3D
 		{
 		private:
 			Camera *m_mainCamera{ nullptr }, *m_GUICamera{ nullptr };
+			Skybox *m_skybox{ nullptr };
 			vector<Light *> m_lights;
 			Vector3f m_globalAmbientColor;
-
+			
 			GBuffer *m_gbuffer{ nullptr };
 			unsigned int m_width, m_height;
 			Mesh *m_renderWindow{ nullptr };
@@ -65,11 +67,13 @@ namespace Enco3D
 			inline void SetClearColor(float r, float g, float b) const { glClearColor(r, g, b, 1); }
 
 			inline void SetMainCamera(Camera *mainCamera) { m_mainCamera = mainCamera; }
+			inline void SetSkybox(Skybox *skybox) { m_skybox = skybox; }
 			inline void SetGlobalAmbientColor(const Vector3f &globalAmbientColor) { m_globalAmbientColor = globalAmbientColor; }
 			inline void SetWidth(unsigned int width) { m_width = width; }
 			inline void SetHeight(unsigned int height) { m_height = height; }
 
 			inline Camera *GetMainCamera() const { return m_mainCamera; }
+			inline Skybox *GetSkybox() const { return m_skybox; }
 			inline Camera *GetGUICamera() const { return m_GUICamera; }
 			inline vector<Light *> GetLights() const { return m_lights; }
 			inline Vector3f GetGlobalAmbientColor() const { return m_globalAmbientColor; }

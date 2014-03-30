@@ -30,7 +30,7 @@ namespace Enco3D
 			Mesh(Vertex *vertices, unsigned int vertexCount, unsigned int *indices, unsigned int indexCount);
 			~Mesh();
 
-			virtual void Render() {  }
+			void Render();
 
 			inline Vertex *GetVertices() const { return m_resource->GetVertices(); }
 			inline unsigned int GetVertexCount() const { return m_resource->GetVertexCount(); }

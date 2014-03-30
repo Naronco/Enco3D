@@ -18,7 +18,7 @@ namespace Enco3D
 		{
 			map<char *, float> floatValues;
 			map<char *, Vector3f> vector3fValues;
-			map<char *, Texture> textureValues;
+			map<char *, Texture *> textureValues;
 
 			inline void AddFloat(char *name, float value)
 			{
@@ -30,9 +30,9 @@ namespace Enco3D
 				vector3fValues.insert(pair<char *, Vector3f>(name, vector));
 			}
 
-			inline void AddTexture(char *name, const Texture &texture)
+			inline void AddTexture(char *name, Texture *texture)
 			{
-				textureValues.insert(pair<char *, Texture>(name, texture));
+				textureValues.insert(pair<char *, Texture *>(name, texture));
 			}
 
 			inline void SetFloat(char *name, float value)
@@ -45,7 +45,7 @@ namespace Enco3D
 				vector3fValues[name] = vector;
 			}
 
-			inline void SetTexture(char *name, const Texture &texture)
+			inline void SetTexture(char *name, Texture *texture)
 			{
 				textureValues[name] = texture;
 			}
@@ -76,16 +76,16 @@ namespace Enco3D
 				}
 			}
 
-			inline Texture &GetTexture(char *name)
+			inline Texture *GetTexture(char *name)
 			{
-				map<char *, Texture>::iterator it = textureValues.find(name);
+				map<char *, Texture *>::iterator it = textureValues.find(name);
 				if (it != textureValues.end())
 				{
 					return textureValues.at(name);
 				}
 				else
 				{
-					return *(Texture::GetBlankTexture());
+					return Texture::GetBlankTexture();
 				}
 			}
 		};

@@ -155,7 +155,7 @@ bool Enco3D::Rendering::WavefrontMesh::InitMaterials(const aiScene *scene, const
 			aiString path;
 			if (material->GetTexture(aiTextureType_DIFFUSE, 0, &path, nullptr, nullptr, nullptr, nullptr, nullptr) == AI_SUCCESS)
 			{
-				meshMaterial->AddTexture("diffuse", Texture(string("models/") + string(path.data)));
+				meshMaterial->AddTexture("diffuse", new Texture(string("models/") + string(path.data)));
 			}
 		}
 

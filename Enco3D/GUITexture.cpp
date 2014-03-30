@@ -15,7 +15,7 @@ Enco3D::Component::GUITexture::GUITexture(Enco3D::Rendering::Texture *texture)
 	m_texture = texture;
 	m_color.Set(1, 1, 1);
 
-	m_material.AddTexture("diffuse", *m_texture);
+	m_material.AddTexture("diffuse", m_texture);
 	m_material.AddVector3f("diffuse", m_color);
 
 	s_numReferences++;
@@ -26,7 +26,7 @@ Enco3D::Component::GUITexture::GUITexture(Enco3D::Rendering::Texture *texture, c
 	m_texture = texture;
 	m_color.Set(color);
 
-	m_material.AddTexture("diffuse", *m_texture);
+	m_material.AddTexture("diffuse", m_texture);
 	m_material.AddVector3f("diffuse", m_color);
 
 	s_numReferences++;
@@ -37,7 +37,7 @@ Enco3D::Component::GUITexture::GUITexture(const string &filename)
 	m_texture = new Texture(filename);
 	m_color.Set(1, 1, 1);
 
-	m_material.AddTexture("diffuse", *m_texture);
+	m_material.AddTexture("diffuse", m_texture);
 	m_material.AddVector3f("diffuse", m_color);
 
 	s_numReferences++;
@@ -48,7 +48,7 @@ Enco3D::Component::GUITexture::GUITexture(const string &filename, const Enco3D::
 	m_texture = new Texture(filename);
 	m_color.Set(color);
 
-	m_material.AddTexture("diffuse", *m_texture);
+	m_material.AddTexture("diffuse", m_texture);
 	m_material.AddVector3f("diffuse", m_color);
 
 	s_numReferences++;

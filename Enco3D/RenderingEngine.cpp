@@ -9,6 +9,7 @@
 
 #include "Camera.h"
 #include "Light.h"
+#include "Skybox.h"
 
 Enco3D::Rendering::RenderingEngine::RenderingEngine()
 {
@@ -114,6 +115,15 @@ void Enco3D::Rendering::RenderingEngine::Render(Enco3D::Core::GameObject *gameOb
 	m_renderWindow->Render();*/
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	// Skybox Render
+
+	if (m_skybox != nullptr)
+	{
+		glDepthMask(GL_FALSE);
+		m_skybox->Render(m_mainCamera);
+		glDepthMask(GL_TRUE);
+	}
 
 	// Light Rendering
 

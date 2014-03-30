@@ -176,13 +176,14 @@ void TestGame::Init()
 	GameObject *mainCameraObject = new GameObject("mainCamera");
 	mainCameraObject->AddComponent(mainCamera);
 	mainCameraObject->AddComponent(new FirstPersonController);
+	mainCameraObject->AddComponent(new Skybox(new Texture("texture/skybox/sunny_ocean.png", TextureTarget::Texture2D, TextureFilter::Nearest)));
 
 	AddGameObject(linkObject);
 	AddGameObject(mainCameraObject);
 
 	DirectionalLight *sunLight = new DirectionalLight;
 	sunLight->SetColor(Vector3f(1, 1, 1));
-	sunLight->SetIntensity(1.5f);
+	sunLight->SetIntensity(2.0f);
 
 	GameObject *sunLightObject = new GameObject;
 	sunLightObject->AddComponent(sunLight);
@@ -193,7 +194,6 @@ void TestGame::Init()
 	GetRenderingEngine()->SetClearColor(0.5f, 0.8f, 1.0f);
 	GetRenderingEngine()->SetGlobalAmbientColor(Vector3f(0.2f, 0.2f, 0.2f));
 	
-//
 //	GetRenderingEngine()->GetMainCamera()->Move(Vector3f(0, 0, -1), 5);
 
 /*	for (int i = 0; i < 30; i++)

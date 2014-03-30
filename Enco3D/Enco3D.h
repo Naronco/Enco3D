@@ -20,6 +20,7 @@
 #include "MeshRenderer.h"
 #include "PointLight.h"
 #include "RigidBody.h"
+#include "Skybox.h"
 #include "SpotLight.h"
 #include "WavefrontMesh.h"
 

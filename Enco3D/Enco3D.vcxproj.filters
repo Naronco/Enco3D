@@ -224,6 +224,9 @@
     <ClInclude Include="WavefrontMesh.h">
       <Filter>Headerdateien\Components</Filter>
     </ClInclude>
+    <ClInclude Include="Skybox.h">
+      <Filter>Headerdateien\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stb_image.c">
@@ -341,6 +344,9 @@
       <Filter>Quelldateien\Audio</Filter>
     </ClCompile>
     <ClCompile Include="WavefrontMesh.cpp">
+      <Filter>Quelldateien\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Skybox.cpp">
       <Filter>Quelldateien\Components</Filter>
     </ClCompile>
   </ItemGroup>

@@ -41,7 +41,7 @@ void Enco3D::Rendering::SpotLightShader::UpdateUniforms(const Enco3D::Core::Matr
 	SetUniformFloat("spotLight.range", m_range);
 	SetUniformFloat("spotLight.cutoff", m_cutoff);
 
-	material.GetTexture("diffuse").Bind(0);
+	material.GetTexture("diffuse")->Bind(0);
 
 	SetUniformVector3f("material.diffuseColor", material.GetVector3f("diffuse"));
 	SetUniformInt("material.diffuseTexture", 0);

@@ -27,15 +27,9 @@ Enco3D::Rendering::Mesh::~Mesh()
 void Enco3D::Rendering::Mesh::BuildBuffers(Vertex *vertices, unsigned int vertexCount, unsigned int *indices, unsigned int indexCount)
 {
 	m_resource = new MeshResource(vertices, vertexCount, indices, indexCount);
-
-	glBindBuffer(GL_ARRAY_BUFFER, m_resource->GetVBO());
-	glBufferData(GL_ARRAY_BUFFER, m_resource->GetVertexCount() * sizeof(Vertex), vertices, GL_STATIC_DRAW);
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_resource->GetIBO());
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_resource->GetIndexCount() * sizeof(unsigned int), indices, GL_STATIC_DRAW);
 }
 
-/*void Enco3D::Rendering::Mesh::Render()
+void Enco3D::Rendering::Mesh::Render()
 {
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
@@ -52,4 +46,4 @@ void Enco3D::Rendering::Mesh::BuildBuffers(Vertex *vertices, unsigned int vertex
 	glDisableVertexAttribArray(2);
 	glDisableVertexAttribArray(1);
 	glDisableVertexAttribArray(0);
-}*/
+}

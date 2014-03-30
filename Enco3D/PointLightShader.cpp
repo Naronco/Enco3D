@@ -37,7 +37,7 @@ void Enco3D::Rendering::PointLightShader::UpdateUniforms(const Enco3D::Core::Mat
 	SetUniformVector3f("pointLight.position", m_position);
 	SetUniformFloat("pointLight.range", m_range);
 
-	material.GetTexture("diffuse").Bind(0);
+	material.GetTexture("diffuse")->Bind(0);
 
 	SetUniformVector3f("material.diffuseColor", material.GetVector3f("diffuse"));
 	SetUniformInt("material.diffuseTexture", 0);

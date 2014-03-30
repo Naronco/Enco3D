@@ -35,7 +35,7 @@ void Enco3D::Rendering::DirectionalLightShader::UpdateUniforms(const Enco3D::Cor
 	SetUniformFloat("directionalLight.intensity", m_intensity);
 	SetUniformVector3f("directionalLight.direction", m_direction);
 
-	material.GetTexture("diffuse").Bind(0);
+	material.GetTexture("diffuse")->Bind(0);
 
 	SetUniformVector3f("material.diffuseColor", material.GetVector3f("diffuse"));
 	SetUniformInt("material.diffuseTexture", 0);
