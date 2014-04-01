@@ -27,6 +27,10 @@ Enco3D::Rendering::RenderingEngine::RenderingEngine()
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_ALPHA_TEST);
 	glAlphaFunc(GL_GREATER, 0.5f);
+
+	glEnable(GL_CULL_FACE);
+	glFrontFace(GL_CW);
+	glCullFace(GL_BACK);
 }
 
 Enco3D::Rendering::RenderingEngine::RenderingEngine(unsigned int width, unsigned int height)
@@ -48,6 +52,10 @@ Enco3D::Rendering::RenderingEngine::RenderingEngine(unsigned int width, unsigned
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_ALPHA_TEST);
 	glAlphaFunc(GL_GREATER, 0.5f);
+
+	glEnable(GL_CULL_FACE);
+	glFrontFace(GL_CW);
+	glCullFace(GL_BACK);
 
 	Vertex vertices[4] =
 	{

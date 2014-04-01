@@ -70,10 +70,10 @@ void Enco3D::Component::GUITexture::RenderGUI(const Camera *camera, Enco3D::Rend
 	{
 		Vertex vertices[4] =
 		{
-			Vertex(-1, -1, 0).SetTexCoord(0, 0, 0).SetNormal(0, 0, 1),
-			Vertex(-1, 1, 0).SetTexCoord(0, 1, 0).SetNormal(0, 0, 1),
-			Vertex(1, 1, 0).SetTexCoord(1, 1, 0).SetNormal(0, 0, 1),
-			Vertex(1, -1, 0).SetTexCoord(1, 0, 0).SetNormal(0, 0, 1),
+			Vertex(+1, -1, 0).SetTexCoord(0, 0, 0).SetNormal(0, 0, 1),
+			Vertex(+1, +1, 0).SetTexCoord(0, 1, 0).SetNormal(0, 0, 1),
+			Vertex(-1, +1, 0).SetTexCoord(1, 1, 0).SetNormal(0, 0, 1),
+			Vertex(-1, -1, 0).SetTexCoord(1, 0, 0).SetNormal(0, 0, 1),
 		};
 
 		unsigned int indices[6] =

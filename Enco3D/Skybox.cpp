@@ -25,35 +25,35 @@ Enco3D::Rendering::Skybox::Skybox(const string &filename)
 
 	Vertex vertices[24] =
 	{
-		Vertex(-1, -1, -1),
-		Vertex(+1, -1, -1),
-		Vertex(+1, -1, +1),
 		Vertex(-1, -1, +1),
+		Vertex(+1, -1, +1),
+		Vertex(+1, -1, -1),
+		Vertex(-1, -1, -1),
 
 		Vertex(+1, +1, +1),
 		Vertex(-1, +1, +1),
 		Vertex(-1, +1, -1),
 		Vertex(+1, +1, -1),
 
-		Vertex(-1, -1, +1),
 		Vertex(+1, -1, +1),
-		Vertex(+1, +1, +1),
+		Vertex(-1, -1, +1),
 		Vertex(-1, +1, +1),
+		Vertex(+1, +1, +1),
 
-		Vertex(+1, +1, -1),
-		Vertex(-1, +1, -1),
 		Vertex(-1, -1, -1),
 		Vertex(+1, -1, -1),
-
-		Vertex(-1, -1, -1),
+		Vertex(+1, +1, -1),
 		Vertex(-1, +1, -1),
+
 		Vertex(-1, +1, +1),
 		Vertex(-1, -1, +1),
+		Vertex(-1, -1, -1),
+		Vertex(-1, +1, -1),
 
-		Vertex(+1, -1, -1),
 		Vertex(+1, +1, -1),
-		Vertex(+1, +1, +1),
+		Vertex(+1, -1, -1),
 		Vertex(+1, -1, +1),
+		Vertex(+1, +1, +1),
 	};
 
 	unsigned int indices[36] =
