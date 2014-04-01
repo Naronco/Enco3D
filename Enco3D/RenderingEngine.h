@@ -35,6 +35,12 @@ namespace Enco3D
 		using namespace Core;
 		using namespace Component;
 
+		enum RasterizationMode : GLenum
+		{
+			Solid     = GL_FILL,
+			Wireframe = GL_LINE,
+		};
+
 		class RenderingEngine
 		{
 		private:
@@ -65,6 +71,7 @@ namespace Enco3D
 			inline void RemoveLight(Light *light) { m_lights.erase(remove(m_lights.begin(), m_lights.end(), light), m_lights.end()); }
 
 			inline void SetClearColor(float r, float g, float b) const { glClearColor(r, g, b, 1); }
+			inline void SetRasterizationMode(const RasterizationMode &mode) { glPolygonMode(GL_FRONT_AND_BACK, mode); }
 
 			inline void SetMainCamera(Camera *mainCamera) { m_mainCamera = mainCamera; }
 			inline void SetSkybox(Skybox *skybox) { m_skybox = skybox; }
