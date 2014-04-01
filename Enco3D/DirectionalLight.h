@@ -3,6 +3,7 @@
 
 #include "Light.h"
 #include "DirectionalLightShader.h"
+#include "Skybox.h"
 
 namespace Enco3D
 {
@@ -20,6 +21,13 @@ namespace Enco3D
 			{
 				((DirectionalLightShader *)m_shader)->SetEyePos(eyePos);
 				((DirectionalLightShader *)m_shader)->SetDirectionalLight(m_color, m_intensity, GetTransform()->GetRotation().GetForward());
+
+				Skybox *skybox = GetRenderingEngine()->GetSkybox();
+
+				if (skybox != nullptr)
+				{
+					((DirectionalLightShader *)m_shader)->SetEnvironmentTexture(skybox->GetTexture());
+				}
 			}
 		};
 	}

@@ -128,6 +128,7 @@
     <ClInclude Include="RenderingEngine.h" />
     <ClInclude Include="RigidBody.h" />
     <ClInclude Include="Skybox.h" />
+    <ClInclude Include="SkyboxShader.h" />
     <ClInclude Include="SphereCollisionShape.h" />
     <ClInclude Include="SpotLight.h" />
     <ClInclude Include="SpotLightShader.h" />
@@ -182,6 +183,7 @@
     <ClCompile Include="RenderingEngine.cpp" />
     <ClCompile Include="RigidBody.cpp" />
     <ClCompile Include="Skybox.cpp" />
+    <ClCompile Include="SkyboxShader.cpp" />
     <ClCompile Include="SphereCollisionShape.cpp" />
     <ClCompile Include="SpotLightShader.cpp" />
     <ClCompile Include="StaticConcaveMeshCollisionShape.cpp" />

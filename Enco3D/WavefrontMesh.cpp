@@ -59,8 +59,8 @@ void Enco3D::Rendering::WavefrontMesh::Render(const Camera *camera, Shader *shad
 
 		glBindBuffer(GL_ARRAY_BUFFER, m_meshes[i]->GetVBO());
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
-		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *)(sizeof(float)* 3));
-		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *)(sizeof(float)* 5));
+		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *)(sizeof(float)* 3));
+		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *)(sizeof(float)* 6));
 
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_meshes[i]->GetIBO());
 		glDrawElements(GL_TRIANGLES, m_meshes[i]->GetIndexCount(), GL_UNSIGNED_INT, 0);
@@ -93,9 +93,9 @@ void Enco3D::Rendering::WavefrontMesh::InitMesh(unsigned int index, const aiMesh
 	for (unsigned int i = 0; i < mesh->mNumVertices; i++)
 	{
 		Vector3f position = Vector3f(mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z);
-		Vector2f texCoord = mesh->HasTextureCoords(0) ? Vector2f(mesh->mTextureCoords[0][i].x, mesh->mTextureCoords[0][i].y) : Enco3D::Core::Vector2Template::Zero;
+		Vector3f texCoord = mesh->HasTextureCoords(0) ? Vector3f(mesh->mTextureCoords[0][i].x, mesh->mTextureCoords[0][i].y, mesh->mTextureCoords[0][i].z) : Enco3D::Core::Vector3Template::Zero;
 		Vector3f normal = Vector3f(mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z);
-		vertices.push_back(Vertex(position.x, position.y, position.z, texCoord.x, texCoord.y, normal.x, normal.y, normal.z));
+		vertices.push_back(Vertex(position.x, position.y, position.z, texCoord.x, texCoord.y, texCoord.z, normal.x, normal.y, normal.z));
 	}
 
 	for (unsigned int i = 0; i < mesh->mNumFaces; i++)

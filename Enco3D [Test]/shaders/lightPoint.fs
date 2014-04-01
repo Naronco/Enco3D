@@ -2,7 +2,7 @@
 
 out vec4 fragColor;
 
-in vec2 texCoord;
+in vec3 texCoord;
 in vec3 normal;
 in vec3 worldPos;
 
@@ -39,7 +39,7 @@ void main()
 		lightDirection = normalize(lightDirection);
 		float attenuation = 1.0f - (distanceToLight / pointLight.range);
 		
-		vec3 diffuseColor = texture(material.diffuseTexture, texCoord).xyz * material.diffuseColor;
+		vec3 diffuseColor = texture(material.diffuseTexture, texCoord.xy).xyz * material.diffuseColor;
 		float diffuseIntensity = max(dot(-lightDirection, normal), 0.0) * attenuation;
 		diffuse = diffuseColor * diffuseIntensity * pointLight.color;
 		

@@ -2,7 +2,7 @@
 
 out vec4 fragColor;
 
-in vec2 texCoord;
+in vec3 texCoord;
 in vec3 normal;
 in vec3 worldPos;
 
@@ -18,10 +18,13 @@ struct Material
 	vec3 diffuseColor;
 	sampler2D diffuseTexture;
 	float specularIntensity, specularExponent;
+	float reflectionIntensity;
 };
 
 uniform DirectionalLight directionalLight;
 uniform Material material;
+
+uniform samplerCube environmentTexture;
 
 uniform vec3 eyePos;
 
@@ -30,7 +33,7 @@ void main()
 	vec3 diffuse = vec3(0, 0, 0);
 	vec3 specular = vec3(0, 0, 0);
 	
-	vec3 diffuseColor = texture(material.diffuseTexture, texCoord).xyz * material.diffuseColor;
+	vec3 diffuseColor = texture(material.diffuseTexture, texCoord.xy).xyz * material.diffuseColor;
 	float diffuseIntensity = max(dot(-directionalLight.direction, normal), 0.0);
 	diffuse = diffuseColor * diffuseIntensity * directionalLight.color;
 	
@@ -48,4 +51,13 @@ void main()
 	}
 	
 	fragColor = vec4(diffuse + specular, 1);
+	
+	if(material.reflectionIntensity > 0.0f)
+	{
+		vec3 viewDirection = normalize(worldPos - eyePos);
+		vec3 reflectionDirection = normalize(reflect(viewDirection, normal));
+		vec4 reflectedEnvironmentColor = texture(environmentTexture, reflectionDirection);
+		
+		fragColor += material.reflectionIntensity * reflectedEnvironmentColor;
+	}
 }

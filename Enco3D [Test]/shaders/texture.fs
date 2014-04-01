@@ -2,7 +2,7 @@
 
 out vec4 fragColor;
 
-in vec2 texCoord;
+in vec3 texCoord;
 
 uniform vec3 diffuseColor;
 uniform sampler2D diffuseTexture;

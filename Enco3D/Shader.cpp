@@ -163,6 +163,16 @@ void Enco3D::Rendering::Shader::AddGeometryShader(const string &text)
 	AddProgram(text, GL_GEOMETRY_SHADER);
 }
 
+void Enco3D::Rendering::Shader::AddTessellationControlShader(const string &text)
+{
+	AddProgram(text, GL_TESS_CONTROL_SHADER);
+}
+
+void Enco3D::Rendering::Shader::AddTessellationEvaluationShader(const string &text)
+{
+	AddProgram(text, GL_TESS_EVALUATION_SHADER);
+}
+
 void Enco3D::Rendering::Shader::AddVertexShaderFromFile(const string &filename)
 {
 	AddVertexShader(LoadShader(filename));
@@ -227,6 +237,6 @@ void Enco3D::Rendering::Shader::SetUniformMatrix4x4f(const string &name, const E
 	glUniformMatrix4fv(m_uniforms.at(name), 1, GL_TRUE, (const GLfloat *)v.m);
 }
 
-void Enco3D::Rendering::Shader::UpdateUniforms(const Enco3D::Core::Matrix4x4f &worldMatrix, const Enco3D::Core::Matrix4x4f projectedMatrix, Material &material) const
+void Enco3D::Rendering::Shader::UpdateUniforms(const Enco3D::Core::Matrix4x4f &worldMatrix, const Enco3D::Core::Matrix4x4f &projectedMatrix, Material &material) const
 {
 }

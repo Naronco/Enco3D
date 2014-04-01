@@ -31,6 +31,39 @@ Enco3D::Rendering::Texture::Texture(int width, int height, unsigned char *data, 
 	InitTexture(width, height, data, target, filter, wrap);
 }
 
+Enco3D::Rendering::Texture::Texture(const string *filenames, TextureFilter filter, TextureWrap wrap)
+{
+	m_textureTarget = TextureTarget::TextureCubeMap;
+
+	glGenTextures(1, &m_textureID);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, m_textureID);
+
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, filter);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, filter);
+
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, wrap);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, wrap);
+
+	for (unsigned int i = 0; i < 6; i++)
+	{
+		int w, h, bytesPerPixel;
+		unsigned char *data = stbi_load(filenames[i].c_str(), &w, &h, &bytesPerPixel, 4);
+
+		if (data == nullptr)
+		{
+			cout << "[ERROR] Unable to load texture: " << filenames[i] << endl;
+			return;
+		}
+		else
+		{
+			cout << "Successfully loaded texture " << filenames[i] << endl;
+		}
+
+		glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+		stbi_image_free(data);
+	}
+}
+
 void Enco3D::Rendering::Texture::InitTexture(int width, int height, unsigned char *data, TextureTarget target, TextureFilter filter, TextureWrap wrap)
 {
 	m_textureTarget = target;

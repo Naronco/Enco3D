@@ -70,6 +70,7 @@
 #include "PostProcessShader.h"
 #include "RenderingEngine.h"
 #include "Shader.h"
+#include "SkyboxShader.h"
 #include "SpotLightShader.h"
 #include "Texture.h"
 #include "TextureShader.h"

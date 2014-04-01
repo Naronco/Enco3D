@@ -8,7 +8,7 @@ namespace Enco3D
 		struct Vertex
 		{
 			float x, y, z;
-			float u, v;
+			float u, v, w;
 			float nx, ny, nz;
 
 			inline Vertex()
@@ -19,15 +19,15 @@ namespace Enco3D
 			{
 			}
 
-			inline Vertex(float _x, float _y, float _z, float _u, float _v) : x(_x), y(_y), z(_z), u(_u), v(_v)
+			inline Vertex(float _x, float _y, float _z, float _u, float _v, float _w) : x(_x), y(_y), z(_z), u(_u), v(_v), w(_w)
 			{
 			}
 
-			inline Vertex(float _x, float _y, float _z, float _u, float _v, float _nx, float _ny, float _nz) : x(_x), y(_y), z(_z), u(_u), v(_v), nx(_nx), ny(_ny), nz(_nz)
+			inline Vertex(float _x, float _y, float _z, float _u, float _v, float _w, float _nx, float _ny, float _nz) : x(_x), y(_y), z(_z), u(_u), v(_v), w(_w), nx(_nx), ny(_ny), nz(_nz)
 			{
 			}
 
-			inline Vertex(const Vertex &v) : x(v.x), y(v.y), z(v.z), u(v.u), v(v.v), nx(v.nx), ny(v.ny), nz(v.nz)
+			inline Vertex(const Vertex &v) : x(v.x), y(v.y), z(v.z), u(v.u), v(v.v), w(v.w), nx(v.nx), ny(v.ny), nz(v.nz)
 			{
 			}
 
@@ -39,10 +39,11 @@ namespace Enco3D
 				return *this;
 			}
 
-			inline Vertex& SetTexCoord(float _u, float _v)
+			inline Vertex& SetTexCoord(float _u, float _v, float _w)
 			{
 				u = _u;
 				v = _v;
+				w = _w;
 				return *this;
 			}
 

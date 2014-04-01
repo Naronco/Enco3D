@@ -13,6 +13,7 @@ Enco3D::Rendering::GeometryPassShader::GeometryPassShader()
 
 	AddUniform("worldMatrix");
 	AddUniform("projectedMatrix");
+
 }
 
 void Enco3D::Rendering::GeometryPassShader::UpdateUniforms(const Enco3D::Core::Matrix4x4f &worldMatrix, const Enco3D::Core::Matrix4x4f &projectedMatrix, Material &material) const

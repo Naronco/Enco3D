@@ -51,10 +51,10 @@ Enco3D::Rendering::RenderingEngine::RenderingEngine(unsigned int width, unsigned
 
 	Vertex vertices[4] =
 	{
-		Vertex(-1, -1,  0).SetTexCoord(0, 0).SetNormal(0, 0, 1),
-		Vertex(-1,  1,  0).SetTexCoord(0, 1).SetNormal(0, 0, 1),
-		Vertex( 1,  1,  0).SetTexCoord(1, 1).SetNormal(0, 0, 1),
-		Vertex( 1, -1,  0).SetTexCoord(1, 0).SetNormal(0, 0, 1),
+		Vertex(-1, -1,  0).SetTexCoord(0, 0, 0).SetNormal(0, 0, 1),
+		Vertex(-1,  1,  0).SetTexCoord(0, 1, 0).SetNormal(0, 0, 1),
+		Vertex( 1,  1,  0).SetTexCoord(1, 1, 0).SetNormal(0, 0, 1),
+		Vertex( 1, -1,  0).SetTexCoord(1, 0, 0).SetNormal(0, 0, 1),
 	};
 
 	unsigned int indices[6] =
@@ -98,22 +98,24 @@ Enco3D::Rendering::RenderingEngine::~RenderingEngine()
 
 void Enco3D::Rendering::RenderingEngine::Render(Enco3D::Core::GameObject *gameObject)
 {
-/*	m_gbuffer->Bind();
+/*	glBindFramebuffer(GL_FRAMEBUFFER, m_gbuffer->GetFBO());
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	gameObject->Render(GeometryPassShader::GetInstance());
-	m_gbuffer->Debind();
-	
+	gameObject->Render(m_mainCamera, TextureShader::GetInstance());
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+	glClear(GL_COLOR_BUFFER_BIT);
+
 	Matrix4x4f postProcessWorldMatrix;
 	Matrix4x4f postProcessProjectedMatrix;
 
-	postProcessProjectedMatrix.SetOrthographicProjection(-1, 1, -1, 1, -1, 1);
+	postProcessProjectedMatrix.SetOrthographicProjection(-1, 1, 1, -1, -1, 1);
 
 	PostProcessShader::GetInstance()->SetGBuffer(m_gbuffer);
 	PostProcessShader::GetInstance()->Bind();
 	PostProcessShader::GetInstance()->UpdateUniforms(postProcessWorldMatrix, postProcessProjectedMatrix, m_renderWindowMaterial);
 
 	m_renderWindow->Render();*/
-
+	
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	// Skybox Render
@@ -149,6 +151,12 @@ void Enco3D::Rendering::RenderingEngine::Render(Enco3D::Core::GameObject *gameOb
 	glDisable(GL_DEPTH_TEST);
 	gameObject->RenderGUI(m_GUICamera, TextureShader::GetInstance());
 	glEnable(GL_DEPTH_TEST);
+
+	GLenum error = glGetError();
+	if (error != GL_NO_ERROR)
+	{
+		cerr << "[GL_ERROR] GL reported an error with code: " << error << endl;
+	}
 }
 
 Enco3D::Core::Matrix4x4f Enco3D::Rendering::RenderingEngine::GetProjectedMatrix(const Enco3D::Rendering::Camera *camera, const Enco3D::Core::Matrix4x4f &worldMatrix)

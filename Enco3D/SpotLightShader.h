@@ -19,7 +19,7 @@ namespace Enco3D
 		public:
 			SpotLightShader();
 
-			void UpdateUniforms(const Matrix4x4f &worldMatrix, const Matrix4x4f projectedMatrix, Material &material) const;
+			void UpdateUniforms(const Matrix4x4f &worldMatrix, const Matrix4x4f &projectedMatrix, Material &material) const;
 
 			inline void SetSpotLight(const Vector3f &color, float intensity, const Vector3f &position, const Vector3f &direction, float range, float cutoff) { m_color = color; m_intensity = intensity; m_position = position; m_direction = direction; m_range = range; m_cutoff = cutoff; }
 			inline void SetEyePos(const Vector3f &eyePos) { m_eyePos = eyePos; }

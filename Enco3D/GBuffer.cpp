@@ -6,50 +6,49 @@ Enco3D::Rendering::GBuffer::GBuffer()
 
 Enco3D::Rendering::GBuffer::GBuffer(unsigned int width, unsigned int height)
 {
-	glGenFramebuffers(1, &m_fbo);
-	glBindFramebuffer(GL_FRAMEBUFFER, m_fbo);
-
-	glGenTextures(GBufferTextureType::NumTextures, m_textures);
-	glGenTextures(1, &m_depthTexture);
-
-	for (unsigned int i = 0; i < GBufferTextureType::NumTextures; i++)
+	for (unsigned int i = 0; i < __numGBufferTextures; i++)
 	{
+		glGenTextures(1, &m_textures[i]);
 		glBindTexture(GL_TEXTURE_2D, m_textures[i]);
-
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_FLOAT, nullptr);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
 
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB32F, width, height, 0, GL_RGB, GL_FLOAT, nullptr);
+	glGenTextures(1, &m_depthTexture);
+	glBindTexture(GL_TEXTURE_2D, m_depthTexture);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, width, height, 0, GL_DEPTH_COMPONENT, GL_FLOAT, nullptr);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glBindTexture(GL_TEXTURE_2D, 0);
 
+	glGenFramebuffers(1, &m_fbo);
+	glBindFramebuffer(GL_FRAMEBUFFER, m_fbo);
+	for (unsigned int i = 0; i < __numGBufferTextures; i++)
+	{
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, GL_TEXTURE_2D, m_textures[i], 0);
 	}
 
-	glBindTexture(GL_TEXTURE_2D, m_depthTexture);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32F, width, height, 0, GL_DEPTH_COMPONENT, GL_FLOAT, nullptr);
-
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, m_depthTexture, 0);
 
-	GLenum drawBuffers[] =
+/*	GLenum drawBufs[__numGBufferTextures];
+	for (unsigned int i = 0; i < __numGBufferTextures; i++)
 	{
-		GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2
-	};
+		drawBufs[i] = GL_COLOR_ATTACHMENT0 + i;
+	}
 
-	//glDrawBuffers(GBufferTextureType::NumTextures, drawBuffers);
+	glDrawBuffers(__numGBufferTextures, drawBufs);
+	*/
 
-	GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
-	if (status != GL_FRAMEBUFFER_COMPLETE)
+	GLenum error = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+	if (error != GL_FRAMEBUFFER_COMPLETE)
 	{
-		cerr << "[ERROR] Failed to initialize deferred shading framebuffer" << endl;
+		cerr << "[GL_ERROR] Framebuffer creation failed, error code: " << error << endl;
 	}
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -57,14 +56,4 @@ Enco3D::Rendering::GBuffer::GBuffer(unsigned int width, unsigned int height)
 
 Enco3D::Rendering::GBuffer::~GBuffer()
 {
-}
-
-void Enco3D::Rendering::GBuffer::Bind()
-{
-	glBindFramebuffer(GL_FRAMEBUFFER, m_fbo);
-}
-
-void Enco3D::Rendering::GBuffer::Debind()
-{
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }

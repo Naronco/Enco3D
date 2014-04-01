@@ -50,10 +50,14 @@ namespace Enco3D
 			void AddVertexShader(const string &text);
 			void AddFragmentShader(const string &text);
 			void AddGeometryShader(const string &text);
+			void AddTessellationControlShader(const string &text);
+			void AddTessellationEvaluationShader(const string &text);
 
 			void AddVertexShaderFromFile(const string &filename);
 			void AddFragmentShaderFromFile(const string &filename);
 			void AddGeometryShaderFromFile(const string &filename);
+			void AddTessellationControlShaderFromFile(const string &filename);
+			void AddTessellationEvaluationShaderFromFile(const string &filename);
 
 			void CompileShader();
 
@@ -68,7 +72,7 @@ namespace Enco3D
 			void SetUniformMatrix3x3f(const string &name, const Matrix3x3f &v) const;
 			void SetUniformMatrix4x4f(const string &name, const Matrix4x4f &v) const;
 
-			virtual void UpdateUniforms(const Matrix4x4f &worldMatrix, const Matrix4x4f projectedMatrix, Material &material) const;
+			virtual void UpdateUniforms(const Matrix4x4f &worldMatrix, const Matrix4x4f &projectedMatrix, Material &material) const;
 		};
 	}
 }

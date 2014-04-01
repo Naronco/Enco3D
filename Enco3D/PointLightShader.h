@@ -19,7 +19,7 @@ namespace Enco3D
 		public:
 			PointLightShader();
 
-			void UpdateUniforms(const Matrix4x4f &worldMatrix, const Matrix4x4f projectedMatrix, Material &material) const;
+			void UpdateUniforms(const Matrix4x4f &worldMatrix, const Matrix4x4f &projectedMatrix, Material &material) const;
 
 			inline void SetEyePos(const Vector3f &eyePos) { m_eyePos = eyePos; }
 			inline void SetPointLight(const Vector3f &color, float intensity, const Vector3f &position, float range) { m_color = color; m_intensity = intensity; m_position = position; m_range = range; }

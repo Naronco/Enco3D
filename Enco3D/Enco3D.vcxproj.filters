@@ -227,6 +227,9 @@
     <ClInclude Include="Skybox.h">
       <Filter>Headerdateien\Components</Filter>
     </ClInclude>
+    <ClInclude Include="SkyboxShader.h">
+      <Filter>Headerdateien\Rendering</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stb_image.c">
@@ -348,6 +351,9 @@
     </ClCompile>
     <ClCompile Include="Skybox.cpp">
       <Filter>Quelldateien\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SkyboxShader.cpp">
+      <Filter>Quelldateien\Rendering</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

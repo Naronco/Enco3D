@@ -14,14 +14,16 @@ namespace Enco3D
 			float m_intensity;
 			Vector3f m_direction;
 			Vector3f m_eyePos;
+			Texture *m_environmentTexture{ nullptr };
 
 		public:
 			DirectionalLightShader();
 
-			void UpdateUniforms(const Matrix4x4f &worldMatrix, const Matrix4x4f projectedMatrix, Material &material) const;
+			void UpdateUniforms(const Matrix4x4f &worldMatrix, const Matrix4x4f &projectedMatrix, Material &material) const;
 
 			inline void SetEyePos(const Vector3f &eyePos) { m_eyePos = eyePos; }
 			inline void SetDirectionalLight(const Vector3f &color, float intensity, const Vector3f &direction) { m_color = color; m_intensity = intensity; m_direction = direction; }
+			inline void SetEnvironmentTexture(Texture *environmentTexture) { m_environmentTexture = environmentTexture; }
 
 			inline Vector3f GetEyePos() const { return m_eyePos; }
 

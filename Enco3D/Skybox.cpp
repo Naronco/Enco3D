@@ -4,46 +4,56 @@ Enco3D::Rendering::Skybox::Skybox()
 {
 }
 
-Enco3D::Rendering::Skybox::Skybox(Texture *texture)
+Enco3D::Rendering::Skybox::Skybox(const string &filename)
 {
+	string cubeMapFilenames[6] =
+	{
+		filename + string("@x+.png"),
+		filename + string("@x-.png"),
+		filename + string("@y+.png"),
+		filename + string("@y-.png"),
+		filename + string("@z+.png"),
+		filename + string("@z-.png"),
+	};
+
+	Texture *cubeMapTexture = new Texture(cubeMapFilenames, TextureFilter::Nearest, TextureWrap::Clamp);
+
 	m_material = new Material;
+	m_material->AddTexture("skybox", cubeMapTexture);
 
-	m_material->AddTexture("diffuse", texture);
-	m_material->AddVector3f("diffuse", Vector3f(1, 1, 1));
-
-	m_textureShader = TextureShader::GetInstance();
+	m_skyboxShader = SkyboxShader::GetInstance();
 
 	Vertex vertices[24] =
 	{
-		Vertex(-1, -1, -1).SetTexCoord(0.25f, 0.75f).SetNormal(+0, -1, +0),
-		Vertex(+1, -1, -1).SetTexCoord(0.50f, 0.75f).SetNormal(+0, -1, +0),
-		Vertex(+1, -1, +1).SetTexCoord(0.50f, 0.50f).SetNormal(+0, -1, +0),
-		Vertex(-1, -1, +1).SetTexCoord(0.25f, 0.50f).SetNormal(+0, -1, +0),
+		Vertex(-1, -1, -1),
+		Vertex(+1, -1, -1),
+		Vertex(+1, -1, +1),
+		Vertex(-1, -1, +1),
 
-		Vertex(+1, +1, +1).SetTexCoord(0.50f, 0.25f).SetNormal(+0, +1, +0),
-		Vertex(-1, +1, +1).SetTexCoord(0.25f, 0.25f).SetNormal(+0, +1, +0),
-		Vertex(-1, +1, -1).SetTexCoord(0.25f, 0.00f).SetNormal(+0, +1, +0),
-		Vertex(+1, +1, -1).SetTexCoord(0.50f, 0.00f).SetNormal(+0, +1, +0),
+		Vertex(+1, +1, +1),
+		Vertex(-1, +1, +1),
+		Vertex(-1, +1, -1),
+		Vertex(+1, +1, -1),
 
-		Vertex(-1, -1, +1).SetTexCoord(0.25f, 0.50f).SetNormal(+0, +0, -1),
-		Vertex(+1, -1, +1).SetTexCoord(0.50f, 0.50f).SetNormal(+0, +0, -1),
-		Vertex(+1, +1, +1).SetTexCoord(0.50f, 0.25f).SetNormal(+0, +0, -1),
-		Vertex(-1, +1, +1).SetTexCoord(0.25f, 0.25f).SetNormal(+0, +0, -1),
+		Vertex(-1, -1, +1),
+		Vertex(+1, -1, +1),
+		Vertex(+1, +1, +1),
+		Vertex(-1, +1, +1),
 
-		Vertex(+1, +1, -1).SetTexCoord(0.75f, 0.25f).SetNormal(+0, +0, +1),
-		Vertex(-1, +1, -1).SetTexCoord(1.00f, 0.25f).SetNormal(+0, +0, +1),
-		Vertex(-1, -1, -1).SetTexCoord(1.00f, 0.50f).SetNormal(+0, +0, +1),
-		Vertex(+1, -1, -1).SetTexCoord(0.75f, 0.50f).SetNormal(+0, +0, +1),
+		Vertex(+1, +1, -1),
+		Vertex(-1, +1, -1),
+		Vertex(-1, -1, -1),
+		Vertex(+1, -1, -1),
 
-		Vertex(-1, -1, -1).SetTexCoord(0.00f, 0.50f).SetNormal(-1, +0, +0),
-		Vertex(-1, +1, -1).SetTexCoord(0.00f, 0.25f).SetNormal(-1, +0, +0),
-		Vertex(-1, +1, +1).SetTexCoord(0.25f, 0.25f).SetNormal(-1, +0, +0),
-		Vertex(-1, -1, +1).SetTexCoord(0.25f, 0.50f).SetNormal(-1, +0, +0),
+		Vertex(-1, -1, -1),
+		Vertex(-1, +1, -1),
+		Vertex(-1, +1, +1),
+		Vertex(-1, -1, +1),
 
-		Vertex(+1, -1, -1).SetTexCoord(0.75f, 0.50f).SetNormal(+1, +0, +0),
-		Vertex(+1, +1, -1).SetTexCoord(0.75f, 0.25f).SetNormal(+1, +0, +0),
-		Vertex(+1, +1, +1).SetTexCoord(0.50f, 0.25f).SetNormal(+1, +0, +0),
-		Vertex(+1, -1, +1).SetTexCoord(0.50f, 0.50f).SetNormal(+1, +0, +0),
+		Vertex(+1, -1, -1),
+		Vertex(+1, +1, -1),
+		Vertex(+1, +1, +1),
+		Vertex(+1, -1, +1),
 	};
 
 	unsigned int indices[36] =
@@ -82,14 +92,12 @@ void Enco3D::Rendering::Skybox::InitRendering()
 void Enco3D::Rendering::Skybox::Render(const Camera *camera)
 {
 	Matrix4x4f worldMatrix;
-
-	Vector3f translation = camera->GetTransform()->GetTranslation();
-	worldMatrix.Translate(translation.x, translation.y, translation.z);
-
 	Matrix4x4f projectedMatrix = GetRenderingEngine()->GetViewProjectedMatrix(camera, worldMatrix);
 
-	m_textureShader->Bind();
-	m_textureShader->UpdateUniforms(worldMatrix, projectedMatrix, *m_material);
+	m_skyboxShader->SetEyePos(camera->GetTransform()->GetTranslation());
+
+	m_skyboxShader->Bind();
+	m_skyboxShader->UpdateUniforms(worldMatrix, projectedMatrix, *m_material);
 
 	m_mesh->Render();
 }

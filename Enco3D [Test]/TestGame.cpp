@@ -176,7 +176,7 @@ void TestGame::Init()
 	GameObject *mainCameraObject = new GameObject("mainCamera");
 	mainCameraObject->AddComponent(mainCamera);
 	mainCameraObject->AddComponent(new FirstPersonController);
-	mainCameraObject->AddComponent(new Skybox(new Texture("texture/skybox/sunny_ocean.png", TextureTarget::Texture2D, TextureFilter::Nearest)));
+	mainCameraObject->AddComponent(new Skybox("texture/skybox/sunny_ocean"));
 
 	AddGameObject(linkObject);
 	AddGameObject(mainCameraObject);

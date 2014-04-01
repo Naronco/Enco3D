@@ -22,11 +22,13 @@ Enco3D::Rendering::DirectionalLightShader::DirectionalLightShader()
 	AddUniform("material.diffuseTexture");
 	AddUniform("material.specularIntensity");
 	AddUniform("material.specularExponent");
+	AddUniform("material.reflectionIntensity");
 
 	AddUniform("eyePos");
+	AddUniform("environmentTexture");
 }
 
-void Enco3D::Rendering::DirectionalLightShader::UpdateUniforms(const Enco3D::Core::Matrix4x4f &worldMatrix, const Enco3D::Core::Matrix4x4f projectedMatrix, Material &material) const
+void Enco3D::Rendering::DirectionalLightShader::UpdateUniforms(const Enco3D::Core::Matrix4x4f &worldMatrix, const Enco3D::Core::Matrix4x4f &projectedMatrix, Material &material) const
 {
 	SetUniformMatrix4x4f("worldMatrix", worldMatrix);
 	SetUniformMatrix4x4f("projectedMatrix", projectedMatrix);
@@ -35,12 +37,19 @@ void Enco3D::Rendering::DirectionalLightShader::UpdateUniforms(const Enco3D::Cor
 	SetUniformFloat("directionalLight.intensity", m_intensity);
 	SetUniformVector3f("directionalLight.direction", m_direction);
 
-	material.GetTexture("diffuse")->Bind(0);
+	if (m_environmentTexture != nullptr)
+	{
+		m_environmentTexture->Bind(1);
+	}
 
+	material.GetTexture("diffuse")->Bind(0);
+	
 	SetUniformVector3f("material.diffuseColor", material.GetVector3f("diffuse"));
 	SetUniformInt("material.diffuseTexture", 0);
+	SetUniformInt("environmentTexture", 1);
 	SetUniformFloat("material.specularIntensity", material.GetFloat("specularIntensity"));
 	SetUniformFloat("material.specularExponent", material.GetFloat("specularExponent"));
+	SetUniformFloat("material.reflectionIntensity", material.GetFloat("reflectionIntensity"));
 
 	SetUniformVector3f("eyePos", m_eyePos);
 }

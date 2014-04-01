@@ -18,7 +18,7 @@ Enco3D::Rendering::TextureShader::TextureShader()
 	AddUniform("diffuseTexture");
 }
 
-void Enco3D::Rendering::TextureShader::UpdateUniforms(const Enco3D::Core::Matrix4x4f &worldMatrix, const Enco3D::Core::Matrix4x4f projectedMatrix, Material &material) const
+void Enco3D::Rendering::TextureShader::UpdateUniforms(const Enco3D::Core::Matrix4x4f &worldMatrix, const Enco3D::Core::Matrix4x4f &projectedMatrix, Material &material) const
 {
 	SetUniformMatrix4x4f("worldMatrix", worldMatrix);
 	SetUniformMatrix4x4f("projectedMatrix", projectedMatrix);

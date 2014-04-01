@@ -15,7 +15,7 @@ namespace Enco3D
 		public:
 			LightGlobalAmbientShader();
 
-			void UpdateUniforms(const Matrix4x4f &worldMatrix, const Matrix4x4f projectedMatrix, Material &material) const;
+			void UpdateUniforms(const Matrix4x4f &worldMatrix, const Matrix4x4f &projectedMatrix, Material &material) const;
 
 			inline void SetGlobalAmbientLight(const Vector3f &globalAmbientLight) { m_globalAmbientLight = globalAmbientLight; }
 			inline Vector3f GetGlobalAmbientLight() const { return m_globalAmbientLight; }

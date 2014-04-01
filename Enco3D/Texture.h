@@ -29,6 +29,7 @@ namespace Enco3D
 		enum TextureTarget
 		{
 			Texture2D = GL_TEXTURE_2D,
+			TextureCubeMap = GL_TEXTURE_CUBE_MAP,
 		};
 
 		class Texture
@@ -48,7 +49,8 @@ namespace Enco3D
 			Texture();
 			Texture(const string &filename, TextureTarget target = TextureTarget::Texture2D, TextureFilter filter = TextureFilter::Linear, TextureWrap wrap = TextureWrap::Repeat);
 			Texture(int width, int height, unsigned char *data, TextureTarget target = TextureTarget::Texture2D, TextureFilter filter = TextureFilter::Linear, TextureWrap wrap = TextureWrap::Repeat);
-
+			Texture(const string *filenames, TextureFilter filter = TextureFilter::Linear, TextureWrap wrap = TextureWrap::Repeat); // Cube Maps
+			
 			void Bind(unsigned int unit = 0) const;
 			void Release();
 

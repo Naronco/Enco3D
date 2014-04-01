@@ -5,9 +5,8 @@ out vec4 fragColor;
 in vec2 texCoord;
 
 uniform sampler2D gbuffer_position;
-uniform sampler2D gbuffer_texCoord;
-uniform sampler2D gbuffer_normal;
-uniform sampler2D gbuffer_depth;
+//uniform sampler2D gbuffer_texCoord;
+//uniform sampler2D gbuffer_normal;
 
 void main()
 {

@@ -2,7 +2,7 @@
 
 out vec4 fragColor;
 
-in vec2 texCoord;
+in vec3 texCoord;
 in vec3 normal;
 in vec3 worldPos;
 
@@ -44,7 +44,7 @@ void main()
 			spotLightFactor = 1.0f - (1.0f - spotLightFactor) / (1.0f - spotLight.cutoff);
 			float attenuation = 1.0f - (distanceToLight / spotLight.range);
 			
-			vec3 diffuseColor = texture(material.diffuseTexture, texCoord).xyz * material.diffuseColor;
+			vec3 diffuseColor = texture(material.diffuseTexture, texCoord.xy).xyz * material.diffuseColor;
 			float diffuseIntensity = max(dot(-lightDirection, normal), 0.0) * attenuation * spotLightFactor;
 			diffuse = diffuseColor * diffuseIntensity * spotLight.color;
 			
