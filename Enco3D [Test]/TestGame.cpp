@@ -176,7 +176,7 @@ void TestGame::Init()
 	GameObject *mainCameraObject = new GameObject("mainCamera");
 	mainCameraObject->AddComponent(mainCamera);
 	mainCameraObject->AddComponent(new FirstPersonController);
-	mainCameraObject->AddComponent(new Skybox("texture/skybox/sunny_ocean"));
+	mainCameraObject->AddComponent(new Skybox("texture/skybox/sunny_evening"));
 
 	AddGameObject(linkObject);
 	AddGameObject(mainCameraObject);
@@ -224,12 +224,21 @@ void TestGame::Init()
 
 		GameObject *heartObject = new GameObject("heart");
 		heartObject->AddComponent(heartTexture);
-		heartObject->GetTransform()->Scale(GetRenderingEngine()->PixelsToImageScale(40.0f, 40.0f));
-		heartObject->GetTransform()->SetTranslation(GetRenderingEngine()->PixelsToScreenCoords(40.0f + 35.0f * i, 40.0f));
+		heartObject->GetTransform()->Scale(Vector3f(40.0f, 40.0f, 1.0f));
+		heartObject->GetTransform()->SetTranslation(Vector3f(40.0f + 35.0f * i, 40.0f, 0.0f));
 
 		AddGameObject(heartObject);
 	}
 
+	GUIText *guiText = new GUIText("Hallo Welt, Test 123");
+
+	GameObject *guiTextObject = new GameObject("guiText");
+	guiTextObject->AddComponent(guiText);
+	guiTextObject->GetTransform()->Scale(Vector3f(3.0f, 3.0f, 1.0f));
+	guiTextObject->GetTransform()->SetTranslation(Vector3f(100.0f, 100.0f, 0.0f));
+
+	AddGameObject(guiTextObject);
+	
 //	GetAudioEngine()->MusicLoad("sounds/kokiri_forest.wav", 10);
 //	GetAudioEngine()->MusicPlay();
 

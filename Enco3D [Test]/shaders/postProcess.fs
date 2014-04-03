@@ -2,7 +2,7 @@
 
 out vec4 fragColor;
 
-in vec2 texCoord;
+in vec3 texCoord;
 
 uniform sampler2D gbuffer_position;
 //uniform sampler2D gbuffer_texCoord;
@@ -10,5 +10,5 @@ uniform sampler2D gbuffer_position;
 
 void main()
 {
-	fragColor = vec4(texture2D(gbuffer_position, texCoord).rgb, 1);
+	fragColor = vec4(1, 0, 1, 1);//vec4(texture2D(gbuffer_position, texCoord).rgb, 1);
 }

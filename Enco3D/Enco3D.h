@@ -15,6 +15,7 @@
 #include "DirectionalLight.h"
 #include "FirstPersonController.h"
 #include "IGUIElement.h"
+#include "GUIText.h"
 #include "GUITexture.h"
 #include "Light.h"
 #include "MeshRenderer.h"
@@ -59,6 +60,8 @@
 
 // Rendering Engine Headers
 #include "DirectionalLightShader.h"
+#include "Font.h"
+#include "FontDatabase.h"
 #include "GBuffer.h"
 #include "GeometryPassShader.h"
 #include "IndexedModel.h"

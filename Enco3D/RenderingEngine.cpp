@@ -42,7 +42,9 @@ Enco3D::Rendering::RenderingEngine::RenderingEngine(unsigned int width, unsigned
 	m_gbuffer = new GBuffer(width, height);
 	m_GUICamera = new Camera;
 
-	m_GUICamera->SetOrthographicProjection(-1, 1, 1, -1, -1, 1);
+	m_GUICamera->SetOrthographicProjection(0, width, height, 0, -1, 1);
+
+	glViewport(0, 0, (GLsizei)width, (GLsizei)height);
 
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
@@ -53,16 +55,16 @@ Enco3D::Rendering::RenderingEngine::RenderingEngine(unsigned int width, unsigned
 	glEnable(GL_ALPHA_TEST);
 	glAlphaFunc(GL_GREATER, 0.5f);
 
-	glEnable(GL_CULL_FACE);
-	glFrontFace(GL_CW);
-	glCullFace(GL_BACK);
+//	glEnable(GL_CULL_FACE);
+//	glFrontFace(GL_CW);
+//	glCullFace(GL_BACK);
 
 	Vertex vertices[4] =
 	{
-		Vertex(-1, -1,  0).SetTexCoord(0, 0, 0).SetNormal(0, 0, 1),
-		Vertex(-1,  1,  0).SetTexCoord(0, 1, 0).SetNormal(0, 0, 1),
-		Vertex( 1,  1,  0).SetTexCoord(1, 1, 0).SetNormal(0, 0, 1),
-		Vertex( 1, -1,  0).SetTexCoord(1, 0, 0).SetNormal(0, 0, 1),
+		Vertex(+1, -1, 0).SetTexCoord(0, 0, 0).SetNormal(0, 0, 1),
+		Vertex(+1, +1, 0).SetTexCoord(0, 1, 0).SetNormal(0, 0, 1),
+		Vertex(-1, +1, 0).SetTexCoord(1, 1, 0).SetNormal(0, 0, 1),
+		Vertex(-1, -1, 0).SetTexCoord(1, 0, 0).SetNormal(0, 0, 1),
 	};
 
 	unsigned int indices[6] =
@@ -106,12 +108,12 @@ Enco3D::Rendering::RenderingEngine::~RenderingEngine()
 
 void Enco3D::Rendering::RenderingEngine::Render(Enco3D::Core::GameObject *gameObject)
 {
-/*	glBindFramebuffer(GL_FRAMEBUFFER, m_gbuffer->GetFBO());
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	gameObject->Render(m_mainCamera, TextureShader::GetInstance());
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+//	glBindFramebuffer(GL_FRAMEBUFFER, m_gbuffer->GetFBO());
+//	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+//	gameObject->Render(m_mainCamera, TextureShader::GetInstance());
+//	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-	glClear(GL_COLOR_BUFFER_BIT);
+/*	glClear(GL_COLOR_BUFFER_BIT);
 
 	Matrix4x4f postProcessWorldMatrix;
 	Matrix4x4f postProcessProjectedMatrix;
@@ -125,7 +127,7 @@ void Enco3D::Rendering::RenderingEngine::Render(Enco3D::Core::GameObject *gameOb
 	m_renderWindow->Render();*/
 	
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+		
 	// Skybox Render
 
 	if (m_skybox != nullptr)

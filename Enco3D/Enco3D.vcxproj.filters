@@ -230,6 +230,15 @@
     <ClInclude Include="SkyboxShader.h">
       <Filter>Headerdateien\Rendering</Filter>
     </ClInclude>
+    <ClInclude Include="GUIText.h">
+      <Filter>Headerdateien\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Font.h">
+      <Filter>Headerdateien\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="FontDatabase.h">
+      <Filter>Headerdateien\Rendering</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stb_image.c">
@@ -353,6 +362,15 @@
       <Filter>Quelldateien\Components</Filter>
     </ClCompile>
     <ClCompile Include="SkyboxShader.cpp">
+      <Filter>Quelldateien\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="GUIText.cpp">
+      <Filter>Quelldateien\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>Quelldateien\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="FontDatabase.cpp">
       <Filter>Quelldateien\Rendering</Filter>
     </ClCompile>
   </ItemGroup>

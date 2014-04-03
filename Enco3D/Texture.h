@@ -37,6 +37,7 @@ namespace Enco3D
 		private:
 			TextureTarget m_textureTarget;
 			GLuint m_textureID{ 0 };
+			unsigned int m_width{ 0 }, m_height{ 0 };
 
 		private:
 			void InitTexture(int width, int height, unsigned char *data, TextureTarget target, TextureFilter filter, TextureWrap wrap);
@@ -55,6 +56,8 @@ namespace Enco3D
 			void Release();
 
 			inline GLuint GetTextureID() const { return m_textureID; }
+			inline unsigned int GetWidth() const { return m_width; }
+			inline unsigned int GetHeight() const { return m_height; }
 
 		public:
 			static Texture *GetBlankTexture();

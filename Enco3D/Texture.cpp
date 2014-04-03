@@ -22,12 +22,18 @@ Enco3D::Rendering::Texture::Texture(const string &filename, TextureTarget target
 		cout << "Successfully loaded texture " << filename << endl;
 	}
 
+	m_width = (unsigned int)width;
+	m_height = (unsigned int)height;
+
 	InitTexture(width, height, data, target, filter, wrap);
 	stbi_image_free(data);
 }
 
 Enco3D::Rendering::Texture::Texture(int width, int height, unsigned char *data, TextureTarget target, TextureFilter filter, TextureWrap wrap)
 {
+	m_width = (unsigned int)width;
+	m_height = (unsigned int)height;
+
 	InitTexture(width, height, data, target, filter, wrap);
 }
 
@@ -48,6 +54,9 @@ Enco3D::Rendering::Texture::Texture(const string *filenames, TextureFilter filte
 	{
 		int w, h, bytesPerPixel;
 		unsigned char *data = stbi_load(filenames[i].c_str(), &w, &h, &bytesPerPixel, 4);
+
+		m_width = (unsigned int)w;
+		m_height = (unsigned int)h;
 
 		if (data == nullptr)
 		{

@@ -149,7 +149,7 @@ bool Enco3D::Rendering::WavefrontMesh::InitMaterials(const aiScene *scene, const
 		meshMaterial->AddVector3f("diffuse", Vector3f(1, 1, 1));
 		meshMaterial->AddFloat("specularIntensity", 0.0f);
 		meshMaterial->AddFloat("specularExponent", 0.0f);
-
+		
 		if (material->GetTextureCount(aiTextureType_DIFFUSE) > 0)
 		{
 			aiString path;

@@ -58,6 +58,6 @@ void main()
 		vec3 reflectionDirection = normalize(reflect(viewDirection, normal));
 		vec4 reflectedEnvironmentColor = texture(environmentTexture, reflectionDirection);
 		
-		fragColor += material.reflectionIntensity * reflectedEnvironmentColor;
+		fragColor = (1.0f - material.reflectionIntensity) * fragColor + material.reflectionIntensity * reflectedEnvironmentColor;
 	}
 }

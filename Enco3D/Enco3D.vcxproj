@@ -98,8 +98,11 @@
     <ClInclude Include="CapsuleCollisionShape.h" />
     <ClInclude Include="ConeCollisionShape.h" />
     <ClInclude Include="CylinderCollisionShape.h" />
+    <ClInclude Include="Font.h" />
+    <ClInclude Include="FontDatabase.h" />
     <ClInclude Include="GBuffer.h" />
     <ClInclude Include="GeometryPassShader.h" />
+    <ClInclude Include="GUIText.h" />
     <ClInclude Include="IGUIElement.h" />
     <ClInclude Include="GUITexture.h" />
     <ClInclude Include="Light.h" />
@@ -167,9 +170,12 @@
     <ClCompile Include="Enco3DEngine.cpp" />
     <ClCompile Include="DirectionalLightShader.cpp" />
     <ClCompile Include="FirstPersonController.cpp" />
+    <ClCompile Include="Font.cpp" />
+    <ClCompile Include="FontDatabase.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GBuffer.cpp" />
     <ClCompile Include="GeometryPassShader.cpp" />
+    <ClCompile Include="GUIText.cpp" />
     <ClCompile Include="GUITexture.cpp" />
     <ClCompile Include="IndexedModel.cpp" />
     <ClCompile Include="LightGlobalAmbientShader.cpp" />
