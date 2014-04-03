@@ -57,26 +57,34 @@ void Enco3D::Component::GUIText::UpdateMesh()
 
 	unsigned int vertexIndex = 0;
 
-	float cursorPos = 0.0f;
+	float cursorPos_x = 0.0f;
+	float cursorPos_y = 0.0f;
 
 	for (unsigned int i = 0; i < m_text.size(); i++)
 	{
+		if (m_text[i] == '\n')
+		{
+			cursorPos_y += 24.0f;
+			cursorPos_x = 0.0f;
+			continue;
+		}
+
 		CharacterData charaData = m_font->GetCharacterData((unsigned int)m_text[i]);
 
-		vertices[vertexIndex + 0].SetPosition(charaData.width + cursorPos + charaData.offsX, charaData.offsY, 0);
+		vertices[vertexIndex + 0].SetPosition(charaData.width + cursorPos_x + charaData.offsX, cursorPos_y + charaData.offsY, 0);
 		vertices[vertexIndex + 0].SetTexCoord(charaData.end_u, charaData.start_v, 0);
 
-		vertices[vertexIndex + 1].SetPosition(charaData.width + cursorPos + charaData.offsX, charaData.height + charaData.offsY, 0);
+		vertices[vertexIndex + 1].SetPosition(charaData.width + cursorPos_x + charaData.offsX, charaData.height + cursorPos_y + charaData.offsY, 0);
 		vertices[vertexIndex + 1].SetTexCoord(charaData.end_u, charaData.end_v, 0);
 
-		vertices[vertexIndex + 2].SetPosition(cursorPos + charaData.offsX, charaData.height + charaData.offsY, 0);
+		vertices[vertexIndex + 2].SetPosition(cursorPos_x + charaData.offsX, charaData.height + cursorPos_y + charaData.offsY, 0);
 		vertices[vertexIndex + 2].SetTexCoord(charaData.start_u, charaData.end_v, 0);
 
-		vertices[vertexIndex + 3].SetPosition(cursorPos + charaData.offsX, charaData.offsY, 0);
+		vertices[vertexIndex + 3].SetPosition(cursorPos_x + charaData.offsX, cursorPos_y + charaData.offsY, 0);
 		vertices[vertexIndex + 3].SetTexCoord(charaData.start_u, charaData.start_v, 0);
 
 		vertexIndex += 4;
-		cursorPos += charaData.advanceX;
+		cursorPos_x += charaData.advanceX;
 	}
 
 	unsigned int *indices = new unsigned int[indexCount];

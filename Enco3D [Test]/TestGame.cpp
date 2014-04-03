@@ -230,7 +230,7 @@ void TestGame::Init()
 		AddGameObject(heartObject);
 	}
 
-	GUIText *guiText = new GUIText("Hallo Welt, Test 123");
+	GUIText *guiText = new GUIText("Hallo Welt, Test 123\nLolxD");
 
 	GameObject *guiTextObject = new GameObject("guiText");
 	guiTextObject->AddComponent(guiText);
