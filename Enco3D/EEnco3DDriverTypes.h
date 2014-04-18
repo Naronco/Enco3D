@@ -1,0 +1,16 @@
+#ifndef __ENCO3D_EENCO3DDRIVERTYPES_H_INCLUDED__
+#define __ENCO3D_EENCO3DDRIVERTYPES_H_INCLUDED__
+
+namespace enco
+{
+	namespace core
+	{
+		enum EEnco3DDriverTypes
+		{
+			eENCO3DDRIVERTYPE_SDL2_OPENGL15,
+			eENCO3DDRIVERTYPE_WIN32_OPENGL15,
+		};
+	}
+}
+
+#endif

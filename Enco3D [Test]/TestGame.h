@@ -3,7 +3,7 @@
 
 #include "Player.h"
 
-#include <Enco3D.h>
+#include <Enco3D/Enco3D.h>
 
 using namespace Enco3D::Core;
 using namespace Enco3D::Component;

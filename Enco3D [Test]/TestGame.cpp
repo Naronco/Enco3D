@@ -14,125 +14,6 @@ void TestGame::Init()
 	fieldMeshObject->AddComponent(new MeshRenderer(fieldMesh, fieldMaterial));
 	fieldMeshObject->AddComponent(new RigidBody(0, 0.8f, 1.0f, 0.2f, 0.1f, new StaticPlaneCollisionShape(Vector3f(0, 1, 0))));
 
-	AddGameObject(fieldMeshObject);*/
-
-	/*	string models[] =
-		{
-		"applejack/applejack_eyelashes.obj",
-		"applejack/applejack_hair_back_lower.obj",
-		"applejack/applejack_hair_back_upper.obj",
-		"applejack/applejack_hair_front.obj",
-		"applejack/applejack_hairband_hair.obj",
-		"applejack/applejack_hairband_tail.obj",
-		"applejack/applejack_hat.obj",
-		"applejack/applejack_tail_lower.obj",
-		"applejack/applejack_tail_upper.obj",
-		"pony_body.obj",
-		"pony_eyes.obj",
-		"pony_teeth_lower.obj",
-		"pony_teeth_upper.obj",
-		"pony_tongue.obj",
-		};
-
-		string textures[] =
-		{
-		"",
-		"applejack/applejack_hair_back_lower.png",
-		"applejack/applejack_hair_back_upper.png",
-		"applejack/applejack_hair_front.png",
-		"applejack/applejack_hairband.png",
-		"applejack/applejack_hairband.png",
-		"applejack/applejack_hat.png",
-		"applejack/applejack_tail_lower.png",
-		"applejack/applejack_tail_upper.png",
-		"applejack/applejack_body.png",
-		"applejack/applejack_eyes.png",
-		"",
-		"",
-		"pony_tongue.png",
-		};
-
-		Vector3f colors[] =
-		{
-		Vector3Template::Zero,
-		Vector3Template::One,
-		Vector3Template::One,
-		Vector3Template::One,
-		Vector3Template::One,
-		Vector3Template::One,
-		Vector3Template::One,
-		Vector3Template::One,
-		Vector3Template::One,
-		Vector3Template::One,
-		Vector3Template::One,
-		Vector3Template::One,
-		Vector3Template::One,
-		Vector3Template::One,
-		};*/
-
-	string models[] =
-	{
-		"rainbow_dash/rainbow_dash_eyelashes.obj",
-		"rainbow_dash/rainbow_dash_hair_back.obj",
-		"rainbow_dash/rainbow_dash_hair_front.obj",
-		"rainbow_dash/rainbow_dash_tail.obj",
-		"pony_wing_folded.obj",
-		"pony_body.obj",
-		"pony_eyes.obj",
-		"pony_teeth_lower.obj",
-		"pony_teeth_upper.obj",
-		"pony_tongue.obj",
-	};
-
-	string textures[] =
-	{
-		"",
-		"rainbow_dash/rainbow_dash_hair_back.png",
-		"rainbow_dash/rainbow_dash_hair_front.png",
-		"rainbow_dash/rainbow_dash_tail.png",
-		"rainbow_dash/rainbow_dash_wings.png",
-		"rainbow_dash/rainbow_dash_body.png",
-		"rainbow_dash/rainbow_dash_eyes.png",
-		"",
-		"",
-		"pony_tongue.png",
-	};
-
-	Vector3f colors[] =
-	{
-		Vector3Template::Zero,
-		Vector3Template::One,
-		Vector3Template::One,
-		Vector3Template::One,
-		Vector3Template::One,
-		Vector3Template::One,
-		Vector3Template::One,
-		Vector3Template::One,
-		Vector3Template::One,
-		Vector3Template::One,
-	};
-
-	/*	GameObject *ponyObject = new GameObject;
-
-		for (unsigned int i = 0; i < 10; i++)
-		{
-		Mesh *ponyMesh = new Mesh(string("models/") + models[i]);
-
-		Material *ponyMaterial = new Material;
-		ponyMaterial->AddVector3f("diffuse", colors[i]);
-		ponyMaterial->AddFloat("specularIntensity", 0.0f);
-		ponyMaterial->AddFloat("specularExponent", 64.0f);
-
-		if (textures[i].length() > 0)
-		{
-		ponyMaterial->AddTexture("diffuse", Texture(string("texture/") + textures[i], TextureTarget::Texture2D, TextureFilter::Linear));
-		}
-
-		ponyObject->AddComponent(new MeshRenderer(ponyMesh, ponyMaterial));
-		}
-
-		AddGameObject(ponyObject);*/
-
 /*	Camera *mainCamera = new Camera;
 	mainCamera->SetName("camera");
 	mainCamera->SetPerspectiveProjection(MathUtil::ToRadians(70.0f), (float)GetWindow()->GetWidth() / (float)GetWindow()->GetHeight(), 0.01f, 100.0f);
@@ -196,7 +77,7 @@ void TestGame::Init()
 	
 //	GetRenderingEngine()->GetMainCamera()->Move(Vector3f(0, 0, -1), 5);
 
-/*	for (int i = 0; i < 30; i++)
+	for (int i = 0; i < 10; i++)
 	{
 		PointLight *pointLight = new PointLight;
 		pointLight->SetColor(Vector3f(Random::NextFloat(), Random::NextFloat(), Random::NextFloat()));
@@ -208,34 +89,29 @@ void TestGame::Init()
 		pointLightObject->AddComponent(pointLight);
 
 		AddGameObject(pointLightObject);
-	}*/
-
-//	GUITexture *guiTexture = new GUITexture("texture/test.png");
-//
-//	GameObject *guiTextureObject = new GameObject("guiTexture");
-//	guiTextureObject->AddComponent(guiTexture);
-//	guiTextureObject->GetTransform()->Scale(Vector3f(0.2f, 0.2f, 0.2f));
-//
-//	AddGameObject(guiTextureObject);
-
-	for (unsigned int i = 0; i < 3; i++)
-	{
-		GUITexture *heartTexture = new GUITexture("texture/heart.png");
-
-		GameObject *heartObject = new GameObject("heart");
-		heartObject->AddComponent(heartTexture);
-		heartObject->GetTransform()->Scale(Vector3f(40.0f, 40.0f, 1.0f));
-		heartObject->GetTransform()->SetTranslation(Vector3f(40.0f + 35.0f * i, 40.0f, 0.0f));
-
-		AddGameObject(heartObject);
 	}
 
-	GUIText *guiText = new GUIText("Hallo Welt, Test 123\nLolxD");
+	for (unsigned int j = 0; j < 1; j++)
+	{
+		for (unsigned int i = 0; i < 3; i++)
+		{
+			GUITexture *heartTexture = new GUITexture("texture/heart.png");
+
+			GameObject *heartObject = new GameObject("heart");
+			heartObject->AddComponent(heartTexture);
+			heartObject->GetTransform()->Scale(Vector3f(40.0f, 40.0f, 1.0f));
+			heartObject->GetTransform()->SetTranslation(Vector3f(40.0f + 35.0f * i, 40.0f + 35.0f * j, 0.0f));
+
+			AddGameObject(heartObject);
+		}
+	}
+
+	GUIText *guiText = new GUIText("Enco3D [Prototype] - test", GetFont("font/arial", FontType::Default));
 
 	GameObject *guiTextObject = new GameObject("guiText");
 	guiTextObject->AddComponent(guiText);
-	guiTextObject->GetTransform()->Scale(Vector3f(3.0f, 3.0f, 1.0f));
-	guiTextObject->GetTransform()->SetTranslation(Vector3f(100.0f, 100.0f, 0.0f));
+	guiTextObject->GetTransform()->Scale(Vector3f(0.8f, 0.8f, 0.8f));
+	guiTextObject->GetTransform()->SetTranslation(Vector3f(0.0f, GetWindow()->GetHeight() - 32.0f * 0.8f, 0.0f));
 
 	AddGameObject(guiTextObject);
 	
@@ -252,9 +128,9 @@ void TestGame::Deinit()
 
 void TestGame::Update()
 {
-	static float timeout = 0.0f;
+/*	static float timeout = 0.0f;
 
-/*	if (Input::IsKeyDown(SDLK_e) && timeout < 0.1f)
+	if (Input::IsKeyDown(SDLK_e) && timeout < 0.1f)
 	{
 		int rand = Random::NextInt(6);
 

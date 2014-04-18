@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Enco3D [Test]", "Enco3D [Te
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Enco3D", "Enco3D\Enco3D.vcxproj", "{1BAA0FBB-5D34-4483-8271-FC1A1C9346A9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enco3D [Editor]", "Enco3D [Editor]\Enco3D [Editor].csproj", "{67DE3F17-FD7B-461F-A253-692EAD625165}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,16 @@ Global
 		{1BAA0FBB-5D34-4483-8271-FC1A1C9346A9}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{1BAA0FBB-5D34-4483-8271-FC1A1C9346A9}.Release|Win32.ActiveCfg = Release|Win32
 		{1BAA0FBB-5D34-4483-8271-FC1A1C9346A9}.Release|Win32.Build.0 = Release|Win32
+		{67DE3F17-FD7B-461F-A253-692EAD625165}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67DE3F17-FD7B-461F-A253-692EAD625165}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67DE3F17-FD7B-461F-A253-692EAD625165}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{67DE3F17-FD7B-461F-A253-692EAD625165}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{67DE3F17-FD7B-461F-A253-692EAD625165}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{67DE3F17-FD7B-461F-A253-692EAD625165}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67DE3F17-FD7B-461F-A253-692EAD625165}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67DE3F17-FD7B-461F-A253-692EAD625165}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{67DE3F17-FD7B-461F-A253-692EAD625165}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{67DE3F17-FD7B-461F-A253-692EAD625165}.Release|Win32.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

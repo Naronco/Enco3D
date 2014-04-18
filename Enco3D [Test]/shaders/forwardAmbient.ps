@@ -1,0 +1,13 @@
+#version 120
+
+varying vec2 texCoord;
+
+uniform vec4 globalAmbientLightColor;
+
+uniform vec4 diffuseColor;
+uniform sampler2D diffuseTexture;
+
+void main()
+{
+	gl_FragColor = texture2D(diffuseTexture, texCoord.xy) * diffuseColor * globalAmbientLightColor;
+}

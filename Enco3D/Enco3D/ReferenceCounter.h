@@ -1,0 +1,33 @@
+#ifndef _ENCO3D_REFERENCECOUNTER_H_
+#define _ENCO3D_REFERENCECOUNTER_H_
+
+namespace Enco3D
+{
+	namespace Core
+	{
+		template <typename T>
+		class ReferenceCounter
+		{
+		private:
+			T m_refCount;
+
+		public:
+			inline ReferenceCounter()
+			{
+				m_refCount = 1;
+			}
+
+			inline void AddReference()
+			{
+				m_refCount++;
+			}
+
+			inline bool RemoveReference()
+			{
+				return --m_refCount == 0;
+			}
+		};
+	}
+}
+
+#endif

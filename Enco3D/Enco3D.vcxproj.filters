@@ -12,366 +12,429 @@
     <Filter Include="stb_image">
       <UniqueIdentifier>{b4ea0383-0828-4a40-a2b5-d6a792198ad9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Headerdateien\Rendering">
-      <UniqueIdentifier>{c55af25e-2b20-4e59-9055-8d6c50c36760}</UniqueIdentifier>
+    <Filter Include="Headerdateien\Enco3D">
+      <UniqueIdentifier>{c78c5600-1c95-4afa-a8b6-f4543a2d6087}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Headerdateien\Core">
-      <UniqueIdentifier>{d6a0ddf6-1823-4b40-9541-eac9b6acc8fa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Headerdateien\Physics">
-      <UniqueIdentifier>{9c06abdc-4392-488c-b869-1acbeac326e9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Headerdateien\Audio">
-      <UniqueIdentifier>{de40493e-bcb1-46c7-898e-cab3c7d44134}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quelldateien\Core">
-      <UniqueIdentifier>{dfaea61a-ba04-40e1-bf39-662e4e312c72}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quelldateien\Audio">
-      <UniqueIdentifier>{5788eee3-d580-4d35-90f6-e2774dbb466d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quelldateien\Physics">
-      <UniqueIdentifier>{5584b292-4172-4b5d-bf05-8b7d94a1f16e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quelldateien\Rendering">
-      <UniqueIdentifier>{0bc68505-5949-4989-b116-e414ccf989cc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Headerdateien\Components">
-      <UniqueIdentifier>{c5c84f8b-55fb-4518-b292-0b6668c47ac4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quelldateien\Components">
-      <UniqueIdentifier>{88fbaea9-ec44-459b-80e1-2d7057b75bbe}</UniqueIdentifier>
+    <Filter Include="Quelldateien\Enco3D">
+      <UniqueIdentifier>{3f0482d5-2d3b-4631-a5e7-ba2bc75b8ec9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stb_image.h">
-      <Filter>stb_image</Filter>
+    <ClCompile Include="Enco3D\AudioEngine.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Enco3D\BoxCollisionShape.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Enco3D\Camera.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Enco3D\CapsuleCollisionShape.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Enco3D\ConeCollisionShape.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Enco3D\ConvexMeshCollisionShape.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Enco3D\CylinderCollisionShape.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Enco3D\Enco3DEngine.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Enco3D\FirstPersonController.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Enco3D\Font.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Enco3D\FontDatabase.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Enco3D\GameObject.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Enco3D\GBuffer.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Enco3D\GLWindow.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Enco3D\GUIText.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Enco3D\GUITexture.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Enco3D\IndexedModel.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Enco3D\Input.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Enco3D\Mesh.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Enco3D\MeshRenderer.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Enco3D\MeshResource.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Enco3D\OBJModel.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Enco3D\PhysicsEngine.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Enco3D\Random.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Enco3D\RenderingEngine.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Enco3D\RigidBody.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Enco3D\Shader.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Enco3D\ShaderPool.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Enco3D\Skybox.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Enco3D\SphereCollisionShape.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Enco3D\StaticConcaveMeshCollisionShape.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Enco3D\StaticPlaneCollisionShape.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Enco3D\stb_image.c">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Enco3D\Texture.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Enco3D\Timer.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Enco3D\Transform.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Enco3D\WavefrontMesh.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Enco3DDevice.cpp">
+      <Filter>Quelldateien\Enco3D</Filter>
+    </ClCompile>
+    <ClCompile Include="CWindow_SDL2.cpp">
+      <Filter>Quelldateien\Enco3D</Filter>
+    </ClCompile>
+    <ClCompile Include="CGraphicsDevice_OpenGL15.cpp">
+      <Filter>Quelldateien\Enco3D</Filter>
+    </ClCompile>
+    <ClCompile Include="CWindow_Win32_OpenGL.cpp">
+      <Filter>Quelldateien\Enco3D</Filter>
+    </ClCompile>
+    <ClCompile Include="CTimer.cpp">
+      <Filter>Quelldateien\Enco3D</Filter>
+    </ClCompile>
+    <ClCompile Include="CCodedMesh.cpp">
+      <Filter>Quelldateien\Enco3D</Filter>
+    </ClCompile>
+    <ClCompile Include="CSceneManager.cpp">
+      <Filter>Quelldateien\Enco3D</Filter>
+    </ClCompile>
+    <ClCompile Include="CCodedMeshSceneNode.cpp">
+      <Filter>Quelldateien\Enco3D</Filter>
+    </ClCompile>
+    <ClCompile Include="CFrameCounter.cpp">
+      <Filter>Quelldateien\Enco3D</Filter>
+    </ClCompile>
+    <ClCompile Include="CPhysicsDevice_BulletPhysics.cpp">
+      <Filter>Quelldateien\Enco3D</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Enco3D\AudioEngine.h">
+      <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="DirectionalLightShader.h">
-      <Filter>Headerdateien\Rendering</Filter>
+    <ClInclude Include="Enco3D\BoxCollisionShape.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\Camera.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\CapsuleCollisionShape.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\ConeCollisionShape.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\Console.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\ConvexMeshCollisionShape.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\CylinderCollisionShape.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\DirectionalLight.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\Enco3D.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\Enco3DEngine.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\Error.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\Event.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\FirstPersonController.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\Font.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\FontDatabase.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\GameObject.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\GBuffer.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\GLWindow.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\GUIText.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\GUITexture.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\ICollisionShape.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\IGame.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\IGameComponent.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\ILight.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\IndexedModel.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\Input.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\Material.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\MathUtil.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\Matrix3x3.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\Matrix4x4.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\Mesh.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\MeshRenderer.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\MeshResource.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\OBJModel.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\PhysicsEngine.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\PhysicsHelper.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\PointLight.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\Quaternion.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\Random.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\ReferenceCounter.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\RenderingEngine.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\RigidBody.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\Shader.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\ShaderPool.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\Skybox.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\SphereCollisionShape.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\SpotLight.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\StaticConcaveMeshCollisionShape.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\StaticPlaneCollisionShape.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\stb_image.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\Texture.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\Timer.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\Transform.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\TSingleton.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\Vector2.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\Vector3.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\Vector4.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\Vertex.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\WavefrontMesh.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3DDevice.h">
+      <Filter>Headerdateien\Enco3D</Filter>
+    </ClInclude>
+    <ClInclude Include="EEnco3DDriverTypes.h">
+      <Filter>Headerdateien\Enco3D</Filter>
+    </ClInclude>
+    <ClInclude Include="IGraphicsDevice.h">
+      <Filter>Headerdateien\Enco3D</Filter>
+    </ClInclude>
+    <ClInclude Include="SColor4.h">
+      <Filter>Headerdateien\Enco3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3DDatatypes.h">
+      <Filter>Headerdateien\Enco3D</Filter>
+    </ClInclude>
+    <ClInclude Include="SDimension2.h">
+      <Filter>Headerdateien\Enco3D</Filter>
+    </ClInclude>
+    <ClInclude Include="EVertexComponents.h">
+      <Filter>Headerdateien\Enco3D</Filter>
     </ClInclude>
     <ClInclude Include="Enco3D.h">
-      <Filter>Headerdateien\Core</Filter>
+      <Filter>Headerdateien\Enco3D</Filter>
     </ClInclude>
-    <ClInclude Include="Error.h">
-      <Filter>Headerdateien\Core</Filter>
+    <ClInclude Include="Enco3DUtil.h">
+      <Filter>Headerdateien\Enco3D</Filter>
     </ClInclude>
-    <ClInclude Include="Event.h">
-      <Filter>Headerdateien\Core</Filter>
+    <ClInclude Include="IWindow.h">
+      <Filter>Headerdateien\Enco3D</Filter>
     </ClInclude>
-    <ClInclude Include="GLWindow.h">
-      <Filter>Headerdateien\Core</Filter>
+    <ClInclude Include="SVector2.h">
+      <Filter>Headerdateien\Enco3D</Filter>
     </ClInclude>
-    <ClInclude Include="Input.h">
-      <Filter>Headerdateien\Core</Filter>
+    <ClInclude Include="Enco3DMath.h">
+      <Filter>Headerdateien\Enco3D</Filter>
     </ClInclude>
-    <ClInclude Include="LightGlobalAmbientShader.h">
-      <Filter>Headerdateien\Rendering</Filter>
+    <ClInclude Include="CWindow_SDL2.h">
+      <Filter>Headerdateien\Enco3D</Filter>
     </ClInclude>
-    <ClInclude Include="Material.h">
-      <Filter>Headerdateien\Rendering</Filter>
+    <ClInclude Include="SVector3.h">
+      <Filter>Headerdateien\Enco3D</Filter>
     </ClInclude>
-    <ClInclude Include="Matrix3x3.h">
-      <Filter>Headerdateien\Core</Filter>
+    <ClInclude Include="CGraphicsDevice_OpenGL15.h">
+      <Filter>Headerdateien\Enco3D</Filter>
     </ClInclude>
-    <ClInclude Include="Matrix4x4.h">
-      <Filter>Headerdateien\Core</Filter>
+    <ClInclude Include="CWindow_Win32_OpenGL.h">
+      <Filter>Headerdateien\Enco3D</Filter>
     </ClInclude>
-    <ClInclude Include="Mesh.h">
-      <Filter>Headerdateien\Rendering</Filter>
+    <ClInclude Include="CFile.h">
+      <Filter>Headerdateien\Enco3D</Filter>
     </ClInclude>
-    <ClInclude Include="PointLightShader.h">
-      <Filter>Headerdateien\Rendering</Filter>
+    <ClInclude Include="SMatrixNxM.h">
+      <Filter>Headerdateien\Enco3D</Filter>
     </ClInclude>
-    <ClInclude Include="Quaternion.h">
-      <Filter>Headerdateien\Core</Filter>
+    <ClInclude Include="CTimer.h">
+      <Filter>Headerdateien\Enco3D</Filter>
     </ClInclude>
-    <ClInclude Include="Random.h">
-      <Filter>Headerdateien\Core</Filter>
+    <ClInclude Include="IMesh.h">
+      <Filter>Headerdateien\Enco3D</Filter>
     </ClInclude>
-    <ClInclude Include="Shader.h">
-      <Filter>Headerdateien\Rendering</Filter>
+    <ClInclude Include="CCodedMesh.h">
+      <Filter>Headerdateien\Enco3D</Filter>
     </ClInclude>
-    <ClInclude Include="SpotLightShader.h">
-      <Filter>Headerdateien\Rendering</Filter>
+    <ClInclude Include="CSceneManager.h">
+      <Filter>Headerdateien\Enco3D</Filter>
     </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Headerdateien\Rendering</Filter>
+    <ClInclude Include="ISceneNode.h">
+      <Filter>Headerdateien\Enco3D</Filter>
     </ClInclude>
-    <ClInclude Include="TextureShader.h">
-      <Filter>Headerdateien\Rendering</Filter>
+    <ClInclude Include="CCodedMeshSceneNode.h">
+      <Filter>Headerdateien\Enco3D</Filter>
     </ClInclude>
-    <ClInclude Include="Timer.h">
-      <Filter>Headerdateien\Core</Filter>
+    <ClInclude Include="CTransform.h">
+      <Filter>Headerdateien\Enco3D</Filter>
     </ClInclude>
-    <ClInclude Include="Transform.h">
-      <Filter>Headerdateien\Core</Filter>
+    <ClInclude Include="CCamera.h">
+      <Filter>Headerdateien\Enco3D</Filter>
     </ClInclude>
-    <ClInclude Include="Vector2.h">
-      <Filter>Headerdateien\Core</Filter>
+    <ClInclude Include="CFrameCounter.h">
+      <Filter>Headerdateien\Enco3D</Filter>
     </ClInclude>
-    <ClInclude Include="Vector3.h">
-      <Filter>Headerdateien\Core</Filter>
+    <ClInclude Include="ILight.h">
+      <Filter>Headerdateien\Enco3D</Filter>
     </ClInclude>
-    <ClInclude Include="Vector4.h">
-      <Filter>Headerdateien\Core</Filter>
+    <ClInclude Include="Enco3DRenderUtil.h">
+      <Filter>Headerdateien\Enco3D</Filter>
     </ClInclude>
-    <ClInclude Include="RenderingEngine.h">
-      <Filter>Headerdateien\Rendering</Filter>
+    <ClInclude Include="IPhysicsDevice.h">
+      <Filter>Headerdateien\Enco3D</Filter>
     </ClInclude>
-    <ClInclude Include="IGame.h">
-      <Filter>Headerdateien\Core</Filter>
+    <ClInclude Include="CPhysicsDevice_BulletPhysics.h">
+      <Filter>Headerdateien\Enco3D</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Headerdateien\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="IGameComponent.h">
-      <Filter>Headerdateien\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshRenderer.h">
-      <Filter>Headerdateien\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="FirstPersonController.h">
-      <Filter>Headerdateien\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="MathUtil.h">
-      <Filter>Headerdateien\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Enco3DEngine.h">
-      <Filter>Headerdateien\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Vertex.h">
-      <Filter>Headerdateien\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="IndexedModel.h">
-      <Filter>Headerdateien\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="OBJModel.h">
-      <Filter>Headerdateien\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="StaticPlaneCollisionShape.h">
-      <Filter>Headerdateien\Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicsEngine.h">
-      <Filter>Headerdateien\Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="ICollisionShape.h">
-      <Filter>Headerdateien\Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="SphereCollisionShape.h">
-      <Filter>Headerdateien\Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicsHelper.h">
-      <Filter>Headerdateien\Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshResource.h">
-      <Filter>Headerdateien\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Headerdateien\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="DirectionalLight.h">
-      <Filter>Headerdateien\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Light.h">
-      <Filter>Headerdateien\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="PointLight.h">
-      <Filter>Headerdateien\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="SpotLight.h">
-      <Filter>Headerdateien\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="RigidBody.h">
-      <Filter>Headerdateien\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="GBuffer.h">
-      <Filter>Headerdateien\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="GeometryPassShader.h">
-      <Filter>Headerdateien\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="PostProcessShader.h">
-      <Filter>Headerdateien\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="BoxCollisionShape.h">
-      <Filter>Headerdateien\Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="CylinderCollisionShape.h">
-      <Filter>Headerdateien\Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="CapsuleCollisionShape.h">
-      <Filter>Headerdateien\Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="ConeCollisionShape.h">
-      <Filter>Headerdateien\Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="ConvexMeshCollisionShape.h">
-      <Filter>Headerdateien\Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="StaticConcaveMeshCollisionShape.h">
-      <Filter>Headerdateien\Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="GUITexture.h">
-      <Filter>Headerdateien\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="IGUIElement.h">
-      <Filter>Headerdateien\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="AudioEngine.h">
-      <Filter>Headerdateien\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="WavefrontMesh.h">
-      <Filter>Headerdateien\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Skybox.h">
-      <Filter>Headerdateien\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="SkyboxShader.h">
-      <Filter>Headerdateien\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="GUIText.h">
-      <Filter>Headerdateien\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Font.h">
-      <Filter>Headerdateien\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="FontDatabase.h">
-      <Filter>Headerdateien\Rendering</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="stb_image.c">
-      <Filter>stb_image</Filter>
-    </ClCompile>
-    <ClCompile Include="DirectionalLightShader.cpp">
-      <Filter>Quelldateien\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="LightGlobalAmbientShader.cpp">
-      <Filter>Quelldateien\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="Mesh.cpp">
-      <Filter>Quelldateien\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="PointLightShader.cpp">
-      <Filter>Quelldateien\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="Shader.cpp">
-      <Filter>Quelldateien\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="SpotLightShader.cpp">
-      <Filter>Quelldateien\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>Quelldateien\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureShader.cpp">
-      <Filter>Quelldateien\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="GLWindow.cpp">
-      <Filter>Quelldateien\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Input.cpp">
-      <Filter>Quelldateien\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Timer.cpp">
-      <Filter>Quelldateien\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Transform.cpp">
-      <Filter>Quelldateien\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderingEngine.cpp">
-      <Filter>Quelldateien\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Quelldateien\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="MeshRenderer.cpp">
-      <Filter>Quelldateien\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="FirstPersonController.cpp">
-      <Filter>Quelldateien\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Random.cpp">
-      <Filter>Quelldateien\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Enco3DEngine.cpp">
-      <Filter>Quelldateien\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="IndexedModel.cpp">
-      <Filter>Quelldateien\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="OBJModel.cpp">
-      <Filter>Quelldateien\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="PhysicsEngine.cpp">
-      <Filter>Quelldateien\Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="StaticPlaneCollisionShape.cpp">
-      <Filter>Quelldateien\Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="SphereCollisionShape.cpp">
-      <Filter>Quelldateien\Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="MeshResource.cpp">
-      <Filter>Quelldateien\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Quelldateien\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="RigidBody.cpp">
-      <Filter>Quelldateien\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="GBuffer.cpp">
-      <Filter>Quelldateien\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="GeometryPassShader.cpp">
-      <Filter>Quelldateien\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="PostProcessShader.cpp">
-      <Filter>Quelldateien\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="BoxCollisionShape.cpp">
-      <Filter>Quelldateien\Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="CylinderCollisionShape.cpp">
-      <Filter>Quelldateien\Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="CapsuleCollisionShape.cpp">
-      <Filter>Quelldateien\Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="ConeCollisionShape.cpp">
-      <Filter>Quelldateien\Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="ConvexMeshCollisionShape.cpp">
-      <Filter>Quelldateien\Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="StaticConcaveMeshCollisionShape.cpp">
-      <Filter>Quelldateien\Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="GUITexture.cpp">
-      <Filter>Quelldateien\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="AudioEngine.cpp">
-      <Filter>Quelldateien\Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="WavefrontMesh.cpp">
-      <Filter>Quelldateien\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Skybox.cpp">
-      <Filter>Quelldateien\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="SkyboxShader.cpp">
-      <Filter>Quelldateien\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="GUIText.cpp">
-      <Filter>Quelldateien\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Font.cpp">
-      <Filter>Quelldateien\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="FontDatabase.cpp">
-      <Filter>Quelldateien\Rendering</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>

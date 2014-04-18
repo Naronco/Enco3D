@@ -1,12 +1,10 @@
-#version 330
+#version 120
 
-out vec4 fragColor;
+varying vec3 worldPos;
 
-in vec3 worldPos;
-
-uniform samplerCube skyboxTexture;
+uniform samplerCube rendering_skybox;
 
 void main()
 {
-	fragColor = texture(skyboxTexture, normalize(worldPos));
+	gl_FragColor = textureCube(rendering_skybox, normalize(worldPos));
 }
