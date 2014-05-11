@@ -9,24 +9,22 @@ namespace Enco3D
 {
 	namespace Physics
 	{
-		using namespace Core;
-
 		class CylinderCollisionShape : public ICollisionShape
 		{
 		private:
-			Vector3f m_halfSize;
+			Core::Vector3f m_halfSize;
 
 		public:
 			CylinderCollisionShape();
-			CylinderCollisionShape(const Vector3f &size);
+			CylinderCollisionShape(const Core::Vector3f &size);
 
 			btCollisionShape *ToBulletPhysicsCollisionShape();
 
-			inline void SetHalfSize(const Vector3f &halfSize) { m_halfSize.Set(halfSize); }
-			inline void SetSize(const Vector3f &size) { m_halfSize.Set(size * 0.5f); }
+			inline void SetHalfSize(const Core::Vector3f &halfSize) { m_halfSize.Set(halfSize); }
+			inline void SetSize(const Core::Vector3f &size) { m_halfSize.Set(size * 0.5f); }
 
-			inline Vector3f GetHalfSize() const { return m_halfSize; }
-			inline Vector3f GetSize() const { return m_halfSize * 2.0f; }
+			inline Core::Vector3f GetHalfSize() const { return m_halfSize; }
+			inline Core::Vector3f GetSize() const { return m_halfSize * 2.0f; }
 		};
 	}
 }

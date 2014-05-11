@@ -21,6 +21,8 @@ Enco3D::Rendering::MeshResource::MeshResource(Vertex *vertices, unsigned int ver
 	glGenBuffers(1, &m_vbo);
 	glGenBuffers(1, &m_ibo);
 
+	Core::DebugLogger::Log("[OPEN_GL] Created vertex buffer with id " + std::to_string(m_vbo) + " and index buffer with id " + std::to_string(m_ibo));
+
 	m_vertexCount = vertexCount;
 	m_indexCount = indexCount;
 
@@ -33,18 +35,20 @@ Enco3D::Rendering::MeshResource::MeshResource(Vertex *vertices, unsigned int ver
 
 Enco3D::Rendering::MeshResource::~MeshResource()
 {
+	Core::DebugLogger::Log("[OPEN_GL] Released vertex buffer with id " + std::to_string(m_vbo) + " and index buffer with id " + std::to_string(m_ibo));
+
 	glDeleteBuffers(1, &m_vbo);
 	glDeleteBuffers(1, &m_ibo);
 
 	if (m_vertices)
-	{
 		delete m_vertices;
-		m_vertices = nullptr;
-	}
 
 	if (m_indices)
-	{
 		delete m_indices;
-		m_indices = nullptr;
-	}
+}
+
+void Enco3D::Rendering::MeshResource::UpdateVertices(unsigned int offsetInVertices, unsigned int sizeInVertices, Vertex *newVertices)
+{
+	for (unsigned int i = 0; i < sizeInVertices; i++)
+		m_vertices[offsetInVertices + i] = newVertices[i];
 }

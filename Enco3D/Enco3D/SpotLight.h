@@ -2,6 +2,7 @@
 #define _ENCO3D_SPOTLIGHT_H_
 
 #include "ILight.h"
+#include "ShaderPool.h"
 
 namespace Enco3D
 {
@@ -15,7 +16,7 @@ namespace Enco3D
 		public:
 			SpotLight()
 			{
-				m_shader = ShaderPool::GetInstance()->GetShader("shaders/forwardSpotLight", ShaderType::VertexShader | ShaderType::FragmentShader);
+				m_shader = Rendering::ShaderPool::GetInstance()->GetShader("shaders/forwardSpotLight", Rendering::ShaderType::VertexShader | Rendering::ShaderType::FragmentShader);
 			}
 
 			inline void SetRange(float range) { m_range = range; }

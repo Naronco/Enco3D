@@ -6,11 +6,9 @@
 #include <iostream>
 
 #include "Event.h"
-#include "Error.h"
 #include "Input.h"
-#include "Texture.h"
-
-using namespace std;
+#include "Texture2D.h"
+#include "DebugLogger.h"
 
 namespace Enco3D
 {
@@ -53,27 +51,27 @@ namespace Enco3D
 			GLWindow(char *title, unsigned int width, unsigned int height, bool multisampleEnabled, unsigned int aaSamples);
 
 			/// <summary>Shows the window, if it it's hided</summary>
-			ErrorResult Show();
+			void Show();
 
 			/// <summary>Hides the window, if it it's shown, but doesn't close it</summary>
-			ErrorResult Hide();
+			void Hide();
 
 			/// <summary>Closes the window and destroys the GL context</summary>
-			ErrorResult Close();
+			void Close();
 
 			/// <summary>Resizes the window</summary>
 			/// <param name="width">New width of the window</param>
 			/// <param name="height">New height of the window</param>
-			ErrorResult Resize(unsigned int width, unsigned int height);
+			void Resize(unsigned int width, unsigned int height);
 
 			/// <summary>Sets the window to fullscreen or to windowed mode</summary>
 			/// <param name="fullscreen">If true, the window changes into fullscreen</param>
-			ErrorResult SetFullscreen(bool fullscreen);
+			void SetFullscreen(bool fullscreen);
 
 			/// <summary>Sets the window to a new position</summary>
 			/// <param name="x">New x coordinate</param>
 			/// <param name="y">New y coordinate</param>
-			ErrorResult SetPosition(int x, int y);
+			void SetPosition(int x, int y);
 
 			/// <summary>Sends a new event to the event queue with user specific data</summary>
 			/// <param name="e">The event to push</param>

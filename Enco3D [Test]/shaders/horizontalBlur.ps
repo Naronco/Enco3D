@@ -1,0 +1,25 @@
+#version 120
+
+varying vec3 texCoord;
+
+uniform sampler2D blurTexture;
+
+uniform vec2 postProcess_texelSize;
+uniform int blurSize;
+
+void main()
+{
+	vec4 color = vec4(0.0f);
+	
+	int blurSizeDiv2 = blurSize / 2;
+
+	float invBlurSize = 1.0f / float(blurSize);
+	
+	for(int i = -blurSizeDiv2; i < blurSizeDiv2; i++)
+	{
+		vec2 coord = texCoord.xy + vec2((float(i) + 0.5f) * postProcess_texelSize.x, 0.0f);
+		color += texture2D(blurTexture, coord) * invBlurSize;
+	}
+	
+	gl_FragColor = color;
+}

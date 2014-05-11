@@ -17,10 +17,7 @@
 #include "RenderingEngine.h"
 #include "Camera.h"
 #include "Transform.h"
-
-using namespace std;
-
-using Enco3D::Component::Camera;
+#include "DebugLogger.h"
 
 namespace Enco3D
 {
@@ -36,8 +33,6 @@ namespace Enco3D
 {
 	namespace Rendering
 	{
-		using namespace Core;
-
 		enum ShaderType : unsigned int
 		{
 			VertexShader                 = 0x000001,
@@ -89,6 +84,7 @@ namespace Enco3D
 		public:
 			Shader();
 			Shader(const string &filename, unsigned int shaderTypes);
+			Shader(const string &vertexFilename, const string &fragmentFilename);
 			virtual ~Shader();
 
 			void Bind() const;
@@ -111,18 +107,18 @@ namespace Enco3D
 			void SetUniformInt(const string &name, int value);
 			void SetUniformFloat(const string &name, float value);
 
-			void SetUniformVector2f(const string &name, const Vector2f &v);
-			void SetUniformVector3f(const string &name, const Vector3f &v);
-			void SetUniformVector4f(const string &name, const Vector4f &v);
+			void SetUniformVector2f(const string &name, const Core::Vector2f &v);
+			void SetUniformVector3f(const string &name, const Core::Vector3f &v);
+			void SetUniformVector4f(const string &name, const Core::Vector4f &v);
 
-			void SetUniformMatrix3x3f(const string &name, const Matrix3x3f &v);
-			void SetUniformMatrix4x4f(const string &name, const Matrix4x4f &v);
+			void SetUniformMatrix3x3f(const string &name, const Core::Matrix3x3f &v);
+			void SetUniformMatrix4x4f(const string &name, const Core::Matrix4x4f &v);
 
-			void SetUniformDirectionalLight(const string &name, const DirectionalLight *directionalLight);
-			void SetUniformPointLight(const string &name, const PointLight *pointLight);
-			void SetUniformSpotLight(const string &name, const SpotLight *spotLight);
+			void SetUniformDirectionalLight(const string &name, const Component::DirectionalLight *directionalLight);
+			void SetUniformPointLight(const string &name, const Component::PointLight *pointLight);
+			void SetUniformSpotLight(const string &name, const Component::SpotLight *spotLight);
 
-			void UpdateUniforms(Transform *transform, const Camera *camera, RenderingEngine *renderingEngine, Material *material);
+			void UpdateUniforms(Core::Transform *transform, const Component::Camera *camera, RenderingEngine *renderingEngine, Material *material);
 		};
 	}
 }

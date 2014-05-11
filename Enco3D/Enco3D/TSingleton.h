@@ -4,16 +4,12 @@
 template <typename T>
 class TSingleton
 {
-private:
-	static T *s_instance;
-
 public:
 	inline static T *GetInstance()
 	{
-		return s_instance == nullptr ? (s_instance = new T) : s_instance;
+		static T instance;
+		return &instance;
 	}
 };
-
-template <typename T> T *TSingleton<T>::s_instance = nullptr;
 
 #endif

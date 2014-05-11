@@ -9,7 +9,7 @@
 #include "Material.h"
 #include "Shader.h"
 #include "Vertex.h"
-#include "Texture.h"
+#include "DebugLogger.h"
 
 #include <assimp\Importer.hpp>
 #include <assimp\scene.h>
@@ -19,45 +19,30 @@
 #include <vector>
 #include <iostream>
 
-using Enco3D::Core::IGameComponent;
-using Enco3D::Core::Vector3f;
-using Enco3D::Core::Vector2f;
-
-using Enco3D::Component::Camera;
-
-using Enco3D::Rendering::MeshResource;
-using Enco3D::Rendering::Material;
-using Enco3D::Rendering::Shader;
-using Enco3D::Rendering::Vertex;
-using Enco3D::Rendering::Texture;
-
-using std::string;
-using std::vector;
-using std::cout;
-using std::cerr;
-using std::endl;
-
 namespace Enco3D
 {
 	namespace Component
 	{
-		class WavefrontMesh : public IGameComponent
+		class WavefrontMesh : public Core::IGameComponent
 		{
 		private:
-			vector<MeshResource *> m_meshes;
-			vector<Material *> m_materials;
+			std::vector<Rendering::MeshResource*> m_meshes;
+			Rendering::Material *m_material;
+			bool m_successfullyLoadedMesh;
 
 		private:
-			bool InitFromScene(const aiScene *scene, const string &filename);
+			bool InitFromScene(const aiScene *scene, const std::string &filename);
 			void InitMesh(unsigned int index, const aiMesh *mesh);
-			bool InitMaterials(const aiScene *scene, const string &filename);
 			
 		public:
 			WavefrontMesh();
-			WavefrontMesh(const string &filename);
+			WavefrontMesh(const std::string &filename, Rendering::Material *material);
 			~WavefrontMesh();
 
-			void Render(const Camera *camera, Shader *shader);
+			void Render(const Component::Camera *camera, Rendering::Shader *shader);
+
+			inline void SetMaterial(Rendering::Material *material) { m_material = material; }
+			inline Rendering::Material *GetMaterial() const { return m_material; }
 		};
 	}
 }

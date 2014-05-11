@@ -12,10 +12,7 @@ namespace Enco3D
 {
 	namespace Component
 	{
-		using namespace Core;
-		using namespace Physics;
-
-		class RigidBody : public IGameComponent
+		class RigidBody : public Core::IGameComponent
 		{
 		private:
 			float m_mass{ 0.0f };
@@ -24,15 +21,15 @@ namespace Enco3D
 			float m_linearDamping{ 0.0f };
 			float m_angularDamping{ 0.0f };
 			bool m_alwaysStanding{ false };
-			ICollisionShape *m_collisionShape{ nullptr };
+			Physics::ICollisionShape *m_collisionShape{ nullptr };
 
 			btRigidBody *m_bulletPhysicsInstance{ nullptr };
 			btTransform m_transform;
 
 		public:
 			RigidBody();
-			RigidBody(float mass, ICollisionShape *collisionShape);
-			RigidBody(float mass, float restitution, float friction, float linearDamping, float angularDamping, ICollisionShape *collisionShape);
+			RigidBody(float mass, Physics::ICollisionShape *collisionShape);
+			RigidBody(float mass, float restitution, float friction, float linearDamping, float angularDamping, Physics::ICollisionShape *collisionShape);
 
 			void InitPhysics();
 			void Deinit();
@@ -40,8 +37,8 @@ namespace Enco3D
 			void Update();
 			btRigidBody *CreateBulletPhysicsInstance();
 
-			inline void SetLinearVelocity(const Vector3f &linearVelocity) { m_bulletPhysicsInstance->setLinearVelocity(PhysicsHelper::ToBulletPhysicsVec3(linearVelocity)); }
-			inline void SetAngularVelocity(const Vector3f &angularVelocity) { m_bulletPhysicsInstance->setAngularVelocity(PhysicsHelper::ToBulletPhysicsVec3(angularVelocity)); }
+			inline void SetLinearVelocity(const Core::Vector3f &linearVelocity) { m_bulletPhysicsInstance->setLinearVelocity(Physics::PhysicsHelper::ToBulletPhysicsVec3(linearVelocity)); }
+			inline void SetAngularVelocity(const Core::Vector3f &angularVelocity) { m_bulletPhysicsInstance->setAngularVelocity(Physics::PhysicsHelper::ToBulletPhysicsVec3(angularVelocity)); }
 
 			inline void SetMass(float mass) { m_mass = mass; }
 			inline void SetRestitution(float restitution) { m_restitution = restitution; }
@@ -49,7 +46,7 @@ namespace Enco3D
 			inline void SetLinearDamping(float linearDamping) { m_linearDamping = linearDamping; }
 			inline void SetAngularDamping(float angularDamping) { m_angularDamping = angularDamping; }
 			inline void SetAlwaysStanding(bool alwaysStanding) { m_alwaysStanding = alwaysStanding; }
-			inline void SetCollisionShape(ICollisionShape *collisionShape) { m_collisionShape = collisionShape; }
+			inline void SetCollisionShape(Physics::ICollisionShape *collisionShape) { m_collisionShape = collisionShape; }
 
 			inline float GetMass() const { return m_mass; }
 			inline float GetRestitution() const { return m_restitution; }
@@ -57,10 +54,10 @@ namespace Enco3D
 			inline float GetLinearDamping() const { return m_linearDamping; }
 			inline float GetAngularDamping() const { return m_angularDamping; }
 			inline bool IsAlwaysStanding() const { return m_alwaysStanding; }
-			inline ICollisionShape *GetCollisionShape() const { return m_collisionShape; }
+			inline Physics::ICollisionShape *GetCollisionShape() const { return m_collisionShape; }
 			inline btRigidBody *GetBulletPhysicsInstance() const { return m_bulletPhysicsInstance; }
-			inline Vector3f GetLinearVelocity() const { return PhysicsHelper::ToEnco3DVec3<float>(m_bulletPhysicsInstance->getLinearVelocity()); }
-			inline Vector3f GetAngularVelocity() const { return PhysicsHelper::ToEnco3DVec3<float>(m_bulletPhysicsInstance->getAngularVelocity()); }
+			inline Core::Vector3f GetLinearVelocity() const { return Physics::PhysicsHelper::ToEnco3DVec3<float>(m_bulletPhysicsInstance->getLinearVelocity()); }
+			inline Core::Vector3f GetAngularVelocity() const { return Physics::PhysicsHelper::ToEnco3DVec3<float>(m_bulletPhysicsInstance->getAngularVelocity()); }
 		};
 	}
 }

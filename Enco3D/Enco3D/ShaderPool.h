@@ -18,6 +18,7 @@ namespace Enco3D
 
 		public:
 			Shader *GetShader(const std::string &filename, unsigned int shaderTypes);
+			void Release();
 		};
 	}
 }

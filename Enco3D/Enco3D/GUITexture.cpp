@@ -10,23 +10,23 @@ Enco3D::Component::GUITexture::GUITexture()
 	s_numReferences++;
 }
 
-Enco3D::Component::GUITexture::GUITexture(Enco3D::Rendering::Texture *texture)
+Enco3D::Component::GUITexture::GUITexture(Enco3D::Rendering::Texture2D *texture)
 {
 	m_texture = texture;
 	m_color.Set(1, 1, 1);
 
-	m_material.AddTexture("diffuseTexture", m_texture);
+	m_material.AddTexture2D("diffuseTexture", m_texture);
 	m_material.AddVector3f("diffuseColor", m_color);
 
 	s_numReferences++;
 }
 
-Enco3D::Component::GUITexture::GUITexture(Enco3D::Rendering::Texture *texture, const Enco3D::Core::Vector3f &color)
+Enco3D::Component::GUITexture::GUITexture(Enco3D::Rendering::Texture2D *texture, const Enco3D::Core::Vector3f &color)
 {
 	m_texture = texture;
 	m_color.Set(color);
 
-	m_material.AddTexture("diffuseTexture", m_texture);
+	m_material.AddTexture2D("diffuseTexture", m_texture);
 	m_material.AddVector3f("diffuseColor", m_color);
 
 	s_numReferences++;
@@ -34,10 +34,10 @@ Enco3D::Component::GUITexture::GUITexture(Enco3D::Rendering::Texture *texture, c
 
 Enco3D::Component::GUITexture::GUITexture(const string &filename)
 {
-	m_texture = new Texture(filename);
+	m_texture = new Rendering::Texture2D(filename);
 	m_color.Set(1, 1, 1);
 
-	m_material.AddTexture("diffuseTexture", m_texture);
+	m_material.AddTexture2D("diffuseTexture", m_texture);
 	m_material.AddVector3f("diffuseColor", m_color);
 
 	s_numReferences++;
@@ -45,10 +45,10 @@ Enco3D::Component::GUITexture::GUITexture(const string &filename)
 
 Enco3D::Component::GUITexture::GUITexture(const string &filename, const Enco3D::Core::Vector3f &color)
 {
-	m_texture = new Texture(filename);
+	m_texture = new Rendering::Texture2D(filename);
 	m_color.Set(color);
 
-	m_material.AddTexture("diffuseTexture", m_texture);
+	m_material.AddTexture2D("diffuseTexture", m_texture);
 	m_material.AddVector3f("diffuseColor", m_color);
 
 	s_numReferences++;
@@ -67,12 +67,12 @@ void Enco3D::Component::GUITexture::RenderGUI(const Camera *camera, Enco3D::Rend
 {
 	if (s_rectangleMesh == nullptr)
 	{
-		Vertex vertices[4] =
+		Rendering::Vertex vertices[4] =
 		{
-			Vertex(+0.5f, -0.5f, 0).SetTexCoord(1, 0, 0).SetNormal(0, 0, 1),
-			Vertex(+0.5f, +0.5f, 0).SetTexCoord(1, 1, 0).SetNormal(0, 0, 1),
-			Vertex(-0.5f, +0.5f, 0).SetTexCoord(0, 1, 0).SetNormal(0, 0, 1),
-			Vertex(-0.5f, -0.5f, 0).SetTexCoord(0, 0, 0).SetNormal(0, 0, 1),
+			Rendering::Vertex(+0.5f, -0.5f, 0).SetTexCoord(1, 0, 0).SetNormal(0, 0, 1),
+			Rendering::Vertex(+0.5f, +0.5f, 0).SetTexCoord(1, 1, 0).SetNormal(0, 0, 1),
+			Rendering::Vertex(-0.5f, +0.5f, 0).SetTexCoord(0, 1, 0).SetNormal(0, 0, 1),
+			Rendering::Vertex(-0.5f, -0.5f, 0).SetTexCoord(0, 0, 0).SetNormal(0, 0, 1),
 		};
 
 		unsigned int indices[6] =
@@ -81,7 +81,7 @@ void Enco3D::Component::GUITexture::RenderGUI(const Camera *camera, Enco3D::Rend
 			0, 2, 3,
 		};
 
-		s_rectangleMesh = new Mesh(vertices, 4, indices, 6);
+		s_rectangleMesh = new Rendering::Mesh(vertices, 4, indices, 6);
 	}
 
 	shader->Bind();

@@ -1,12 +1,11 @@
 #include "Skybox.h"
-
 #include "ShaderPool.h"
 
-Enco3D::Rendering::Skybox::Skybox()
+Enco3D::Component::Skybox::Skybox()
 {
 }
 
-Enco3D::Rendering::Skybox::Skybox(const string &filename)
+Enco3D::Component::Skybox::Skybox(const std::string &filename)
 {
 	string cubeMapFilenames[6] =
 	{
@@ -18,40 +17,40 @@ Enco3D::Rendering::Skybox::Skybox(const string &filename)
 		filename + string("@z-.png"),
 	};
 
-	m_skyboxTexture = new Texture(cubeMapFilenames, TextureFilter::Nearest, TextureWrap::Clamp);
-	m_skyboxShader = Enco3D::Rendering::ShaderPool::GetInstance()->GetShader("shaders/skybox", ShaderType::VertexShader | ShaderType::FragmentShader);
+	m_skyboxTexture = new Rendering::TextureCubeMap(cubeMapFilenames, Rendering::TextureFilter::Nearest, Rendering::TextureWrap::Clamp);
+	m_skyboxShader = Rendering::ShaderPool::GetInstance()->GetShader("shaders/skybox", Rendering::ShaderType::VertexShader | Rendering::ShaderType::FragmentShader);
 
-	Vertex vertices[24] =
+	Rendering::Vertex vertices[24] =
 	{
-		Vertex(-1, -1, +1),
-		Vertex(+1, -1, +1),
-		Vertex(+1, -1, -1),
-		Vertex(-1, -1, -1),
+		Rendering::Vertex(-1, -1, +1),
+		Rendering::Vertex(+1, -1, +1),
+		Rendering::Vertex(+1, -1, -1),
+		Rendering::Vertex(-1, -1, -1),
 
-		Vertex(+1, +1, +1),
-		Vertex(-1, +1, +1),
-		Vertex(-1, +1, -1),
-		Vertex(+1, +1, -1),
+		Rendering::Vertex(+1, +1, +1),
+		Rendering::Vertex(-1, +1, +1),
+		Rendering::Vertex(-1, +1, -1),
+		Rendering::Vertex(+1, +1, -1),
 
-		Vertex(+1, -1, +1),
-		Vertex(-1, -1, +1),
-		Vertex(-1, +1, +1),
-		Vertex(+1, +1, +1),
+		Rendering::Vertex(+1, -1, +1),
+		Rendering::Vertex(-1, -1, +1),
+		Rendering::Vertex(-1, +1, +1),
+		Rendering::Vertex(+1, +1, +1),
 
-		Vertex(-1, -1, -1),
-		Vertex(+1, -1, -1),
-		Vertex(+1, +1, -1),
-		Vertex(-1, +1, -1),
+		Rendering::Vertex(-1, -1, -1),
+		Rendering::Vertex(+1, -1, -1),
+		Rendering::Vertex(+1, +1, -1),
+		Rendering::Vertex(-1, +1, -1),
 
-		Vertex(-1, +1, +1),
-		Vertex(-1, -1, +1),
-		Vertex(-1, -1, -1),
-		Vertex(-1, +1, -1),
+		Rendering::Vertex(-1, +1, +1),
+		Rendering::Vertex(-1, -1, +1),
+		Rendering::Vertex(-1, -1, -1),
+		Rendering::Vertex(-1, +1, -1),
 
-		Vertex(+1, +1, -1),
-		Vertex(+1, -1, -1),
-		Vertex(+1, -1, +1),
-		Vertex(+1, +1, +1),
+		Rendering::Vertex(+1, +1, -1),
+		Rendering::Vertex(+1, -1, -1),
+		Rendering::Vertex(+1, -1, +1),
+		Rendering::Vertex(+1, +1, +1),
 	};
 
 	unsigned int indices[36] =
@@ -64,30 +63,23 @@ Enco3D::Rendering::Skybox::Skybox(const string &filename)
 		20, 21, 22, 20, 22, 23,
 	};
 
-	m_mesh = new Mesh(vertices, 24, indices, 36);
+	m_mesh = new Rendering::Mesh(vertices, 24, indices, 36);
 }
 
-Enco3D::Rendering::Skybox::~Skybox()
+Enco3D::Component::Skybox::~Skybox()
 {
 	if (m_skyboxTexture)
-	{
 		delete m_skyboxTexture;
-		m_skyboxTexture = nullptr;
-	}
-
 	if (m_mesh)
-	{
 		delete m_mesh;
-		m_mesh = nullptr;
-	}
 }
 
-void Enco3D::Rendering::Skybox::InitRendering()
+void Enco3D::Component::Skybox::InitRendering()
 {
 	GetRenderingEngine()->SetSkybox(this);
 }
 
-void Enco3D::Rendering::Skybox::Render(const Camera *camera)
+void Enco3D::Component::Skybox::Render(const Component::Camera *camera)
 {
 	m_skyboxShader->Bind();
 	m_skyboxShader->UpdateUniforms(GetTransform(), camera, GetRenderingEngine(), nullptr);

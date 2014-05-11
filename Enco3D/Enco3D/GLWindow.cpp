@@ -40,58 +40,41 @@ Enco3D::Core::GLWindow::GLWindow(char *title, unsigned int width, unsigned int h
 	}
 	else
 	{
-		cout << "Failed to create SDL window" << endl;
+		Core::DebugLogger::Log("Failed to create SDL window");
 		return;
 	}
 
 	GLenum result = glewInit();
 	if (result == GLEW_OK)
-	{
-		cout << "Successfully initialized GLEW" << endl;
-	}
+		Core::DebugLogger::Log("Successfully initialized GLEW");
 	else
-	{
-		cout << "Failed to initialize GLEW" << endl;
-	}
+		Core::DebugLogger::Log("Failed to initialize GLEW");
 
 	Input::Init();
 }
 
-Enco3D::Core::ErrorResult Enco3D::Core::GLWindow::Show()
+void Enco3D::Core::GLWindow::Show()
 {
 	if (m_window != nullptr)
-	{
 		SDL_ShowWindow(m_window);
-		return Error::Success;
-	}
-
-	return Error::Failed;
 }
 
-Enco3D::Core::ErrorResult Enco3D::Core::GLWindow::Hide()
+void Enco3D::Core::GLWindow::Hide()
 {
 	if (m_window != nullptr)
-	{
 		SDL_HideWindow(m_window);
-		return Error::Success;
-	}
-
-	return Error::Failed;
 }
 
-Enco3D::Core::ErrorResult Enco3D::Core::GLWindow::Close()
+void Enco3D::Core::GLWindow::Close()
 {
 	if (m_window != nullptr)
 	{
 		SDL_DestroyWindow(m_window);
 		Input::Deinit();
-		return Error::Success;
 	}
-
-	return Error::Failed;
 }
 
-Enco3D::Core::ErrorResult Enco3D::Core::GLWindow::Resize(unsigned int width, unsigned int height)
+void Enco3D::Core::GLWindow::Resize(unsigned int width, unsigned int height)
 {
 	if (m_window)
 	{
@@ -100,33 +83,19 @@ Enco3D::Core::ErrorResult Enco3D::Core::GLWindow::Resize(unsigned int width, uns
 
 		m_width = width;
 		m_height = height;
-
-		return Error::Success;
 	}
-
-	return Error::Failed;
 }
 
-Enco3D::Core::ErrorResult Enco3D::Core::GLWindow::SetFullscreen(bool fullscreen)
+void Enco3D::Core::GLWindow::SetFullscreen(bool fullscreen)
 {
 	if (m_window && SDL_SetWindowFullscreen(m_window, fullscreen) == 0)
-	{
 		m_fullscreen = fullscreen;
-		return Error::Success;
-	}
-
-	return Error::Failed;
 }
 
-Enco3D::Core::ErrorResult Enco3D::Core::GLWindow::SetPosition(int x, int y)
+void Enco3D::Core::GLWindow::SetPosition(int x, int y)
 {
 	if (m_window)
-	{
 		SDL_SetWindowPosition(m_window, x, y);
-		return Error::Success;
-	}
-
-	return Error::Failed;
 }
 
 bool Enco3D::Core::GLWindow::PollEvent(Event *e)
@@ -150,37 +119,29 @@ bool Enco3D::Core::GLWindow::PollEvent(Event *e)
 		ne.window = ev.window.windowID;
 
 		if (ev.window.event == SDL_WINDOWEVENT_CLOSE)
-		{
 			m_running = false;
-		}
-
+		
 		if (ev.window.event == SDL_WINDOWEVENT_FOCUS_GAINED)
-		{
 			m_focused = true;
-		}
-
+		
 		if (ev.window.event == SDL_WINDOWEVENT_FOCUS_LOST)
-		{
 			m_focused = false;
-		}
-
+		
 		if (ev.window.event == SDL_WINDOWEVENT_RESIZED)
-		{
 			glViewport(0, 0, ev.window.data1, ev.window.data2);
-		}
-
+		
 		break;
 
 	case SDL_KEYDOWN:
 		ne.type = EventType::KeyDown;
-		ne.keyboard.keyCode = ev.key.keysym.sym;
+		ne.keyboard.keyCode = ev.key.keysym.scancode;
 		ne.keyboard.modifiers = ev.key.keysym.mod;
 		ne.window = ev.key.windowID;
 		break;
 
 	case SDL_KEYUP:
 		ne.type = EventType::KeyUp;
-		ne.keyboard.keyCode = ev.key.keysym.sym;
+		ne.keyboard.keyCode = ev.key.keysym.scancode;
 		ne.keyboard.modifiers = ev.key.keysym.mod;
 		ne.window = ev.key.windowID;
 		break;

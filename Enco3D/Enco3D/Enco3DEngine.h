@@ -17,26 +17,15 @@ namespace Enco3D
 {
 	namespace Core
 	{
-		using namespace Rendering;
-		using namespace Physics;
-		using namespace Audio;
-
-		const unsigned int __consoleMaxLineCount = 16;
-
 		class Enco3DEngine : public TSingleton<Enco3DEngine>
 		{
 		private:
 			GLWindow *m_window{ nullptr };
 			Timer *m_timer{ nullptr };
 			IGame *m_game{ nullptr };
-			RenderingEngine *m_renderingEngine{ nullptr };
-			PhysicsEngine *m_physicsEngine{ nullptr };
-			AudioEngine *m_audioEngine{ nullptr };
-
-			GameObject *m_consoleObject{ nullptr };
-			GUIText *m_consoleGuiText{ nullptr };
-			std::string m_consoleText;
-			unsigned int m_consoleLineCount{ 0 };
+			Rendering::RenderingEngine *m_renderingEngine{ nullptr };
+			Physics::PhysicsEngine *m_physicsEngine{ nullptr };
+			Audio::AudioEngine *m_audioEngine{ nullptr };
 
 		public:
 			inline Enco3DEngine() {  }
@@ -45,17 +34,12 @@ namespace Enco3D
 			void Deinit();
 			void MainLoop();
 
-			void Console_Print(char *text);
-			void Console_PrintLine(char *text);
-			void Console_PrintError(char *text);
-			void Console_CheckAndShort();
-
 			inline GLWindow *GetWindow() const { return m_window; }
 			inline Timer *GetTimer() const { return m_timer; }
 			inline IGame *GetGame() const { return m_game; }
-			inline RenderingEngine *GetRenderingEngine() const { return m_renderingEngine; }
-			inline PhysicsEngine *GetPhysicsEngine() const { return m_physicsEngine; }
-			inline AudioEngine *GetAudioEngine() const { return m_audioEngine; }
+			inline Rendering::RenderingEngine *GetRenderingEngine() const { return m_renderingEngine; }
+			inline Physics::PhysicsEngine *GetPhysicsEngine() const { return m_physicsEngine; }
+			inline Audio::AudioEngine *GetAudioEngine() const { return m_audioEngine; }
 		};
 	}
 }

@@ -7,41 +7,31 @@
 
 #include "Mesh.h"
 #include "Material.h"
-#include "Texture.h"
+#include "TextureCubeMap.h"
 
 #include <string>
-
-using Enco3D::Core::IGameComponent;
-
-using Enco3D::Component::Camera;
-
-using Enco3D::Rendering::Mesh;
-using Enco3D::Rendering::Material;
-using Enco3D::Rendering::Texture;
-
-using std::string;
 
 namespace Enco3D
 {
 	namespace Component
 	{
-		class Skybox : public IGameComponent
+		class Skybox : public Core::IGameComponent
 		{
 		private:
-			Mesh *m_mesh{ nullptr };
-			Texture *m_skyboxTexture{ nullptr };
-			Shader *m_skyboxShader{ nullptr };
+			Rendering::Mesh *m_mesh{ nullptr };
+			Rendering::TextureCubeMap *m_skyboxTexture{ nullptr };
+			Rendering::Shader *m_skyboxShader{ nullptr };
 
 		public:
 			Skybox();
-			Skybox(const string &filename);
+			Skybox(const std::string &filename);
 			~Skybox();
 
 			void InitRendering();
 
-			void Render(const Camera *camera);
+			void Render(const Component::Camera *camera);
 
-			inline Texture *GetTexture() { return m_skyboxTexture; }
+			inline Rendering::TextureCubeMap *GetTexture() { return m_skyboxTexture; }
 		};
 	}
 }

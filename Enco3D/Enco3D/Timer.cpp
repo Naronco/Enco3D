@@ -1,9 +1,6 @@
 #include "Timer.h"
-#include "Console.h"
 
 #include <iostream>
-
-using Enco3D::Core::Console::PrintLine;
 
 Enco3D::Core::Timer::Timer()
 {
@@ -27,16 +24,10 @@ void Enco3D::Core::Timer::Update()
 	m_deltaTime = (m_time - m_lastTime) * 0.001f;
 	m_lastTime = m_time;
 
-	m_fpsCounter++;
-
 	if (m_time - m_lastFrameTime > 1000)
 	{
 		if (m_printFps)
-		{
-			string fpsString=std::to_string(m_fpsCounter)+" FPS";
-			PrintLine((char*)fpsString.c_str());
-			std::cout << fpsString << std::endl;
-		}
+			Core::DebugLogger::Log(std::to_string(m_fpsCounter) + " fps");
 
 		m_fps = m_fpsCounter;
 		m_fpsCounter = 0;

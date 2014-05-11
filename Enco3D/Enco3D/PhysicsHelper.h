@@ -10,12 +10,10 @@ namespace Enco3D
 {
 	namespace Physics
 	{
-		using namespace Core;
-
 		namespace PhysicsHelper
 		{
 			template <typename T>
-			inline static btVector3 ToBulletPhysicsVec3(const Vector3<T> &v)
+			inline static btVector3 ToBulletPhysicsVec3(const Core::Vector3<T> &v)
 			{
 				btVector3 result;
 
@@ -27,7 +25,7 @@ namespace Enco3D
 			}
 
 			template <typename T>
-			inline static btQuaternion ToBulletPhysicsQuat(const Quaternion<T> &q)
+			inline static btQuaternion ToBulletPhysicsQuat(const Core::Quaternion<T> &q)
 			{
 				btQuaternion result;
 
@@ -40,15 +38,15 @@ namespace Enco3D
 			}
 
 			template <typename T>
-			inline static Vector3<T> ToEnco3DVec3(const btVector3 &v)
+			inline static Core::Vector3<T> ToEnco3DVec3(const btVector3 &v)
 			{
-				return Vector3<T>(v.x(), v.y(), v.z());
+				return Core::Vector3<T>(v.x(), v.y(), v.z());
 			}
 
 			template <typename T>
-			inline static Quaternion<T> ToEnco3DQuat(const btQuaternion &q)
+			inline static Core::Quaternion<T> ToEnco3DQuat(const btQuaternion &q)
 			{
-				return Quaternion<T>(q.x(), q.y(), q.z(), q.w());
+				return Core::Quaternion<T>(q.x(), q.y(), q.z(), q.w());
 			}
 		}
 	}

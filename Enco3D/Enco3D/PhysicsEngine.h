@@ -18,9 +18,6 @@ namespace Enco3D
 {
 	namespace Physics
 	{
-		using namespace Core;
-		using namespace Component;
-
 		class PhysicsEngine
 		{
 		private:
@@ -30,8 +27,8 @@ namespace Enco3D
 			btSequentialImpulseConstraintSolver *m_solver{ nullptr };
 			btDiscreteDynamicsWorld *m_dynamicsWorld{ nullptr };
 
-			Vector3f m_gravity;
-			Timer *m_timer{ nullptr };
+			Core::Vector3f m_gravity;
+			Core::Timer *m_timer{ nullptr };
 
 		public:
 			PhysicsEngine();
@@ -39,14 +36,14 @@ namespace Enco3D
 
 			void Update();
 
-			void AddRigidBody(RigidBody *rigidBody);
-			void RemoveRigidBody(RigidBody *rigidBody);
+			void AddRigidBody(Component::RigidBody *rigidBody);
+			void RemoveRigidBody(Component::RigidBody *rigidBody);
 
-			inline void SetGravity(const Vector3f &gravity) { m_gravity.Set(gravity); }
-			inline void SetTimer(Timer *timer) { m_timer = timer; }
+			inline void SetGravity(const Core::Vector3f &gravity) { m_gravity.Set(gravity); }
+			inline void SetTimer(Core::Timer *timer) { m_timer = timer; }
 
-			inline Vector3f GetGravity() const { return m_gravity; }
-			inline Timer *GetTimer() const { return m_timer; }
+			inline Core::Vector3f GetGravity() const { return m_gravity; }
+			inline Core::Timer *GetTimer() const { return m_timer; }
 		};
 	}
 }

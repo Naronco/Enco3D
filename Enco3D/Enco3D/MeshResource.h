@@ -2,7 +2,9 @@
 #define _ENCO3D_MESHRESOURCE_H_
 
 #include <GL\glew.h>
+#include <iostream>
 #include "Vertex.h"
+#include "DebugLogger.h"
 
 namespace Enco3D
 {
@@ -26,6 +28,8 @@ namespace Enco3D
 			inline bool RemoveReference() { m_refCount--; return m_refCount == 0; }
 
 			inline void SetMaterialIndex(unsigned int materialIndex) { m_materialIndex = materialIndex; }
+
+			void UpdateVertices(unsigned int offsetInVertices, unsigned int sizeInVertices, Vertex *newVertices);
 
 			inline GLuint GetVBO() const { return m_vbo; }
 			inline GLuint GetIBO() const { return m_ibo; }

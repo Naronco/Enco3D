@@ -14,7 +14,7 @@ namespace Enco3D
 		public:
 			DirectionalLight()
 			{
-				m_shader = ShaderPool::GetInstance()->GetShader("shaders/forwardDirectionalLight", ShaderType::VertexShader | ShaderType::FragmentShader);
+				m_shader = Rendering::ShaderPool::GetInstance()->GetShader("shaders/forwardDirectionalLight", Rendering::ShaderType::VertexShader | Rendering::ShaderType::FragmentShader);
 			}
 		};
 	}

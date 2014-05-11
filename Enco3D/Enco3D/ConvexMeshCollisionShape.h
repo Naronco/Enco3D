@@ -8,28 +8,23 @@
 
 #include <vector>
 
-using namespace std;
-
 namespace Enco3D
 {
 	namespace Physics
 	{
-		using namespace Core;
-		using namespace Rendering;
-
 		class ConvexMeshCollisionShape : public ICollisionShape
 		{
 		private:
-			Mesh *m_mesh{ nullptr };
+			Rendering::Mesh *m_mesh{ nullptr };
 
 		public:
 			ConvexMeshCollisionShape();
-			ConvexMeshCollisionShape(Mesh *mesh);
+			ConvexMeshCollisionShape(Rendering::Mesh *mesh);
 
 			btCollisionShape *ToBulletPhysicsCollisionShape();
 
-			inline void SetMesh(Mesh *mesh) { m_mesh = mesh; }
-			inline Mesh *GetMesh() const { return m_mesh; }
+			inline void SetMesh(Rendering::Mesh *mesh) { m_mesh = mesh; }
+			inline Rendering::Mesh *GetMesh() const { return m_mesh; }
 		};
 	}
 }

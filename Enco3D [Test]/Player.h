@@ -26,12 +26,12 @@ public:
 	{
 		if (m_rigidBody == nullptr)
 		{
-			m_rigidBody = (RigidBody *)GetGameObject()->GetGameComponent("rigidBody");
+			m_rigidBody = (RigidBody*)GetGameObject()->GetGameComponent<RigidBody>();
 		}
 
 		if (m_camera == nullptr)
 		{
-			m_camera = (Camera *)GetGameObject()->GetChild("mainCamera")->GetGameComponent("camera");
+			m_camera = (Camera*)GetGameObject()->GetChild("mainCamera")->GetGameComponent<Camera>();
 		}
 
 		bool walking = false;

@@ -1,4 +1,4 @@
-/*#include "TestGame.h"
+#include "TestGame.h"
 
 int main(int argc, char *argv[])
 {
@@ -12,8 +12,9 @@ int main(int argc, char *argv[])
 	IGame *game = new TestGame;
 
 	return Enco3D_Main(&startInstruction, game);
-}*/
+}
 
+/*
 #include <Enco3D.h>
 
 using namespace enco::core;
@@ -80,44 +81,16 @@ int main(int argc, char *argv[])
 	codedMeshSceneNode->setMaterialFloat(eMATERIALFLOAT_SPECULARINTENSITY, 1.0f);
 	codedMeshSceneNode->setMaterialFloat(eMATERIALFLOAT_SPECULAREXPONENT, 64.0f);
 	
-	IShape *planeShape = device->getPhysicsDevice()->createStaticPlaneShape();
+//	IShape *planeShape = device->getPhysicsDevice()->createStaticPlaneShape();
 
 	codedMeshSceneNode->setPhysicsFlag(ePHYSICSFLAG_USERIGIDBODY, true);
-	codedMeshSceneNode->setPhysicsShape(planeShape);
+//	codedMeshSceneNode->setPhysicsShape(planeShape);
 	codedMeshSceneNode->setPhysicsFloat(ePHYSICSFLOAT_MASS, 0);
 
 	RigidBodyData planeShapeBodyData;
 	codedMeshSceneNode->buildRigidBodyData(&planeShapeBodyData);
 	std::cout << device->getPhysicsDevice() << std::endl;
-	IRigidBody *planeRigidBody = device->getPhysicsDevice()->addRigidBody(planeShapeBodyData);
-
-/*	float32 w = 16.0f;
-	float32 h = 32.0f;
-
-	float32 tileSizeX = 1.0f / 16.0f;
-	float32 tileSizeY = 1.0f / 8.0f;
-
-	Vertex vertices[4] =
-	{
-		{ -w*0.5f, 0, 0,  0 * tileSizeX, 2 * tileSizeY },
-		{ +w*0.5f, 0, 0,  1 * tileSizeX, 2 * tileSizeY },
-		{ +w*0.5f, h, 0,  1 * tileSizeX, 4 * tileSizeY },
-		{ -w*0.5f, h, 0,  0 * tileSizeX, 4 * tileSizeY },
-	};
-
-	sint32 vertexComponents = eVERTEXCOMPONENT_POSITION3F32 | eVERTEXCOMPONENT_TEXCOORD2F32;
-	uint32 vertexSizeInBytes = sizeof(Vertex)* 4;
-
-	uint32 indices[6] = { 0, 1, 2, 0, 2, 3 };
-	uint32 indexSizeInBytes = sizeof(uint32)* 6;
-	
-	CCodedMesh *codedMesh = sceneManager->buildCodedMesh(vertexSizeInBytes, vertices, vertexComponents, indexSizeInBytes, indices, 6);
-	CCodedMeshSceneNode *codedMeshSceneNode = sceneManager->addCodedMeshSceneNode(codedMesh);
-	codedMeshSceneNode->setMaterialFlag(eMATERIALFLAG_LIGHTING, false);
-	codedMeshSceneNode->setMaterialColor(eMATERIALCOLOR_DIFFUSE, Color4f32(1, 1, 1, 1));
-	codedMeshSceneNode->setMaterialTexture(eMATERIALTEXTURE_DIFFUSE, "texture/mario.png");
-
-	graphicsDevice->setTransparencyEnabled(true);*/
+//	IRigidBody *planeRigidBody = device->getPhysicsDevice()->addRigidBody(planeShapeBodyData);
 
 	math::Vector3f32 cameraPosition(0, 5, 0);
 	math::Vector3f32 cameraRotation(0, 0, 0);
@@ -130,16 +103,8 @@ int main(int argc, char *argv[])
 	ILight *pointLight = sceneManager->addPointLight(1.0f, Color4f32(0, 1, 1, 1), math::Vector3f32(0, 2, 0), 5.0f);
 	ILight *spotLight = sceneManager->addSpotLight(1.0f, Color4f32(1, 1, 0, 1), cameraPosition, mainCamera->getForward(), 20.0f, __TO_RADIANS_f32(20.0f));
 
-//	CCamera<float32> *mainCamera = sceneManager->addOrthographicCamera(0.0f, (float32)device->getDisplayDim().x * 0.5f, (float32)device->getDisplayDim().y * 0.5f, 0.0f, -10.0f, 10.0f);
-	
-//	float32 verticalPosition = 0.0f, verticalVelocity = 0.0f;
-
 	while (device->run())
 	{
-//		codedMeshSceneNode->getTransform()->setTranslation(0.0f, verticalPosition, 0.0f);
-//		verticalVelocity += timer->getDeltaTime() * timer->getDeltaTime() * 8.0f;
-//		verticalPosition += verticalVelocity;
-
 		{
 			float32 movementSpeed = 4.0f;
 			float32 rotateSpeed = 0.1f;
@@ -191,18 +156,6 @@ int main(int argc, char *argv[])
 				if (device->getWindow()->isKeyDown(input::KEY_D))
 					movement += mainCamera->getRight();
 
-//				math::Vector2f32 forward2d = mainCamera.getForward2D();
-//				math::Vector2f32 right2d = mainCamera.getRight2D();
-//
-//				if (device->getWindow()->isKeyDown(input::KEY_W))
-//					movement += math::Vector3f32(forward2d.x, 0, forward2d.y);
-//				if (device->getWindow()->isKeyDown(input::KEY_S))
-//					movement -= math::Vector3f32(forward2d.x, 0, forward2d.y);
-//				if (device->getWindow()->isKeyDown(input::KEY_A))
-//					movement -= math::Vector3f32(right2d.x, 0, right2d.y);
-//				if (device->getWindow()->isKeyDown(input::KEY_D))
-//					movement += math::Vector3f32(right2d.x, 0, right2d.y);
-				
 				if (movement.getSquaredLength() > 0.0f)
 				{
 					movement = movement.getNormalized();
@@ -229,4 +182,4 @@ int main(int argc, char *argv[])
 	releaseDevice(device);
 
 	return 0;
-}
+}*/

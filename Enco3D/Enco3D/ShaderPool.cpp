@@ -15,3 +15,9 @@ Enco3D::Rendering::Shader *Enco3D::Rendering::ShaderPool::GetShader(const std::s
 		return shader;
 	}
 }
+
+void Enco3D::Rendering::ShaderPool::Release()
+{
+	for (std::map<std::string, Shader*>::iterator it = m_loadedShaders.begin(); it != m_loadedShaders.end(); it++)
+		delete it->second;
+}

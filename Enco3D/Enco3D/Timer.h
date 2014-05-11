@@ -10,7 +10,7 @@
 #	define CURRENT_TIME(x) { timeval time; gettimeofday(&time, nullptr); *x = time.wSecond * 1000 + time.wMilliseconds; }
 #endif
 
-using namespace std;
+#include "DebugLogger.h"
 
 namespace Enco3D
 {
@@ -30,6 +30,8 @@ namespace Enco3D
 			Timer(bool printFps);
 
 			void Update();
+
+			inline void increaseFps() { m_fpsCounter++; }
 
 			inline void SetPrintFps(bool printFps) { m_printFps = printFps; }
 

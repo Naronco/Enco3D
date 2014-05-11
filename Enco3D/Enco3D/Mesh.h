@@ -6,11 +6,27 @@
 #include <map>
 
 #include "Vertex.h"
-#include "OBJModel.h"
-#include "IndexedModel.h"
 #include "MeshResource.h"
 
-using namespace std;
+namespace Enco3D
+{
+	namespace Core
+	{
+		class Transform;
+	}
+
+	namespace Rendering
+	{
+		class Shader;
+		struct Material;
+		class RenderingEngine;
+	}
+
+	namespace Component
+	{
+		class Camera;
+	}
+}
 
 namespace Enco3D
 {
@@ -32,11 +48,15 @@ namespace Enco3D
 
 			void Render();
 
+			void UpdateVertices(unsigned int offsetInVertices, unsigned int sizeInVertices, Vertex *newVertexData);
+
 			inline Vertex *GetVertices() const { return m_resource->GetVertices(); }
 			inline unsigned int GetVertexCount() const { return m_resource->GetVertexCount(); }
 
 			inline unsigned int *GetIndices() const { return m_resource->GetIndices(); }
 			inline unsigned int GetIndexCount() const { return m_resource->GetIndexCount(); }
+
+			static void RenderErrorMesh(Rendering::Shader *shader, Core::Transform *transform, const Component::Camera *camera, Rendering::RenderingEngine *renderingEngine);
 		};
 	}
 }

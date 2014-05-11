@@ -12,22 +12,18 @@ namespace Enco3D
 {
 	namespace Core
 	{
-		using namespace Rendering;
-		using namespace Physics;
-		using namespace Audio;
-
 		/// <summary>Main interface class for a game</summary>
 		class IGame
 		{
 		private:
 			/// <summary>Pointer to the rendering engine</summary>
-			RenderingEngine *m_renderingEngine{ nullptr };
+			Rendering::RenderingEngine *m_renderingEngine{ nullptr };
 
 			/// <summary>Pointer to the physics engine</summary>
-			PhysicsEngine *m_physicsEngine{ nullptr };
+			Physics::PhysicsEngine *m_physicsEngine{ nullptr };
 
 			/// <summary>Pointer to the audio engine</summary>
-			AudioEngine *m_audioEngine{ nullptr };
+			Audio::AudioEngine *m_audioEngine{ nullptr };
 
 			/// <summary>Pointer to the GL window</summary>
 			GLWindow *m_window{ nullptr };
@@ -48,9 +44,6 @@ namespace Enco3D
 			/// <summary>Virtual void, which will be called if the game updates (Called once per frame)</summary>
 			virtual void Update() {  }
 
-			/// <summary>Virtual void, which will be called if the game renders (Called once per frame)</summary>
-			virtual void Render() {  }
-
 			/// <summary>Adds the given game object to the scene hierarchy</summary>
 			/// <param name="gameObject">The game object to add</param>
 			inline void AddGameObject(GameObject *gameObject)
@@ -67,7 +60,7 @@ namespace Enco3D
 
 			/// <summary>Sets the rendering engine of the hierarchy</summary>
 			/// <param name="renderingEngine">The new rendering engine</param>
-			inline void SetRenderingEngine(RenderingEngine *renderingEngine)
+			inline void SetRenderingEngine(Rendering::RenderingEngine *renderingEngine)
 			{
 				m_renderingEngine = renderingEngine;
 				GetRootObject()->SetRenderingEngine(renderingEngine);
@@ -75,7 +68,7 @@ namespace Enco3D
 
 			/// <summary>Sets the physics engine of the hierarchy</summary>
 			/// <param name="physicsEngine">The new physics engine</param>
-			inline void SetPhysicsEngine(PhysicsEngine *physicsEngine)
+			inline void SetPhysicsEngine(Physics::PhysicsEngine *physicsEngine)
 			{
 				m_physicsEngine = physicsEngine;
 				GetRootObject()->SetPhysicsEngine(physicsEngine);
@@ -83,7 +76,7 @@ namespace Enco3D
 
 			/// <summary>Sets the audio engine of the hierarchy</summary>
 			/// <param name="audioEngine">The new audio engine</param>
-			inline void SetAudioEngine(AudioEngine *audioEngine)
+			inline void SetAudioEngine(Audio::AudioEngine *audioEngine)
 			{
 				m_audioEngine = audioEngine;
 			}
@@ -105,13 +98,13 @@ namespace Enco3D
 			}
 
 			/// <summary>Returns the rendering engine</summary>
-			inline RenderingEngine *GetRenderingEngine() const { return m_renderingEngine; }
+			inline Rendering::RenderingEngine *GetRenderingEngine() const { return m_renderingEngine; }
 
 			/// <summary>Returns the physics engine</summary>
-			inline PhysicsEngine *GetPhysicsEngine() const { return m_physicsEngine; }
+			inline Physics::PhysicsEngine *GetPhysicsEngine() const { return m_physicsEngine; }
 
 			/// <summary>Returns the audio engine</summary>
-			inline AudioEngine *GetAudioEngine() const { return m_audioEngine; }
+			inline Audio::AudioEngine *GetAudioEngine() const { return m_audioEngine; }
 
 			/// <summary>Returns the main GL window</summary>
 			inline GLWindow *GetWindow() const { return m_window; }
@@ -123,9 +116,7 @@ namespace Enco3D
 			inline GameObject *GetRootObject()
 			{
 				if (m_rootObject == nullptr)
-				{
 					m_rootObject = new GameObject;
-				}
 
 				return m_rootObject;
 			}

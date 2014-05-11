@@ -4,39 +4,39 @@ Enco3D::Rendering::Font::Font()
 {
 }
 
-Enco3D::Rendering::Font::Font(const string &name, const FontType &type)
+Enco3D::Rendering::Font::Font(const std::string &name, const FontType &type)
 {
-	string textureFilename, dataFilename;
+	std::string textureFilename, dataFilename;
 
 	switch (type)
 	{
 	case FontType::Default:
-		textureFilename = name + string("/default.png");
-		dataFilename = name + string("/default.fnt");
+		textureFilename = name + std::string("/default.png");
+		dataFilename = name + std::string("/default.fnt");
 		break;
 
 	case FontType::Italic:
-		textureFilename = name + string("/italic.png");
-		dataFilename = name + string("/italic.fnt");
+		textureFilename = name + std::string("/italic.png");
+		dataFilename = name + std::string("/italic.fnt");
 		break;
 
 	case FontType::Bold:
-		textureFilename = name + string("/bold.png");
-		dataFilename = name + string("/bold.fnt");
+		textureFilename = name + std::string("/bold.png");
+		dataFilename = name + std::string("/bold.fnt");
 		break;
 
 	case FontType::BoldAndItalic:
-		textureFilename = name + string("/bold_and_italic.png");
-		dataFilename = name + string("/bold_and_italic.fnt");
+		textureFilename = name + std::string("/bold_and_italic.png");
+		dataFilename = name + std::string("/bold_and_italic.fnt");
 		break;
 	}
 
-	m_texture = new Texture(textureFilename, TextureTarget::Texture2D, TextureFilter::Linear, TextureWrap::Clamp);
+	m_texture = new Texture2D(textureFilename, TextureFilter::Linear, TextureWrap::Clamp);
 	
 	float iw = 1.0f / (float)m_texture->GetWidth();
 	float ih = 1.0f / (float)m_texture->GetHeight();
 
-	ifstream file;
+	std::ifstream file;
 	file.open(dataFilename.c_str());
 
 	char temp;
@@ -44,69 +44,60 @@ Enco3D::Rendering::Font::Font(const string &name, const FontType &type)
 
 	if (!file.fail())
 	{
-#		define __findnextdef(streaminst) { streaminst.get(temp); while(temp != '=') { streaminst.get(temp); } }
+#		define FIND_NEXT_DEF(streaminst) { streaminst.get(temp); while(temp != '=') { streaminst.get(temp); } }
 
-		__findnextdef(file);
+		FIND_NEXT_DEF(file);
 		file >> m_fontSize;
 
-		__findnextdef(file);
+		FIND_NEXT_DEF(file);
 		file >> numCharacters;
 
 		m_characterData = new CharacterData[256];
 
 		unsigned int x, y, width, height;
-		int offsx, offsy;
-		unsigned int advancex;
+		int offsX, offsY;
+		unsigned int advanceX;
 
 		unsigned int fci = 0;
 
 		for (unsigned int i = 0; i < numCharacters; i++)
 		{
-			__findnextdef(file); file >> fci;
-			__findnextdef(file); file >> x;
-			__findnextdef(file); file >> y;
-			__findnextdef(file); file >> width;
-			__findnextdef(file); file >> height;
-			__findnextdef(file); file >> offsx;
-			__findnextdef(file); file >> offsy;
-			__findnextdef(file); file >> advancex;
+			FIND_NEXT_DEF(file); file >> fci;
+			FIND_NEXT_DEF(file); file >> x;
+			FIND_NEXT_DEF(file); file >> y;
+			FIND_NEXT_DEF(file); file >> width;
+			FIND_NEXT_DEF(file); file >> height;
+			FIND_NEXT_DEF(file); file >> offsX;
+			FIND_NEXT_DEF(file); file >> offsY;
+			FIND_NEXT_DEF(file); file >> advanceX;
 
-			__findnextdef(file);
-			__findnextdef(file);
+			FIND_NEXT_DEF(file);
+			FIND_NEXT_DEF(file);
 
-			m_characterData[fci].start_u = x * iw;
-			m_characterData[fci].start_v = y * ih;
-			m_characterData[fci].end_u = m_characterData[fci].start_u+width * iw;
-			m_characterData[fci].end_v = m_characterData[fci].start_v+height * ih;
+			m_characterData[fci].startU = x * iw;
+			m_characterData[fci].startV = y * ih;
+			m_characterData[fci].endU = m_characterData[fci].startU + width * iw;
+			m_characterData[fci].endV = m_characterData[fci].startV + height * ih;
 
 			m_characterData[fci].width = width;
 			m_characterData[fci].height = height;
 
-			m_characterData[fci].offsX = offsx;
-			m_characterData[fci].offsY = offsy;
+			m_characterData[fci].offsX = offsX;
+			m_characterData[fci].offsY = offsY;
 
-			m_characterData[fci].advanceX = advancex;
+			m_characterData[fci].advanceX = advanceX;
 		}
-		
-		cout << "Successfully loaded font data " << dataFilename << endl;
+
+		Core::DebugLogger::Log("Successfully loaded font data " + dataFilename);
 	}
 	else
-	{
-		cerr << "[ERROR] Failed to load font data " << dataFilename << endl;
-	}
+		Core::DebugLogger::Log("[ERROR] Failed to load font data " + dataFilename);
 }
 
 Enco3D::Rendering::Font::~Font()
 {
 	if (m_characterData)
-	{
 		delete[] m_characterData;
-		m_characterData = nullptr;
-	}
-
 	if (m_texture)
-	{
 		delete m_texture;
-		m_texture = nullptr;
-	}
 }

@@ -68,8 +68,14 @@ namespace Enco3D
 
 		namespace Vector3Template
 		{
-			static Vector3f Zero(0, 0, 0);
-			static Vector3f One(1, 1, 1);
+			static const Vector3f Zero(0, 0, 0);
+			static const Vector3f One(1, 1, 1);
+		}
+
+		namespace Color3Template
+		{
+			static const Vector3f White(1, 1, 1);
+			static const Vector3f Black(0, 0, 0);
 		}
 	}
 }

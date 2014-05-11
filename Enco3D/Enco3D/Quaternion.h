@@ -28,15 +28,6 @@ namespace Enco3D
 				Set(axis.x * s, axis.y * s, axis.z * s, c);
 			}
 
-			inline Quaternion(const Vector3<T> &forward, const Vector3<T> &right, const Vector3<T> &up)
-			{
-				w = (T)sqrt(1.0f + right.x + up.y + forward.z) * 0.5f;
-				float w4_recip = 1.0f / (4.0f * w);
-				x = (forward.y - up.z) * w4_recip;
-				y = (right.z - forward.x) * w4_recip;
-				z = (up.x - right.y) * w4_recip;
-			}
-
 			inline Quaternion(T rotX, T rotY, T rotZ)
 			{
 				T srx = (T)sin(rotX * 0.5);

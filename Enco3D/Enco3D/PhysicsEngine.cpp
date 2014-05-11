@@ -51,7 +51,7 @@ Enco3D::Physics::PhysicsEngine::~PhysicsEngine()
 
 void Enco3D::Physics::PhysicsEngine::Update()
 {
-	m_dynamicsWorld->stepSimulation(m_timer->GetDeltaTime(), 10);
+	m_dynamicsWorld->stepSimulation(1.0f / 60.0f, 10);
 }
 
 void Enco3D::Physics::PhysicsEngine::AddRigidBody(Enco3D::Component::RigidBody *rigidBody)
@@ -68,5 +68,4 @@ void Enco3D::Physics::PhysicsEngine::RemoveRigidBody(Enco3D::Component::RigidBod
 	delete btInstance;
 
 	delete rigidBody->GetCollisionShape();
-	delete rigidBody;
 }

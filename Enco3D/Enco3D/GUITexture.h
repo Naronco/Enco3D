@@ -2,7 +2,7 @@
 #define _ENCO3D_GUITEXTURE_H_
 
 #include "IGameComponent.h"
-#include "Texture.h"
+#include "Texture2D.h"
 #include "Mesh.h"
 #include "Shader.h"
 
@@ -12,17 +12,15 @@ namespace Enco3D
 {
 	namespace Component
 	{
-		using namespace Rendering;
-
-		class GUITexture : public IGameComponent
+		class GUITexture : public Core::IGameComponent
 		{
 		private:
-			Texture *m_texture;
-			Vector3f m_color;
-			Material m_material;
+			Rendering::Texture2D *m_texture;
+			Core::Vector3f m_color;
+			Rendering::Material m_material;
 
 		private:
-			static Mesh *s_rectangleMesh;
+			static Rendering::Mesh *s_rectangleMesh;
 			static unsigned int s_numReferences;
 
 		private:
@@ -30,20 +28,20 @@ namespace Enco3D
 
 		public:
 			GUITexture();
-			GUITexture(Texture *texture);
-			GUITexture(Texture *texture, const Vector3f &color);
+			GUITexture(Rendering::Texture2D *texture);
+			GUITexture(Rendering::Texture2D *texture, const Core::Vector3f &color);
 			GUITexture(const string &filename);
-			GUITexture(const string &filename, const Vector3f &color);
+			GUITexture(const string &filename, const Core::Vector3f &color);
 
-			void RenderGUI(const Camera *camera, Shader *shader);
+			void RenderGUI(const Camera *camera, Rendering::Shader *shader);
 
 			void Deinit();
 
-			inline void SetTexture(Texture *texture) { ReleaseTexture(); m_material.SetTexture("diffuseTexture", texture); m_texture = texture; }
-			inline void SetColor(const Vector3f &color) { m_material.SetVector3f("diffuseColor", color); m_color.Set(color); }
+			inline void SetTexture(Rendering::Texture2D *texture) { ReleaseTexture(); m_material.SetTexture2D("diffuseTexture", texture); m_texture = texture; }
+			inline void SetColor(const Core::Vector3f &color) { m_material.SetVector3f("diffuseColor", color); m_color.Set(color); }
 
-			inline Texture *GetTexture() const { return m_texture; }
-			inline Vector3f GetColor() const { return m_color; }
+			inline Rendering::Texture2D *GetTexture() const { return m_texture; }
+			inline Core::Vector3f GetColor() const { return m_color; }
 		};
 	}
 }

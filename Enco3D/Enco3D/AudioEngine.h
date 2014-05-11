@@ -1,22 +1,16 @@
 #ifndef _ENCO3D_AUDIOENGINE_H_
 #define _ENCO3D_AUDIOENGINE_H_
 
-#include "Error.h"
-
 #include <SDL.h>
 #include <SDL_mixer.h>
 
 #include <string>
 #include <iostream>
 
-using namespace std;
-
 namespace Enco3D
 {
 	namespace Audio
 	{
-		using namespace Core;
-
 		class AudioEngine
 		{
 		private:
@@ -31,11 +25,11 @@ namespace Enco3D
 			AudioEngine(int audioRate = 44100, Uint16 audioFormat = AUDIO_S16SYS, int audioChannels = 2, int audioBuffers = 4096);
 			~AudioEngine();
 
-			ErrorResult SoundLoad(const string &filename, int volume);
-			ErrorResult SoundPlay();
+			void SoundLoad(const std::string &filename, int volume);
+			void SoundPlay();
 
-			ErrorResult MusicLoad(const string &filename, int volume);
-			ErrorResult MusicPlay();
+			void MusicLoad(const std::string &filename, int volume);
+			void MusicPlay();
 		};
 	}
 }
