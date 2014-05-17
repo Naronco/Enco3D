@@ -1,0 +1,47 @@
+#version 120
+
+varying vec3 texCoord;
+varying vec3 normal;
+varying vec3 worldPos;
+
+struct DirectionalLight
+{
+	vec3 color;
+	float intensity;
+	vec3 direction;
+};
+
+uniform DirectionalLight directionalLight;
+
+uniform vec3 mat_diffuseColor;
+uniform sampler2D mat_diffuseTexture;
+uniform float mat_specularIntensity;
+uniform float mat_specularExponent;
+
+uniform vec3 camera_translation;
+
+void main()
+{
+	vec3 diffuse = vec3(0.0f, 0.0f, 0.0f);
+	vec3 specular = vec3(0.0f, 0.0f, 0.0f);
+	
+	vec3 diffuseColor = texture2D(mat_diffuseTexture, texCoord.xy).rgb * mat_diffuseColor.rgb;
+	float diffuseIntensity = max(dot(-directionalLight.direction, normal), 0.0f);
+	diffuse = diffuseColor * diffuseIntensity * directionalLight.color.rgb;
+	
+	if(diffuseIntensity > 0.0f && mat_specularIntensity > 0.0f)
+	{
+		vec3 reflectionDirection = normalize(reflect(directionalLight.direction, normal));
+		vec3 viewDirection = normalize(camera_translation - worldPos);
+		float specularIntensity = dot(viewDirection, reflectionDirection);
+		specularIntensity = pow(specularIntensity, mat_specularExponent);
+		
+		if(specularIntensity > 0.0f)
+		{
+			specular = mat_specularIntensity * specularIntensity * directionalLight.color.rgb;
+		}
+	}
+	
+	gl_FragData[2] = vec4(diffuse, 0.0f);
+	gl_FragData[3] = vec4(specular, 0.0f);
+}

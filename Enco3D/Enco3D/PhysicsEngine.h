@@ -34,16 +34,16 @@ namespace Enco3D
 			PhysicsEngine();
 			~PhysicsEngine();
 
-			void Update();
+			void update();
 
-			void AddRigidBody(Component::RigidBody *rigidBody);
-			void RemoveRigidBody(Component::RigidBody *rigidBody);
+			void addRigidBody(Component::RigidBody *rigidBody);
+			void removeRigidBody(Component::RigidBody *rigidBody);
 
-			inline void SetGravity(const Core::Vector3f &gravity) { m_gravity.Set(gravity); }
-			inline void SetTimer(Core::Timer *timer) { m_timer = timer; }
+			inline void setGravity(const Core::Vector3f &gravity) { m_gravity.set(gravity); }
+			inline void setTimer(Core::Timer *timer) { m_timer = timer; }
 
-			inline Core::Vector3f GetGravity() const { return m_gravity; }
-			inline Core::Timer *GetTimer() const { return m_timer; }
+			inline Core::Vector3f getGravity() const { return m_gravity; }
+			inline Core::Timer *getTimer() const { return m_timer; }
 		};
 	}
 }

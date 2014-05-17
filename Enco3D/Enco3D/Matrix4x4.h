@@ -9,8 +9,7 @@ namespace Enco3D
 	namespace Core
 	{
 		/// <summary>A 4x4 matrix structure</summary>
-		template <typename T>
-		struct Matrix4x4
+		template <typename T> struct Matrix4x4
 		{
 			union
 			{
@@ -27,20 +26,20 @@ namespace Enco3D
 
 			inline Matrix4x4()
 			{
-				SetIdentity();
+				setIdentity();
 			}
 
 			inline Matrix4x4(T _m00, T _m01, T _m02, T _m03, T _m10, T _m11, T _m12, T _m13, T _m20, T _m21, T _m22, T _m23, T _m30, T _m31, T _m32, T _m33)
 			{
-				Set(_m00, _m01, _m02, _m03, _m10, _m11, _m12, _m13, _m20, _m21, _m22, _m23, _m30, _m31, _m32, _m33);
+				set(_m00, _m01, _m02, _m03, _m10, _m11, _m12, _m13, _m20, _m21, _m22, _m23, _m30, _m31, _m32, _m33);
 			}
 
 			inline Matrix4x4(const Matrix4x4<T> &m)
 			{
-				Set(m);
+				set(m);
 			}
 
-			inline Matrix4x4<T> &Set(T _m00, T _m01, T _m02, T _m03, T _m10, T _m11, T _m12, T _m13, T _m20, T _m21, T _m22, T _m23, T _m30, T _m31, T _m32, T _m33)
+			inline Matrix4x4<T> &set(T _m00, T _m01, T _m02, T _m03, T _m10, T _m11, T _m12, T _m13, T _m20, T _m21, T _m22, T _m23, T _m30, T _m31, T _m32, T _m33)
 			{
 				m00 = _m00;
 				m01 = _m01;
@@ -61,14 +60,14 @@ namespace Enco3D
 				return *this;
 			}
 
-			inline Matrix4x4<T> &Set(const Matrix4x4<T> &mat)
+			inline Matrix4x4<T> &set(const Matrix4x4<T> &mat)
 			{
-				return Set(mat.m00, mat.m01, mat.m02, mat.m03, mat.m10, mat.m11, mat.m12, mat.m13, mat.m20, mat.m21, mat.m22, mat.m23, mat.m30, mat.m31, mat.m32, mat.m33);
+				return set(mat.m00, mat.m01, mat.m02, mat.m03, mat.m10, mat.m11, mat.m12, mat.m13, mat.m20, mat.m21, mat.m22, mat.m23, mat.m30, mat.m31, mat.m32, mat.m33);
 			}
 
-			inline Matrix4x4<T> &SetIdentity()
+			inline Matrix4x4<T> &setIdentity()
 			{
-				return Set(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+				return set(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
 			}
 
 			inline Matrix4x4<T> operator * (const Matrix4x4<T> &mat) const
@@ -94,41 +93,41 @@ namespace Enco3D
 					r.m[x][y] = (m[x][0] * mat.m[0][y]) + (m[x][1] * mat.m[1][y]) + (m[x][2] * mat.m[2][y]) + (m[x][3] * mat.m[3][y]);
 				}
 
-				return Set(r);
+				return set(r);
 			}
 
-			inline Matrix4x4<T> &Translate(T x, T y, T z)
+			inline Matrix4x4<T> &translate(T x, T y, T z)
 			{
 				return (*this *= Matrix4x4<T>(1, 0, 0, x, 0, 1, 0, y, 0, 0, 1, z, 0, 0, 0, 1));
 			}
 
-			inline Matrix4x4<T> &RotateX(T angle)
+			inline Matrix4x4<T> &rotateX(T angle)
 			{
 				T s = (T)sin(angle);
 				T c = (T)cos(angle);
 				return (*this *= Matrix4x4<T>(1, 0, 0, 0, 0, c, -s, 0, 0, s, c, 0, 0, 0, 0, 1));
 			}
 
-			inline Matrix4x4<T> &RotateY(T angle)
+			inline Matrix4x4<T> &rotateY(T angle)
 			{
 				T s = (T)sin(angle);
 				T c = (T)cos(angle);
 				return (*this *= Matrix4x4<T>(c, 0, s, 0, 0, 1, 0, 0, -s, 0, c, 0, 0, 0, 0, 1));
 			}
 
-			inline Matrix4x4<T> &RotateZ(T angle)
+			inline Matrix4x4<T> &rotateZ(T angle)
 			{
 				T s = (T)sin(angle);
 				T c = (T)cos(angle);
 				return (*this *= Matrix4x4<T>(c, -s, 0, 0, s, c, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1));
 			}
 
-			inline Matrix4x4<T> &Scale(T x, T y, T z)
+			inline Matrix4x4<T> &scale(T x, T y, T z)
 			{
 				return (*this *= Matrix4x4<T>(x, 0, 0, 0, 0, y, 0, 0, 0, 0, z, 0, 0, 0, 0, 1));
 			}
 
-			inline Matrix4x4<T> &SetRotation(const Matrix3x3<T> &m)
+			inline Matrix4x4<T> &setRotation(const Matrix3x3<T> &m)
 			{
 				m00 = m.m00;
 				m01 = m.m01;
@@ -142,39 +141,188 @@ namespace Enco3D
 				return *this;
 			}
 
-			inline Matrix4x4<T> &SetRotation(const Vector3<T> &forward, const Vector3<T> &up, const Vector3<T> &right)
+			inline Matrix4x4<T> &setRotation(const Vector3<T> &forward, const Vector3<T> &up, const Vector3<T> &right)
 			{
-				return Set(right.x, right.y, right.z, 0, up.x, up.y, up.z, 0, forward.x, forward.y, forward.z, 0, 0, 0, 0, 1);
+				return set(right.x, right.y, right.z, 0, up.x, up.y, up.z, 0, forward.x, forward.y, forward.z, 0, 0, 0, 0, 1);
 			}
 
-			inline Matrix4x4<T> &SetRotation(const Vector3<T> &forward, const Vector3<T> &up)
+			inline Matrix4x4<T> &setRotation(const Vector3<T> &forward, const Vector3<T> &up)
 			{
 				Vector3<T> right(up);
-				right.Cross(forward).Normalize();
+				right.cross(forward).normalize();
 
-				return SetRotation(forward, up, right);
+				return setRotation(forward, up, right);
 			}
 
-			inline Matrix4x4<T> &SetOrthographicProjection(T left, T right, T bottom, T top, T zNear, T zFar)
+			inline Matrix4x4<T> &setOrthographicProjection(T left, T right, T bottom, T top, T zNear, T zFar)
 			{
 				T width = right - left;
 				T height = top - bottom;
 				T depth = zFar - zNear;
 
-				return Set(2 / width, 0, 0, -(right + left) / width, 0, 2 / height, 0, -(top + bottom) / height, 0, 0, -2 / depth, -(zFar + zNear) / depth, 0, 0, 0, 1);
+				return set(2 / width, 0, 0, -(right + left) / width, 0, 2 / height, 0, -(top + bottom) / height, 0, 0, -2 / depth, -(zFar + zNear) / depth, 0, 0, 0, 1);
 			}
 
-			inline Matrix4x4<T> &SetPerspectiveProjection(T fov, T aspectRatio, T zNear, T zFar)
+			inline Matrix4x4<T> &setPerspectiveProjection(T fov, T aspectRatio, T zNear, T zFar)
 			{
 				T tanHalfFov = (T)tan(fov * 0.5);
 				T zRange = zNear - zFar;
 
-				return Set((T)(1.0 / (tanHalfFov * aspectRatio)), 0, 0, 0, 0, (T)(1.0 / tanHalfFov), 0, 0, 0, 0, (-zNear - zFar) / zRange, 2 * zFar * zNear / zRange, 0, 0, 1, 0);
+				return set((T)(1.0 / (tanHalfFov * aspectRatio)), 0, 0, 0, 0, (T)(1.0 / tanHalfFov), 0, 0, 0, 0, (-zNear - zFar) / zRange, 2 * zFar * zNear / zRange, 0, 0, 1, 0);
 			}
 
-			inline Matrix4x4<T> &Transpose()
+			inline Matrix4x4<T> &transpose()
 			{
-				return Set(m00, m10, m20, m30, m01, m11, m21, m31, m02, m12, m22, m32, m03, m13, m23, m33);
+				return set(m00, m10, m20, m30, m01, m11, m21, m31, m02, m12, m22, m32, m03, m13, m23, m33);
+			}
+
+			inline float getAtIndex(int index)
+			{
+				return m[index % 4][index >> 2];
+			}
+
+			inline Matrix4x4<T> getInverse()
+			{
+				float inv[16];
+
+				inv[0] = getAtIndex(5) * getAtIndex(10) * getAtIndex(15) -
+					getAtIndex(5) * getAtIndex(11) * getAtIndex(14) -
+					getAtIndex(9) * getAtIndex(6) * getAtIndex(15) +
+					getAtIndex(9) * getAtIndex(7) * getAtIndex(14) +
+					getAtIndex(13) * getAtIndex(6) * getAtIndex(11) -
+					getAtIndex(13) * getAtIndex(7) * getAtIndex(10);
+
+				inv[4] = -getAtIndex(4) * getAtIndex(10) * getAtIndex(15) +
+					getAtIndex(4) * getAtIndex(11) * getAtIndex(14) +
+					getAtIndex(8) * getAtIndex(6) * getAtIndex(15) -
+					getAtIndex(8) * getAtIndex(7) * getAtIndex(14) -
+					getAtIndex(12) * getAtIndex(6) * getAtIndex(11) +
+					getAtIndex(12) * getAtIndex(7) * getAtIndex(10);
+
+				inv[8] = getAtIndex(4) * getAtIndex(9) * getAtIndex(15) -
+					getAtIndex(4) * getAtIndex(11) * getAtIndex(13) -
+					getAtIndex(8) * getAtIndex(5) * getAtIndex(15) +
+					getAtIndex(8) * getAtIndex(7) * getAtIndex(13) +
+					getAtIndex(12) * getAtIndex(5) * getAtIndex(11) -
+					getAtIndex(12) * getAtIndex(7) * getAtIndex(9);
+
+				inv[12] = -getAtIndex(4) * getAtIndex(9) * getAtIndex(14) +
+					getAtIndex(4) * getAtIndex(10) * getAtIndex(13) +
+					getAtIndex(8) * getAtIndex(5) * getAtIndex(14) -
+					getAtIndex(8) * getAtIndex(6) * getAtIndex(13) -
+					getAtIndex(12) * getAtIndex(5) * getAtIndex(10) +
+					getAtIndex(12) * getAtIndex(6) * getAtIndex(9);
+
+				inv[1] = -getAtIndex(1) * getAtIndex(10) * getAtIndex(15) +
+					getAtIndex(1) * getAtIndex(11) * getAtIndex(14) +
+					getAtIndex(9) * getAtIndex(2) * getAtIndex(15) -
+					getAtIndex(9) * getAtIndex(3) * getAtIndex(14) -
+					getAtIndex(13) * getAtIndex(2) * getAtIndex(11) +
+					getAtIndex(13) * getAtIndex(3) * getAtIndex(10);
+
+				inv[5] = getAtIndex(0) * getAtIndex(10) * getAtIndex(15) -
+					getAtIndex(0) * getAtIndex(11) * getAtIndex(14) -
+					getAtIndex(8) * getAtIndex(2) * getAtIndex(15) +
+					getAtIndex(8) * getAtIndex(3) * getAtIndex(14) +
+					getAtIndex(12) * getAtIndex(2) * getAtIndex(11) -
+					getAtIndex(12) * getAtIndex(3) * getAtIndex(10);
+
+				inv[9] = -getAtIndex(0) * getAtIndex(9) * getAtIndex(15) +
+					getAtIndex(0) * getAtIndex(11) * getAtIndex(13) +
+					getAtIndex(8) * getAtIndex(1) * getAtIndex(15) -
+					getAtIndex(8) * getAtIndex(3) * getAtIndex(13) -
+					getAtIndex(12) * getAtIndex(1) * getAtIndex(11) +
+					getAtIndex(12) * getAtIndex(3) * getAtIndex(9);
+
+				inv[13] = getAtIndex(0) * getAtIndex(9) * getAtIndex(14) -
+					getAtIndex(0) * getAtIndex(10) * getAtIndex(13) -
+					getAtIndex(8) * getAtIndex(1) * getAtIndex(14) +
+					getAtIndex(8) * getAtIndex(2) * getAtIndex(13) +
+					getAtIndex(12) * getAtIndex(1) * getAtIndex(10) -
+					getAtIndex(12) * getAtIndex(2) * getAtIndex(9);
+
+				inv[2] = getAtIndex(1) * getAtIndex(6) * getAtIndex(15) -
+					getAtIndex(1) * getAtIndex(7) * getAtIndex(14) -
+					getAtIndex(5) * getAtIndex(2) * getAtIndex(15) +
+					getAtIndex(5) * getAtIndex(3) * getAtIndex(14) +
+					getAtIndex(13) * getAtIndex(2) * getAtIndex(7) -
+					getAtIndex(13) * getAtIndex(3) * getAtIndex(6);
+
+				inv[6] = -getAtIndex(0) * getAtIndex(6) * getAtIndex(15) +
+					getAtIndex(0) * getAtIndex(7) * getAtIndex(14) +
+					getAtIndex(4) * getAtIndex(2) * getAtIndex(15) -
+					getAtIndex(4) * getAtIndex(3) * getAtIndex(14) -
+					getAtIndex(12) * getAtIndex(2) * getAtIndex(7) +
+					getAtIndex(12) * getAtIndex(3) * getAtIndex(6);
+
+				inv[10] = getAtIndex(0) * getAtIndex(5) * getAtIndex(15) -
+					getAtIndex(0) * getAtIndex(7) * getAtIndex(13) -
+					getAtIndex(4) * getAtIndex(1) * getAtIndex(15) +
+					getAtIndex(4) * getAtIndex(3) * getAtIndex(13) +
+					getAtIndex(12) * getAtIndex(1) * getAtIndex(7) -
+					getAtIndex(12) * getAtIndex(3) * getAtIndex(5);
+
+				inv[14] = -getAtIndex(0) * getAtIndex(5) * getAtIndex(14) +
+					getAtIndex(0) * getAtIndex(6) * getAtIndex(13) +
+					getAtIndex(4) * getAtIndex(1) * getAtIndex(14) -
+					getAtIndex(4) * getAtIndex(2) * getAtIndex(13) -
+					getAtIndex(12) * getAtIndex(1) * getAtIndex(6) +
+					getAtIndex(12) * getAtIndex(2) * getAtIndex(5);
+
+				inv[3] = -getAtIndex(1) * getAtIndex(6) * getAtIndex(11) +
+					getAtIndex(1) * getAtIndex(7) * getAtIndex(10) +
+					getAtIndex(5) * getAtIndex(2) * getAtIndex(11) -
+					getAtIndex(5) * getAtIndex(3) * getAtIndex(10) -
+					getAtIndex(9) * getAtIndex(2) * getAtIndex(7) +
+					getAtIndex(9) * getAtIndex(3) * getAtIndex(6);
+
+				inv[7] = getAtIndex(0) * getAtIndex(6) * getAtIndex(11) -
+					getAtIndex(0) * getAtIndex(7) * getAtIndex(10) -
+					getAtIndex(4) * getAtIndex(2) * getAtIndex(11) +
+					getAtIndex(4) * getAtIndex(3) * getAtIndex(10) +
+					getAtIndex(8) * getAtIndex(2) * getAtIndex(7) -
+					getAtIndex(8) * getAtIndex(3) * getAtIndex(6);
+
+				inv[11] = -getAtIndex(0) * getAtIndex(5) * getAtIndex(11) +
+					getAtIndex(0) * getAtIndex(7) * getAtIndex(9) +
+					getAtIndex(4) * getAtIndex(1) * getAtIndex(11) -
+					getAtIndex(4) * getAtIndex(3) * getAtIndex(9) -
+					getAtIndex(8) * getAtIndex(1) * getAtIndex(7) +
+					getAtIndex(8) * getAtIndex(3) * getAtIndex(5);
+
+				inv[15] = getAtIndex(0) * getAtIndex(5) * getAtIndex(10) -
+					getAtIndex(0) * getAtIndex(6) * getAtIndex(9) -
+					getAtIndex(4) * getAtIndex(1) * getAtIndex(10) +
+					getAtIndex(4) * getAtIndex(2) * getAtIndex(9) +
+					getAtIndex(8) * getAtIndex(1) * getAtIndex(6) -
+					getAtIndex(8) * getAtIndex(2) * getAtIndex(5);
+
+				float det = getAtIndex(0) * inv[0] + getAtIndex(1) * inv[4] + getAtIndex(2) * inv[8] + getAtIndex(3) * inv[12];
+
+				if (det == 0.0f)
+					return Matrix4x4<T>().setIdentity();
+
+				det = 1.0f / det;
+
+				Matrix4x4<T> result;
+
+				for (int i = 0; i < 16; i++)
+					result.m[i % 4][i >> 2] = inv[i] * det;
+
+				return result;
+			}
+
+			inline void print()
+			{
+				for (int i = 0; i < 4; i++)
+				{
+					for (int j = 0; j < 4; j++)
+					{
+						std::cout << m[i][j] << ", ";
+					}
+
+					std::cout << std::endl;
+				}
 			}
 		};
 

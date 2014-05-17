@@ -15,13 +15,13 @@ Enco3D::Component::WavefrontMesh::WavefrontMesh(const std::string &filename, Ren
 	if (scene)
 	{
 		m_successfullyLoadedMesh = true;
-		Core::DebugLogger::Log("Successfully loaded OBJ model " + filename);
-		InitFromScene(scene, filename);
+		Core::DebugLogger::log("Successfully loaded OBJ model " + filename);
+		initFromScene(scene, filename);
 	}
 	else
 	{
 		m_successfullyLoadedMesh = false;
-		Core::DebugLogger::Log("[ERROR] Failed to load OBJ model " + filename);
+		Core::DebugLogger::log("[ERROR] Failed to load OBJ model " + filename);
 	}
 }
 
@@ -35,12 +35,12 @@ Enco3D::Component::WavefrontMesh::~WavefrontMesh()
 		delete m_material;
 }
 
-void Enco3D::Component::WavefrontMesh::Render(const Component::Camera *camera, Rendering::Shader *shader)
+void Enco3D::Component::WavefrontMesh::render(const Component::Camera *camera, Rendering::Shader *shader)
 {
 	if (m_successfullyLoadedMesh)
 	{
-		shader->Bind();
-		shader->UpdateUniforms(GetTransform(), camera, GetRenderingEngine(), m_material);
+		shader->bind();
+		shader->updateUniforms(getTransform(), camera, getRenderingEngine(), m_material);
 
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
@@ -48,13 +48,13 @@ void Enco3D::Component::WavefrontMesh::Render(const Component::Camera *camera, R
 
 		for (unsigned int i = 0; i < m_meshes.size(); i++)
 		{
-			glBindBuffer(GL_ARRAY_BUFFER, m_meshes[i]->GetVBO());
+			glBindBuffer(GL_ARRAY_BUFFER, m_meshes[i]->getVBO());
 			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Rendering::Vertex), 0);
 			glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Rendering::Vertex), (GLvoid *)(sizeof(float)* 3));
 			glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Rendering::Vertex), (GLvoid *)(sizeof(float)* 6));
 
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_meshes[i]->GetIBO());
-			glDrawElements(GL_TRIANGLES, m_meshes[i]->GetIndexCount(), GL_UNSIGNED_INT, 0);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_meshes[i]->getIBO());
+			glDrawElements(GL_TRIANGLES, m_meshes[i]->getIndexCount(), GL_UNSIGNED_INT, 0);
 		}
 
 		glDisableVertexAttribArray(2);
@@ -63,24 +63,24 @@ void Enco3D::Component::WavefrontMesh::Render(const Component::Camera *camera, R
 	}
 	else
 	{
-		Rendering::Mesh::RenderErrorMesh(shader, GetTransform(), camera, GetRenderingEngine());
+		Rendering::Mesh::renderErrorMesh(shader, getTransform(), camera, getRenderingEngine());
 	}
 }
 
-bool Enco3D::Component::WavefrontMesh::InitFromScene(const aiScene *scene, const std::string &filename)
+bool Enco3D::Component::WavefrontMesh::initFromScene(const aiScene *scene, const std::string &filename)
 {
 	m_meshes.resize(scene->mNumMeshes);
 	
 	for (unsigned int i = 0; i < m_meshes.size(); i++)
 	{
 		const aiMesh *mesh = scene->mMeshes[i];
-		InitMesh(i, mesh);
+		initMesh(i, mesh);
 	}
 
 	return true;
 }
 
-void Enco3D::Component::WavefrontMesh::InitMesh(unsigned int index, const aiMesh *mesh)
+void Enco3D::Component::WavefrontMesh::initMesh(unsigned int index, const aiMesh *mesh)
 {
 	std::vector<Rendering::Vertex> vertices;
 	std::vector<unsigned int> indices;
@@ -115,7 +115,7 @@ void Enco3D::Component::WavefrontMesh::InitMesh(unsigned int index, const aiMesh
 	}
 
 	m_meshes[index] = new Rendering::MeshResource(arrVertices, vertices.size(), arrIndices, indices.size());
-	m_meshes[index]->SetMaterialIndex(mesh->mMaterialIndex);
+	m_meshes[index]->setMaterialIndex(mesh->mMaterialIndex);
 
 	delete arrVertices;
 	delete arrIndices;

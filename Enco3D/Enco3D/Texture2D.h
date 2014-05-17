@@ -16,7 +16,7 @@ namespace Enco3D
 			Texture2D(const std::string &filename, unsigned int filter = GL_NEAREST, unsigned int wrap = GL_REPEAT);
 			~Texture2D();
 
-			void Bind(unsigned int unit = 0) const;
+			void bind(unsigned int unit = 0) const;
 		};
 	}
 }

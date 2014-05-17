@@ -27,11 +27,11 @@ namespace Enco3D
 			Skybox(const std::string &filename);
 			~Skybox();
 
-			void InitRendering();
+			void initRendering();
 
-			void Render(const Component::Camera *camera);
+			void render(const Component::Camera *camera);
 
-			inline Rendering::TextureCubeMap *GetTexture() { return m_skyboxTexture; }
+			inline Rendering::TextureCubeMap *getTexture() { return m_skyboxTexture; }
 		};
 	}
 }

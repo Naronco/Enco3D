@@ -31,7 +31,7 @@ namespace Enco3D
 			{
 			}
 
-			inline Vertex& SetPosition(float _x, float _y, float _z)
+			inline Vertex& setPosition(float _x, float _y, float _z)
 			{
 				x = _x;
 				y = _y;
@@ -39,7 +39,7 @@ namespace Enco3D
 				return *this;
 			}
 
-			inline Vertex& SetTexCoord(float _u, float _v, float _w)
+			inline Vertex& setTexCoord(float _u, float _v, float _w = 0.0f)
 			{
 				u = _u;
 				v = _v;
@@ -47,7 +47,7 @@ namespace Enco3D
 				return *this;
 			}
 
-			inline Vertex& SetNormal(float _nx, float _ny, float _nz)
+			inline Vertex& setNormal(float _nx, float _ny, float _nz)
 			{
 				nx = _nx;
 				ny = _ny;

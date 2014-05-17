@@ -6,10 +6,10 @@ Enco3D::Physics::CylinderCollisionShape::CylinderCollisionShape()
 
 Enco3D::Physics::CylinderCollisionShape::CylinderCollisionShape(const Enco3D::Core::Vector3f &size)
 {
-	m_halfSize.Set(size * 0.5f);
+	m_halfSize.set(size * 0.5f);
 }
 
-btCollisionShape *Enco3D::Physics::CylinderCollisionShape::ToBulletPhysicsCollisionShape()
+btCollisionShape *Enco3D::Physics::CylinderCollisionShape::toBulletPhysicsCollisionShape()
 {
-	return new btCylinderShape(PhysicsHelper::ToBulletPhysicsVec3(m_halfSize));
+	return new btCylinderShape(PhysicsHelper::toBulletPhysicsVec3(m_halfSize));
 }

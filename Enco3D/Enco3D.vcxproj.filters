@@ -42,6 +42,12 @@
     <Filter Include="Quelldateien\Physics">
       <UniqueIdentifier>{529526ae-e5b6-42c0-8461-f48af4d51cf6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headerdateien\IO">
+      <UniqueIdentifier>{ff7ae8f2-a1a2-4fff-9ab0-ded4dd21b52d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\IO">
+      <UniqueIdentifier>{4a8771e5-7e17-4675-a25b-95ef4e8b113e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Enco3D\stb_image.c">
@@ -169,6 +175,9 @@
     </ClCompile>
     <ClCompile Include="Enco3D\DebugLogger.cpp">
       <Filter>Quelldateien\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Enco3D\ImageIO.cpp">
+      <Filter>Quelldateien\IO</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -366,6 +375,9 @@
     </ClInclude>
     <ClInclude Include="Enco3D\DebugLogger.h">
       <Filter>Headerdateien\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\ImageIO.h">
+      <Filter>Headerdateien\IO</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

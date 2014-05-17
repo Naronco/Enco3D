@@ -3,9 +3,9 @@
 #include "ShaderPool.h"
 #include "DebugLogger.h"
 
-void Enco3D::Core::Enco3DEngine::Init(char *windowTitle, unsigned int windowWidth, unsigned int windowHeight, bool multisampleEnabled, unsigned int aaSamples, IGame *game)
+void Enco3D::Core::Enco3DEngine::init(char *windowTitle, unsigned int windowWidth, unsigned int windowHeight, bool multisampleEnabled, unsigned int aaSamples, IGame *game)
 {
-	Core::DebugLogger::Init();
+	Core::DebugLogger::init();
 	
 	m_window = new GLWindow(windowTitle, windowWidth, windowHeight, multisampleEnabled, aaSamples);
 	m_timer = new Timer(true);
@@ -14,32 +14,32 @@ void Enco3D::Core::Enco3DEngine::Init(char *windowTitle, unsigned int windowWidt
 	m_physicsEngine = new Physics::PhysicsEngine;
 	m_audioEngine = new Audio::AudioEngine;
 
-	m_physicsEngine->SetTimer(m_timer);
-	Random::SetSeed(m_timer->GetTime());
+	m_physicsEngine->setTimer(m_timer);
+	Random::setSeed(m_timer->getTime());
 	
-	m_window->Show();
+	m_window->show();
 
-	m_game->SetRenderingEngine(m_renderingEngine);
-	m_game->SetPhysicsEngine(m_physicsEngine);
-	m_game->SetAudioEngine(m_audioEngine);
-	m_game->SetWindow(m_window);
-	m_game->SetTimer(m_timer);
+	m_game->setRenderingEngine(m_renderingEngine);
+	m_game->setPhysicsEngine(m_physicsEngine);
+	m_game->setAudioEngine(m_audioEngine);
+	m_game->setWindow(m_window);
+	m_game->setTimer(m_timer);
 
-	m_game->AddGameComponent(m_renderingEngine->GetGUICamera());
+	m_game->addGameComponent(m_renderingEngine->getGUICamera());
 
-	m_game->Init();
+	m_game->init();
 }
 
-void Enco3D::Core::Enco3DEngine::Deinit()
+void Enco3D::Core::Enco3DEngine::deinit()
 {
-	Rendering::FontPool::GetInstance()->Release();
-	Rendering::ShaderPool::GetInstance()->Release();
+	Rendering::FontPool::getInstance()->release();
+	Rendering::ShaderPool::getInstance()->release();
 
 	if (m_game)
 	{
-		m_game->Deinit();
+		m_game->deinit();
 
-		GameObject *rootGameObject = m_game->GetRootObject();
+		GameObject *rootGameObject = m_game->getRootObject();
 		if (rootGameObject)
 			delete rootGameObject;
 
@@ -60,42 +60,42 @@ void Enco3D::Core::Enco3DEngine::Deinit()
 
 	if (m_window)
 	{
-		m_window->Close();
+		m_window->close();
 		delete m_window;
 	}
 
-	Core::DebugLogger::Deinit();
+	Core::DebugLogger::deinit();
 }
 
-void Enco3D::Core::Enco3DEngine::MainLoop()
+void Enco3D::Core::Enco3DEngine::mainLoop()
 {
 	float unprocessedSeconds = 0.0f;
 
 	Event event;
-	while (m_window->Update(&event))
+	while (m_window->update(&event))
 	{
-		if (!m_window->IsFocused() && m_window->IsFullscreen())
-			m_window->SetFullscreen(false);
+		if (!m_window->isFocused() && m_window->isFullscreen())
+			m_window->setFullscreen(false);
 
 		if (event.type == EventType::Window && event.windowEvent.event == SDL_WINDOWEVENT_RESIZED)
 		{
 			unsigned int newWidth = (unsigned int)event.windowEvent.data1;
 			unsigned int newHeight = (unsigned int)event.windowEvent.data2;
 
-			m_renderingEngine->Resize(newWidth, newHeight);
-			m_game->GetRootObject()->Resize(newWidth, newHeight);
+			m_renderingEngine->resize(newWidth, newHeight);
+			m_game->getRootObject()->resize(newWidth, newHeight);
 		}
 		
-		m_timer->Update();
+		m_timer->update();
 
-		m_renderingEngine->Render(m_game->GetRootObject());
+		m_renderingEngine->render(m_game->getRootObject());
 		
-		unprocessedSeconds += m_timer->GetDeltaTime() * 60.0f;
+		unprocessedSeconds += m_timer->getDeltaTime() * 60.0f;
 		while (unprocessedSeconds >= 1.0f)
 		{
-			m_game->GetRootObject()->Update();
-			m_physicsEngine->Update();
-			m_game->Update();
+			m_game->getRootObject()->update();
+			m_physicsEngine->update();
+			m_game->update();
 
 			m_timer->increaseFps();
 

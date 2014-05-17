@@ -21,10 +21,10 @@ namespace Enco3D
 			ConvexMeshCollisionShape();
 			ConvexMeshCollisionShape(Rendering::Mesh *mesh);
 
-			btCollisionShape *ToBulletPhysicsCollisionShape();
+			btCollisionShape *toBulletPhysicsCollisionShape();
 
-			inline void SetMesh(Rendering::Mesh *mesh) { m_mesh = mesh; }
-			inline Rendering::Mesh *GetMesh() const { return m_mesh; }
+			inline void setMesh(Rendering::Mesh *mesh) { m_mesh = mesh; }
+			inline Rendering::Mesh *getMesh() const { return m_mesh; }
 		};
 	}
 }

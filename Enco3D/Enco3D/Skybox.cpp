@@ -18,7 +18,7 @@ Enco3D::Component::Skybox::Skybox(const std::string &filename)
 	};
 
 	m_skyboxTexture = new Rendering::TextureCubeMap(cubeMapFilenames, Rendering::TextureFilter::Nearest, Rendering::TextureWrap::Clamp);
-	m_skyboxShader = Rendering::ShaderPool::GetInstance()->GetShader("shaders/skybox", Rendering::ShaderType::VertexShader | Rendering::ShaderType::FragmentShader);
+	m_skyboxShader = Rendering::ShaderPool::getInstance()->getShader("shaders/skybox", Rendering::ShaderType::VertexShader | Rendering::ShaderType::FragmentShader);
 
 	Rendering::Vertex vertices[24] =
 	{
@@ -74,15 +74,15 @@ Enco3D::Component::Skybox::~Skybox()
 		delete m_mesh;
 }
 
-void Enco3D::Component::Skybox::InitRendering()
+void Enco3D::Component::Skybox::initRendering()
 {
-	GetRenderingEngine()->SetSkybox(this);
+	getRenderingEngine()->setSkybox(this);
 }
 
-void Enco3D::Component::Skybox::Render(const Component::Camera *camera)
+void Enco3D::Component::Skybox::render(const Component::Camera *camera)
 {
-	m_skyboxShader->Bind();
-	m_skyboxShader->UpdateUniforms(GetTransform(), camera, GetRenderingEngine(), nullptr);
+	m_skyboxShader->bind();
+	m_skyboxShader->updateUniforms(getTransform(), camera, getRenderingEngine(), nullptr);
 	
-	m_mesh->Render();
+	m_mesh->render();
 }

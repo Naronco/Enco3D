@@ -18,7 +18,7 @@ namespace Enco3D
 		public:
 			/// <summary>Sets a new seed</summary>
 			/// <param name="seed">The new seed as an unsigned long</param>
-			inline static void SetSeed(unsigned long seed)
+			inline static void setSeed(unsigned long seed)
 			{
 				x = seed;
 				y = x + 34575425;
@@ -26,7 +26,7 @@ namespace Enco3D
 			}
 
 			/// <summary>Returns a random unsigned long</summary>
-			inline static unsigned long NextLong()
+			inline static unsigned long nextLong()
 			{
 				x ^= x << 16;
 				x ^= x >> 5;
@@ -41,34 +41,34 @@ namespace Enco3D
 			}
 
 			/// <summary>Returns a random int >= 0</summary>
-			inline static int NextInt()
+			inline static int nextInt()
 			{
-				return (NextLong() % LONG_MAX);
+				return (nextLong() % LONG_MAX);
 			}
 
 			/// <summary>Returns a random int from 0 to the max value</summary>
 			/// <param name="max">The maximum value of the returned integer</param>
-			inline static int NextInt(int max)
+			inline static int nextInt(int max)
 			{
-				return (NextInt() % max);
+				return (nextInt() % max);
 			}
 
 			/// <summary>Returns a random float from 0.0f to 1.0f</summary>
-			inline static float NextFloat()
+			inline static float nextFloat()
 			{
-				return (NextLong() % LONG_MAX) / (float)LONG_MAX;
+				return (nextLong() % LONG_MAX) / (float)LONG_MAX;
 			}
 
 			/// <summary>Returns a random double from 0.0 to 1.0</summary>
 			inline static double NextDouble()
 			{
-				return (NextLong() % LONG_MAX) / (double)LONG_MAX;
+				return (nextLong() % LONG_MAX) / (double)LONG_MAX;
 			}
 
 			/// <summary>Returns a random boolean (true or false)</summary>
 			inline static bool NextBool()
 			{
-				return (NextInt(2) == 0);
+				return (nextInt(2) == 0);
 			}
 		};
 	}

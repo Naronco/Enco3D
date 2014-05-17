@@ -16,14 +16,14 @@ namespace Enco3D
 		public:
 			SpotLight()
 			{
-				m_shader = Rendering::ShaderPool::GetInstance()->GetShader("shaders/forwardSpotLight", Rendering::ShaderType::VertexShader | Rendering::ShaderType::FragmentShader);
+				m_shader = Rendering::ShaderPool::getInstance()->getShader("shaders/forwardSpotLight", Rendering::ShaderType::VertexShader | Rendering::ShaderType::FragmentShader);
 			}
 
-			inline void SetRange(float range) { m_range = range; }
-			inline void SetCutoff(float cutoff) { m_cutoff = cutoff; }
+			inline void setRange(float range) { m_range = range; }
+			inline void setCutoff(float cutoff) { m_cutoff = cutoff; }
 
-			inline float GetRange() const { return m_range; }
-			inline float GetCutoff() const { return m_cutoff; }
+			inline float getRange() const { return m_range; }
+			inline float getCutoff() const { return m_cutoff; }
 		};
 	}
 }

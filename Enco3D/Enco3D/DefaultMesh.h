@@ -20,14 +20,14 @@ namespace Enco3D
 			DefaultMesh();
 			DefaultMesh(Rendering::Mesh *mesh, Rendering::Material *material);
 
-			void Render(const Camera *camera, Rendering::Shader *shader);
-			void Deinit();
+			void render(const Camera *camera, Rendering::Shader *shader);
+			void deinit();
 
-			inline void SetMesh(Rendering::Mesh *mesh) { m_mesh = mesh; }
-			inline void SetMaterial(Rendering::Material *material) { m_material = material; }
+			inline void setMesh(Rendering::Mesh *mesh) { m_mesh = mesh; }
+			inline void setMaterial(Rendering::Material *material) { m_material = material; }
 			
-			inline Rendering::Mesh *GetMesh() const { return m_mesh; }
-			inline Rendering::Material *GetMaterial() const { return m_material; }
+			inline Rendering::Mesh *getMesh() const { return m_mesh; }
+			inline Rendering::Material *getMaterial() const { return m_material; }
 		};
 	}
 }

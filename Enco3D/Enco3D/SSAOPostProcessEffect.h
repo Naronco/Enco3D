@@ -10,24 +10,24 @@ namespace Enco3D
 		class SSAOPostProcessEffect : public IPostProcessEffect
 		{
 		private:
-			Rendering::Framebuffer *m_ssaoFramebuffer, *m_horizontalBlurFramebuffer, *m_verticalBlurFramebuffer;
-			Rendering::Texture2D *m_ssaoBuffer, *m_horizontalBlurBuffer, *m_verticalBlurBuffer;
-			Rendering::Shader *m_ssaoShader, *m_horizontalBlurShader, *m_verticalBlurShader;
+			Rendering::Framebuffer *m_ssaoFramebuffer, *m_blurFramebuffer;
+			Rendering::Texture2D *m_ssaoBuffer, *m_blurBuffer, *m_randomTexture;
+			Rendering::Shader *m_ssaoShader, *m_blurShader;
 
 			float m_ssaoRadius{ 0.5f }, m_ssaoPower{ 1.0f }, m_ssaoStrength{ 1.0f };
 
 		public:
-			void InitRendering();
-			void Deinit();
+			void initRendering();
+			void deinit();
 
-			void PostProcess(const Camera *camera);
-			void Resize(unsigned int width, unsigned int height);
+			void postProcess(const Camera *camera);
+			void resize(unsigned int width, unsigned int height);
 
-			inline void SetSSAORadius(float radius) { m_ssaoRadius = radius; }
-			inline void SetSSAOPower(float power) { m_ssaoPower = power; }
-			inline void SetSSAOStrength(float strength) { m_ssaoStrength = strength; }
+			inline void setSSAORadius(float radius) { m_ssaoRadius = radius; }
+			inline void setSSAOPower(float power) { m_ssaoPower = power; }
+			inline void setSSAOStrength(float strength) { m_ssaoStrength = strength; }
 
-			inline Rendering::Texture2D *GetFinalBuffer() { return m_verticalBlurBuffer; }
+			inline Rendering::Texture2D *getFinalBuffer() { return m_blurBuffer; }
 		};
 	}
 }

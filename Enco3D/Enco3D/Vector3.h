@@ -7,8 +7,7 @@ namespace Enco3D
 {
 	namespace Core
 	{
-		template <typename T>
-		struct Vector3
+		template <typename T> struct Vector3
 		{
 			union
 			{
@@ -23,9 +22,9 @@ namespace Enco3D
 			inline Vector3(T _x = 0, T _y = 0, T _z = 0) : x(_x), y(_y), z(_z) {  }
 			inline Vector3(const Vector3<T> &v) : x(v.x), y(v.y), z(v.z) {  }
 
-			inline Vector3<T> &Clear() { x = y = z = 0; return *this; }
-			inline Vector3<T> &Set(T _x, T _y, T _z) { x = _x; y = _y; z = _z; return *this; }
-			inline Vector3<T> &Set(const Vector3<T> &v) { x = v.x; y = v.y; z = v.z; return *this; }
+			inline Vector3<T> &clear() { x = y = z = 0; return *this; }
+			inline Vector3<T> &set(T _x, T _y, T _z) { x = _x; y = _y; z = _z; return *this; }
+			inline Vector3<T> &set(const Vector3<T> &v) { x = v.x; y = v.y; z = v.z; return *this; }
 
 			template <typename S> inline bool operator == (const Vector3<S> &v) const { return x == v.x && y == v.y && z == v.z; }
 			template <typename S> inline bool operator != (const Vector3<S> &v) const { return x != v.x || y != v.y || z != v.z; }
@@ -37,27 +36,27 @@ namespace Enco3D
 			template <typename S> inline Vector3<T> operator * (S val) const { return Vector3<T>(x * val, y * val, z * val); }
 			template <typename S> inline Vector3<T> operator / (S val) const { T ival = (T)(1.0 / val); return Vector3<T>(x * ival, y * ival, z * ival); }
 
-			template <typename S> inline Vector3<T> &operator += (const Vector3<S> &v) { return Set(x + v.x, y + v.y, z + v.z); }
-			template <typename S> inline Vector3<T> &operator -= (const Vector3<S> &v) { return Set(x - v.x, y - v.y, z - v.z); }
-			template <typename S> inline Vector3<T> &operator *= (S val) { return Set(x * val, y * val, z * val); }
-			template <typename S> inline Vector3<T> &operator /= (S val) { T ival = (T)(1.0 / val); return Set(x * ival, y * ival, z * ival); }
+			template <typename S> inline Vector3<T> &operator += (const Vector3<S> &v) { return set(x + v.x, y + v.y, z + v.z); }
+			template <typename S> inline Vector3<T> &operator -= (const Vector3<S> &v) { return set(x - v.x, y - v.y, z - v.z); }
+			template <typename S> inline Vector3<T> &operator *= (S val) { return set(x * val, y * val, z * val); }
+			template <typename S> inline Vector3<T> &operator /= (S val) { T ival = (T)(1.0 / val); return set(x * ival, y * ival, z * ival); }
 
-			inline T GetSquaredLength() const { return x * x + y * y + z * z; }
-			inline T GetLength() const { return (T)sqrt(x * x + y * y + z * z); }
+			inline T getSquaredLength() const { return x * x + y * y + z * z; }
+			inline T getLength() const { return (T)sqrt(x * x + y * y + z * z); }
 
-			template <typename S> inline T GetSquaredDistance(const Vector3<S> &v) { T xd = (T)(v.x - x); T yd = (T)(v.y - y); T zd = (T)(v.z - z); return xd * xd + yd * yd + zd * zd; }
-			template <typename S> inline T GetDistance(const Vector3<S> &v) { T xd = (T)(v.x - x); T yd = (T)(v.y - y); T zd = (T)(v.z - z); (T)sqrt(xd * xd + yd * yd + zd * zd); }
+			template <typename S> inline T getSquaredDistance(const Vector3<S> &v) { T xd = (T)(v.x - x); T yd = (T)(v.y - y); T zd = (T)(v.z - z); return xd * xd + yd * yd + zd * zd; }
+			template <typename S> inline T getDistance(const Vector3<S> &v) { T xd = (T)(v.x - x); T yd = (T)(v.y - y); T zd = (T)(v.z - z); (T)sqrt(xd * xd + yd * yd + zd * zd); }
 
-			inline Vector3<T> &Normalize() { return (*this * (T)(1.0 / GetLength())); }
+			inline Vector3<T> &normalize() { return (*this * (T)(1.0 / getLength())); }
 
-			template <typename S> inline T Dot(const Vector3<S> &v) { return x * v.x + y * v.y + z * v.z; }
-			template <typename S> inline Vector3<T> &Cross(const Vector3<S> &v) { return Set(y * v.z - z * v.y, z * v.x - x * v.z, x * v.y - y * v.x); }
+			template <typename S> inline T dot(const Vector3<S> &v) { return x * v.x + y * v.y + z * v.z; }
+			template <typename S> inline Vector3<T> &cross(const Vector3<S> &v) { return set(y * v.z - z * v.y, z * v.x - x * v.z, x * v.y - y * v.x); }
 
-			inline Vector3<T> &Rotate(const Vector3<T> &axis, T angle)
+			inline Vector3<T> &rotate(const Vector3<T> &axis, T angle)
 			{
 				T s = (T)(sin(angle));
 				T c = (T)(cos(angle));
-				return Set(Cross(axis * s) + (*this * c) + (axis * (Dot(axis * (1 - c)))));
+				return set(cross(axis * s) + (*this * c) + (axis * (dot(axis * (1 - c)))));
 			}
 		};
 

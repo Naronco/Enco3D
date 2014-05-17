@@ -17,12 +17,12 @@ namespace Enco3D
 				m_refCount = 1;
 			}
 
-			inline void AddReference()
+			inline void addReference()
 			{
 				m_refCount++;
 			}
 
-			inline bool RemoveReference()
+			inline bool removeReference()
 			{
 				return --m_refCount == 0;
 			}

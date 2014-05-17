@@ -63,20 +63,13 @@ namespace Enco3D
 			Shader *m_geometryBufferShader{ nullptr };
 
 			Framebuffer *m_geometryFramebuffer;
-			Texture2D *m_positionBuffer;
-			Texture2D *m_normalBuffer;
-			Texture2D *m_lightBuffer;
-			Texture2D *m_backgroundBuffer;
-			Texture2D *m_velocityBuffer;
-			Texture2D *m_depthBuffer;
-
-			Framebuffer *m_compositeFramebuffer;
-			Texture2D *m_compositeBuffer;
+			Texture2D *m_gbuffer0; // RGB = Albedo, A = Specular
+			Texture2D *m_gbuffer1; // RGB = Normals, A = Glossiness
+			Texture2D *m_depthBuffer; // Depth
 
 			Core::Matrix4x4f m_postProcessWorldViewProjectionMatrix;
 			Core::Vector2f m_postProcessTexelSize;
 			
-			Shader *m_compositeShader{ nullptr };
 			Shader *m_finalShader{ nullptr };
 
 			Mesh *m_renderWindow{ nullptr };
@@ -86,44 +79,44 @@ namespace Enco3D
 			RenderingEngine(unsigned int width, unsigned int height);
 			~RenderingEngine();
 
-			void Resize(unsigned int width, unsigned int height);
+			void resize(unsigned int width, unsigned int height);
 
-			void Render(Core::GameObject *gameObject);
-			void RenderCamera(Core::GameObject *gameObject, Component::Camera *camera);
+			void render(Core::GameObject *gameObject);
+			void renderCamera(Core::GameObject *gameObject, Component::Camera *camera);
 
-			inline void AddLight(Component::ILight *light) { m_lights.push_back(light); }
-			inline void RemoveLight(Component::ILight *light) { m_lights.erase(remove(m_lights.begin(), m_lights.end(), light), m_lights.end()); }
+			inline void addLight(Component::ILight *light) { m_lights.push_back(light); }
+			inline void removeLight(Component::ILight *light) { m_lights.erase(remove(m_lights.begin(), m_lights.end(), light), m_lights.end()); }
 
-			void InitializePostProcessEffect(Component::IPostProcessEffect *effect);
+			void initializePostProcessEffect(Component::IPostProcessEffect *effect);
 
-			Component::Camera *CreatePerspectiveCamera(float fovInRadians, float zNear, float zFar);
-			Component::Camera *CreateOrthographicCamera(float zNear, float zFar);
+			Component::Camera *createPerspectiveCamera(float fovInRadians, float zNear, float zFar);
+			Component::Camera *createOrthographicCamera(float zNear, float zFar, float size = 1.0f);
 
-			inline void SetClearColor(float r, float g, float b) const { glClearColor(r, g, b, 0); }
-			inline void SetRasterizationMode(const RasterizationMode &mode) { glPolygonMode(GL_FRONT_AND_BACK, mode); }
+			inline void setClearColor(float r, float g, float b) const { glClearColor(r, g, b, 0); }
+			inline void setRasterizationMode(const RasterizationMode &mode) { glPolygonMode(GL_FRONT_AND_BACK, mode); }
 
-			inline void SetCamera(Component::Camera *camera, unsigned int index) { m_cameras[index] = camera; }
-			inline void SetSkybox(Component::Skybox *skybox) { m_skybox = skybox; }
-			inline void SetGlobalAmbientColor(const Core::Vector3f &globalAmbientColor) { m_globalAmbientColor = globalAmbientColor; }
-			inline void SetWidth(unsigned int width) { m_width = width; }
-			inline void SetHeight(unsigned int height) { m_height = height; }
-			inline void SetZNearClippingPlane(float val) { m_zNearClippingPlane = val; }
-			inline void SetZFarClippingPlane(float val) { m_zFarClippingPlane = val; }
+			inline void setCamera(Component::Camera *camera, unsigned int index) { m_cameras[index] = camera; }
+			inline void setSkybox(Component::Skybox *skybox) { m_skybox = skybox; }
+			inline void setGlobalAmbientColor(const Core::Vector3f &globalAmbientColor) { m_globalAmbientColor = globalAmbientColor; }
+			inline void setWidth(unsigned int width) { m_width = width; }
+			inline void setHeight(unsigned int height) { m_height = height; }
+			inline void setZNearClippingPlane(float val) { m_zNearClippingPlane = val; }
+			inline void setZFarClippingPlane(float val) { m_zFarClippingPlane = val; }
 
-			inline Component::Camera *GetCamera(unsigned int depth) const { return m_cameras[depth]; }
-			inline Component::Skybox *GetSkybox() const { return m_skybox; }
-			inline Component::Camera *GetGUICamera() const { return m_GUICamera; }
-			inline vector<Component::ILight *> GetLights() const { return m_lights; }
-			inline Core::Vector3f GetGlobalAmbientColor() const { return m_globalAmbientColor; }
-			inline Component::ILight *GetActiveLight() const { return m_activeLight; };
-			inline float GetZNearClippingPlane() const { return m_zNearClippingPlane; }
-			inline float GetZFarClippingPlane() const { return m_zFarClippingPlane; }
-			inline Mesh *GetRenderWindow() const { return m_renderWindow; }
-			inline Core::Matrix4x4f GetPostProcessWorldViewProjectionMatrix() const { return m_postProcessWorldViewProjectionMatrix; }
-			inline Core::Vector2f GetPostProcessTexelSize() const { return m_postProcessTexelSize; }
+			inline Component::Camera *getCamera(unsigned int depth) const { return m_cameras[depth]; }
+			inline Component::Skybox *getSkybox() const { return m_skybox; }
+			inline Component::Camera *getGUICamera() const { return m_GUICamera; }
+			inline vector<Component::ILight *> getLights() const { return m_lights; }
+			inline Core::Vector3f getGlobalAmbientColor() const { return m_globalAmbientColor; }
+			inline Component::ILight *getActiveLight() const { return m_activeLight; };
+			inline float getZNearClippingPlane() const { return m_zNearClippingPlane; }
+			inline float getZFarClippingPlane() const { return m_zFarClippingPlane; }
+			inline Mesh *getRenderWindow() const { return m_renderWindow; }
+			inline Core::Matrix4x4f getPostProcessWorldViewProjectionMatrix() const { return m_postProcessWorldViewProjectionMatrix; }
+			inline Core::Vector2f getPostProcessTexelSize() const { return m_postProcessTexelSize; }
 
-			inline unsigned int GetWidth() const { return m_width; }
-			inline unsigned int GetHeight() const { return m_height; }
+			inline unsigned int getWidth() const { return m_width; }
+			inline unsigned int getHeight() const { return m_height; }
 		};
 	}
 }

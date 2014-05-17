@@ -30,16 +30,16 @@ namespace Enco3D
 		public:
 			inline Enco3DEngine() {  }
 
-			void Init(char *windowTitle, unsigned int windowWidth, unsigned int windowHeight, bool multisampleEnabled, unsigned int aaSamples, IGame *game);
-			void Deinit();
-			void MainLoop();
+			void init(char *windowTitle, unsigned int windowWidth, unsigned int windowHeight, bool multisampleEnabled, unsigned int aaSamples, IGame *game);
+			void deinit();
+			void mainLoop();
 
-			inline GLWindow *GetWindow() const { return m_window; }
-			inline Timer *GetTimer() const { return m_timer; }
-			inline IGame *GetGame() const { return m_game; }
-			inline Rendering::RenderingEngine *GetRenderingEngine() const { return m_renderingEngine; }
-			inline Physics::PhysicsEngine *GetPhysicsEngine() const { return m_physicsEngine; }
-			inline Audio::AudioEngine *GetAudioEngine() const { return m_audioEngine; }
+			inline GLWindow *getWindow() const { return m_window; }
+			inline Timer *getTimer() const { return m_timer; }
+			inline IGame *getGame() const { return m_game; }
+			inline Rendering::RenderingEngine *getRenderingEngine() const { return m_renderingEngine; }
+			inline Physics::PhysicsEngine *getPhysicsEngine() const { return m_physicsEngine; }
+			inline Audio::AudioEngine *getAudioEngine() const { return m_audioEngine; }
 		};
 	}
 }

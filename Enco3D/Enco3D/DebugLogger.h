@@ -24,13 +24,13 @@ namespace Enco3D
 			static std::ofstream s_outputStream;
 
 		public:
-			static void Init();
-			static void Deinit();
+			static void init();
+			static void deinit();
 
-			static void Log(const std::string &text);
+			static void log(const std::string &text);
 
-			static void SetFlag(unsigned int flag, bool enabled) { s_flags[flag] = enabled; }
-			static bool IsFlagEnabled(unsigned int flag) { return s_flags[flag]; }
+			static void setFlag(unsigned int flag, bool enabled) { s_flags[flag] = enabled; }
+			static bool isFlagEnabled(unsigned int flag) { return s_flags[flag]; }
 		};
 	}
 }

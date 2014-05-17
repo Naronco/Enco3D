@@ -15,145 +15,148 @@ Enco3D::Core::GameObject::GameObject(const string &name)
 
 Enco3D::Core::GameObject::~GameObject()
 {
-	for (unsigned int i = 0; i < m_components.size(); i++)
-		RemoveComponent(m_components[i]);
+	for (unsigned int j = 0; j < m_components.size(); j++)
+	{
+		m_components[j]->deinit();
+		delete m_components[j];
+	}
+
+	m_components.clear();
 
 	for (unsigned int i = 0; i < m_children.size(); i++)
 		if (m_children[i])
 			delete m_children[i];
 }
 
-void Enco3D::Core::GameObject::Update()
+void Enco3D::Core::GameObject::update()
 {
 	if (!m_enabled)
 		return;
 
-	m_transform->Update();
+	m_transform->update();
 
 	for (unsigned int i = 0; i < m_children.size(); i++)
-		m_children[i]->Update();
+		m_children[i]->update();
 
 	for (unsigned int i = 0; i < m_components.size(); i++)
-		m_components[i]->Update();
+		m_components[i]->update();
 }
 
-void Enco3D::Core::GameObject::Render(const Enco3D::Component::Camera *camera, Enco3D::Rendering::Shader *shader)
-{
-	if (!m_enabled)
-		return;
-
-	for (unsigned int i = 0; i < m_children.size(); i++)
-		m_children[i]->Render(camera, shader);
-
-	for (unsigned int i = 0; i < m_components.size(); i++)
-		m_components[i]->Render(camera, shader);
-}
-
-void Enco3D::Core::GameObject::RenderGUI(const Enco3D::Component::Camera *camera, Enco3D::Rendering::Shader *shader)
+void Enco3D::Core::GameObject::render(const Enco3D::Component::Camera *camera, Enco3D::Rendering::Shader *shader)
 {
 	if (!m_enabled)
 		return;
 
 	for (unsigned int i = 0; i < m_children.size(); i++)
-		m_children[i]->RenderGUI(camera, shader);
+		m_children[i]->render(camera, shader);
 
 	for (unsigned int i = 0; i < m_components.size(); i++)
-		m_components[i]->RenderGUI(camera, shader);
+		m_components[i]->render(camera, shader);
 }
 
-void Enco3D::Core::GameObject::Resize(unsigned int width, unsigned int height)
+void Enco3D::Core::GameObject::renderGUI(const Enco3D::Component::Camera *camera, Enco3D::Rendering::Shader *shader)
+{
+	if (!m_enabled)
+		return;
+
+	for (unsigned int i = 0; i < m_children.size(); i++)
+		m_children[i]->renderGUI(camera, shader);
+
+	for (unsigned int i = 0; i < m_components.size(); i++)
+		m_components[i]->renderGUI(camera, shader);
+}
+
+void Enco3D::Core::GameObject::resize(unsigned int width, unsigned int height)
 {
 	for (unsigned int i = 0; i < m_children.size(); i++)
-		m_children[i]->Resize(width, height);
+		m_children[i]->resize(width, height);
 
 	for (unsigned int i = 0; i < m_components.size(); i++)
-		m_components[i]->Resize(width, height);
+		m_components[i]->resize(width, height);
 }
 
-Enco3D::Core::GameObject *Enco3D::Core::GameObject::AddChild(GameObject *child)
+Enco3D::Core::GameObject *Enco3D::Core::GameObject::addChild(GameObject *child)
 {
 	if (m_renderingEngine)
-		child->SetRenderingEngine(m_renderingEngine);
+		child->setRenderingEngine(m_renderingEngine);
 	
 	if (m_physicsEngine)
-		child->SetPhysicsEngine(m_physicsEngine);
+		child->setPhysicsEngine(m_physicsEngine);
 
-	child->SetWindow(m_window);
-	child->SetTimer(m_timer);
-	child->GetTransform()->SetParentTransform(m_transform);
+	child->setWindow(m_window);
+	child->setTimer(m_timer);
+	child->getTransform()->setParentTransform(m_transform);
 	m_children.push_back(child);
 
 	return this;
 }
 
-Enco3D::Core::GameObject *Enco3D::Core::GameObject::AddComponent(IGameComponent *component)
+Enco3D::Core::GameObject *Enco3D::Core::GameObject::addComponent(IGameComponent *component)
 {
 	for (unsigned int i = 0; i < m_components.size(); i++)
-		m_components[i]->OnAddComponentToObject(component);
+		m_components[i]->onAddComponentToObject(component);
 
-	component->SetGameObject(this);
-	component->Init();
+	component->setGameObject(this);
+	component->init();
 	m_components.push_back(component);
 
 	return this;
 }
 
-void Enco3D::Core::GameObject::RemoveComponent(IGameComponent *component)
+void Enco3D::Core::GameObject::removeComponent(IGameComponent *component)
 {
 	for (unsigned int i = 0; i < m_components.size(); i++)
-	{
 		if (m_components[i] != component)
-			m_components[i]->OnRemoveComponentFromObject(component);
-	}
+			m_components[i]->onRemoveComponentFromObject(component);
 
-	component->Deinit();
+	component->deinit();
 	delete component;
 
 	m_components.erase(std::remove(m_components.begin(), m_components.end(), component), m_components.end());
 }
 
-void Enco3D::Core::GameObject::SetRenderingEngine(Enco3D::Rendering::RenderingEngine *renderingEngine)
+void Enco3D::Core::GameObject::setRenderingEngine(Enco3D::Rendering::RenderingEngine *renderingEngine)
 {
 	m_renderingEngine = renderingEngine;
 
 	for (unsigned int i = 0; i < m_children.size(); i++)
-		m_children[i]->SetRenderingEngine(renderingEngine);
+		m_children[i]->setRenderingEngine(renderingEngine);
 
 	for (unsigned int i = 0; i < m_components.size(); i++)
-		m_components[i]->InitRendering();
+		m_components[i]->initRendering();
 }
 
-void Enco3D::Core::GameObject::SetPhysicsEngine(Enco3D::Physics::PhysicsEngine *physicsEngine)
+void Enco3D::Core::GameObject::setPhysicsEngine(Enco3D::Physics::PhysicsEngine *physicsEngine)
 {
 	m_physicsEngine = physicsEngine;
 
 	for (unsigned int i = 0; i < m_children.size(); i++)
-		m_children[i]->SetPhysicsEngine(physicsEngine);
+		m_children[i]->setPhysicsEngine(physicsEngine);
 
 	for (unsigned int i = 0; i < m_components.size(); i++)
-		m_components[i]->InitPhysics();
+		m_components[i]->initPhysics();
 }
 
-void Enco3D::Core::GameObject::SetWindow(GLWindow *window)
+void Enco3D::Core::GameObject::setWindow(GLWindow *window)
 {
 	m_window = window;
 
 	for (unsigned int i = 0; i < m_children.size(); i++)
-		m_children[i]->SetWindow(window);
+		m_children[i]->setWindow(window);
 }
 
-void Enco3D::Core::GameObject::SetTimer(Timer *timer)
+void Enco3D::Core::GameObject::setTimer(Timer *timer)
 {
 	m_timer = timer;
 
 	for (unsigned int i = 0; i < m_children.size(); i++)
-		m_children[i]->SetTimer(timer);
+		m_children[i]->setTimer(timer);
 }
 
-Enco3D::Core::GameObject *Enco3D::Core::GameObject::GetChild(const string &name) const
+Enco3D::Core::GameObject *Enco3D::Core::GameObject::getChild(const string &name) const
 {
 	for (unsigned int i = m_children.size() - 1; i >= 0; i--)
-		if (m_children[i]->GetName() == name)
+		if (m_children[i]->getName() == name)
 			return m_children[i];
 
 	return nullptr;

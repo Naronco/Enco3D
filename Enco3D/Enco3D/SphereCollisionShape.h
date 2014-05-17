@@ -17,10 +17,10 @@ namespace Enco3D
 			SphereCollisionShape();
 			SphereCollisionShape(float radius);
 
-			btCollisionShape *ToBulletPhysicsCollisionShape();
+			btCollisionShape *toBulletPhysicsCollisionShape();
 
-			inline void SetRadius(float radius) { m_radius = radius; }
-			inline float GetRadius() const { return m_radius; }
+			inline void setRadius(float radius) { m_radius = radius; }
+			inline float getRadius() const { return m_radius; }
 		};
 	}
 }

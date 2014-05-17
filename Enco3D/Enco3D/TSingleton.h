@@ -5,7 +5,7 @@ template <typename T>
 class TSingleton
 {
 public:
-	inline static T *GetInstance()
+	inline static T *getInstance()
 	{
 		static T instance;
 		return &instance;

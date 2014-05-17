@@ -1,0 +1,16 @@
+#version 120
+
+varying vec3 texCoord;
+
+uniform sampler2D gbuffer_lightTexture;
+uniform sampler2D gbuffer_backgroundTexture;
+
+void main()
+{
+	vec4 light = texture2D(gbuffer_lightTexture, texCoord.xy);
+	
+	if(light.a < 0.1f)
+		gl_FragColor = texture2D(gbuffer_backgroundTexture, texCoord.xy);
+	else
+		gl_FragColor = light;
+}

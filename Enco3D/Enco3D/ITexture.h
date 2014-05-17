@@ -74,11 +74,11 @@ namespace Enco3D
 		public:
 			virtual ~ITexture() {  }
 
-			virtual void Bind(unsigned int unit = 0) const = 0;
+			virtual void bind(unsigned int unit = 0) const = 0;
 			
-			inline GLuint GetID() const { return m_id; }
-			inline unsigned int GetWidth() const { return m_width; }
-			inline unsigned int GetHeight() const { return m_height; }
+			inline GLuint getID() const { return m_id; }
+			inline unsigned int getWidth() const { return m_width; }
+			inline unsigned int getHeight() const { return m_height; }
 		};
 	}
 }

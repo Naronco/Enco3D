@@ -17,43 +17,79 @@ namespace Enco3D
 			std::map<std::string, Core::Vector3f> vector3fValues;
 			std::map<std::string, Texture2D*> texture2dValues;
 
-			~Material() {
-				for (std::map<std::string, Texture2D*>::iterator it = texture2dValues.begin(); it != texture2dValues.end(); it++) {
-					if (it->second) delete it->second;
-				}
+			Material()
+			{
 			}
 
-			inline void AddFloat(const std::string &name, float value)
+			Material(Texture2D *diffuseTexture)
+			{
+				addTexture2D("diffuseTexture", diffuseTexture);
+			}
+
+			Material(Texture2D *diffuseTexture, const Core::Vector3f &diffuseColor)
+			{
+				addTexture2D("diffuseTexture", diffuseTexture);
+				addVector3f("diffuseColor", diffuseColor);
+			}
+
+			Material(const Core::Vector3f &diffuseColor)
+			{
+				addVector3f("diffuseColor", diffuseColor);
+			}
+
+			Material(Texture2D *diffuseTexture, const Core::Vector3f &diffuseColor, float specularIntensity, float specularExponent)
+			{
+				addTexture2D("diffuseTexture", diffuseTexture);
+				addVector3f("diffuseColor", diffuseColor);
+				addFloat("specularIntensity", specularIntensity);
+				addFloat("specularExponent", specularExponent);
+			}
+
+			Material(const Core::Vector3f &diffuseColor, float specularIntensity, float specularExponent)
+			{
+				addVector3f("diffuseColor", diffuseColor);
+				addFloat("specularIntensity", specularIntensity);
+				addFloat("specularExponent", specularExponent);
+			}
+
+			~Material()
+			{
+				for (std::map<std::string, Texture2D*>::iterator it = texture2dValues.begin(); it != texture2dValues.end(); it++)
+					if (it->second)
+						delete it->second;
+			}
+
+			inline void addFloat(const std::string &name, float value)
 			{
 				floatValues.insert(std::pair<std::string, float>(name, value));
 			}
 
-			inline void AddVector3f(const std::string &name, const Core::Vector3f &vector)
+			inline void addVector3f(const std::string &name, const Core::Vector3f &vector)
 			{
 				vector3fValues.insert(std::pair<std::string, Core::Vector3f>(name, vector));
 			}
 
-			inline void AddTexture2D(const std::string &name, Texture2D *texture)
+			inline void addTexture2D(const std::string &name, Texture2D *texture)
 			{
 				texture2dValues.insert(std::pair<std::string, Texture2D*>(name, texture));
 			}
 
-			inline void SetFloat(const std::string &name, float value)
+			inline void setFloat(const std::string &name, float value)
 			{
 				floatValues[name] = value;
 			}
 
-			inline void SetVector3f(const std::string &name, const Core::Vector3f &vector)
+			inline void setVector3f(const std::string &name, const Core::Vector3f &vector)
 			{
 				vector3fValues[name] = vector;
 			}
 
-			inline void SetTexture2D(const std::string &name, Texture2D *texture)
+			inline void setTexture2D(const std::string &name, Texture2D *texture)
 			{
 				texture2dValues[name] = texture;
 			}
 
-			inline float GetFloat(const std::string &name)
+			inline float getFloat(const std::string &name)
 			{
 				std::map<std::string, float>::iterator it = floatValues.find(name);
 				if (it != floatValues.end())
@@ -62,7 +98,7 @@ namespace Enco3D
 					return 0.0f;
 			}
 
-			inline Core::Vector3f GetVector3f(const std::string &name)
+			inline Core::Vector3f getVector3f(const std::string &name)
 			{
 				std::map<std::string, Core::Vector3f>::iterator it = vector3fValues.find(name);
 				if (it != vector3fValues.end())
@@ -71,7 +107,7 @@ namespace Enco3D
 					return Core::Vector3Template::One;
 			}
 
-			inline Texture2D *GetTexture2D(const std::string &name)
+			inline Texture2D *getTexture2D(const std::string &name)
 			{
 				std::map<std::string, Texture2D *>::iterator it = texture2dValues.find(name);
 				if (it != texture2dValues.end())

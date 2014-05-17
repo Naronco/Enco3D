@@ -40,32 +40,32 @@ Enco3D::Core::GLWindow::GLWindow(char *title, unsigned int width, unsigned int h
 	}
 	else
 	{
-		Core::DebugLogger::Log("Failed to create SDL window");
+		Core::DebugLogger::log("Failed to create SDL window");
 		return;
 	}
 
 	GLenum result = glewInit();
 	if (result == GLEW_OK)
-		Core::DebugLogger::Log("Successfully initialized GLEW");
+		Core::DebugLogger::log("Successfully initialized GLEW");
 	else
-		Core::DebugLogger::Log("Failed to initialize GLEW");
+		Core::DebugLogger::log("Failed to initialize GLEW");
 
 	Input::Init();
 }
 
-void Enco3D::Core::GLWindow::Show()
+void Enco3D::Core::GLWindow::show()
 {
 	if (m_window != nullptr)
 		SDL_ShowWindow(m_window);
 }
 
-void Enco3D::Core::GLWindow::Hide()
+void Enco3D::Core::GLWindow::hide()
 {
 	if (m_window != nullptr)
 		SDL_HideWindow(m_window);
 }
 
-void Enco3D::Core::GLWindow::Close()
+void Enco3D::Core::GLWindow::close()
 {
 	if (m_window != nullptr)
 	{
@@ -74,7 +74,7 @@ void Enco3D::Core::GLWindow::Close()
 	}
 }
 
-void Enco3D::Core::GLWindow::Resize(unsigned int width, unsigned int height)
+void Enco3D::Core::GLWindow::resize(unsigned int width, unsigned int height)
 {
 	if (m_window)
 	{
@@ -86,19 +86,19 @@ void Enco3D::Core::GLWindow::Resize(unsigned int width, unsigned int height)
 	}
 }
 
-void Enco3D::Core::GLWindow::SetFullscreen(bool fullscreen)
+void Enco3D::Core::GLWindow::setFullscreen(bool fullscreen)
 {
 	if (m_window && SDL_SetWindowFullscreen(m_window, fullscreen) == 0)
 		m_fullscreen = fullscreen;
 }
 
-void Enco3D::Core::GLWindow::SetPosition(int x, int y)
+void Enco3D::Core::GLWindow::setPosition(int x, int y)
 {
 	if (m_window)
 		SDL_SetWindowPosition(m_window, x, y);
 }
 
-bool Enco3D::Core::GLWindow::PollEvent(Event *e)
+bool Enco3D::Core::GLWindow::pollEvent(Event *e)
 {
 	SDL_Event ev;
 	SDL_PollEvent(&ev);
@@ -268,41 +268,41 @@ bool Enco3D::Core::GLWindow::PollEvent(Event *e)
 
 	if (ne.type == EventType::KeyDown)
 	{
-		Input::SetKey(ne.keyboard.keyCode, true);
+		Input::setKey(ne.keyboard.keyCode, true);
 	}
 	else if (ne.type == EventType::KeyUp)
 	{
-		Input::SetKey(ne.keyboard.keyCode, false);
+		Input::setKey(ne.keyboard.keyCode, false);
 	}
 	
 	if (ne.type == EventType::MouseMove)
 	{
-		Input::SetRelativeMouse(ne.mouseMove.relativeX, ne.mouseMove.relativeY);
-		Input::SetMousePos(ne.mouseMove.destinationX, ne.mouseMove.destinationY);
+		Input::setRelativeMouse(ne.mouseMove.relativeX, ne.mouseMove.relativeY);
+		Input::setMousePos(ne.mouseMove.destinationX, ne.mouseMove.destinationY);
 	}
 	else
 	{
-		Input::SetRelativeMouse(0, 0);
+		Input::setRelativeMouse(0, 0);
 	}
 
 	if (ne.type == EventType::MouseClick)
 	{
-		Input::SetMouseButton(ne.mouseButton.button, true);
-		Input::SetMousePos(ne.mouseButton.x, ne.mouseButton.y);
+		Input::setMouseButton(ne.mouseButton.button, true);
+		Input::setMousePos(ne.mouseButton.x, ne.mouseButton.y);
 	}
 	else if (ne.type == EventType::MouseRelease)
 	{
-		Input::SetMouseButton(ne.mouseButton.button, false);
-		Input::SetMousePos(ne.mouseButton.x, ne.mouseButton.y);
+		Input::setMouseButton(ne.mouseButton.button, false);
+		Input::setMousePos(ne.mouseButton.x, ne.mouseButton.y);
 	}
 
 	*e = ne;
 	return true;
 }
 
-bool Enco3D::Core::GLWindow::Update(Event *e)
+bool Enco3D::Core::GLWindow::update(Event *e)
 {
-	PollEvent(e);
+	pollEvent(e);
 	SDL_GL_SwapWindow(m_window);
 
 	return m_running;

@@ -25,11 +25,11 @@ Enco3D::Rendering::TextureCubeMap::TextureCubeMap(const std::string *filenames, 
 
 		if (data == nullptr)
 		{
-			Core::DebugLogger::Log("[ERROR] Unable to load texture: " + filenames[i]);
+			Core::DebugLogger::log("[ERROR] Unable to load texture: " + filenames[i]);
 			return;
 		}
 		else
-			Core::DebugLogger::Log("Successfully loaded texture " + filenames[i]);
+			Core::DebugLogger::log("Successfully loaded texture " + filenames[i]);
 
 		m_width = (unsigned int)w;
 		m_height = (unsigned int)h;
@@ -39,17 +39,17 @@ Enco3D::Rendering::TextureCubeMap::TextureCubeMap(const std::string *filenames, 
 
 	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
-	Core::DebugLogger::Log("[OPEN_GL] Created texture cube map with id " + std::to_string(m_id));
+	Core::DebugLogger::log("[OPEN_GL] Created texture cube map with id " + std::to_string(m_id));
 }
 
 Enco3D::Rendering::TextureCubeMap::~TextureCubeMap()
 {
-	Core::DebugLogger::Log("[OPEN_GL] Released texture cube map with id " + std::to_string(m_id));
+	Core::DebugLogger::log("[OPEN_GL] Released texture cube map with id " + std::to_string(m_id));
 
 	glDeleteTextures(1, &m_id);
 }
 
-void Enco3D::Rendering::TextureCubeMap::Bind(unsigned int unit) const
+void Enco3D::Rendering::TextureCubeMap::bind(unsigned int unit) const
 {
 	glActiveTexture(GL_TEXTURE0 + unit);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, m_id);

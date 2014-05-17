@@ -9,18 +9,18 @@ Enco3D::Physics::StaticConcaveMeshCollisionShape::StaticConcaveMeshCollisionShap
 	m_mesh = mesh;
 }
 
-btCollisionShape *Enco3D::Physics::StaticConcaveMeshCollisionShape::ToBulletPhysicsCollisionShape()
+btCollisionShape *Enco3D::Physics::StaticConcaveMeshCollisionShape::toBulletPhysicsCollisionShape()
 {
 	btTriangleMesh *triangleMesh = new btTriangleMesh;
-	for (unsigned int i = 0; i < m_mesh->GetIndexCount(); i += 3)
+	for (unsigned int i = 0; i < m_mesh->getIndexCount(); i += 3)
 	{
-		unsigned int index0 = m_mesh->GetIndices()[i + 0];
-		unsigned int index1 = m_mesh->GetIndices()[i + 1];
-		unsigned int index2 = m_mesh->GetIndices()[i + 2];
+		unsigned int index0 = m_mesh->getIndices()[i + 0];
+		unsigned int index1 = m_mesh->getIndices()[i + 1];
+		unsigned int index2 = m_mesh->getIndices()[i + 2];
 
-		btVector3 vertex0(m_mesh->GetVertices()[index0].x, m_mesh->GetVertices()[index0].y, m_mesh->GetVertices()[index0].z);
-		btVector3 vertex1(m_mesh->GetVertices()[index1].x, m_mesh->GetVertices()[index1].y, m_mesh->GetVertices()[index1].z);
-		btVector3 vertex2(m_mesh->GetVertices()[index2].x, m_mesh->GetVertices()[index2].y, m_mesh->GetVertices()[index2].z);
+		btVector3 vertex0(m_mesh->getVertices()[index0].x, m_mesh->getVertices()[index0].y, m_mesh->getVertices()[index0].z);
+		btVector3 vertex1(m_mesh->getVertices()[index1].x, m_mesh->getVertices()[index1].y, m_mesh->getVertices()[index1].z);
+		btVector3 vertex2(m_mesh->getVertices()[index2].x, m_mesh->getVertices()[index2].y, m_mesh->getVertices()[index2].z);
 
 		triangleMesh->addTriangle(vertex0, vertex1, vertex2);
 	}

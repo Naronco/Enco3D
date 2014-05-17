@@ -35,16 +35,16 @@ namespace Enco3D
 			Framebuffer();
 			~Framebuffer();
 
-			void AttachTexture2D(Texture2D *texture, unsigned int attachment);
-			void Pack();
+			void attachTexture2D(Texture2D *texture, unsigned int attachment);
+			void pack();
 
-			inline GLuint GetID() const { return m_id; }
+			inline GLuint getID() const { return m_id; }
 		};
 
-		inline static void BindFramebuffer(Framebuffer *framebuffer)
+		inline static void bindFramebuffer(Framebuffer *framebuffer)
 		{
 			if (framebuffer != nullptr)
-				glBindFramebuffer(GL_FRAMEBUFFER, framebuffer->GetID());
+				glBindFramebuffer(GL_FRAMEBUFFER, framebuffer->getID());
 			else
 				glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		}

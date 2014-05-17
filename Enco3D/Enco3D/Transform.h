@@ -36,35 +36,35 @@ namespace Enco3D
 			Transform();
 			Transform(const Transform &other);
 
-			void Update();
-			bool HasChanged() const;
+			void update();
+			bool hasChanged() const;
 
-			void Translate(const Vector3f &translation);
-			void Rotate(const Quaternionf &rotation);
-			void Scale(const Vector3f &scaling);
+			void translate(const Vector3f &translation);
+			void rotate(const Quaternionf &rotation);
+			void scale(const Vector3f &scaling);
 
-			Matrix4x4f GetTransformation();
+			Matrix4x4f getTransformation();
 
-			inline void SetParentTransform(Transform *parentTransform) { m_parentTransform = parentTransform; }
+			inline void setParentTransform(Transform *parentTransform) { m_parentTransform = parentTransform; }
 
-			inline void SetTranslation(const Vector3f &translation) { m_translation = translation; }
-			inline void SetRotation(const Quaternionf &rotation) { m_rotation = rotation; }
-			inline void SetScaling(const Vector3f &scaling) { m_scaling = scaling; }
+			inline void setTranslation(const Vector3f &translation) { m_translation = translation; }
+			inline void setRotation(const Quaternionf &rotation) { m_rotation = rotation; }
+			inline void setScaling(const Vector3f &scaling) { m_scaling = scaling; }
 
-			inline void SetBillboardEnabled(bool enabled) { m_billboardEnabled = enabled; }
-			inline void SetBillboardCamera(Component::Camera *camera) { m_billboardCamera = camera; }
+			inline void setBillboardEnabled(bool enabled) { m_billboardEnabled = enabled; }
+			inline void setBillboardCamera(Component::Camera *camera) { m_billboardCamera = camera; }
 
-			inline Matrix4x4f GetPrevTransformation() const { return m_prevTransformation; }
+			inline Matrix4x4f getPrevTransformation() const { return m_prevTransformation; }
 
-			inline Transform *GetParentTransform() const { return m_parentTransform; }
-			inline Matrix4x4f GetParentMatrix() const { return m_parentMatrix; }
+			inline Transform *getParentTransform() const { return m_parentTransform; }
+			inline Matrix4x4f getParentMatrix() const { return m_parentMatrix; }
 
-			inline Vector3f GetTranslation() const { return GetParentMatrix() * m_translation; }
-			inline Quaternionf GetRotation() const { Quaternionf parentRotation = m_parentTransform != nullptr ? m_parentTransform->GetRotation() : Quaternionf(0, 0, 0, 1); return parentRotation * m_rotation; }
-			inline Vector3f GetScaling() const { return m_scaling; }
+			inline Vector3f getTranslation() const { return getParentMatrix() * m_translation; }
+			inline Quaternionf getRotation() const { Quaternionf parentRotation = m_parentTransform != nullptr ? m_parentTransform->getRotation() : Quaternionf(0, 0, 0, 1); return parentRotation * m_rotation; }
+			inline Vector3f getScaling() const { return m_scaling; }
 
-			inline bool IsBillboardEnabled() const { return m_billboardEnabled; }
-			inline Component::Camera *GetBillboardCamera() const { return m_billboardCamera; }
+			inline bool isBillboardEnabled() const { return m_billboardEnabled; }
+			inline Component::Camera *getBillboardCamera() const { return m_billboardCamera; }
 		};
 	}
 }

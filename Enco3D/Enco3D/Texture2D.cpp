@@ -32,7 +32,7 @@ Enco3D::Rendering::Texture2D::Texture2D(unsigned int width, unsigned int height,
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 
-	Core::DebugLogger::Log("Created texture 2d with id " + std::to_string(m_id));
+	Core::DebugLogger::log("Created texture 2d with id " + std::to_string(m_id));
 }
 
 Enco3D::Rendering::Texture2D::Texture2D(const std::string &filename, unsigned int filter, unsigned int wrap)
@@ -45,11 +45,11 @@ Enco3D::Rendering::Texture2D::Texture2D(const std::string &filename, unsigned in
 
 	if (data == nullptr)
 	{
-		Core::DebugLogger::Log("[ERROR] Unable to load texture: " + filename);
+		Core::DebugLogger::log("[ERROR] Unable to load texture: " + filename);
 		return;
 	}
 	else
-		Core::DebugLogger::Log("Successfully loaded texture " + filename);
+		Core::DebugLogger::log("Successfully loaded texture " + filename);
 	
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 
@@ -76,17 +76,17 @@ Enco3D::Rendering::Texture2D::Texture2D(const std::string &filename, unsigned in
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 
-	Core::DebugLogger::Log("[OPEN_GL] Created texture 2d with id " + std::to_string(m_id));
+	Core::DebugLogger::log("[OPEN_GL] Created texture 2d with id " + std::to_string(m_id));
 }
 
 Enco3D::Rendering::Texture2D::~Texture2D()
 {
-	Core::DebugLogger::Log("[OPEN_GL] Released texture 2d with id " + std::to_string(m_id));
+	Core::DebugLogger::log("[OPEN_GL] Released texture 2d with id " + std::to_string(m_id));
 	
 	glDeleteTextures(1, &m_id);
 }
 
-void Enco3D::Rendering::Texture2D::Bind(unsigned int unit) const
+void Enco3D::Rendering::Texture2D::bind(unsigned int unit) const
 {
 	glActiveTexture(GL_TEXTURE0 + unit);
 	glBindTexture(GL_TEXTURE_2D, m_id);

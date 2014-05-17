@@ -10,7 +10,7 @@ Enco3D::Physics::CapsuleCollisionShape::CapsuleCollisionShape(float radius, floa
 	m_height = height;
 }
 
-btCollisionShape *Enco3D::Physics::CapsuleCollisionShape::ToBulletPhysicsCollisionShape()
+btCollisionShape *Enco3D::Physics::CapsuleCollisionShape::toBulletPhysicsCollisionShape()
 {
 	return new btCapsuleShape(m_radius, m_height);
 }

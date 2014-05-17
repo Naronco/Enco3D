@@ -17,8 +17,8 @@ namespace Enco3D
 			std::map<std::string, Shader*> m_loadedShaders;
 
 		public:
-			Shader *GetShader(const std::string &filename, unsigned int shaderTypes);
-			void Release();
+			Shader *getShader(const std::string &filename, unsigned int shaderTypes);
+			void release();
 		};
 	}
 }

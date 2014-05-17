@@ -8,8 +8,7 @@ namespace Enco3D
 	namespace Core
 	{
 		/// <summary>A 3x3 Matrix structure</summary>
-		template <typename T>
-		struct Matrix3x3
+		template <typename T> struct Matrix3x3
 		{
 			union
 			{
@@ -26,24 +25,24 @@ namespace Enco3D
 			/// <summary>Initializes the identity matrix</summary>
 			inline Matrix3x3()
 			{
-				SetIdentity();
+				setIdentity();
 			}
 
 			/// <summary>Initializes with the given values</summary>
 			inline Matrix3x3(T _m00, T _m01, T _m02, T _m10, T _m11, T _m12, T _m20, T _m21, T _m22)
 			{
-				Set(_m00, _m01, _m02, _m10, _m11, _m12, _m20, _m21, _m22);
+				set(_m00, _m01, _m02, _m10, _m11, _m12, _m20, _m21, _m22);
 			}
 
 			/// <summary>Copies the given matrix</summary>
 			/// <param name="m">The source matrix</param>
 			inline Matrix3x3(const Matrix3x3<T> &m)
 			{
-				Set(m);
+				set(m);
 			}
 
 			/// <summary>Sets the values to the given values</summary>
-			inline Matrix3x3<T> &Set(T _m00, T _m01, T _m02, T _m10, T _m11, T _m12, T _m20, T _m21, T _m22)
+			inline Matrix3x3<T> &set(T _m00, T _m01, T _m02, T _m10, T _m11, T _m12, T _m20, T _m21, T _m22)
 			{
 				m00 = _m00;
 				m01 = _m01;
@@ -59,15 +58,15 @@ namespace Enco3D
 
 			/// <summary>Sets the values to the given matrix</summary>
 			/// <param name="mat">The target matrix</summary>
-			inline Matrix3x3<T> &Set(const Matrix3x3<T> &mat)
+			inline Matrix3x3<T> &set(const Matrix3x3<T> &mat)
 			{
-				return Set(mat.m00, mat.m01, mat.m02, mat.m10, mat.m11, mat.m12, mat.m20, mat.m21, mat.m22);
+				return set(mat.m00, mat.m01, mat.m02, mat.m10, mat.m11, mat.m12, mat.m20, mat.m21, mat.m22);
 			}
 
 			/// <summary>Resets to the identity matrix</summary>
-			inline Matrix3x3<T> &SetIdentity()
+			inline Matrix3x3<T> &setIdentity()
 			{
-				return Set(1, 0, 0, 0, 1, 0, 0, 0, 1);
+				return set(1, 0, 0, 0, 1, 0, 0, 0, 1);
 			}
 
 			/// <summary>Multiplies two matrices, and returns a new matrix</summary>
@@ -100,7 +99,7 @@ namespace Enco3D
 
 			/// <summary>Rotates the matrix over the X axis</summary>
 			/// <param name="angle">The amount to rotate in radians</param>
-			inline Matrix3x3<T> &RotateX(T angle)
+			inline Matrix3x3<T> &rotateX(T angle)
 			{
 				T s = (T)sin(angle);
 				T c = (T)cos(angle);
@@ -109,7 +108,7 @@ namespace Enco3D
 
 			/// <summary>Rotates the matrix over the Y axis</summary>
 			/// <param name="angle">The amount to rotate in radians</param>
-			inline Matrix3x3<T> &RotateY(T angle)
+			inline Matrix3x3<T> &rotateY(T angle)
 			{
 				T s = (T)sin(angle);
 				T c = (T)cos(angle);
@@ -118,7 +117,7 @@ namespace Enco3D
 
 			/// <summary>Rotates the matrix over the Z axis</summary>
 			/// <param name="angle">The amount to rotate in radians</param>
-			inline Matrix3x3<T> &RotateZ(T angle)
+			inline Matrix3x3<T> &rotateZ(T angle)
 			{
 				T s = (T)sin(angle);
 				T c = (T)cos(angle);
@@ -129,7 +128,7 @@ namespace Enco3D
 			/// <param name="forward">The forward looking vector</param>
 			/// <param name="up">The up looking vector</param>
 			/// <param name="right">The right looking vector</param>
-			inline Matrix3x3<T> &SetRotation(const Vector3<T> &forward, const Vector3<T> &up, const Vector3<T> &right)
+			inline Matrix3x3<T> &setRotation(const Vector3<T> &forward, const Vector3<T> &up, const Vector3<T> &right)
 			{
 				return Set(right.x, right.y, right.z, up.x, up.y, up.z, forward.x, forward.y, forward.z);
 			}
@@ -137,25 +136,25 @@ namespace Enco3D
 			/// <summary>Sets to a new rotation matrix, and calculates the right looking vector</summary>
 			/// <param name="forward">The forward looking vector</param>
 			/// <param name="up">The up looking vector</param>
-			inline Matrix3x3<T> &SetRotation(const Vector3<T> &forward, const Vector3<T> &up)
+			inline Matrix3x3<T> &setRotation(const Vector3<T> &forward, const Vector3<T> &up)
 			{
 				Vector3<T> right(up);
-				right.Cross(forward).Normalize();
+				right.cross(forward).normalize();
 
-				return SetRotation(forward, up, right);
+				return setRotation(forward, up, right);
 			}
 
 			/// <summary>Scales the matrix</summary>
 			/// <param name="x">The x scaling</param>
 			/// <param name="y">The y scaling</param>
 			/// <param name="z">The z scaling</param>
-			inline Matrix3x3<T> &Scale(T x, T y, T z)
+			inline Matrix3x3<T> &scale(T x, T y, T z)
 			{
 				return (*this *= Matrix3x3<T>(x, 0, 0, 0, y, 0, 0, 0, z));
 			}
 
 			/// <summary>Transposes the matrix</summary>
-			inline Matrix3x3<T> &Transpose()
+			inline Matrix3x3<T> &transpose()
 			{
 				return Set(m00, m10, m20, m01, m11, m21, m02, m12, m22);
 			}

@@ -48,44 +48,42 @@ namespace Enco3D
 			GameObject(const string &name);
 			~GameObject();
 
-			void Update();
-			void Render(const Component::Camera *camera, Rendering::Shader *shader);
-			void RenderGUI(const Component::Camera *camera, Rendering::Shader *shader);
+			void update();
+			void render(const Component::Camera *camera, Rendering::Shader *shader);
+			void renderGUI(const Component::Camera *camera, Rendering::Shader *shader);
 
-			void Resize(unsigned int width, unsigned int height);
+			void resize(unsigned int width, unsigned int height);
 
-			GameObject *AddChild(GameObject *child);
-			GameObject *AddComponent(IGameComponent *component);
-			void RemoveComponent(IGameComponent *component);
+			GameObject *addChild(GameObject *child);
+			GameObject *addComponent(IGameComponent *component);
+			void removeComponent(IGameComponent *component);
 
-			void SetRenderingEngine(Rendering::RenderingEngine *renderingEngine);
-			void SetPhysicsEngine(Physics::PhysicsEngine *physicsEngine);
-			void SetWindow(GLWindow *window);
-			void SetTimer(Timer *timer);
+			void setRenderingEngine(Rendering::RenderingEngine *renderingEngine);
+			void setPhysicsEngine(Physics::PhysicsEngine *physicsEngine);
+			void setWindow(GLWindow *window);
+			void setTimer(Timer *timer);
 
-			inline void SetName(const string &name) { m_name = name; }
-			inline void SetEnabled(bool enabled) { m_enabled = enabled; }
+			inline void setName(const string &name) { m_name = name; }
+			inline void setEnabled(bool enabled) { m_enabled = enabled; }
 
-			GameObject *GetChild(const string &name) const;
+			GameObject *getChild(const string &name) const;
 
-			template <typename T>
-			IGameComponent *GetGameComponent() const {
+			template <typename T> IGameComponent *getGameComponent() const {
 				for (unsigned int i = m_components.size() - 1; i >= 0; i--)
 					if (typeid(*m_components[i]) == typeid(T))
 						return m_components[i];
-
 				return nullptr;
 			}
 
-			inline Transform *GetTransform() const { return m_transform; }
-			inline string GetName() const { return m_name; }
-			inline bool IsEnabled() const { return m_enabled; }
-			inline vector<GameObject *> GetChildren() const { return m_children; }
-			inline vector<IGameComponent *> GetComponents() const { return m_components; }
-			inline Rendering::RenderingEngine *GetRenderingEngine() const { return m_renderingEngine; }
-			inline Physics::PhysicsEngine *GetPhysicsEngine() const { return m_physicsEngine; }
-			inline GLWindow *GetWindow() const { return m_window; }
-			inline Timer *GetTimer() const { return m_timer; }
+			inline Transform *getTransform() const { return m_transform; }
+			inline string getName() const { return m_name; }
+			inline bool isEnabled() const { return m_enabled; }
+			inline vector<GameObject *> getChildren() const { return m_children; }
+			inline vector<IGameComponent *> getComponents() const { return m_components; }
+			inline Rendering::RenderingEngine *getRenderingEngine() const { return m_renderingEngine; }
+			inline Physics::PhysicsEngine *getPhysicsEngine() const { return m_physicsEngine; }
+			inline GLWindow *getWindow() const { return m_window; }
+			inline Timer *getTimer() const { return m_timer; }
 		};
 	}
 }

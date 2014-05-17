@@ -10,7 +10,7 @@ Enco3D::Physics::ConeCollisionShape::ConeCollisionShape(float radius, float heig
 	m_height = height;
 }
 
-btCollisionShape *Enco3D::Physics::ConeCollisionShape::ToBulletPhysicsCollisionShape()
+btCollisionShape *Enco3D::Physics::ConeCollisionShape::toBulletPhysicsCollisionShape()
 {
 	return new btConeShape(m_radius, m_height);
 }

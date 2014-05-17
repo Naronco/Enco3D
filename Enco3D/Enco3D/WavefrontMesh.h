@@ -31,18 +31,18 @@ namespace Enco3D
 			bool m_successfullyLoadedMesh;
 
 		private:
-			bool InitFromScene(const aiScene *scene, const std::string &filename);
-			void InitMesh(unsigned int index, const aiMesh *mesh);
+			bool initFromScene(const aiScene *scene, const std::string &filename);
+			void initMesh(unsigned int index, const aiMesh *mesh);
 			
 		public:
 			WavefrontMesh();
 			WavefrontMesh(const std::string &filename, Rendering::Material *material);
 			~WavefrontMesh();
 
-			void Render(const Component::Camera *camera, Rendering::Shader *shader);
+			void render(const Component::Camera *camera, Rendering::Shader *shader);
 
-			inline void SetMaterial(Rendering::Material *material) { m_material = material; }
-			inline Rendering::Material *GetMaterial() const { return m_material; }
+			inline void setMaterial(Rendering::Material *material) { m_material = material; }
+			inline Rendering::Material *getMaterial() const { return m_material; }
 		};
 	}
 }

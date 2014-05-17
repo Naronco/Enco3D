@@ -18,12 +18,12 @@ namespace Enco3D
 			FreeLook();
 			FreeLook(float rotateSpeed);
 
-			void Update();
+			void update();
 
-			inline void SetRotationEnabled(bool enabled) { m_rotationEnabled = enabled; }
+			inline void setRotationEnabled(bool enabled) { m_rotationEnabled = enabled; }
 
-			inline void SetRotateSpeed(float rotateSpeed) { m_rotateSpeed = rotateSpeed; }
-			inline float GetRotateSpeed() const { return m_rotateSpeed; }
+			inline void setRotateSpeed(float rotateSpeed) { m_rotateSpeed = rotateSpeed; }
+			inline float getRotateSpeed() const { return m_rotateSpeed; }
 		};
 	}
 }

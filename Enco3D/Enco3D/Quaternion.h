@@ -11,8 +11,7 @@ namespace Enco3D
 {
 	namespace Core
 	{
-		template <typename T>
-		struct Quaternion
+		template <typename T> struct Quaternion
 		{
 			T x, y, z, w;
 
@@ -25,7 +24,7 @@ namespace Enco3D
 				T s = (T)sin(angle * 0.5);
 				T c = (T)cos(angle * 0.5);
 
-				Set(axis.x * s, axis.y * s, axis.z * s, c);
+				set(axis.x * s, axis.y * s, axis.z * s, c);
 			}
 
 			inline Quaternion(T rotX, T rotY, T rotZ)
@@ -45,9 +44,9 @@ namespace Enco3D
 				z = crx * cry * srz - srx * sry * crz;
 			}
 
-			inline Quaternion<T> &Clear() { x = y = z = w = 0; return *this; }
-			inline Quaternion<T> &Set(T _x, T _y, T _z, T _w) { x = _x; y = _y; z = _z; w = _w; return *this; }
-			inline Quaternion<T> &Set(const Quaternion<T> &q) { x = q.x; y = q.y; z = q.z; w = q.w; return *this; }
+			inline Quaternion<T> &clear() { x = y = z = w = 0; return *this; }
+			inline Quaternion<T> &set(T _x, T _y, T _z, T _w) { x = _x; y = _y; z = _z; w = _w; return *this; }
+			inline Quaternion<T> &set(const Quaternion<T> &q) { x = q.x; y = q.y; z = q.z; w = q.w; return *this; }
 
 			inline bool operator == (const Quaternion<T> &q) const { return x == q.x && y == q.y && z == q.z && w == q.w; }
 			inline bool operator != (const Quaternion<T> &q) const { return x != q.x || y != q.y || z != q.z || w != q.w; }
@@ -77,42 +76,42 @@ namespace Enco3D
 			inline Quaternion<T> operator * (T val) const { return Quaternion<T>(x * val, y * val, z * val, w * val); }
 			inline Quaternion<T> &operator *= (T val) { return Set(x * val, y * val, z * val, w * val); }
 
-			inline T GetSquaredLength() const { return x * x + y * y + z * z + w * w; }
-			inline T GetLength() const { return (T)sqrt(x * x + y * y + z * z + w * w); }
+			inline T getSquaredLength() const { return x * x + y * y + z * z + w * w; }
+			inline T getLength() const { return (T)sqrt(x * x + y * y + z * z + w * w); }
 
-			inline Quaternion<T> &Normalize()
+			inline Quaternion<T> &normalize()
 			{
-				return (*this * ((T)(1.0 / GetLength())));
+				return (*this * ((T)(1.0 / getLength())));
 			}
 
-			template <typename S> inline void RotateVector(Vector3<S> *v) const
+			template <typename S> inline void rotateVector(Vector3<S> *v) const
 			{
 				Quaternion<S> conjugate = -(*this);
 				Quaternion<S> w = ((*this) * (*v)) * conjugate;
-				v->Set(w.x, w.y, w.z);
+				v->set(w.x, w.y, w.z);
 			}
 
-			inline Matrix3x3<T> &ToRotationMatrix3x3() const
+			inline Matrix3x3<T> &toRotationMatrix3x3() const
 			{
 				Vector3<T> forward(2 * (x * z - w * y), 2 * (y * z + w * x), 1 - 2 * (x * x + y * y));
 				Vector3<T> up(2 * (x * y + w * z), 1 - 2 * (x * x + z * z), 2 * (y * z - w * x));
 				Vector3<T> right(1 - 2 * (y * y + z * z), 2 * (x * y - w * z), 2 * (x * z + w * y));
 
-				return Matrix3x3<T>().SetRotation(forward, up, right);
+				return Matrix3x3<T>().setRotation(forward, up, right);
 			}
 
-			inline Matrix4x4<T> &ToRotationMatrix4x4() const
+			inline Matrix4x4<T> &toRotationMatrix4x4() const
 			{
 				Vector3<T> forward(2 * (x * z - w * y), 2 * (y * z + w * x), 1 - 2 * (x * x + y * y));
 				Vector3<T> up(2 * (x * y + w * z), 1 - 2 * (x * x + z * z), 2 * (y * z - w * x));
 				Vector3<T> right(1 - 2 * (y * y + z * z), 2 * (x * y - w * z), 2 * (x * z + w * y));
 
-				return Matrix4x4<T>().SetRotation(forward, up, right);
+				return Matrix4x4<T>().setRotation(forward, up, right);
 			}
 
-			inline Vector3<T> GetForward() const { Vector3<T> dir(0, 0, 1); RotateVector(&dir); return dir; }
-			inline Vector3<T> GetUp() const { Vector3<T> dir(0, 1, 0); RotateVector(&dir); return dir; }
-			inline Vector3<T> GetRight() const { Vector3<T> dir(1, 0, 0); RotateVector(&dir); return dir; }
+			inline Vector3<T> getForward() const { Vector3<T> dir(0, 0, 1); rotateVector(&dir); return dir; }
+			inline Vector3<T> getUp() const { Vector3<T> dir(0, 1, 0); rotateVector(&dir); return dir; }
+			inline Vector3<T> getRight() const { Vector3<T> dir(1, 0, 0); rotateVector(&dir); return dir; }
 		};
 
 		template <typename T, typename S> inline Quaternion<S> operator * (T val, const Quaternion<S> &q) { return Quaternion<S>(x * val, y * val, z * val, w * val); }

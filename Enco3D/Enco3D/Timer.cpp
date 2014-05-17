@@ -18,7 +18,7 @@ Enco3D::Core::Timer::Timer(bool printFps)
 	CURRENT_TIME(&m_lastFrameTime);
 }
 
-void Enco3D::Core::Timer::Update()
+void Enco3D::Core::Timer::update()
 {
 	CURRENT_TIME(&m_time);
 	m_deltaTime = (m_time - m_lastTime) * 0.001f;
@@ -27,7 +27,7 @@ void Enco3D::Core::Timer::Update()
 	if (m_time - m_lastFrameTime > 1000)
 	{
 		if (m_printFps)
-			Core::DebugLogger::Log(std::to_string(m_fpsCounter) + " fps");
+			Core::DebugLogger::log(std::to_string(m_fpsCounter) + " fps");
 
 		m_fps = m_fpsCounter;
 		m_fpsCounter = 0;

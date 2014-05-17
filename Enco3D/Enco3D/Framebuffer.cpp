@@ -5,29 +5,29 @@ Enco3D::Rendering::Framebuffer::Framebuffer()
 	glGenFramebuffers(1, &m_id);
 	glBindFramebuffer(GL_FRAMEBUFFER, m_id);
 
-	Core::DebugLogger::Log("[OPEN_GL] Created framebuffer with id " + std::to_string(m_id));
+	Core::DebugLogger::log("[OPEN_GL] Created framebuffer with id " + std::to_string(m_id));
 }
 
 Enco3D::Rendering::Framebuffer::~Framebuffer()
 {
-	Core::DebugLogger::Log("[OPEN_GL] Released framebuffer with id " + std::to_string(m_id));
+	Core::DebugLogger::log("[OPEN_GL] Released framebuffer with id " + std::to_string(m_id));
 
 	glDeleteFramebuffers(1, &m_id);
 }
 
-void Enco3D::Rendering::Framebuffer::AttachTexture2D(Texture2D *texture, unsigned int attachment)
+void Enco3D::Rendering::Framebuffer::attachTexture2D(Texture2D *texture, unsigned int attachment)
 {
 	if (attachment != Attachment::Depth)
 	{
 		unsigned int gl_attachment = GL_COLOR_ATTACHMENT0 + attachment;
-		glFramebufferTexture2D(GL_FRAMEBUFFER, gl_attachment, GL_TEXTURE_2D, texture->GetID(), 0);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, gl_attachment, GL_TEXTURE_2D, texture->getID(), 0);
 		m_attachments.push_back(gl_attachment);
 	}
 	else
-		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, texture->GetID(), 0);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, texture->getID(), 0);
 }
 
-void Enco3D::Rendering::Framebuffer::Pack()
+void Enco3D::Rendering::Framebuffer::pack()
 {
 	int numDrawBuffers = (int)m_attachments.size();
 	GLenum *drawBuffers = new GLenum[numDrawBuffers];

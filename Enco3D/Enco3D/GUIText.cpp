@@ -9,10 +9,10 @@ Enco3D::Component::GUIText::GUIText(const std::string &text, Rendering::Font *fo
 	m_font = font;
 	m_text = text;
 
-	m_color.Set(1, 1, 1);
+	m_color.set(1, 1, 1);
 
-	m_material.AddTexture2D("diffuseTexture", m_font->GetTexture());
-	m_material.AddVector3f("diffuseColor", m_color);
+	m_material.addTexture2D("diffuseTexture", m_font->getTexture());
+	m_material.addVector3f("diffuseColor", m_color);
 }
 
 Enco3D::Component::GUIText::GUIText(const std::string &text, const Core::Vector3f &color, Rendering::Font *font)
@@ -20,8 +20,8 @@ Enco3D::Component::GUIText::GUIText(const std::string &text, const Core::Vector3
 	m_font = font;
 	m_text = text;
 
-	m_material.AddTexture2D("diffuseTexture", m_font->GetTexture());
-	m_material.AddVector3f("diffuseColor", m_color);
+	m_material.addTexture2D("diffuseTexture", m_font->getTexture());
+	m_material.addVector3f("diffuseColor", m_color);
 }
 
 Enco3D::Component::GUIText::~GUIText()
@@ -33,17 +33,17 @@ Enco3D::Component::GUIText::~GUIText()
 	}
 }
 
-void Enco3D::Component::GUIText::InitRendering()
+void Enco3D::Component::GUIText::initRendering()
 {
 	UpdateMesh();
 }
 
-void Enco3D::Component::GUIText::RenderGUI(const Component::Camera *camera, Rendering::Shader *shader)
+void Enco3D::Component::GUIText::renderGUI(const Component::Camera *camera, Rendering::Shader *shader)
 {
-	shader->Bind();
-	shader->UpdateUniforms(GetTransform(), camera, GetRenderingEngine(), &m_material);
+	shader->bind();
+	shader->updateUniforms(getTransform(), camera, getRenderingEngine(), &m_material);
 
-	m_mesh->Render();
+	m_mesh->render();
 }
 
 void Enco3D::Component::GUIText::UpdateMesh()
@@ -55,7 +55,7 @@ void Enco3D::Component::GUIText::UpdateMesh()
 
 	unsigned int vertexIndex = 0;
 
-	float fontScaling = __defaultFontSize / (float)m_font->GetFontSize();
+	float fontScaling = __defaultFontSize / (float)m_font->getFontSize();
 
 	float cursorPosX = 0.0f;
 	float cursorPosY = 0.0f;
@@ -69,24 +69,24 @@ void Enco3D::Component::GUIText::UpdateMesh()
 			continue;
 		}
 
-		Rendering::CharacterData charaData = m_font->GetCharacterData((unsigned int)m_text[i]);
+		Rendering::CharacterData charaData = m_font->getCharacterData((unsigned int)m_text[i]);
 
 		float w = fontScaling * charaData.width;
 		float h = fontScaling * charaData.height;
 		float offsX = fontScaling * charaData.offsX;
 		float offsY = fontScaling * charaData.offsY;
 
-		vertices[vertexIndex + 0].SetPosition(w + cursorPosX + offsX, cursorPosY + offsY, 0);
-		vertices[vertexIndex + 0].SetTexCoord(charaData.endU, charaData.startV, 0);
+		vertices[vertexIndex + 0].setPosition(w + cursorPosX + offsX, cursorPosY + offsY, 0);
+		vertices[vertexIndex + 0].setTexCoord(charaData.endU, charaData.startV, 0);
 
-		vertices[vertexIndex + 1].SetPosition(w + cursorPosX + offsX, h + cursorPosY + offsY, 0);
-		vertices[vertexIndex + 1].SetTexCoord(charaData.endU, charaData.endV, 0);
+		vertices[vertexIndex + 1].setPosition(w + cursorPosX + offsX, h + cursorPosY + offsY, 0);
+		vertices[vertexIndex + 1].setTexCoord(charaData.endU, charaData.endV, 0);
 
-		vertices[vertexIndex + 2].SetPosition(cursorPosX + offsX, h + cursorPosY + offsY, 0);
-		vertices[vertexIndex + 2].SetTexCoord(charaData.startU, charaData.endV, 0);
+		vertices[vertexIndex + 2].setPosition(cursorPosX + offsX, h + cursorPosY + offsY, 0);
+		vertices[vertexIndex + 2].setTexCoord(charaData.startU, charaData.endV, 0);
 
-		vertices[vertexIndex + 3].SetPosition(cursorPosX + offsX, cursorPosY + offsY, 0);
-		vertices[vertexIndex + 3].SetTexCoord(charaData.startU, charaData.startV, 0);
+		vertices[vertexIndex + 3].setPosition(cursorPosX + offsX, cursorPosY + offsY, 0);
+		vertices[vertexIndex + 3].setTexCoord(charaData.startU, charaData.startV, 0);
 
 		vertexIndex += 4;
 		cursorPosX += fontScaling * charaData.advanceX;

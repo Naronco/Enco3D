@@ -14,9 +14,6 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="TestGame.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Enco3D\Enco3D.vcxproj">
       <Project>{1baa0fbb-5d34-4483-8271-fc1a1c9346a9}</Project>
       <Private>false</Private>

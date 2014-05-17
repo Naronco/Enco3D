@@ -14,16 +14,16 @@ namespace Enco3D
 		{
 		private:
 			std::map<std::string, Font*> m_loadedFonts;
-			Font *LoadFont(const std::string &filename, const FontType &type);
+			Font *loadFont(const std::string &filename, const FontType &type);
 
 		public:
-			Font *GetFont(const std::string &filename, const FontType &type);
-			void Release();
+			Font *getFont(const std::string &filename, const FontType &type);
+			void release();
 		};
 
 		inline static Font *GetFont(const std::string &filename, const FontType &type)
 		{
-			return FontPool::GetInstance()->GetFont(filename, type);
+			return FontPool::getInstance()->getFont(filename, type);
 		}
 	}
 }

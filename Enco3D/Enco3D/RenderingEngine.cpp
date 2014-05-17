@@ -22,39 +22,27 @@ Enco3D::Rendering::RenderingEngine::RenderingEngine(unsigned int width, unsigned
 	m_width = width;
 	m_height = height;
 
-	m_globalAmbientColor.Set(0.1f, 0.1f, 0.1f);
+	m_globalAmbientColor.set(0.1f, 0.1f, 0.1f);
 	m_GUICamera = new Component::Camera;
 
-	m_GUICamera->SetOrthographicProjection(0, (float)width, (float)height, 0, -1, 1);
+	m_GUICamera->setOrthographicProjection(0, (float)width, (float)height, 0, -1, 1);
 
-	m_textureShader        = ShaderPool::GetInstance()->GetShader("shaders/texture", ShaderType::VertexShader | ShaderType::FragmentShader);
-	m_geometryBufferShader = ShaderPool::GetInstance()->GetShader("shaders/geometryBuffer", ShaderType::VertexShader | ShaderType::FragmentShader);
+	m_textureShader = ShaderPool::getInstance()->getShader("shaders/texture", ShaderType::VertexShader | ShaderType::FragmentShader);
+	m_geometryBufferShader = ShaderPool::getInstance()->getShader("shaders/geometryBuffer", ShaderType::VertexShader | ShaderType::FragmentShader);
 
 // POST PROCESS INITIALIZATION //
 
-	m_positionBuffer   = new Texture2D(m_width, m_height, GL_RGBA32F, GL_RGBA, GL_NEAREST, GL_CLAMP_TO_EDGE);
-	m_normalBuffer     = new Texture2D(m_width, m_height, GL_RGBA, GL_RGBA, GL_NEAREST, GL_CLAMP_TO_EDGE);
-	m_lightBuffer      = new Texture2D(m_width, m_height, GL_RGBA, GL_RGBA, GL_NEAREST, GL_CLAMP_TO_EDGE);
-	m_backgroundBuffer = new Texture2D(m_width, m_height, GL_RGBA, GL_RGBA, GL_NEAREST, GL_CLAMP_TO_EDGE);
-	m_velocityBuffer   = new Texture2D(m_width, m_height, GL_RGBA, GL_RGBA, GL_NEAREST, GL_CLAMP_TO_EDGE);
-	m_depthBuffer      = new Texture2D(m_width, m_height, GL_DEPTH_COMPONENT32F, GL_DEPTH_COMPONENT, GL_NEAREST, GL_CLAMP_TO_EDGE);
+	m_gbuffer0 = new Texture2D(m_width, m_height, GL_RGBA, GL_RGBA, GL_NEAREST, GL_CLAMP_TO_EDGE);
+	m_gbuffer1 = new Texture2D(m_width, m_height, GL_RGBA, GL_RGBA, GL_NEAREST, GL_CLAMP_TO_EDGE);
+	m_depthBuffer = new Texture2D(m_width, m_height, GL_DEPTH_COMPONENT32F, GL_DEPTH_COMPONENT, GL_NEAREST, GL_CLAMP_TO_EDGE);
 	
 	m_geometryFramebuffer = new Framebuffer;
-	m_geometryFramebuffer->AttachTexture2D(m_positionBuffer, Attachment::Color0);
-	m_geometryFramebuffer->AttachTexture2D(m_normalBuffer, Attachment::Color1);
-	m_geometryFramebuffer->AttachTexture2D(m_lightBuffer, Attachment::Color2);
-	m_geometryFramebuffer->AttachTexture2D(m_backgroundBuffer, Attachment::Color3);
-	m_geometryFramebuffer->AttachTexture2D(m_velocityBuffer, Attachment::Color4);
-	m_geometryFramebuffer->AttachTexture2D(m_depthBuffer, Attachment::Depth);
-	m_geometryFramebuffer->Pack();
+	m_geometryFramebuffer->attachTexture2D(m_gbuffer0, Attachment::Color0);
+	m_geometryFramebuffer->attachTexture2D(m_gbuffer1, Attachment::Color1);
+	m_geometryFramebuffer->attachTexture2D(m_depthBuffer, Attachment::Depth);
+	m_geometryFramebuffer->pack();
 
-	m_compositeShader = ShaderPool::GetInstance()->GetShader("shaders/composite", ShaderType::VertexShader | ShaderType::FragmentShader);
-	m_finalShader = ShaderPool::GetInstance()->GetShader("shaders/final", ShaderType::VertexShader | ShaderType::FragmentShader);
-
-	m_compositeBuffer = new Texture2D(m_width, m_height, GL_RGBA, GL_RGBA, GL_NEAREST, GL_CLAMP_TO_EDGE);
-	m_compositeFramebuffer = new Framebuffer;
-	m_compositeFramebuffer->AttachTexture2D(m_compositeBuffer, Attachment::Color0);
-	m_compositeFramebuffer->Pack();
+	m_finalShader = ShaderPool::getInstance()->getShader("shaders/final", ShaderType::VertexShader | ShaderType::FragmentShader);
 
 ////////////////////////////
 
@@ -75,10 +63,10 @@ Enco3D::Rendering::RenderingEngine::RenderingEngine(unsigned int width, unsigned
 
 	Vertex vertices[4] =
 	{
-		Vertex((float)width, 0, 0).SetTexCoord(0, 0, 0).SetNormal(0, 0, 1),
-		Vertex((float)width, (float)height, 0).SetTexCoord(0, 1, 0).SetNormal(0, 0, 1),
-		Vertex(0, (float)height, 0).SetTexCoord(1, 1, 0).SetNormal(0, 0, 1),
-		Vertex(0, 0, 0).SetTexCoord(1, 0, 0).SetNormal(0, 0, 1),
+		Vertex((float)width, 0, 0).setTexCoord(0, 0, 0).setNormal(0, 0, 1),
+		Vertex((float)width, (float)height, 0).setTexCoord(0, 1, 0).setNormal(0, 0, 1),
+		Vertex(0, (float)height, 0).setTexCoord(1, 1, 0).setNormal(0, 0, 1),
+		Vertex(0, 0, 0).setTexCoord(1, 0, 0).setNormal(0, 0, 1),
 	};
 
 	unsigned int indices[6] =
@@ -90,90 +78,65 @@ Enco3D::Rendering::RenderingEngine::RenderingEngine(unsigned int width, unsigned
 	m_renderWindow = new Mesh(vertices, 4, indices, 6);
 }
 
-#define __safedelete(x) { if(x){delete x;x=nullptr;} }
+#define SAFE_DELETE(x) { if(x) { delete x; x = nullptr; } }
  
 Enco3D::Rendering::RenderingEngine::~RenderingEngine()
 {
-	__safedelete(m_renderWindow);
+	SAFE_DELETE(m_renderWindow);
 
-	__safedelete(m_velocityBuffer);
-	__safedelete(m_backgroundBuffer);
-	__safedelete(m_depthBuffer);
-	__safedelete(m_lightBuffer);
-	__safedelete(m_normalBuffer);
-	__safedelete(m_positionBuffer);
-	__safedelete(m_geometryFramebuffer);
-
-	__safedelete(m_compositeBuffer);
-	__safedelete(m_compositeFramebuffer);
+	SAFE_DELETE(m_gbuffer0);
+	SAFE_DELETE(m_gbuffer1);
+	SAFE_DELETE(m_depthBuffer);
+	SAFE_DELETE(m_geometryFramebuffer);
 }
 
-void Enco3D::Rendering::RenderingEngine::Resize(unsigned int width, unsigned int height)
+void Enco3D::Rendering::RenderingEngine::resize(unsigned int width, unsigned int height)
 {
 	m_width = width;
 	m_height = height;
 
 	Vertex vertices[4] =
 	{
-		Vertex((float)width, 0, 0).SetTexCoord(0, 0, 0).SetNormal(0, 0, 1),
-		Vertex((float)width, (float)height, 0).SetTexCoord(0, 1, 0).SetNormal(0, 0, 1),
-		Vertex(0, (float)height, 0).SetTexCoord(1, 1, 0).SetNormal(0, 0, 1),
-		Vertex(0, 0, 0).SetTexCoord(1, 0, 0).SetNormal(0, 0, 1),
+		Vertex((float)width, 0, 0).setTexCoord(0, 0, 0).setNormal(0, 0, 1),
+		Vertex((float)width, (float)height, 0).setTexCoord(0, 1, 0).setNormal(0, 0, 1),
+		Vertex(0, (float)height, 0).setTexCoord(1, 1, 0).setNormal(0, 0, 1),
+		Vertex(0, 0, 0).setTexCoord(1, 0, 0).setNormal(0, 0, 1),
 	};
 
-	m_renderWindow->UpdateVertices(0, 4, vertices);
+	m_renderWindow->updateVertices(0, 4, vertices);
 
 //	m_GUICamera->SetOrthographicProjection(0, (float)width, (float)height, 0, -1, 1);
 
 	delete m_depthBuffer;
-	delete m_velocityBuffer;
-	delete m_backgroundBuffer;
-	delete m_lightBuffer;
-	delete m_normalBuffer;
-	delete m_positionBuffer;
+	delete m_gbuffer1;
+	delete m_gbuffer0;
 
-	m_positionBuffer = new Texture2D(m_width, m_height, GL_RGBA32F, GL_RGBA, GL_NEAREST, GL_CLAMP_TO_EDGE);
-	m_normalBuffer = new Texture2D(m_width, m_height, GL_RGBA, GL_RGBA, GL_NEAREST, GL_CLAMP_TO_EDGE);
-	m_lightBuffer = new Texture2D(m_width, m_height, GL_RGBA, GL_RGBA, GL_NEAREST, GL_CLAMP_TO_EDGE);
-	m_backgroundBuffer = new Texture2D(m_width, m_height, GL_RGBA, GL_RGBA, GL_NEAREST, GL_CLAMP_TO_EDGE);
-	m_velocityBuffer = new Texture2D(m_width, m_height, GL_RGBA, GL_RGBA, GL_NEAREST, GL_CLAMP_TO_EDGE);
+	m_gbuffer0 = new Texture2D(m_width, m_height, GL_RGBA, GL_RGBA, GL_NEAREST, GL_CLAMP_TO_EDGE);
+	m_gbuffer1 = new Texture2D(m_width, m_height, GL_RGBA, GL_RGBA, GL_NEAREST, GL_CLAMP_TO_EDGE);
 	m_depthBuffer = new Texture2D(m_width, m_height, GL_DEPTH_COMPONENT32F, GL_DEPTH_COMPONENT, GL_NEAREST, GL_CLAMP_TO_EDGE);
 
 	delete m_geometryFramebuffer;
 
 	m_geometryFramebuffer = new Framebuffer;
-	m_geometryFramebuffer->AttachTexture2D(m_positionBuffer, Attachment::Color0);
-	m_geometryFramebuffer->AttachTexture2D(m_normalBuffer, Attachment::Color1);
-	m_geometryFramebuffer->AttachTexture2D(m_lightBuffer, Attachment::Color2);
-	m_geometryFramebuffer->AttachTexture2D(m_backgroundBuffer, Attachment::Color3);
-	m_geometryFramebuffer->AttachTexture2D(m_velocityBuffer, Attachment::Color4);
-	m_geometryFramebuffer->AttachTexture2D(m_depthBuffer, Attachment::Depth);
-	m_geometryFramebuffer->Pack();
-
-	delete m_compositeBuffer;
-
-	m_compositeBuffer = new Texture2D(m_width, m_height, GL_RGBA, GL_RGBA, GL_NEAREST, GL_CLAMP_TO_EDGE);
-
-	delete m_compositeFramebuffer;
-
-	m_compositeFramebuffer = new Framebuffer;
-	m_compositeFramebuffer->AttachTexture2D(m_compositeBuffer, Attachment::Color0);
-	m_compositeFramebuffer->Pack();
+	m_geometryFramebuffer->attachTexture2D(m_gbuffer0, Attachment::Color0);
+	m_geometryFramebuffer->attachTexture2D(m_gbuffer1, Attachment::Color1);
+	m_geometryFramebuffer->attachTexture2D(m_depthBuffer, Attachment::Depth);
+	m_geometryFramebuffer->pack();
 }
 
-void Enco3D::Rendering::RenderingEngine::Render(Enco3D::Core::GameObject *gameObject)
+void Enco3D::Rendering::RenderingEngine::render(Enco3D::Core::GameObject *gameObject)
 {
 	for (int i = 0; i < MAX_CAMERAS; i++)
 	{
 		if (m_cameras[i] == nullptr)
 			continue;
 
-		RenderCamera(gameObject, m_cameras[i]);
+		renderCamera(gameObject, m_cameras[i]);
 	}
 
 	// GUI Rendering
 
-	gameObject->RenderGUI(m_GUICamera, m_textureShader);
+	gameObject->renderGUI(m_GUICamera, m_textureShader);
 	glEnable(GL_DEPTH_TEST);
 
 	GLenum error = glGetError();
@@ -181,21 +144,26 @@ void Enco3D::Rendering::RenderingEngine::Render(Enco3D::Core::GameObject *gameOb
 		cerr << "[GL_ERROR] GL reported an error with code: " << error << endl;
 }
 
-void Enco3D::Rendering::RenderingEngine::RenderCamera(Enco3D::Core::GameObject *gameObject, Enco3D::Component::Camera *camera)
+void Enco3D::Rendering::RenderingEngine::renderCamera(Enco3D::Core::GameObject *gameObject, Enco3D::Component::Camera *camera)
 {
 	//////////////////////////////////////////////////////////////////////////////
 	////////////////////////// RENDER INTO FRAMEBUFFER ///////////////////////////
 	//////////////////////////////////////////////////////////////////////////////
 
-	BindFramebuffer(m_geometryFramebuffer);
+	bindFramebuffer(m_geometryFramebuffer);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	// Light Rendering
+	if (m_skybox != nullptr)
+	{
+		glDisable(GL_DEPTH_TEST);
+		m_skybox->render(camera);
+		glEnable(GL_DEPTH_TEST);
+	}
 
-	gameObject->Render(camera, m_geometryBufferShader);
+	gameObject->render(camera, m_geometryBufferShader);
 
-	glBlendFunc(GL_ONE, GL_ONE);
-	glDepthMask(GL_FALSE);
+//	glBlendFunc(GL_ONE, GL_ONE);
+//	glDepthMask(GL_FALSE);
 
 /*	for (unsigned int i = 0; i < m_lights.size(); i++)
 	{
@@ -203,109 +171,75 @@ void Enco3D::Rendering::RenderingEngine::RenderCamera(Enco3D::Core::GameObject *
 		gameObject->Render(m_mainCamera, m_lights[i]->GetShader());
 	}*/
 
-	glDepthMask(GL_TRUE);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+//	glDepthMask(GL_TRUE);
+//	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	// Skybox Rendering
 
-	if (m_skybox != nullptr)
-	{
-		glDisable(GL_DEPTH_TEST);
-		m_skybox->Render(camera);
-		glEnable(GL_DEPTH_TEST);
-	}
-
-	BindFramebuffer(nullptr);
+	bindFramebuffer(nullptr);
 
 	//////////////////////////////////////////////////////////////////////////////
 	////////////////////////////// POST PROCESSING ///////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////
 
-	std::vector<Component::IPostProcessEffect*> postProcessEffects;
+	std::vector<Component::IPostProcessEffect*> postProcessEffects = camera->getPostProcessEffects();
 
 	glDisable(GL_DEPTH_TEST);
 
 	// Post Processing
 
-	m_postProcessWorldViewProjectionMatrix.SetOrthographicProjection((float)m_width, 0, 0, (float)m_height, -1, 1);
-	m_postProcessTexelSize.Set(1.0f / (float)m_width, 1.0f / (float)m_height);
-
-	//////////////////////////////////////////////////////////////////////////////
-	//////////////////////////////////////////////////////////////////////////////
-	//////////////////////////////////////////////////////////////////////////////
-
-	BindFramebuffer(m_compositeFramebuffer);
-	glClear(GL_COLOR_BUFFER_BIT);
-
-	m_compositeShader->Bind();
-	m_compositeShader->SetUniformMatrix4x4f("matrix_worldViewProjectionMatrix", m_postProcessWorldViewProjectionMatrix);
-
-	m_backgroundBuffer->Bind(TextureSampler::Sampler1); m_compositeShader->SetUniformInt("gbuffer_backgroundTexture", TextureSampler::Sampler1);
-	m_lightBuffer->Bind(TextureSampler::Sampler0);      m_compositeShader->SetUniformInt("gbuffer_lightTexture", TextureSampler::Sampler0);
-
-	m_renderWindow->Render();
-	BindFramebuffer(nullptr);
+	m_postProcessWorldViewProjectionMatrix.setOrthographicProjection((float)m_width, 0, 0, (float)m_height, -1, 1);
+	m_postProcessTexelSize.set(1.0f / (float)m_width, 1.0f / (float)m_height);
 
 	//////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////
 
 	for (unsigned int i = 0; i < postProcessEffects.size(); i++)
-		postProcessEffects[i]->PostProcess(camera);
+		postProcessEffects[i]->postProcess(camera);
 
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	m_finalShader->Bind();
-	m_finalShader->SetUniformMatrix4x4f("matrix_worldViewProjectionMatrix", m_postProcessWorldViewProjectionMatrix);
+	m_finalShader->bind();
+	m_finalShader->setUniformMatrix4x4f("matrix_worldViewProjectionMatrix", m_postProcessWorldViewProjectionMatrix);
 
 	for (unsigned int i = 0; i < postProcessEffects.size(); i++)
 	{
-		int slot = (int)postProcessEffects[i]->GetGeneratedImageSlot();
-		postProcessEffects[i]->GetFinalBuffer()->Bind(10 + slot);
-		m_finalShader->SetUniformInt("generatedImage_slot" + std::to_string(10 + slot), 10 + slot);
+		int slot = (int)postProcessEffects[i]->getGeneratedImageSlot();
+		postProcessEffects[i]->getFinalBuffer()->bind(10 + slot);
+		m_finalShader->setUniformInt("generatedImage_slot" + std::to_string(10 + slot), 10 + slot);
 	}
 
-	//
-	m_compositeBuffer->Bind(TextureSampler::Sampler8);  m_finalShader->SetUniformInt("postProcess_compositeTexture", TextureSampler::Sampler8);
-	//
-	//
-	m_depthBuffer->Bind(TextureSampler::Sampler5);      m_finalShader->SetUniformInt("gbuffer_depthTexture", TextureSampler::Sampler5);
-	m_velocityBuffer->Bind(TextureSampler::Sampler4);   m_finalShader->SetUniformInt("gbuffer_velocityTexture", TextureSampler::Sampler4);
-	m_backgroundBuffer->Bind(TextureSampler::Sampler3); m_finalShader->SetUniformInt("gbuffer_backgroundTexture", TextureSampler::Sampler3);
-	m_lightBuffer->Bind(TextureSampler::Sampler2);      m_finalShader->SetUniformInt("gbuffer_lightTexture", TextureSampler::Sampler2);
-	m_normalBuffer->Bind(TextureSampler::Sampler1);     m_finalShader->SetUniformInt("gbuffer_normalTexture", TextureSampler::Sampler1);
-	m_positionBuffer->Bind(TextureSampler::Sampler0);   m_finalShader->SetUniformInt("gbuffer_positionTexture", TextureSampler::Sampler0);
+	m_depthBuffer->bind(TextureSampler::Sampler2); m_finalShader->setUniformInt("gbuffer_depth", TextureSampler::Sampler2);
+	m_gbuffer1->bind(TextureSampler::Sampler1); m_finalShader->setUniformInt("gbuffer_1", TextureSampler::Sampler1);
+	m_gbuffer0->bind(TextureSampler::Sampler0); m_finalShader->setUniformInt("gbuffer_0", TextureSampler::Sampler0);
 
-	m_finalShader->SetUniformVector2f("postProcess_texelSize", m_postProcessTexelSize);
+	m_finalShader->setUniformVector2f("postProcess_texelSize", m_postProcessTexelSize);
 
-	m_finalShader->SetUniformFloat("camera_tanHalfFov", camera->GetTanHalfFov());
-	m_finalShader->SetUniformFloat("camera_aspectRatio", camera->GetAspectRatio());
-	m_finalShader->SetUniformFloat("camera_zNearClippingPlane", camera->GetZNearClippingPlane());
-	m_finalShader->SetUniformFloat("camera_zFarClippingPlane", camera->GetZFarClippingPlane());
+	m_finalShader->setUniformFloat("camera_tanHalfFov", camera->getTanHalfFov());
+	m_finalShader->setUniformFloat("camera_aspectRatio", camera->getAspectRatio());
+	m_finalShader->setUniformFloat("camera_zNearClippingPlane", camera->getZNearClippingPlane());
+	m_finalShader->setUniformFloat("camera_zFarClippingPlane", camera->getZFarClippingPlane());
 
-	m_finalShader->SetUniformFloat("velocityScale", 1.0f);
+	m_finalShader->setUniformFloat("velocityScale", 1.0f);
 
-	m_renderWindow->Render();
+	m_renderWindow->render();
 }
 
-void Enco3D::Rendering::RenderingEngine::InitializePostProcessEffect(Component::IPostProcessEffect *effect)
+void Enco3D::Rendering::RenderingEngine::initializePostProcessEffect(Component::IPostProcessEffect *effect)
 {
-	effect->SetPositionBuffer(m_positionBuffer);
-	effect->SetNormalBuffer(m_normalBuffer);
-	effect->SetLightBuffer(m_lightBuffer);
-	effect->SetBackgroundBuffer(m_backgroundBuffer);
-	effect->SetVelocityBuffer(m_velocityBuffer);
-	effect->SetDepthBuffer(m_depthBuffer);
-	effect->SetCompositeBuffer(m_compositeBuffer);
+	effect->setGBuffer0(m_gbuffer0);
+	effect->setGBuffer1(m_gbuffer1);
+	effect->setDepthBuffer(m_depthBuffer);
 }
 
-Enco3D::Component::Camera *Enco3D::Rendering::RenderingEngine::CreatePerspectiveCamera(float fovInRadians, float zNear, float zFar)
+Enco3D::Component::Camera *Enco3D::Rendering::RenderingEngine::createPerspectiveCamera(float fovInRadians, float zNear, float zFar)
 {
 	float aspectRatio = (float)m_width / (float)m_height;
 	return new Component::Camera(fovInRadians, aspectRatio, zNear, zFar);
 }
 
-Enco3D::Component::Camera *Enco3D::Rendering::RenderingEngine::CreateOrthographicCamera(float zNear, float zFar)
+Enco3D::Component::Camera *Enco3D::Rendering::RenderingEngine::createOrthographicCamera(float zNear, float zFar, float size)
 {
-	return new Component::Camera(-1.0f, 1.0f, -1.0f, 1.0f, zNear, zFar);
+	return new Component::Camera(-size, size, -size, size, zNear, zFar);
 }

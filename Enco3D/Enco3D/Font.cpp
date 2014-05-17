@@ -33,8 +33,8 @@ Enco3D::Rendering::Font::Font(const std::string &name, const FontType &type)
 
 	m_texture = new Texture2D(textureFilename, TextureFilter::Linear, TextureWrap::Clamp);
 	
-	float iw = 1.0f / (float)m_texture->GetWidth();
-	float ih = 1.0f / (float)m_texture->GetHeight();
+	float iw = 1.0f / (float)m_texture->getWidth();
+	float ih = 1.0f / (float)m_texture->getHeight();
 
 	std::ifstream file;
 	file.open(dataFilename.c_str());
@@ -88,10 +88,10 @@ Enco3D::Rendering::Font::Font(const std::string &name, const FontType &type)
 			m_characterData[fci].advanceX = advanceX;
 		}
 
-		Core::DebugLogger::Log("Successfully loaded font data " + dataFilename);
+		Core::DebugLogger::log("Successfully loaded font data " + dataFilename);
 	}
 	else
-		Core::DebugLogger::Log("[ERROR] Failed to load font data " + dataFilename);
+		Core::DebugLogger::log("[ERROR] Failed to load font data " + dataFilename);
 }
 
 Enco3D::Rendering::Font::~Font()

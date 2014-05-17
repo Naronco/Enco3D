@@ -10,13 +10,13 @@ Enco3D::Component::FreeLook::FreeLook(float rotateSpeed)
 	m_rotateSpeed = rotateSpeed;
 }
 
-void Enco3D::Component::FreeLook::Update()
+void Enco3D::Component::FreeLook::update()
 {
-	static unsigned int lastMouseX = Core::Input::GetMouseX();
-	static unsigned int lastMouseY = Core::Input::GetMouseY();
+	static unsigned int lastMouseX = Core::Input::getMouseX();
+	static unsigned int lastMouseY = Core::Input::getMouseY();
 
-	unsigned int currentMouseX = Core::Input::GetMouseX();
-	unsigned int currentMouseY = Core::Input::GetMouseY();
+	unsigned int currentMouseX = Core::Input::getMouseX();
+	unsigned int currentMouseY = Core::Input::getMouseY();
 
 	int relativeX = currentMouseX - lastMouseX;
 	int relativeY = currentMouseY - lastMouseY;
@@ -27,7 +27,7 @@ void Enco3D::Component::FreeLook::Update()
 	static float rotationXAmount = 0.0f;
 	static float rotationYAmount = 0.0f;
 
-	if (Core::Input::IsMouseButtonDown(Core::Mouse::Right))
+	if (Core::Input::isMouseButtonDown(Core::Mouse::Right))
 	{
 		bool rotateX = relativeX != 0;
 		bool rotateY = relativeY != 0;
@@ -36,11 +36,11 @@ void Enco3D::Component::FreeLook::Update()
 		if (rotateY) rotationYAmount += (float)relativeY * m_rotateSpeed;
 	}
 
-	Core::Quaternionf rotationAmountX = Core::Quaternionf(Core::Vector3f(0, 1, 0), Core::MathUtil::ToRadians(rotationXAmount));
-	GetTransform()->SetRotation((rotationAmountX * GetTransform()->GetRotation()).Normalize());
+	Core::Quaternionf rotationAmountX = Core::Quaternionf(Core::Vector3f(0, 1, 0), Core::MathUtil::toRadians(rotationXAmount));
+	getTransform()->setRotation((rotationAmountX * getTransform()->getRotation()).normalize());
 
-	Core::Quaternionf rotationAmountY = Core::Quaternionf(GetTransform()->GetRotation().GetRight(), Core::MathUtil::ToRadians(rotationYAmount));
-	GetTransform()->SetRotation((rotationAmountY * GetTransform()->GetRotation()).Normalize());
+	Core::Quaternionf rotationAmountY = Core::Quaternionf(getTransform()->getRotation().getRight(), Core::MathUtil::toRadians(rotationYAmount));
+	getTransform()->setRotation((rotationAmountY * getTransform()->getRotation()).normalize());
 
 	rotationXAmount *= 0.92f;
 	rotationYAmount *= 0.92f;

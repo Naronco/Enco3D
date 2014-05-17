@@ -17,15 +17,15 @@ namespace Enco3D
 			float m_threshold{ 0.86f };
 
 		public:
-			void InitRendering();
-			void Deinit();
+			void initRendering();
+			void deinit();
 
-			void PostProcess(const Camera *camera);
-			void Resize(unsigned int width, unsigned int height);
+			void postProcess(const Camera *camera);
+			void resize(unsigned int width, unsigned int height);
 
-			inline Rendering::Texture2D *GetFinalBuffer() { return m_verticalBlurBuffer; }
-			inline void SetThreshold(float threshold) { m_threshold = threshold; }
-			inline float GetThreshold() const { return m_threshold; }
+			inline Rendering::Texture2D *getFinalBuffer() { return m_verticalBlurBuffer; }
+			inline void setThreshold(float threshold) { m_threshold = threshold; }
+			inline float getThreshold() const { return m_threshold; }
 		};
 	}
 }

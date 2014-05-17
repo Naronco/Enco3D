@@ -3,7 +3,7 @@
 
 Enco3D::Physics::PhysicsEngine::PhysicsEngine()
 {
-	m_gravity.Set(0, -9.81f, 0);
+	m_gravity.set(0, -9.81f, 0);
 
 	m_broadphase = new btDbvtBroadphase;
 
@@ -13,7 +13,7 @@ Enco3D::Physics::PhysicsEngine::PhysicsEngine()
 	m_solver = new btSequentialImpulseConstraintSolver;
 
 	m_dynamicsWorld = new btDiscreteDynamicsWorld(m_dispatcher, m_broadphase, m_solver, m_collisionConfiguration);
-	m_dynamicsWorld->setGravity(PhysicsHelper::ToBulletPhysicsVec3(m_gravity));
+	m_dynamicsWorld->setGravity(PhysicsHelper::toBulletPhysicsVec3(m_gravity));
 }
 
 Enco3D::Physics::PhysicsEngine::~PhysicsEngine()
@@ -49,23 +49,23 @@ Enco3D::Physics::PhysicsEngine::~PhysicsEngine()
 	}
 }
 
-void Enco3D::Physics::PhysicsEngine::Update()
+void Enco3D::Physics::PhysicsEngine::update()
 {
 	m_dynamicsWorld->stepSimulation(1.0f / 60.0f, 10);
 }
 
-void Enco3D::Physics::PhysicsEngine::AddRigidBody(Enco3D::Component::RigidBody *rigidBody)
+void Enco3D::Physics::PhysicsEngine::addRigidBody(Enco3D::Component::RigidBody *rigidBody)
 {
-	m_dynamicsWorld->addRigidBody(rigidBody->CreateBulletPhysicsInstance());
+	m_dynamicsWorld->addRigidBody(rigidBody->createBulletPhysicsInstance());
 }
 
-void Enco3D::Physics::PhysicsEngine::RemoveRigidBody(Enco3D::Component::RigidBody *rigidBody)
+void Enco3D::Physics::PhysicsEngine::removeRigidBody(Enco3D::Component::RigidBody *rigidBody)
 {
-	btRigidBody *btInstance = rigidBody->GetBulletPhysicsInstance();
+	btRigidBody *btInstance = rigidBody->getBulletPhysicsInstance();
 
 	m_dynamicsWorld->removeRigidBody(btInstance);
 	delete btInstance->getMotionState();
 	delete btInstance;
 
-	delete rigidBody->GetCollisionShape();
+	delete rigidBody->getCollisionShape();
 }

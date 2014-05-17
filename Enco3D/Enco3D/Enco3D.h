@@ -52,6 +52,9 @@
 #include "Vector3.h"
 #include "Vector4.h"
 
+// IO Headers
+#include "ImageIO.h"
+
 // Physics Engine Headers
 #include "BoxCollisionShape.h"
 #include "CapsuleCollisionShape.h"
@@ -91,9 +94,9 @@ typedef struct __Enco3D_StartInstruction
 
 inline static int Enco3D_Main(const __Enco3D_StartInstruction *info, Enco3D::Core::IGame *game)
 {
-	Enco3D::Core::Enco3DEngine::GetInstance()->Init(info->windowTitle, info->windowWidth, info->windowHeight, info->multisampleEnabled, info->aaSamples, game);
-	Enco3D::Core::Enco3DEngine::GetInstance()->MainLoop();
-	Enco3D::Core::Enco3DEngine::GetInstance()->Deinit();
+	Enco3D::Core::Enco3DEngine::getInstance()->init(info->windowTitle, info->windowWidth, info->windowHeight, info->multisampleEnabled, info->aaSamples, game);
+	Enco3D::Core::Enco3DEngine::getInstance()->mainLoop();
+	Enco3D::Core::Enco3DEngine::getInstance()->deinit();
 
 	return 0;
 }

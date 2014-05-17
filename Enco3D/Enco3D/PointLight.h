@@ -15,11 +15,11 @@ namespace Enco3D
 		public:
 			PointLight()
 			{
-				m_shader = Rendering::ShaderPool::GetInstance()->GetShader("shaders/forwardPointLight", Rendering::ShaderType::VertexShader | Rendering::ShaderType::FragmentShader);
+				m_shader = Rendering::ShaderPool::getInstance()->getShader("shaders/forwardPointLight", Rendering::ShaderType::VertexShader | Rendering::ShaderType::FragmentShader);
 			}
 
-			inline void SetRange(float range) { m_range = range; }
-			inline float GetRange() const { return m_range; }
+			inline void setRange(float range) { m_range = range; }
+			inline float getRange() const { return m_range; }
 		};
 	}
 }

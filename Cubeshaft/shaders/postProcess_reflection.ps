@@ -1,0 +1,45 @@
+#version 120
+
+varying vec3 texCoord;
+
+uniform sampler2D gbuffer_positionTexture;
+uniform sampler2D gbuffer_normalTexture;
+uniform sampler2D gbuffer_depthTexture;
+uniform sampler2D screenTexture;
+
+uniform vec2 postProcess_texelSize;
+uniform vec3 camera_translation;
+
+uniform float rendering_zNearClippingPlane;
+uniform float rendering_zFarClippingPlane;
+
+uniform mat4 matrix_viewProjectionMatrix;
+
+void main()
+{
+	vec3 worldPosition = texture2D(gbuffer_positionTexture, texCoord.xy).xyz;
+	vec3 normal = normalize(texture2D(gbuffer_normalTexture, texCoord.xy).xyz * 2.0f - 1.0f);
+	vec3 viewDirection = normalize(worldPosition - camera_translation);
+	vec3 reflectionDirection = normalize(reflect(viewDirection, normal));
+	
+	vec3 screenSpaceReflectionDirection = normalize(vec3(matrix_viewProjectionMatrix * vec4(reflectionDirection, 0.0f)));
+	
+	vec2 sampledPosition = texCoord.xy;
+	float currentDepth = texture2D(gbuffer_depthTexture, sampledPosition.xy).r;
+	
+	vec4 reflectedColor = vec4(0.0f);
+	
+	while(sampledPosition.x >= 0.0f && sampledPosition.y >= 0.0f && sampledPosition.x < 1.0f && sampledPosition.y < 1.0f)
+	{
+		sampledPosition += screenSpaceReflectionDirection.xy * postProcess_texelSize;
+		currentDepth += screenSpaceReflectionDirection.z;
+		
+		if(currentDepth > texture2D(gbuffer_depthTexture, sampledPosition.xy).r)
+		{
+			reflectedColor = texture2D(screenTexture, sampledPosition.xy);
+			break;
+		}
+	}
+	
+	gl_FragColor = reflectedColor;
+}

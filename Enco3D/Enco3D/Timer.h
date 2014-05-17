@@ -29,15 +29,15 @@ namespace Enco3D
 			Timer();
 			Timer(bool printFps);
 
-			void Update();
+			void update();
 
 			inline void increaseFps() { m_fpsCounter++; }
 
-			inline void SetPrintFps(bool printFps) { m_printFps = printFps; }
+			inline void setPrintFps(bool printFps) { m_printFps = printFps; }
 
-			inline unsigned int GetFPS() const { return m_fps; }
-			inline float GetDeltaTime() const { return m_deltaTime; }
-			inline unsigned int GetTime() const { return m_time; }
+			inline unsigned int getFPS() const { return m_fps; }
+			inline float getDeltaTime() const { return m_deltaTime; }
+			inline unsigned int getTime() const { return m_time; }
 		};
 	}
 }

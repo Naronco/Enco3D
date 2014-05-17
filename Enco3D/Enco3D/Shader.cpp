@@ -12,7 +12,7 @@ Enco3D::Rendering::Shader::Shader()
 
 	if (m_program == 0)
 	{
-		Core::DebugLogger::Log("[ERROR] Failed to create shader program");
+		Core::DebugLogger::log("[ERROR] Failed to create shader program");
 	}
 }
 
@@ -22,7 +22,7 @@ Enco3D::Rendering::Shader::Shader(const string &filename, unsigned int shaderTyp
 
 	if (m_program == 0)
 	{
-		Core::DebugLogger::Log("[ERROR] Failed to create shader program");
+		Core::DebugLogger::log("[ERROR] Failed to create shader program");
 		return;
 	}
 
@@ -30,46 +30,46 @@ Enco3D::Rendering::Shader::Shader(const string &filename, unsigned int shaderTyp
 
 	if ((shaderTypes & ShaderType::VertexShader) == ShaderType::VertexShader)
 	{
-		std::string shaderText = LoadShader(filename + ".vs");
-		AddVertexShader(shaderText);
+		std::string shaderText = loadShader(filename + ".vs");
+		addVertexShader(shaderText);
 		shaderTexts.push_back(shaderText);
 	}
 
 	if ((shaderTypes & ShaderType::FragmentShader) == ShaderType::FragmentShader)
 	{
-		std::string shaderText = LoadShader(filename + ".ps");
-		AddFragmentShader(shaderText);
+		std::string shaderText = loadShader(filename + ".ps");
+		addFragmentShader(shaderText);
 		shaderTexts.push_back(shaderText);
 	}
 
 	if ((shaderTypes & ShaderType::GeometryShader) == ShaderType::GeometryShader)
 	{
-		std::string shaderText = LoadShader(filename + ".gs");
-		AddGeometryShader(shaderText);
+		std::string shaderText = loadShader(filename + ".gs");
+		addGeometryShader(shaderText);
 		shaderTexts.push_back(shaderText);
 	}
 
 	if ((shaderTypes & ShaderType::TessellationControlShader) == ShaderType::TessellationControlShader)
 	{
-		std::string shaderText = LoadShader(filename + ".cs");
-		AddTessellationControlShader(shaderText);
+		std::string shaderText = loadShader(filename + ".cs");
+		addTessellationControlShader(shaderText);
 		shaderTexts.push_back(shaderText);
 	}
 
 	if ((shaderTypes & ShaderType::TessellationEvaluationShader) == ShaderType::TessellationEvaluationShader)
 	{
-		std::string shaderText = LoadShader(filename + ".es");
-		AddTessellationEvaluationShader(shaderText);
+		std::string shaderText = loadShader(filename + ".es");
+		addTessellationEvaluationShader(shaderText);
 		shaderTexts.push_back(shaderText);
 	}
 
-	AddAllAttributes(shaderTexts[0]);
+	addAllAttributes(shaderTexts[0]);
 
-	CompileShader();
+	compileShader();
 
 	for (unsigned int i = 0; i < shaderTexts.size(); i++)
 	{
-		AddShaderUniforms(shaderTexts[i]);
+		addShaderUniforms(shaderTexts[i]);
 	}
 }
 
@@ -79,22 +79,22 @@ Enco3D::Rendering::Shader::Shader(const std::string &vertexFilename, const std::
 
 	if (m_program == 0)
 	{
-		Core::DebugLogger::Log("[ERROR] Failed to create shader program");
+		Core::DebugLogger::log("[ERROR] Failed to create shader program");
 		return;
 	}
 
-	std::string vertexShaderText = LoadShader(vertexFilename);
-	std::string fragmentShaderText = LoadShader(fragmentFilename);
+	std::string vertexShaderText = loadShader(vertexFilename);
+	std::string fragmentShaderText = loadShader(fragmentFilename);
 
-	AddVertexShader(vertexShaderText);
-	AddFragmentShader(fragmentShaderText);
+	addVertexShader(vertexShaderText);
+	addFragmentShader(fragmentShaderText);
 
-	AddAllAttributes(vertexShaderText);
+	addAllAttributes(vertexShaderText);
 
-	CompileShader();
+	compileShader();
 
-	AddShaderUniforms(vertexShaderText);
-	AddShaderUniforms(fragmentShaderText);
+	addShaderUniforms(vertexShaderText);
+	addShaderUniforms(fragmentShaderText);
 }
 
 Enco3D::Rendering::Shader::~Shader()
@@ -108,13 +108,13 @@ Enco3D::Rendering::Shader::~Shader()
 	glDeleteProgram(m_program);
 }
 
-void Enco3D::Rendering::Shader::AddProgram(const string &text, int type)
+void Enco3D::Rendering::Shader::addProgram(const string &text, int type)
 {
 	int shader = glCreateShader(type);
 
 	if (shader == 0)
 	{
-		Core::DebugLogger::Log("[ERROR] Failed creating shader type " + std::to_string(type));
+		Core::DebugLogger::log("[ERROR] Failed creating shader type " + std::to_string(type));
 		return;
 	}
 
@@ -133,8 +133,8 @@ void Enco3D::Rendering::Shader::AddProgram(const string &text, int type)
 		GLchar infoLog[1024];
 
 		glGetShaderInfoLog(shader, 1024, nullptr, infoLog);
-		Core::DebugLogger::Log("[ERROR] Failed to compile shader type " + std::to_string(type) + ":");
-		Core::DebugLogger::Log(infoLog);
+		Core::DebugLogger::log("[ERROR] Failed to compile shader type " + std::to_string(type) + ":");
+		Core::DebugLogger::log(infoLog);
 
 		return;
 	}
@@ -143,7 +143,7 @@ void Enco3D::Rendering::Shader::AddProgram(const string &text, int type)
 	m_shaders.push_back(shader);
 }
 
-string Enco3D::Rendering::Shader::LoadShader(const string &filename)
+string Enco3D::Rendering::Shader::loadShader(const string &filename)
 {
 	ifstream file;
 	file.open(filename.c_str());
@@ -152,7 +152,7 @@ string Enco3D::Rendering::Shader::LoadShader(const string &filename)
 
 	if (file.is_open())
 	{
-		Core::DebugLogger::Log("Successfully loaded shader: " + filename);
+		Core::DebugLogger::log("Successfully loaded shader: " + filename);
 	
 		while (file.good())
 		{
@@ -162,13 +162,13 @@ string Enco3D::Rendering::Shader::LoadShader(const string &filename)
 	}
 	else
 	{
-		Core::DebugLogger::Log("[ERROR] Failed to load shader: " + filename);
+		Core::DebugLogger::log("[ERROR] Failed to load shader: " + filename);
 	}
 
 	return output;
 }
 
-void Enco3D::Rendering::Shader::CheckShaderError(int shader, int flag, bool isProgram, const string &errorMsg)
+void Enco3D::Rendering::Shader::checkShaderError(int shader, int flag, bool isProgram, const string &errorMsg)
 {
 	GLint success = 0;
 	GLchar error[1024] = { 0 };
@@ -185,12 +185,12 @@ void Enco3D::Rendering::Shader::CheckShaderError(int shader, int flag, bool isPr
 		else
 			glGetProgramInfoLog(shader, sizeof(error), nullptr, error);
 
-		Core::DebugLogger::Log(errorMsg + ":");
-		Core::DebugLogger::Log(error);
+		Core::DebugLogger::log(errorMsg + ":");
+		Core::DebugLogger::log(error);
 	}
 }
 
-std::vector<Enco3D::Rendering::__UniformStruct> Enco3D::Rendering::Shader::FindUniformStructs(const std::string &shaderText)
+std::vector<Enco3D::Rendering::__UniformStruct> Enco3D::Rendering::Shader::findUniformStructs(const std::string &shaderText)
 {
 	static const std::string STRUCT_KEY = "struct";
 	std::vector<__UniformStruct> result;
@@ -204,8 +204,8 @@ std::vector<Enco3D::Rendering::__UniformStruct> Enco3D::Rendering::Shader::FindU
 		size_t braceClosing = shaderText.find("}", braceOpening);
 
 		__UniformStruct newStruct;
-		newStruct.name = FindUniformStructName(shaderText.substr(structLocation, braceOpening - structLocation));
-		newStruct.memberNames = FindUniformStructComponents(shaderText.substr(braceOpening, braceClosing - braceOpening));
+		newStruct.name = findUniformStructName(shaderText.substr(structLocation, braceOpening - structLocation));
+		newStruct.memberNames = findUniformStructComponents(shaderText.substr(braceOpening, braceClosing - braceOpening));
 
 		result.push_back(newStruct);
 		structLocation = shaderText.find(STRUCT_KEY, structLocation);
@@ -240,12 +240,12 @@ static std::vector<std::string> __Split(const std::string &s, char delim)
 	return elems;
 }
 
-std::string Enco3D::Rendering::Shader::FindUniformStructName(const std::string &structStartToOpeningBrace)
+std::string Enco3D::Rendering::Shader::findUniformStructName(const std::string &structStartToOpeningBrace)
 {
 	return __Split(__Split(structStartToOpeningBrace, ' ')[0], '\n')[0];
 }
 
-std::vector<Enco3D::Rendering::__TypedData> Enco3D::Rendering::Shader::FindUniformStructComponents(const std::string &openingBraceToClosingBrace)
+std::vector<Enco3D::Rendering::__TypedData> Enco3D::Rendering::Shader::findUniformStructComponents(const std::string &openingBraceToClosingBrace)
 {
 	static const char charsToIgnore[] = {' ', '\n', '\t', '{'};
 	static const size_t UNSIGNED_NEG_ONE = (size_t)-1;
@@ -293,7 +293,7 @@ std::vector<Enco3D::Rendering::__TypedData> Enco3D::Rendering::Shader::FindUnifo
 	return result;
 }
 
-void Enco3D::Rendering::Shader::AddAllAttributes(const std::string &vertexShaderText)
+void Enco3D::Rendering::Shader::addAllAttributes(const std::string &vertexShaderText)
 {
 	static const std::string ATTRIBUTE_KEY = "attribute";
 
@@ -328,11 +328,11 @@ void Enco3D::Rendering::Shader::AddAllAttributes(const std::string &vertexShader
 	}
 }
 
-void Enco3D::Rendering::Shader::AddShaderUniforms(const std::string &shaderText)
+void Enco3D::Rendering::Shader::addShaderUniforms(const std::string &shaderText)
 {
 	static const std::string UNIFORM_KEY = "uniform";
 
-	std::vector<__UniformStruct> structs = FindUniformStructs(shaderText);
+	std::vector<__UniformStruct> structs = findUniformStructs(shaderText);
 
 	size_t uniformLocation = shaderText.find(UNIFORM_KEY);
 	while (uniformLocation != std::string::npos)
@@ -359,14 +359,14 @@ void Enco3D::Rendering::Shader::AddShaderUniforms(const std::string &shaderText)
 
 			m_uniformNames.push_back(uniformName);
 			m_uniformTypes.push_back(uniformType);
-			AddUniform(uniformName, uniformType, structs);
+			addUniform(uniformName, uniformType, structs);
 		}
 
 		uniformLocation = shaderText.find(UNIFORM_KEY, uniformLocation + UNIFORM_KEY.length());
 	}
 }
 
-void Enco3D::Rendering::Shader::AddUniform(const std::string &uniformName, const std::string &uniformType, const std::vector<Enco3D::Rendering::__UniformStruct>& structs)
+void Enco3D::Rendering::Shader::addUniform(const std::string &uniformName, const std::string &uniformType, const std::vector<Enco3D::Rendering::__UniformStruct>& structs)
 {
 	bool addThis = true;
 
@@ -376,7 +376,7 @@ void Enco3D::Rendering::Shader::AddUniform(const std::string &uniformName, const
 		{
 			addThis = false;
 			for (unsigned int j = 0; j < structs[i].memberNames.size(); j++)
-				AddUniform(uniformName + "." + structs[i].memberNames[j].name, structs[i].memberNames[j].type, structs);
+				addUniform(uniformName + "." + structs[i].memberNames[j].name, structs[i].memberNames[j].type, structs);
 		}
 	}
 
@@ -388,7 +388,7 @@ void Enco3D::Rendering::Shader::AddUniform(const std::string &uniformName, const
 	m_uniformMap.insert(std::pair<std::string, unsigned int>(uniformName, location));
 }
 
-void Enco3D::Rendering::Shader::Bind() const
+void Enco3D::Rendering::Shader::bind() const
 {
 	if (s_lastBind != this)
 	{
@@ -397,141 +397,148 @@ void Enco3D::Rendering::Shader::Bind() const
 	}
 }
 
-void Enco3D::Rendering::Shader::AddVertexShader(const string &text)
+void Enco3D::Rendering::Shader::addVertexShader(const string &text)
 {
-	AddProgram(text, GL_VERTEX_SHADER);
+	addProgram(text, GL_VERTEX_SHADER);
 }
 
-void Enco3D::Rendering::Shader::AddFragmentShader(const string &text)
+void Enco3D::Rendering::Shader::addFragmentShader(const string &text)
 {
-	AddProgram(text, GL_FRAGMENT_SHADER);
+	addProgram(text, GL_FRAGMENT_SHADER);
 }
 
-void Enco3D::Rendering::Shader::AddGeometryShader(const string &text)
+void Enco3D::Rendering::Shader::addGeometryShader(const string &text)
 {
-	AddProgram(text, GL_GEOMETRY_SHADER);
+	addProgram(text, GL_GEOMETRY_SHADER);
 }
 
-void Enco3D::Rendering::Shader::AddTessellationControlShader(const string &text)
+void Enco3D::Rendering::Shader::addTessellationControlShader(const string &text)
 {
-	AddProgram(text, GL_TESS_CONTROL_SHADER);
+	addProgram(text, GL_TESS_CONTROL_SHADER);
 }
 
-void Enco3D::Rendering::Shader::AddTessellationEvaluationShader(const string &text)
+void Enco3D::Rendering::Shader::addTessellationEvaluationShader(const string &text)
 {
-	AddProgram(text, GL_TESS_EVALUATION_SHADER);
+	addProgram(text, GL_TESS_EVALUATION_SHADER);
 }
 
-void Enco3D::Rendering::Shader::AddVertexShaderFromFile(const string &filename)
+void Enco3D::Rendering::Shader::addVertexShaderFromFile(const string &filename)
 {
-	AddVertexShader(LoadShader(filename));
+	addVertexShader(loadShader(filename));
 }
 
-void Enco3D::Rendering::Shader::AddFragmentShaderFromFile(const string &filename)
+void Enco3D::Rendering::Shader::addFragmentShaderFromFile(const string &filename)
 {
-	AddFragmentShader(LoadShader(filename));
+	addFragmentShader(loadShader(filename));
 }
 
-void Enco3D::Rendering::Shader::AddGeometryShaderFromFile(const string &filename)
+void Enco3D::Rendering::Shader::addGeometryShaderFromFile(const string &filename)
 {
-	AddGeometryShader(LoadShader(filename));
+	addGeometryShader(loadShader(filename));
 }
 
-void Enco3D::Rendering::Shader::AddTessellationControlShaderFromFile(const string &filename)
+void Enco3D::Rendering::Shader::addTessellationControlShaderFromFile(const string &filename)
 {
-	AddTessellationControlShader(LoadShader(filename));
+	addTessellationControlShader(loadShader(filename));
 }
 
-void Enco3D::Rendering::Shader::AddTessellationEvaluationShaderFromFile(const string &filename)
+void Enco3D::Rendering::Shader::addTessellationEvaluationShaderFromFile(const string &filename)
 {
-	AddTessellationEvaluationShader(LoadShader(filename));
+	addTessellationEvaluationShader(loadShader(filename));
 }
 
-void Enco3D::Rendering::Shader::CompileShader()
+void Enco3D::Rendering::Shader::compileShader()
 {
 	glLinkProgram(m_program);
-	CheckShaderError(m_program, GL_LINK_STATUS, true, "[ERROR] Failed to link shader program");
+	checkShaderError(m_program, GL_LINK_STATUS, true, "[ERROR] Failed to link shader program");
 
 	glValidateProgram(m_program);
-	CheckShaderError(m_program, GL_VALIDATE_STATUS, true, "[ERROR] Invalid shader program");
+	checkShaderError(m_program, GL_VALIDATE_STATUS, true, "[ERROR] Invalid shader program");
 }
 
-void Enco3D::Rendering::Shader::SetAttribLocation(const string &attributeName, int location)
+void Enco3D::Rendering::Shader::setAttribLocation(const string &attributeName, int location)
 {
 	glBindAttribLocation(m_program, location, attributeName.c_str());
 }
 
-void Enco3D::Rendering::Shader::SetUniformInt(const string &name, int value)
+void Enco3D::Rendering::Shader::setUniformInt(const string &name, int value)
 {
 	glUniform1i(m_uniformMap.at(name), value);
 }
 
-void Enco3D::Rendering::Shader::SetUniformFloat(const string &name, float value)
+void Enco3D::Rendering::Shader::setUniformFloat(const string &name, float value)
 {
 	glUniform1f(m_uniformMap.at(name), value);
 }
 
-void Enco3D::Rendering::Shader::SetUniformVector2f(const string &name, const Enco3D::Core::Vector2f &v)
+void Enco3D::Rendering::Shader::setUniformVector2f(const string &name, const Enco3D::Core::Vector2f &v)
 {
 	glUniform2f(m_uniformMap.at(name), v.x, v.y);
 }
 
-void Enco3D::Rendering::Shader::SetUniformVector3f(const string &name, const Enco3D::Core::Vector3f &v)
+void Enco3D::Rendering::Shader::setUniformVector3f(const string &name, const Enco3D::Core::Vector3f &v)
 {
 	glUniform3f(m_uniformMap.at(name), v.x, v.y, v.z);
 }
 
-void Enco3D::Rendering::Shader::SetUniformVector4f(const string &name, const Enco3D::Core::Vector4f &v)
+void Enco3D::Rendering::Shader::setUniformVector4f(const string &name, const Enco3D::Core::Vector4f &v)
 {
 	glUniform4f(m_uniformMap.at(name), v.x, v.y, v.z, v.w);
 }
 
-void Enco3D::Rendering::Shader::SetUniformMatrix3x3f(const string &name, const Enco3D::Core::Matrix3x3f &v)
+void Enco3D::Rendering::Shader::setUniformMatrix3x3f(const string &name, const Enco3D::Core::Matrix3x3f &v)
 {
 	glUniformMatrix3fv(m_uniformMap.at(name), 1, GL_TRUE, (const GLfloat *)v.m);
 }
 
-void Enco3D::Rendering::Shader::SetUniformMatrix4x4f(const string &name, const Enco3D::Core::Matrix4x4f &v)
+void Enco3D::Rendering::Shader::setUniformMatrix4x4f(const string &name, const Enco3D::Core::Matrix4x4f &v)
 {
 	glUniformMatrix4fv(m_uniformMap.at(name), 1, GL_TRUE, (const GLfloat *)v.m);
 }
 
-void Enco3D::Rendering::Shader::SetUniformDirectionalLight(const string &name, const Enco3D::Component::DirectionalLight *directionalLight)
+void Enco3D::Rendering::Shader::setUniformDirectionalLight(const string &name, const Enco3D::Component::DirectionalLight *directionalLight)
 {
-	SetUniformVector3f(name + ".color", directionalLight->GetColor());
-	SetUniformFloat(name + ".intensity", directionalLight->GetIntensity());
-	SetUniformVector3f(name + ".direction", directionalLight->GetTransform()->GetRotation().GetForward());
+	setUniformVector3f(name + ".color", directionalLight->getColor());
+	setUniformFloat(name + ".intensity", directionalLight->getIntensity());
+	setUniformVector3f(name + ".direction", directionalLight->getTransform()->getRotation().getForward());
 }
 
-void Enco3D::Rendering::Shader::SetUniformPointLight(const string &name, const Enco3D::Component::PointLight *pointLight)
+void Enco3D::Rendering::Shader::setUniformPointLight(const string &name, const Enco3D::Component::PointLight *pointLight)
 {
-	SetUniformVector3f(name + ".color", pointLight->GetColor());
-	SetUniformFloat(name + ".intensity", pointLight->GetIntensity());
-	SetUniformVector3f(name + ".position", pointLight->GetTransform()->GetTranslation());
-	SetUniformFloat(name + ".range", pointLight->GetRange());
+	setUniformVector3f(name + ".color", pointLight->getColor());
+	setUniformFloat(name + ".intensity", pointLight->getIntensity());
+	setUniformVector3f(name + ".position", pointLight->getTransform()->getTranslation());
+	setUniformFloat(name + ".range", pointLight->getRange());
 }
 
-void Enco3D::Rendering::Shader::SetUniformSpotLight(const string &name, const Enco3D::Component::SpotLight *spotLight)
+void Enco3D::Rendering::Shader::setUniformSpotLight(const string &name, const Enco3D::Component::SpotLight *spotLight)
 {
-	SetUniformVector3f(name + ".color", spotLight->GetColor());
-	SetUniformFloat(name + ".intensity", spotLight->GetIntensity());
-	SetUniformVector3f(name + ".position", spotLight->GetTransform()->GetTranslation());
-	SetUniformVector3f(name + ".direction", spotLight->GetTransform()->GetRotation().GetForward());
-	SetUniformFloat(name + ".range", spotLight->GetRange());
-	SetUniformFloat(name + ".cutoff", spotLight->GetCutoff());
+	setUniformVector3f(name + ".color", spotLight->getColor());
+	setUniformFloat(name + ".intensity", spotLight->getIntensity());
+	setUniformVector3f(name + ".position", spotLight->getTransform()->getTranslation());
+	setUniformVector3f(name + ".direction", spotLight->getTransform()->getRotation().getForward());
+	setUniformFloat(name + ".range", spotLight->getRange());
+	setUniformFloat(name + ".cutoff", spotLight->getCutoff());
 }
 
-void Enco3D::Rendering::Shader::UpdateUniforms(Enco3D::Core::Transform *transform, const Enco3D::Component::Camera *camera, Enco3D::Rendering::RenderingEngine *renderingEngine, Enco3D::Rendering::Material *material)
+void Enco3D::Rendering::Shader::updateUniforms(Enco3D::Core::Transform *transform, const Enco3D::Component::Camera *camera, Enco3D::Rendering::RenderingEngine *renderingEngine, Enco3D::Rendering::Material *material)
 {
-	Core::Matrix4x4f worldMatrix = transform->GetTransformation();
-	Core::Matrix4x4f worldViewMatrix = camera->GetView() * worldMatrix;
-	Core::Matrix4x4f worldViewProjectionMatrix = camera->GetViewProjection() * worldMatrix;
-	Core::Matrix4x4f viewProjectionMatrix = camera->GetViewProjection();
+	Core::Matrix4x4f worldMatrix = transform->getTransformation();
+	Core::Matrix4x4f worldViewMatrix = camera->getView() * worldMatrix;
+	Core::Matrix4x4f worldViewProjectionMatrix = camera->getViewProjection() * worldMatrix;
+	Core::Matrix4x4f viewProjectionMatrix = camera->getViewProjection();
+	
+	Core::Matrix4x4f prevWorldMatrix = transform->getPrevTransformation();
+	Core::Matrix4x4f prevWorldViewMatrix = camera->getPrevView() * prevWorldMatrix;
+	Core::Matrix4x4f prevWorldViewProjectionMatrix = camera->getPrevViewProjection() * prevWorldMatrix;
+	Core::Matrix4x4f prevViewProjectionMatrix = camera->getPrevViewProjection();
 
-	Core::Matrix4x4f prevWorldMatrix = transform->GetPrevTransformation();
-	Core::Matrix4x4f prevWorldViewMatrix = camera->GetPrevView() * prevWorldMatrix;
-	Core::Matrix4x4f prevWorldViewProjectionMatrix = camera->GetPrevViewProjection() * prevWorldMatrix;
-	Core::Matrix4x4f prevViewProjectionMatrix = camera->GetPrevViewProjection();
+	Core::Matrix4x4f rotationMatrix = camera->getRotationMatrix();
+	Core::Matrix4x4f rotationProjectionMatrix = camera->getProjection() * rotationMatrix;
+
+	Core::Matrix4x4f inverseProjectionMatrix = camera->getInverseProjection();
+	Core::Matrix4x4f inverseViewMatrix = camera->getInverseView();
+	Core::Matrix4x4f inverseViewProjectionMatrix = camera->getInverseViewProjection();
 
 	for (unsigned int i = 0; i < m_uniformNames.size(); i++)
 	{
@@ -539,35 +546,45 @@ void Enco3D::Rendering::Shader::UpdateUniforms(Enco3D::Core::Transform *transfor
 		std::string uniformType = m_uniformTypes[i];
 
 		if (uniformName == "matrix_worldMatrix")
-			SetUniformMatrix4x4f(uniformName, worldMatrix);
+			setUniformMatrix4x4f(uniformName, worldMatrix);
 		else if (uniformName == "matrix_worldViewMatrix")
-			SetUniformMatrix4x4f(uniformName, worldViewMatrix);
+			setUniformMatrix4x4f(uniformName, worldViewMatrix);
 		else if (uniformName == "matrix_worldViewProjectionMatrix")
-			SetUniformMatrix4x4f(uniformName, worldViewProjectionMatrix);
+			setUniformMatrix4x4f(uniformName, worldViewProjectionMatrix);
 		else if (uniformName == "matrix_viewProjectionMatrix")
-			SetUniformMatrix4x4f(uniformName, viewProjectionMatrix);
+			setUniformMatrix4x4f(uniformName, viewProjectionMatrix);
 		else if (uniformName == "matrix_prevWorldMatrix")
-			SetUniformMatrix4x4f(uniformName, prevWorldMatrix);
+			setUniformMatrix4x4f(uniformName, prevWorldMatrix);
 		else if (uniformName == "matrix_prevWorldViewMatrix")
-			SetUniformMatrix4x4f(uniformName, prevWorldViewMatrix);
+			setUniformMatrix4x4f(uniformName, prevWorldViewMatrix);
 		else if (uniformName == "matrix_prevWorldViewProjectionMatrix")
-			SetUniformMatrix4x4f(uniformName, prevWorldViewProjectionMatrix);
+			setUniformMatrix4x4f(uniformName, prevWorldViewProjectionMatrix);
 		else if (uniformName == "matrix_prevViewProjectionMatrix")
-			SetUniformMatrix4x4f(uniformName, prevViewProjectionMatrix);
+			setUniformMatrix4x4f(uniformName, prevViewProjectionMatrix);
+		else if (uniformName == "matrix_rotationMatrix")
+			setUniformMatrix4x4f(uniformName, rotationMatrix);
+		else if (uniformName == "matrix_rotationProjectionMatrix")
+			setUniformMatrix4x4f(uniformName, rotationProjectionMatrix);
+		else if (uniformName == "matrix_inverseProjectionMatrix")
+			setUniformMatrix4x4f(uniformName, inverseProjectionMatrix);
+		else if (uniformName == "matrix_inverseViewMatrix")
+			setUniformMatrix4x4f(uniformName, inverseViewMatrix);
+		else if (uniformName == "matrix_inverseViewProjectionMatrix")
+			setUniformMatrix4x4f(uniformName, inverseViewProjectionMatrix);
 		else if (uniformName == "camera_translation")
-			SetUniformVector3f(uniformName, camera->GetTransform()->GetTranslation());
+			setUniformVector3f(uniformName, camera->getTransform()->getTranslation());
 		else if (uniformName == "rendering_globalAmbientLightColor")
-			SetUniformVector3f(uniformName, renderingEngine->GetGlobalAmbientColor());
+			setUniformVector3f(uniformName, renderingEngine->getGlobalAmbientColor());
 		else if (uniformName == "rendering_zNearClippingPlane")
-			SetUniformFloat(uniformName, renderingEngine->GetZNearClippingPlane());
+			setUniformFloat(uniformName, renderingEngine->getZNearClippingPlane());
 		else if (uniformName == "rendering_zFarClippingPlane")
-			SetUniformFloat(uniformName, renderingEngine->GetZFarClippingPlane());
+			setUniformFloat(uniformName, renderingEngine->getZFarClippingPlane());
 		else if (uniformName == "rendering_skybox")
 		{
-			if (renderingEngine->GetSkybox() != nullptr)
+			if (renderingEngine->getSkybox() != nullptr)
 			{
-				renderingEngine->GetSkybox()->GetTexture()->Bind(1);
-				SetUniformInt(uniformName, 1);
+				renderingEngine->getSkybox()->getTexture()->bind(1);
+				setUniformInt(uniformName, 1);
 			}
 		}
 
@@ -575,21 +592,21 @@ void Enco3D::Rendering::Shader::UpdateUniforms(Enco3D::Core::Transform *transfor
 		{
 			string matComponentName = uniformName.substr(4, uniformName.size() - 4);
 			if (uniformType == "float")
-				SetUniformFloat(uniformName, material->GetFloat(matComponentName));
+				setUniformFloat(uniformName, material->getFloat(matComponentName));
 			else if (uniformType == "vec3")
-				SetUniformVector3f(uniformName, material->GetVector3f(matComponentName));
+				setUniformVector3f(uniformName, material->getVector3f(matComponentName));
 			else if (uniformType == "sampler2D")
 			{
-				material->GetTexture2D(matComponentName)->Bind(TextureSampler::Sampler0);
-				SetUniformInt(uniformName, 0);
+				material->getTexture2D(matComponentName)->bind(TextureSampler::Sampler0);
+				setUniformInt(uniformName, 0);
 			}
 		}
 
 		if (uniformType == "DirectionalLight")
-			SetUniformDirectionalLight(uniformName, (Component::DirectionalLight*)renderingEngine->GetActiveLight());
+			setUniformDirectionalLight(uniformName, (Component::DirectionalLight*)renderingEngine->getActiveLight());
 		else if (uniformType == "PointLight")
-			SetUniformPointLight(uniformName, (Component::PointLight*)renderingEngine->GetActiveLight());
+			setUniformPointLight(uniformName, (Component::PointLight*)renderingEngine->getActiveLight());
 		else if (uniformType == "SpotLight")
-			SetUniformSpotLight(uniformName, (Component::SpotLight*)renderingEngine->GetActiveLight());
+			setUniformSpotLight(uniformName, (Component::SpotLight*)renderingEngine->getActiveLight());
 	}
 }

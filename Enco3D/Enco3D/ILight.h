@@ -18,17 +18,17 @@ namespace Enco3D
 			Rendering::Shader *m_shader{ nullptr };
 
 		public:
-			void InitRendering() { GetRenderingEngine()->AddLight(this); }
-			void Deinit() { GetRenderingEngine()->RemoveLight(this); }
+			void initRendering() { getRenderingEngine()->addLight(this); }
+			void deinit() { getRenderingEngine()->removeLight(this); }
 
-			virtual void SetUpShader() {  }
+			virtual void setUpShader() {  }
 
-			inline void SetColor(const Core::Vector3f &color) { m_color.Set(color); }
-			inline void SetIntensity(float intensity) { m_intensity = intensity; }
+			inline void setColor(const Core::Vector3f &color) { m_color.set(color); }
+			inline void setIntensity(float intensity) { m_intensity = intensity; }
 
-			inline Core::Vector3f GetColor() const { return m_color; }
-			inline float GetIntensity() const { return m_intensity; }
-			inline Rendering::Shader *GetShader() const { return m_shader; }
+			inline Core::Vector3f getColor() const { return m_color; }
+			inline float getIntensity() const { return m_intensity; }
+			inline Rendering::Shader *getShader() const { return m_shader; }
 		};
 	}
 }

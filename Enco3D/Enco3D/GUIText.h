@@ -35,16 +35,16 @@ namespace Enco3D
 			GUIText(const std::string &text, const Core::Vector3f &color, Rendering::Font *font);
 			~GUIText();
 
-			void InitRendering();
+			void initRendering();
 
-			void RenderGUI(const Component::Camera *camera, Rendering::Shader *shader);
+			void renderGUI(const Component::Camera *camera, Rendering::Shader *shader);
 
-			inline void SetText(const std::string &text) { m_text = text; UpdateMesh(); }
-			inline void SetColor(const Core::Vector3f &color) { m_color.Set(color); m_material.SetVector3f("diffuseColor", m_color); }
+			inline void setText(const std::string &text) { m_text = text; UpdateMesh(); }
+			inline void setColor(const Core::Vector3f &color) { m_color.set(color); m_material.setVector3f("diffuseColor", m_color); }
 
-			inline std::string GetText() const { return m_text; }
-			inline Core::Vector3f GetColor() const { return m_color; }
-			inline Rendering::Font *GetFont() const { return m_font; }
+			inline std::string getText() const { return m_text; }
+			inline Core::Vector3f getColor() const { return m_color; }
+			inline Rendering::Font *getFont() const { return m_font; }
 		};
 	}
 }

@@ -1,105 +1,105 @@
 #include "SSAOPostProcessEffect.h"
+#include "Random.h"
+#include "Vector3.h"
 
-void Enco3D::Component::SSAOPostProcessEffect::InitRendering()
+void Enco3D::Component::SSAOPostProcessEffect::initRendering()
 {
-	m_ssaoBuffer = new Rendering::Texture2D(GetWidth(), GetHeight(), GL_RGBA, GL_RGBA, GL_NEAREST, GL_CLAMP_TO_EDGE);
-	m_horizontalBlurBuffer = new Rendering::Texture2D(GetWidth(), GetHeight(), GL_RGBA, GL_RGBA, GL_NEAREST, GL_CLAMP_TO_EDGE);
-	m_verticalBlurBuffer = new Rendering::Texture2D(GetWidth(), GetHeight(), GL_RGBA, GL_RGBA, GL_NEAREST, GL_CLAMP_TO_EDGE);
+	m_ssaoBuffer = new Rendering::Texture2D(getWidth(), getHeight(), GL_RGBA, GL_RGBA, GL_NEAREST, GL_CLAMP_TO_EDGE);
+	m_blurBuffer = new Rendering::Texture2D(getWidth(), getHeight(), GL_RGBA, GL_RGBA, GL_NEAREST, GL_CLAMP_TO_EDGE);
+	
+	m_ssaoFramebuffer = new Rendering::Framebuffer; m_ssaoFramebuffer->attachTexture2D(m_ssaoBuffer, Rendering::Attachment::Color0); m_ssaoFramebuffer->pack();
+	m_blurFramebuffer = new Rendering::Framebuffer; m_blurFramebuffer->attachTexture2D(m_blurBuffer, Rendering::Attachment::Color0); m_blurFramebuffer->pack();
+	
+	m_ssaoShader = Rendering::ShaderPool::getInstance()->getShader("shaders/ssao", Rendering::ShaderType::VertexShader | Rendering::ShaderType::FragmentShader);
+	m_blurShader = Rendering::ShaderPool::getInstance()->getShader("shaders/ssaoBlur", Rendering::ShaderType::VertexShader | Rendering::ShaderType::FragmentShader);
+	
+	float randomValues[64];
+	unsigned int pixelIndex = 0;
+	for (unsigned int i = 0; i < 16; i++)
+	{
+		Core::Vector3f randomVec(Core::Random::nextFloat() * 2.0f - 1.0f, Core::Random::nextFloat() * 2.0f - 1.0f, 0.0f);
+		randomVec = randomVec.normalize();
 
-	m_ssaoFramebuffer = new Rendering::Framebuffer; m_ssaoFramebuffer->AttachTexture2D(m_ssaoBuffer, Rendering::Attachment::Color0); m_ssaoFramebuffer->Pack();
-	m_horizontalBlurFramebuffer = new Rendering::Framebuffer; m_horizontalBlurFramebuffer->AttachTexture2D(m_horizontalBlurBuffer, Rendering::Attachment::Color0); m_horizontalBlurFramebuffer->Pack();
-	m_verticalBlurFramebuffer = new Rendering::Framebuffer; m_verticalBlurFramebuffer->AttachTexture2D(m_verticalBlurBuffer, Rendering::Attachment::Color0); m_verticalBlurFramebuffer->Pack();
+		randomVec.x = randomVec.x * 0.5f + 0.5f;
+		randomVec.y = randomVec.y * 0.5f + 0.5f;
+		randomVec.z = randomVec.z * 0.5f + 0.5f;
 
-	m_ssaoShader = Rendering::ShaderPool::GetInstance()->GetShader("shaders/ssao", Rendering::ShaderType::VertexShader | Rendering::ShaderType::FragmentShader);
-	m_horizontalBlurShader = Rendering::ShaderPool::GetInstance()->GetShader("shaders/horizontalBlur", Rendering::ShaderType::VertexShader | Rendering::ShaderType::FragmentShader);
-	m_verticalBlurShader = Rendering::ShaderPool::GetInstance()->GetShader("shaders/verticalBlur", Rendering::ShaderType::VertexShader | Rendering::ShaderType::FragmentShader);
+		randomValues[pixelIndex + 0] = randomVec.x;
+		randomValues[pixelIndex + 1] = randomVec.y;
+		randomValues[pixelIndex + 2] = randomVec.z;
+		randomValues[pixelIndex + 3] = 1.0f;
+
+		pixelIndex += 4;
+	}
+
+	m_randomTexture = new Rendering::Texture2D(4, 4, GL_RGBA, GL_RGBA, GL_NEAREST, GL_REPEAT, randomValues);
 
 	m_generatedImageSlot = 1;
 }
 
-void Enco3D::Component::SSAOPostProcessEffect::Deinit()
+void Enco3D::Component::SSAOPostProcessEffect::deinit()
 {
+	delete m_randomTexture;
+
 	delete m_ssaoBuffer;
-	delete m_horizontalBlurBuffer;
-	delete m_verticalBlurBuffer;
+	delete m_blurBuffer;
 
 	delete m_ssaoFramebuffer;
-	delete m_horizontalBlurFramebuffer;
-	delete m_verticalBlurFramebuffer;
+	delete m_blurFramebuffer;
 }
 
-void Enco3D::Component::SSAOPostProcessEffect::PostProcess(const Camera *camera)
+void Enco3D::Component::SSAOPostProcessEffect::postProcess(const Camera *camera)
 {
 	// GENERATE SSAO TEXTURE //
 
-	Rendering::BindFramebuffer(m_ssaoFramebuffer);
+	Rendering::bindFramebuffer(m_ssaoFramebuffer);
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	m_ssaoShader->Bind();
-	m_ssaoShader->SetUniformMatrix4x4f("matrix_worldViewProjectionMatrix", GetWorldViewProjectionMatrix());
-	m_ssaoShader->SetUniformMatrix4x4f("matrix_projectionMatrix", camera->GetProjection());
-	m_ssaoShader->SetUniformFloat("ssaoRadius", m_ssaoRadius);
-	m_ssaoShader->SetUniformFloat("ssaoPower", m_ssaoPower);
-	m_ssaoShader->SetUniformFloat("ssaoStrength", m_ssaoStrength);
-	m_ssaoShader->SetUniformVector2f("postProcess_texelSize", GetTexelSize());
-	m_ssaoShader->SetUniformFloat("camera_tanHalfFov", camera->GetTanHalfFov());
-	m_ssaoShader->SetUniformFloat("camera_aspectRatio", camera->GetAspectRatio());
-	m_ssaoShader->SetUniformFloat("camera_zNearClippingPlane", camera->GetZNearClippingPlane());
-	m_ssaoShader->SetUniformFloat("camera_zFarClippingPlane", camera->GetZFarClippingPlane());
+	m_ssaoShader->bind();
+	m_ssaoShader->setUniformMatrix4x4f("matrix_worldViewProjectionMatrix", getWorldViewProjectionMatrix());
+	m_ssaoShader->setUniformMatrix4x4f("matrix_projectionMatrix", camera->getProjection());
+	m_ssaoShader->setUniformFloat("ssaoRadius", m_ssaoRadius);
+	m_ssaoShader->setUniformFloat("ssaoPower", m_ssaoPower);
+	m_ssaoShader->setUniformFloat("ssaoStrength", m_ssaoStrength);
+	m_ssaoShader->setUniformVector2f("postProcess_texelSize", getTexelSize());
+	m_ssaoShader->setUniformFloat("camera_tanHalfFov", camera->getTanHalfFov());
+	m_ssaoShader->setUniformFloat("camera_aspectRatio", camera->getAspectRatio());
+	m_ssaoShader->setUniformFloat("camera_zNearClippingPlane", camera->getZNearClippingPlane());
+	m_ssaoShader->setUniformFloat("camera_zFarClippingPlane", camera->getZFarClippingPlane());
 
-	m_depthBuffer->Bind(Rendering::TextureSampler::Sampler2); m_ssaoShader->SetUniformInt("gbuffer_depthTexture", Rendering::TextureSampler::Sampler2);
-	m_compositeBuffer->Bind(Rendering::TextureSampler::Sampler1); m_ssaoShader->SetUniformInt("compositeTexture", Rendering::TextureSampler::Sampler1);
-	m_normalBuffer->Bind(Rendering::TextureSampler::Sampler0); m_ssaoShader->SetUniformInt("gbuffer_normalTexture", Rendering::TextureSampler::Sampler0);
+	m_randomTexture->bind(Rendering::TextureSampler::Sampler2); m_ssaoShader->setUniformInt("randomTexture", Rendering::TextureSampler::Sampler2);
+	m_depthBuffer->bind(Rendering::TextureSampler::Sampler1); m_ssaoShader->setUniformInt("gbuffer_depth", Rendering::TextureSampler::Sampler1);
+	m_gbuffer1->bind(Rendering::TextureSampler::Sampler0); m_ssaoShader->setUniformInt("gbuffer_1", Rendering::TextureSampler::Sampler0);
+	
+	renderScreen();
 
-	RenderScreen();
-	Rendering::BindFramebuffer(nullptr);
+	// BLUR THE SSAO TEXTURE //
 
-	// BLUR THE SSAO TEXTURE (HORIZONTAL) //
-
-	Rendering::BindFramebuffer(m_horizontalBlurFramebuffer);
+	Rendering::bindFramebuffer(m_blurFramebuffer);
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	m_horizontalBlurShader->Bind();
-	m_horizontalBlurShader->SetUniformMatrix4x4f("matrix_worldViewProjectionMatrix", GetWorldViewProjectionMatrix());
-	m_horizontalBlurShader->SetUniformInt("blurTexture", 0);
-	m_horizontalBlurShader->SetUniformVector2f("postProcess_texelSize", GetTexelSize());
-	m_horizontalBlurShader->SetUniformInt("blurSize", 4);
+	m_blurShader->bind();
+	m_blurShader->setUniformMatrix4x4f("matrix_worldViewProjectionMatrix", getWorldViewProjectionMatrix());
+	m_blurShader->setUniformVector2f("texelSize", getTexelSize());
+	m_blurShader->setUniformInt("blurSize", 4);
 
-	m_ssaoBuffer->Bind(Rendering::TextureSampler::Sampler0); m_horizontalBlurShader->SetUniformInt("blurTexture", Rendering::TextureSampler::Sampler0);
+	m_ssaoBuffer->bind(Rendering::TextureSampler::Sampler0); m_blurShader->setUniformInt("inputTexture", Rendering::TextureSampler::Sampler0);
 
-	RenderScreen();
-
-	// BLUR THE SSAO TEXTURE (VERTICAL) //
-
-	Rendering::BindFramebuffer(m_verticalBlurFramebuffer);
-	glClear(GL_COLOR_BUFFER_BIT);
-
-	m_verticalBlurShader->Bind();
-	m_verticalBlurShader->SetUniformMatrix4x4f("matrix_worldViewProjectionMatrix", GetWorldViewProjectionMatrix());
-	m_verticalBlurShader->SetUniformVector2f("postProcess_texelSize", GetTexelSize());
-	m_verticalBlurShader->SetUniformInt("blurSize", 4);
-
-	m_horizontalBlurBuffer->Bind(Rendering::TextureSampler::Sampler0); m_verticalBlurShader->SetUniformInt("blurTexture", Rendering::TextureSampler::Sampler0);
-
-	RenderScreen();
-	Rendering::BindFramebuffer(nullptr);
+	renderScreen();
+	Rendering::bindFramebuffer(nullptr);
 }
 
-void Enco3D::Component::SSAOPostProcessEffect::Resize(unsigned int width, unsigned int height)
+void Enco3D::Component::SSAOPostProcessEffect::resize(unsigned int width, unsigned int height)
 {
 	delete m_ssaoBuffer;
-	delete m_horizontalBlurBuffer;
-	delete m_verticalBlurBuffer;
-
+	delete m_blurBuffer;
+	
 	delete m_ssaoFramebuffer;
-	delete m_horizontalBlurFramebuffer;
-	delete m_verticalBlurFramebuffer;
-
+	delete m_blurFramebuffer;
+	
 	m_ssaoBuffer = new Rendering::Texture2D(width, height, GL_RGBA, GL_RGBA, GL_NEAREST, GL_CLAMP_TO_EDGE);
-	m_horizontalBlurBuffer = new Rendering::Texture2D(width, height, GL_RGBA, GL_RGBA, GL_NEAREST, GL_CLAMP_TO_EDGE);
-	m_verticalBlurBuffer = new Rendering::Texture2D(width, height, GL_RGBA, GL_RGBA, GL_NEAREST, GL_CLAMP_TO_EDGE);
-
-	m_ssaoFramebuffer = new Rendering::Framebuffer; m_ssaoFramebuffer->AttachTexture2D(m_ssaoBuffer, Rendering::Attachment::Color0); m_ssaoFramebuffer->Pack();
-	m_horizontalBlurFramebuffer = new Rendering::Framebuffer; m_horizontalBlurFramebuffer->AttachTexture2D(m_horizontalBlurBuffer, Rendering::Attachment::Color0); m_horizontalBlurFramebuffer->Pack();
-	m_verticalBlurFramebuffer = new Rendering::Framebuffer; m_verticalBlurFramebuffer->AttachTexture2D(m_verticalBlurBuffer, Rendering::Attachment::Color0); m_verticalBlurFramebuffer->Pack();
+	m_blurBuffer = new Rendering::Texture2D(width, height, GL_RGBA, GL_RGBA, GL_NEAREST, GL_CLAMP_TO_EDGE);
+	
+	m_ssaoFramebuffer = new Rendering::Framebuffer; m_ssaoFramebuffer->attachTexture2D(m_ssaoBuffer, Rendering::Attachment::Color0); m_ssaoFramebuffer->pack();
+	m_blurFramebuffer = new Rendering::Framebuffer; m_blurFramebuffer->attachTexture2D(m_blurBuffer, Rendering::Attachment::Color0); m_blurFramebuffer->pack();
 }

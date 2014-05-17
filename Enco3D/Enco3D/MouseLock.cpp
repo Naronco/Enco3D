@@ -1,29 +1,29 @@
 #include "MouseLock.h"
 
-void Enco3D::Component::MouseLock::Update()
+void Enco3D::Component::MouseLock::update()
 {
-	if (!GetWindow()->IsFocused())
+	if (!getWindow()->isFocused())
 		m_mouseLocked = false;
 
-	if (Core::Input::IsMouseButtonDown(Core::Mouse::Left) && !m_mouseLocked)
+	if (Core::Input::isMouseButtonDown(Core::Mouse::Left) && !m_mouseLocked)
 	{
 		m_mouseLocked = true;
-		GetWindow()->SetCursor(false);
-		GetWindow()->SetCursorPosition(GetWindow()->GetWidth() >> 1, GetWindow()->GetHeight() >> 1);
+		getWindow()->setCursor(false);
+		getWindow()->setCursorPosition(getWindow()->getWidth() >> 1, getWindow()->getHeight() >> 1);
 	}
 
-	if (Core::Input::IsKeyDown(Core::Keyboard::Escape) && m_mouseLocked)
+	if (Core::Input::isKeyDown(Core::Keyboard::Escape) && m_mouseLocked)
 	{
 		m_mouseLocked = false;
-		GetWindow()->SetCursor(true);
+		getWindow()->setCursor(true);
 	}
 
-	FreeMove *freeMove = (FreeMove*)m_gameObject->GetGameComponent<FreeMove>();
-	FreeLook *freeLook = (FreeLook*)m_gameObject->GetGameComponent<FreeLook>();
+	FreeMove *freeMove = (FreeMove*)m_gameObject->getGameComponent<FreeMove>();
+	FreeLook *freeLook = (FreeLook*)m_gameObject->getGameComponent<FreeLook>();
 
 	if (freeMove != nullptr)
-		freeMove->SetMovingEnabled(m_mouseLocked);
+		freeMove->setMovingEnabled(m_mouseLocked);
 	
 	if (freeLook != nullptr)
-		freeLook->SetRotationEnabled(m_mouseLocked);
+		freeLook->setRotationEnabled(m_mouseLocked);
 }

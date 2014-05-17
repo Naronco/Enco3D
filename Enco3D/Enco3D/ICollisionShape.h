@@ -12,7 +12,7 @@ namespace Enco3D
 		class ICollisionShape
 		{
 		public:
-			virtual btCollisionShape *ToBulletPhysicsCollisionShape() = 0;
+			virtual btCollisionShape *toBulletPhysicsCollisionShape() = 0;
 		};
 	}
 }

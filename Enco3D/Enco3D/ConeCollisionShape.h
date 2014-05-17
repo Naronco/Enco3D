@@ -16,13 +16,13 @@ namespace Enco3D
 			ConeCollisionShape();
 			ConeCollisionShape(float radius, float height);
 
-			btCollisionShape *ToBulletPhysicsCollisionShape();
+			btCollisionShape *toBulletPhysicsCollisionShape();
 
-			inline void SetRadius(float radius) { m_radius = radius; }
-			inline void SetHeight(float height) { m_height = height; }
+			inline void setRadius(float radius) { m_radius = radius; }
+			inline void setHeight(float height) { m_height = height; }
 
-			inline float GetRadius() const { return m_radius; }
-			inline float GetHeight() const { return m_height; }
+			inline float getRadius() const { return m_radius; }
+			inline float getHeight() const { return m_height; }
 		};
 	}
 }

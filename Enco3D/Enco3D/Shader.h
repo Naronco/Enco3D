@@ -69,17 +69,17 @@ namespace Enco3D
 			static const Shader *s_lastBind;
 
 		private:
-			void AddProgram(const string &text, int type);
-			string LoadShader(const string &filename);
-			void CheckShaderError(int shader, int flag, bool isProgram, const string &errorMsg);
+			void addProgram(const string &text, int type);
+			string loadShader(const string &filename);
+			void checkShaderError(int shader, int flag, bool isProgram, const string &errorMsg);
 			
-			std::vector<__UniformStruct> FindUniformStructs(const std::string &shaderText);
-			std::string FindUniformStructName(const std::string &structStartToOpeningBrace);
-			std::vector<__TypedData> FindUniformStructComponents(const std::string &openingBraceToClosingBrace);
+			std::vector<__UniformStruct> findUniformStructs(const std::string &shaderText);
+			std::string findUniformStructName(const std::string &structStartToOpeningBrace);
+			std::vector<__TypedData> findUniformStructComponents(const std::string &openingBraceToClosingBrace);
 
-			void AddAllAttributes(const std::string &vertexShaderText);
-			void AddShaderUniforms(const std::string &shaderText);
-			void AddUniform(const std::string &uniformName, const std::string &uniformType, const std::vector<__UniformStruct>& structs);
+			void addAllAttributes(const std::string &vertexShaderText);
+			void addShaderUniforms(const std::string &shaderText);
+			void addUniform(const std::string &uniformName, const std::string &uniformType, const std::vector<__UniformStruct>& structs);
 
 		public:
 			Shader();
@@ -87,38 +87,38 @@ namespace Enco3D
 			Shader(const string &vertexFilename, const string &fragmentFilename);
 			virtual ~Shader();
 
-			void Bind() const;
+			void bind() const;
 
-			void AddVertexShader(const string &text);
-			void AddFragmentShader(const string &text);
-			void AddGeometryShader(const string &text);
-			void AddTessellationControlShader(const string &text);
-			void AddTessellationEvaluationShader(const string &text);
+			void addVertexShader(const string &text);
+			void addFragmentShader(const string &text);
+			void addGeometryShader(const string &text);
+			void addTessellationControlShader(const string &text);
+			void addTessellationEvaluationShader(const string &text);
 
-			void AddVertexShaderFromFile(const string &filename);
-			void AddFragmentShaderFromFile(const string &filename);
-			void AddGeometryShaderFromFile(const string &filename);
-			void AddTessellationControlShaderFromFile(const string &filename);
-			void AddTessellationEvaluationShaderFromFile(const string &filename);
+			void addVertexShaderFromFile(const string &filename);
+			void addFragmentShaderFromFile(const string &filename);
+			void addGeometryShaderFromFile(const string &filename);
+			void addTessellationControlShaderFromFile(const string &filename);
+			void addTessellationEvaluationShaderFromFile(const string &filename);
 
-			void CompileShader();
+			void compileShader();
 
-			void SetAttribLocation(const string &attributeName, int location);
-			void SetUniformInt(const string &name, int value);
-			void SetUniformFloat(const string &name, float value);
+			void setAttribLocation(const string &attributeName, int location);
+			void setUniformInt(const string &name, int value);
+			void setUniformFloat(const string &name, float value);
 
-			void SetUniformVector2f(const string &name, const Core::Vector2f &v);
-			void SetUniformVector3f(const string &name, const Core::Vector3f &v);
-			void SetUniformVector4f(const string &name, const Core::Vector4f &v);
+			void setUniformVector2f(const string &name, const Core::Vector2f &v);
+			void setUniformVector3f(const string &name, const Core::Vector3f &v);
+			void setUniformVector4f(const string &name, const Core::Vector4f &v);
 
-			void SetUniformMatrix3x3f(const string &name, const Core::Matrix3x3f &v);
-			void SetUniformMatrix4x4f(const string &name, const Core::Matrix4x4f &v);
+			void setUniformMatrix3x3f(const string &name, const Core::Matrix3x3f &v);
+			void setUniformMatrix4x4f(const string &name, const Core::Matrix4x4f &v);
 
-			void SetUniformDirectionalLight(const string &name, const Component::DirectionalLight *directionalLight);
-			void SetUniformPointLight(const string &name, const Component::PointLight *pointLight);
-			void SetUniformSpotLight(const string &name, const Component::SpotLight *spotLight);
+			void setUniformDirectionalLight(const string &name, const Component::DirectionalLight *directionalLight);
+			void setUniformPointLight(const string &name, const Component::PointLight *pointLight);
+			void setUniformSpotLight(const string &name, const Component::SpotLight *spotLight);
 
-			void UpdateUniforms(Core::Transform *transform, const Component::Camera *camera, RenderingEngine *renderingEngine, Material *material);
+			void updateUniforms(Core::Transform *transform, const Component::Camera *camera, RenderingEngine *renderingEngine, Material *material);
 		};
 	}
 }

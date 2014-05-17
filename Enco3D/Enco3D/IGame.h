@@ -36,89 +36,96 @@ namespace Enco3D
 
 		public:
 			/// <summary>Virtual void, which will be called when the game should be initialized</summary>
-			virtual void Init() {  }
+			virtual void init() {  }
 
 			/// <summary>Virtual void, which will be called if the game closes</summary>
-			virtual void Deinit() {  }
+			virtual void deinit() {  }
 
 			/// <summary>Virtual void, which will be called if the game updates (Called once per frame)</summary>
-			virtual void Update() {  }
+			virtual void update() {  }
 
 			/// <summary>Adds the given game object to the scene hierarchy</summary>
 			/// <param name="gameObject">The game object to add</param>
-			inline void AddGameObject(GameObject *gameObject)
+			inline void addGameObject(GameObject *gameObject)
 			{
-				GetRootObject()->AddChild(gameObject);
+				getRootObject()->addChild(gameObject);
 			}
 
 			/// <summary>Adds the given game component to the scene hierarchy</summary>
 			/// <param name="gameComponent">The game component to add</param>
-			inline void AddGameComponent(IGameComponent *gameComponent)
+			inline void addGameComponent(IGameComponent *gameComponent)
 			{
-				GetRootObject()->AddComponent(gameComponent);
+				getRootObject()->addComponent(gameComponent);
 			}
 
 			/// <summary>Sets the rendering engine of the hierarchy</summary>
 			/// <param name="renderingEngine">The new rendering engine</param>
-			inline void SetRenderingEngine(Rendering::RenderingEngine *renderingEngine)
+			inline void setRenderingEngine(Rendering::RenderingEngine *renderingEngine)
 			{
 				m_renderingEngine = renderingEngine;
-				GetRootObject()->SetRenderingEngine(renderingEngine);
+				getRootObject()->setRenderingEngine(renderingEngine);
 			}
 
 			/// <summary>Sets the physics engine of the hierarchy</summary>
 			/// <param name="physicsEngine">The new physics engine</param>
-			inline void SetPhysicsEngine(Physics::PhysicsEngine *physicsEngine)
+			inline void setPhysicsEngine(Physics::PhysicsEngine *physicsEngine)
 			{
 				m_physicsEngine = physicsEngine;
-				GetRootObject()->SetPhysicsEngine(physicsEngine);
+				getRootObject()->setPhysicsEngine(physicsEngine);
 			}
 
 			/// <summary>Sets the audio engine of the hierarchy</summary>
 			/// <param name="audioEngine">The new audio engine</param>
-			inline void SetAudioEngine(Audio::AudioEngine *audioEngine)
+			inline void setAudioEngine(Audio::AudioEngine *audioEngine)
 			{
 				m_audioEngine = audioEngine;
 			}
 
 			/// <summary>Sets the main GL window of the hierarchy</summary>
 			/// <param name="window">The new main GL window</param>
-			inline void SetWindow(GLWindow *window)
+			inline void setWindow(GLWindow *window)
 			{
 				m_window = window;
-				GetRootObject()->SetWindow(window);
+				getRootObject()->setWindow(window);
 			}
 
 			/// <summary>Sets the main timer of the hierarchy</summary>
 			/// <param name="timer">The new main timer</param>
-			inline void SetTimer(Timer *timer)
+			inline void setTimer(Timer *timer)
 			{
 				m_timer = timer;
-				GetRootObject()->SetTimer(timer);
+				getRootObject()->setTimer(timer);
 			}
 
 			/// <summary>Returns the rendering engine</summary>
-			inline Rendering::RenderingEngine *GetRenderingEngine() const { return m_renderingEngine; }
+			inline Rendering::RenderingEngine *getRenderingEngine() const { return m_renderingEngine; }
 
 			/// <summary>Returns the physics engine</summary>
-			inline Physics::PhysicsEngine *GetPhysicsEngine() const { return m_physicsEngine; }
+			inline Physics::PhysicsEngine *getPhysicsEngine() const { return m_physicsEngine; }
 
 			/// <summary>Returns the audio engine</summary>
-			inline Audio::AudioEngine *GetAudioEngine() const { return m_audioEngine; }
+			inline Audio::AudioEngine *getAudioEngine() const { return m_audioEngine; }
 
 			/// <summary>Returns the main GL window</summary>
-			inline GLWindow *GetWindow() const { return m_window; }
+			inline GLWindow *getWindow() const { return m_window; }
 
 			/// <summary>Returns the main timer</summary>
-			inline Timer *GetTimer() const { return m_timer; }
+			inline Timer *getTimer() const { return m_timer; }
 
 			/// <summary>Returns the root object of the hierarchy, and initializes it if it's a null pointer</summary>
-			inline GameObject *GetRootObject()
+			inline GameObject *getRootObject()
 			{
 				if (m_rootObject == nullptr)
 					m_rootObject = new GameObject;
 
 				return m_rootObject;
+			}
+
+			inline GameObject *createGameObject(const std::string &name)
+			{
+				GameObject *go = new GameObject(name);
+//				addGameObject(go);
+				return go;
 			}
 		};
 	}

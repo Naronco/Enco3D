@@ -19,10 +19,10 @@ namespace Enco3D
 			StaticPlaneCollisionShape(const Core::Vector3f &p0, const Core::Vector3f &p1, const Core::Vector3f &p2);
 			~StaticPlaneCollisionShape();
 
-			btCollisionShape *ToBulletPhysicsCollisionShape();
+			btCollisionShape *toBulletPhysicsCollisionShape();
 
-			inline void SetNormal(const Core::Vector3f &normal) { m_normal.Set(normal); }
-			inline Core::Vector3f GetNormal() const { return m_normal; }
+			inline void setNormal(const Core::Vector3f &normal) { m_normal.set(normal); }
+			inline Core::Vector3f getNormal() const { return m_normal; }
 		};
 	}
 }

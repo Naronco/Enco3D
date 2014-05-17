@@ -21,21 +21,21 @@ namespace Enco3D
 			FreeMove();
 			FreeMove(float moveSpeed);
 
-			void Update();
+			void update();
 
-			inline void SetMovingEnabled(bool enabled) { m_movingEnabled = enabled; }
+			inline void setMovingEnabled(bool enabled) { m_movingEnabled = enabled; }
 
-			inline void SetMoveSpeed(float moveSpeed) { m_moveSpeed = moveSpeed; }
-			inline void SetMoveForwardKey(unsigned int key) { m_moveForwardKey = key; }
-			inline void SetMoveBackwardKey(unsigned int key) { m_moveBackwardKey = key; }
-			inline void SetMoveLeftKey(unsigned int key) { m_moveLeftKey = key; }
-			inline void SetMoveRightKey(unsigned int key) { m_moveRightKey = key; }
+			inline void setMoveSpeed(float moveSpeed) { m_moveSpeed = moveSpeed; }
+			inline void setMoveForwardKey(unsigned int key) { m_moveForwardKey = key; }
+			inline void setMoveBackwardKey(unsigned int key) { m_moveBackwardKey = key; }
+			inline void setMoveLeftKey(unsigned int key) { m_moveLeftKey = key; }
+			inline void setMoveRightKey(unsigned int key) { m_moveRightKey = key; }
 
-			inline float GetMoveSpeed() const { return m_moveSpeed; }
-			inline unsigned int GetMoveForwardKey() const { return m_moveForwardKey; }
-			inline unsigned int GetMoveBackwardKey() const { return m_moveBackwardKey; }
-			inline unsigned int GetMoveLeftKey() const { return m_moveLeftKey; }
-			inline unsigned int GetMoveRightKey() const { return m_moveRightKey; }
+			inline float getMoveSpeed() const { return m_moveSpeed; }
+			inline unsigned int getMoveForwardKey() const { return m_moveForwardKey; }
+			inline unsigned int getMoveBackwardKey() const { return m_moveBackwardKey; }
+			inline unsigned int getMoveLeftKey() const { return m_moveLeftKey; }
+			inline unsigned int getMoveRightKey() const { return m_moveRightKey; }
 		};
 	}
 }

@@ -1,6 +1,6 @@
 #include "ShaderPool.h"
 
-Enco3D::Rendering::Shader *Enco3D::Rendering::ShaderPool::GetShader(const std::string &filename, unsigned int shaderTypes)
+Enco3D::Rendering::Shader *Enco3D::Rendering::ShaderPool::getShader(const std::string &filename, unsigned int shaderTypes)
 {
 	std::map<std::string, Shader*>::iterator it = m_loadedShaders.find(filename);
 	if (it != m_loadedShaders.end())
@@ -16,7 +16,7 @@ Enco3D::Rendering::Shader *Enco3D::Rendering::ShaderPool::GetShader(const std::s
 	}
 }
 
-void Enco3D::Rendering::ShaderPool::Release()
+void Enco3D::Rendering::ShaderPool::release()
 {
 	for (std::map<std::string, Shader*>::iterator it = m_loadedShaders.begin(); it != m_loadedShaders.end(); it++)
 		delete it->second;

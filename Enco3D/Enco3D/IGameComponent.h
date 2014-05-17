@@ -20,29 +20,29 @@ namespace Enco3D
 			GameObject *m_gameObject;
 			
 		public:
-			virtual void Init() {  }
-			virtual void Deinit() {  }
+			virtual void init() {  }
+			virtual void deinit() {  }
 
-			virtual void InitRendering() {  }
-			virtual void InitPhysics() {  }
+			virtual void initRendering() {  }
+			virtual void initPhysics() {  }
 
-			virtual void Update() {  }
-			virtual void Render(const Component::Camera *camera, Rendering::Shader *shader) {  }
-			virtual void RenderGUI(const Component::Camera *camera, Rendering::Shader *shader) {  }
+			virtual void update() {  }
+			virtual void render(const Component::Camera *camera, Rendering::Shader *shader) {  }
+			virtual void renderGUI(const Component::Camera *camera, Rendering::Shader *shader) {  }
 
-			virtual void Resize(unsigned int width, unsigned int height) {  }
+			virtual void resize(unsigned int width, unsigned int height) {  }
 
-			virtual void OnAddComponentToObject(IGameComponent *component) {  }
-			virtual void OnRemoveComponentFromObject(IGameComponent *component) {  }
+			virtual void onAddComponentToObject(IGameComponent *component) {  }
+			virtual void onRemoveComponentFromObject(IGameComponent *component) {  }
 
-			inline void SetGameObject(GameObject *gameObject) { m_gameObject = gameObject; }
+			inline void setGameObject(GameObject *gameObject) { m_gameObject = gameObject; }
 
-			inline GameObject *GetGameObject() const { return m_gameObject; }
-			inline Rendering::RenderingEngine *GetRenderingEngine() const { return m_gameObject->GetRenderingEngine(); }
-			inline Physics::PhysicsEngine *GetPhysicsEngine() const { return m_gameObject->GetPhysicsEngine(); }
-			inline GLWindow *GetWindow() const { return m_gameObject->GetWindow(); }
-			inline Timer *GetTimer() const { return m_gameObject->GetTimer(); }
-			inline Transform *GetTransform() const { return m_gameObject->GetTransform(); }
+			inline GameObject *getGameObject() const { return m_gameObject; }
+			inline Rendering::RenderingEngine *getRenderingEngine() const { return m_gameObject->getRenderingEngine(); }
+			inline Physics::PhysicsEngine *getPhysicsEngine() const { return m_gameObject->getPhysicsEngine(); }
+			inline GLWindow *getWindow() const { return m_gameObject->getWindow(); }
+			inline Timer *getTimer() const { return m_gameObject->getTimer(); }
+			inline Transform *getTransform() const { return m_gameObject->getTransform(); }
 		};
 	}
 }

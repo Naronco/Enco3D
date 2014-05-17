@@ -39,9 +39,9 @@ namespace Enco3D
 			Font(const std::string &name, const FontType &type);
 			~Font();
 
-			inline Texture2D *GetTexture() const { return m_texture; }
-			inline CharacterData GetCharacterData(unsigned int index) { return m_characterData[index]; }
-			inline unsigned int GetFontSize() const { return m_fontSize; }
+			inline Texture2D *getTexture() const { return m_texture; }
+			inline CharacterData getCharacterData(unsigned int index) { return m_characterData[index]; }
+			inline unsigned int getFontSize() const { return m_fontSize; }
 		};
 	}
 }

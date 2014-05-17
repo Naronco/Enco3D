@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
+# Visual Studio Express 2013 for Windows Desktop
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Enco3D [Test]", "Enco3D [Test]\Enco3D [Test].vcxproj", "{B023A2CA-4A82-4FD6-A527-8B21C05B7D70}"
@@ -8,6 +8,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Enco3D", "Enco3D\Enco3D.vcxproj", "{1BAA0FBB-5D34-4483-8271-FC1A1C9346A9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enco3D [Editor]", "Enco3D [Editor]\Enco3D [Editor].csproj", "{67DE3F17-FD7B-461F-A253-692EAD625165}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Cubeshaft", "Cubeshaft\Cubeshaft.vcxproj", "{8C69354A-063A-48D5-9906-9A29CE4D7C4F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +51,16 @@ Global
 		{67DE3F17-FD7B-461F-A253-692EAD625165}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{67DE3F17-FD7B-461F-A253-692EAD625165}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{67DE3F17-FD7B-461F-A253-692EAD625165}.Release|Win32.ActiveCfg = Release|Any CPU
+		{8C69354A-063A-48D5-9906-9A29CE4D7C4F}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{8C69354A-063A-48D5-9906-9A29CE4D7C4F}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{8C69354A-063A-48D5-9906-9A29CE4D7C4F}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{8C69354A-063A-48D5-9906-9A29CE4D7C4F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8C69354A-063A-48D5-9906-9A29CE4D7C4F}.Debug|Win32.Build.0 = Debug|Win32
+		{8C69354A-063A-48D5-9906-9A29CE4D7C4F}.Release|Any CPU.ActiveCfg = Release|Win32
+		{8C69354A-063A-48D5-9906-9A29CE4D7C4F}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{8C69354A-063A-48D5-9906-9A29CE4D7C4F}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{8C69354A-063A-48D5-9906-9A29CE4D7C4F}.Release|Win32.ActiveCfg = Release|Win32
+		{8C69354A-063A-48D5-9906-9A29CE4D7C4F}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

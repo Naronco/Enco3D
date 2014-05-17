@@ -10,22 +10,24 @@ Enco3D::Component::DefaultMesh::DefaultMesh(Rendering::Mesh *mesh, Rendering::Ma
 	m_material = material;
 }
 
-void Enco3D::Component::DefaultMesh::Render(const Camera *camera, Rendering::Shader *shader)
+void Enco3D::Component::DefaultMesh::render(const Camera *camera, Rendering::Shader *shader)
 {
-	shader->Bind();
-	shader->UpdateUniforms(m_gameObject->GetTransform(), camera, m_gameObject->GetRenderingEngine(), m_material);
+	shader->bind();
+	shader->updateUniforms(m_gameObject->getTransform(), camera, m_gameObject->getRenderingEngine(), m_material);
 
-	m_mesh->Render();
+	m_mesh->render();
 }
 
-void Enco3D::Component::DefaultMesh::Deinit()
+void Enco3D::Component::DefaultMesh::deinit()
 {
-	if (m_mesh) {
+	if (m_mesh)
+	{
 		delete m_mesh;
 		m_mesh = nullptr;
 	}
 
-	if (m_material) {
+	if (m_material)
+	{
 		delete m_material;
 		m_material = nullptr;
 	}

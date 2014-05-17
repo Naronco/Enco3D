@@ -18,13 +18,13 @@ namespace Enco3D
 			BoxCollisionShape();
 			BoxCollisionShape(const Core::Vector3f &size);
 
-			btCollisionShape *ToBulletPhysicsCollisionShape();
+			btCollisionShape *toBulletPhysicsCollisionShape();
 
-			inline void SetHalfSize(const Core::Vector3f &halfSize) { m_halfSize.Set(halfSize); }
-			inline void SetSize(const Core::Vector3f &size) { m_halfSize.Set(size * 0.5f); }
+			inline void setHalfSize(const Core::Vector3f &halfSize) { m_halfSize.set(halfSize); }
+			inline void setSize(const Core::Vector3f &size) { m_halfSize.set(size * 0.5f); }
 
-			inline Core::Vector3f GetHalfSize() const { return m_halfSize; }
-			inline Core::Vector3f GetSize() const { return m_halfSize * 2.0f; }
+			inline Core::Vector3f getHalfSize() const { return m_halfSize; }
+			inline Core::Vector3f getSize() const { return m_halfSize * 2.0f; }
 		};
 	}
 }

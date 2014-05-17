@@ -238,42 +238,42 @@ namespace Enco3D
 			/// <summary>Sets a key state at the given key code</summary>
 			/// <param name="keyCode">The id of the key</summary>
 			/// <param name="down">True = the key is pressed; False = The key is not pressed</summary>
-			inline static void SetKey(int keyCode, bool down) { m_keys[keyCode] = down; }
+			inline static void setKey(int keyCode, bool down) { m_keys[keyCode] = down; }
 
 			/// <summary>Sets a mouse button state</summary>
 			/// <param name="mouseButton">The id of the mouse button</summary>
 			/// <param name="down">True = the button is pressed; False = The button is not pressed</summary>
-			inline static void SetMouseButton(int mouseButton, bool down) { m_mouseButtons[mouseButton] = down; }
+			inline static void setMouseButton(int mouseButton, bool down) { m_mouseButtons[mouseButton] = down; }
 
 			/// <summary>Sets the mouse position internally, if you want to set the cursor position, use the GLWindow class</summary>
 			/// <param name="mouseX">The X coordinate of the mouse</summary>
 			/// <param name="mouseY">The Y coordinate of the mouse</summary>
-			inline static void SetMousePos(int mouseX, int mouseY) { m_mouseX = mouseX; m_mouseY = mouseY; }
+			inline static void setMousePos(int mouseX, int mouseY) { m_mouseX = mouseX; m_mouseY = mouseY; }
 
 			/// <summary>Sets the motion of the mouse since the last frame internally</summary>
 			/// <param name="relativeX">The X motion of the mouse</summary>
 			/// <param name="relativeY">The Y motion of the mouse</summary>
-			inline static void SetRelativeMouse(int relativeX, int relativeY) { m_relativeX = relativeX; m_relativeY = relativeY; }
+			inline static void setRelativeMouse(int relativeX, int relativeY) { m_relativeX = relativeX; m_relativeY = relativeY; }
 
 			/// <summary>Returns true, if the key is pressed</summary>
 			/// <param name="keyCode">The id of the key</summary>
-			inline static bool IsKeyDown(int keyCode) { return m_keys[keyCode]; }
+			inline static bool isKeyDown(int keyCode) { return m_keys[keyCode]; }
 
 			/// <summary>Returns true, if the mouse button is pressed</summary>
 			/// <param name="mouseButton">The id of the mouse button, use the enumeration "MouseButton"</summary>
-			inline static bool IsMouseButtonDown(int mouseButton) { return m_mouseButtons[mouseButton]; }
+			inline static bool isMouseButtonDown(int mouseButton) { return m_mouseButtons[mouseButton]; }
 
 			/// <summary>Returns the X coordinate of the mouse relative to the window</summary>
-			inline static int GetMouseX() { return m_mouseX; }
+			inline static int getMouseX() { return m_mouseX; }
 
 			/// <summary>Returns the Y coordinate of the mouse relative to the window</summary>
-			inline static int GetMouseY() { return m_mouseY; }
+			inline static int getMouseY() { return m_mouseY; }
 
 			/// <summary>Returns the X motion of the mouse since the last frame</summary>
-			inline static int GetRelativeX() { return m_relativeX; }
+			inline static int getRelativeX() { return m_relativeX; }
 
 			/// <summary>Returns the Y motion of the mouse since the last frame</summary>
-			inline static int GetRelativeY() { return m_relativeY; }
+			inline static int getRelativeY() { return m_relativeY; }
 		};
 	}
 }

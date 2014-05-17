@@ -12,30 +12,30 @@ Enco3D::Component::RigidBody::RigidBody(float mass, float restitution, float fri
 {
 }
 
-void Enco3D::Component::RigidBody::InitPhysics()
+void Enco3D::Component::RigidBody::initPhysics()
 {
-	GetPhysicsEngine()->AddRigidBody(this);
+	getPhysicsEngine()->addRigidBody(this);
 }
 
-void Enco3D::Component::RigidBody::Deinit()
+void Enco3D::Component::RigidBody::deinit()
 {
-	GetPhysicsEngine()->RemoveRigidBody(this);
+	getPhysicsEngine()->removeRigidBody(this);
 }
 
-void Enco3D::Component::RigidBody::Update()
+void Enco3D::Component::RigidBody::update()
 {
 	if (m_bulletPhysicsInstance == nullptr)
 		return;
 
 	m_bulletPhysicsInstance->getMotionState()->getWorldTransform(m_transform);
-	GetTransform()->SetTranslation(Physics::PhysicsHelper::ToEnco3DVec3<float>(m_transform.getOrigin()));
-	GetTransform()->SetRotation(Physics::PhysicsHelper::ToEnco3DQuat<float>(m_transform.getRotation()));
+	getTransform()->setTranslation(Physics::PhysicsHelper::toEnco3DVec3<float>(m_transform.getOrigin()));
+	getTransform()->setRotation(Physics::PhysicsHelper::toEnco3DQuat<float>(m_transform.getRotation()));
 }
 
-btRigidBody *Enco3D::Component::RigidBody::CreateBulletPhysicsInstance()
+btRigidBody *Enco3D::Component::RigidBody::createBulletPhysicsInstance()
 {
-	btDefaultMotionState *motionState = new btDefaultMotionState(btTransform(Physics::PhysicsHelper::ToBulletPhysicsQuat(GetTransform()->GetRotation()), Physics::PhysicsHelper::ToBulletPhysicsVec3(GetTransform()->GetTranslation())));
-	btCollisionShape *shape = m_collisionShape->ToBulletPhysicsCollisionShape();
+	btDefaultMotionState *motionState = new btDefaultMotionState(btTransform(Physics::PhysicsHelper::toBulletPhysicsQuat(getTransform()->getRotation()), Physics::PhysicsHelper::toBulletPhysicsVec3(getTransform()->getTranslation())));
+	btCollisionShape *shape = m_collisionShape->toBulletPhysicsCollisionShape();
 	btVector3 inertia(0, 0, 0);
 
 	if (m_mass > 0.0f)

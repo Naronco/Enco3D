@@ -3,7 +3,7 @@
 bool Enco3D::Core::DebugLogger::s_flags[Enco3D::Core::DebugLoggerFlag::NumDebugLoggerFlags];
 std::ofstream Enco3D::Core::DebugLogger::s_outputStream;
 
-void Enco3D::Core::DebugLogger::Init()
+void Enco3D::Core::DebugLogger::init()
 {
 	s_outputStream.open("debug.log", std::ios::out);
 
@@ -11,13 +11,13 @@ void Enco3D::Core::DebugLogger::Init()
 	s_flags[WriteToFile] = true;
 }
 
-void Enco3D::Core::DebugLogger::Deinit()
+void Enco3D::Core::DebugLogger::deinit()
 {
 	s_outputStream.close();
 	std::cout << "HALLO 2" << std::endl;
 }
 
-void Enco3D::Core::DebugLogger::Log(const std::string &text)
+void Enco3D::Core::DebugLogger::log(const std::string &text)
 {
 	if (s_flags[WriteToConsole])
 		std::cout << text << std::endl;

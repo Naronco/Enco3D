@@ -4,7 +4,7 @@ Enco3D::Component::FreeMove::FreeMove() {  }
 
 Enco3D::Component::FreeMove::FreeMove(float moveSpeed) : m_moveSpeed(moveSpeed) {  }
 
-void Enco3D::Component::FreeMove::Update()
+void Enco3D::Component::FreeMove::update()
 {
 	if (m_movingEnabled)
 	{
@@ -12,23 +12,23 @@ void Enco3D::Component::FreeMove::Update()
 
 		Core::Vector3f movement;
 
-		if (Core::Input::IsKeyDown(m_moveForwardKey))
-			movement += GetTransform()->GetRotation().GetForward();
-		if (Core::Input::IsKeyDown(m_moveBackwardKey))
-			movement -= GetTransform()->GetRotation().GetForward();
-		if (Core::Input::IsKeyDown(m_moveLeftKey))
-			movement -= GetTransform()->GetRotation().GetRight();
-		if (Core::Input::IsKeyDown(m_moveRightKey))
-			movement += GetTransform()->GetRotation().GetRight();
+		if (Core::Input::isKeyDown(m_moveForwardKey))
+			movement += getTransform()->getRotation().getForward();
+		if (Core::Input::isKeyDown(m_moveBackwardKey))
+			movement -= getTransform()->getRotation().getForward();
+		if (Core::Input::isKeyDown(m_moveLeftKey))
+			movement -= getTransform()->getRotation().getRight();
+		if (Core::Input::isKeyDown(m_moveRightKey))
+			movement += getTransform()->getRotation().getRight();
 
-		if (movement.GetSquaredLength() > 0.0f)
+		if (movement.getSquaredLength() > 0.0f)
 		{
-			movement.Normalize();
+			movement = movement.normalize();
 			movement *= m_moveSpeed;
 			motion += movement;
 		}
 
 		motion *= 0.92f;
-		GetTransform()->Translate(motion);
+		getTransform()->translate(motion);
 	}
 }

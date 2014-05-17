@@ -31,33 +31,33 @@ namespace Enco3D
 			RigidBody(float mass, Physics::ICollisionShape *collisionShape);
 			RigidBody(float mass, float restitution, float friction, float linearDamping, float angularDamping, Physics::ICollisionShape *collisionShape);
 
-			void InitPhysics();
-			void Deinit();
+			void initPhysics();
+			void deinit();
 
-			void Update();
-			btRigidBody *CreateBulletPhysicsInstance();
+			void update();
+			btRigidBody *createBulletPhysicsInstance();
 
-			inline void SetLinearVelocity(const Core::Vector3f &linearVelocity) { m_bulletPhysicsInstance->setLinearVelocity(Physics::PhysicsHelper::ToBulletPhysicsVec3(linearVelocity)); }
-			inline void SetAngularVelocity(const Core::Vector3f &angularVelocity) { m_bulletPhysicsInstance->setAngularVelocity(Physics::PhysicsHelper::ToBulletPhysicsVec3(angularVelocity)); }
+			inline void setLinearVelocity(const Core::Vector3f &linearVelocity) { m_bulletPhysicsInstance->setLinearVelocity(Physics::PhysicsHelper::toBulletPhysicsVec3(linearVelocity)); }
+			inline void setAngularVelocity(const Core::Vector3f &angularVelocity) { m_bulletPhysicsInstance->setAngularVelocity(Physics::PhysicsHelper::toBulletPhysicsVec3(angularVelocity)); }
 
-			inline void SetMass(float mass) { m_mass = mass; }
-			inline void SetRestitution(float restitution) { m_restitution = restitution; }
-			inline void SetFriction(float friction) { m_friction = friction; }
-			inline void SetLinearDamping(float linearDamping) { m_linearDamping = linearDamping; }
-			inline void SetAngularDamping(float angularDamping) { m_angularDamping = angularDamping; }
-			inline void SetAlwaysStanding(bool alwaysStanding) { m_alwaysStanding = alwaysStanding; }
-			inline void SetCollisionShape(Physics::ICollisionShape *collisionShape) { m_collisionShape = collisionShape; }
+			inline void setMass(float mass) { m_mass = mass; }
+			inline void setRestitution(float restitution) { m_restitution = restitution; }
+			inline void setFriction(float friction) { m_friction = friction; }
+			inline void setLinearDamping(float linearDamping) { m_linearDamping = linearDamping; }
+			inline void setAngularDamping(float angularDamping) { m_angularDamping = angularDamping; }
+			inline void setAlwaysStanding(bool alwaysStanding) { m_alwaysStanding = alwaysStanding; }
+			inline void setCollisionShape(Physics::ICollisionShape *collisionShape) { m_collisionShape = collisionShape; }
 
-			inline float GetMass() const { return m_mass; }
-			inline float GetRestitution() const { return m_restitution; }
-			inline float GetFriction() const { return m_friction; }
-			inline float GetLinearDamping() const { return m_linearDamping; }
-			inline float GetAngularDamping() const { return m_angularDamping; }
-			inline bool IsAlwaysStanding() const { return m_alwaysStanding; }
-			inline Physics::ICollisionShape *GetCollisionShape() const { return m_collisionShape; }
-			inline btRigidBody *GetBulletPhysicsInstance() const { return m_bulletPhysicsInstance; }
-			inline Core::Vector3f GetLinearVelocity() const { return Physics::PhysicsHelper::ToEnco3DVec3<float>(m_bulletPhysicsInstance->getLinearVelocity()); }
-			inline Core::Vector3f GetAngularVelocity() const { return Physics::PhysicsHelper::ToEnco3DVec3<float>(m_bulletPhysicsInstance->getAngularVelocity()); }
+			inline float getMass() const { return m_mass; }
+			inline float getRestitution() const { return m_restitution; }
+			inline float getFriction() const { return m_friction; }
+			inline float getLinearDamping() const { return m_linearDamping; }
+			inline float getAngularDamping() const { return m_angularDamping; }
+			inline bool isAlwaysStanding() const { return m_alwaysStanding; }
+			inline Physics::ICollisionShape *getCollisionShape() const { return m_collisionShape; }
+			inline btRigidBody *getBulletPhysicsInstance() const { return m_bulletPhysicsInstance; }
+			inline Core::Vector3f getLinearVelocity() const { return Physics::PhysicsHelper::toEnco3DVec3<float>(m_bulletPhysicsInstance->getLinearVelocity()); }
+			inline Core::Vector3f getAngularVelocity() const { return Physics::PhysicsHelper::toEnco3DVec3<float>(m_bulletPhysicsInstance->getAngularVelocity()); }
 		};
 	}
 }

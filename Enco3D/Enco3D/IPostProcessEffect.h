@@ -13,36 +13,28 @@ namespace Enco3D
 		class IPostProcessEffect : public Core::IGameComponent
 		{
 		protected:
-			Rendering::Texture2D *m_positionBuffer;
-			Rendering::Texture2D *m_normalBuffer;
-			Rendering::Texture2D *m_lightBuffer;
-			Rendering::Texture2D *m_backgroundBuffer;
-			Rendering::Texture2D *m_velocityBuffer;
+			Rendering::Texture2D *m_gbuffer0;
+			Rendering::Texture2D *m_gbuffer1;
 			Rendering::Texture2D *m_depthBuffer;
-			Rendering::Texture2D *m_compositeBuffer;
 
 			unsigned int m_generatedImageSlot;
 
-			inline void RenderScreen() { GetRenderingEngine()->GetRenderWindow()->Render(); }
-			inline Core::Matrix4x4f GetWorldViewProjectionMatrix() const { return GetRenderingEngine()->GetPostProcessWorldViewProjectionMatrix(); }
-			inline Core::Vector2f GetTexelSize() const { return GetRenderingEngine()->GetPostProcessTexelSize(); }
-			inline unsigned int GetWidth() const { return GetRenderingEngine()->GetWidth(); }
-			inline unsigned int GetHeight() const { return GetRenderingEngine()->GetHeight(); }
+			inline void renderScreen() { getRenderingEngine()->getRenderWindow()->render(); }
+			inline Core::Matrix4x4f getWorldViewProjectionMatrix() const { return getRenderingEngine()->getPostProcessWorldViewProjectionMatrix(); }
+			inline Core::Vector2f getTexelSize() const { return getRenderingEngine()->getPostProcessTexelSize(); }
+			inline unsigned int getWidth() const { return getRenderingEngine()->getWidth(); }
+			inline unsigned int getHeight() const { return getRenderingEngine()->getHeight(); }
 
 		public:
-			virtual void PostProcess(const Camera *camera) = 0;
+			virtual void postProcess(const Camera *camera) = 0;
 			
-			virtual Rendering::Texture2D *GetFinalBuffer() = 0;
+			virtual Rendering::Texture2D *getFinalBuffer() = 0;
 
-			inline void SetPositionBuffer(Rendering::Texture2D *buffer) { m_positionBuffer = buffer; }
-			inline void SetNormalBuffer(Rendering::Texture2D *buffer) { m_normalBuffer = buffer; }
-			inline void SetLightBuffer(Rendering::Texture2D *buffer) { m_lightBuffer = buffer; }
-			inline void SetBackgroundBuffer(Rendering::Texture2D *buffer) { m_backgroundBuffer = buffer; }
-			inline void SetVelocityBuffer(Rendering::Texture2D *buffer) { m_velocityBuffer = buffer; }
-			inline void SetDepthBuffer(Rendering::Texture2D *buffer) { m_depthBuffer = buffer; }
-			inline void SetCompositeBuffer(Rendering::Texture2D *buffer) { m_compositeBuffer = buffer; }
+			inline void setGBuffer0(Rendering::Texture2D *buffer) { m_gbuffer0 = buffer; }
+			inline void setGBuffer1(Rendering::Texture2D *buffer) { m_gbuffer1 = buffer; }
+			inline void setDepthBuffer(Rendering::Texture2D *buffer) { m_depthBuffer = buffer; }
 
-			inline unsigned int GetGeneratedImageSlot() const { return m_generatedImageSlot; }
+			inline unsigned int getGeneratedImageSlot() const { return m_generatedImageSlot; }
 		};
 	}
 }

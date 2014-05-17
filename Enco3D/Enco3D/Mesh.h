@@ -38,7 +38,7 @@ namespace Enco3D
 			MeshResource *m_resource{ nullptr };
 			
 		protected:
-			void BuildBuffers(Vertex *vertices, unsigned int vertexCount, unsigned int *indices, unsigned int indexCount);
+			void buildBuffers(Vertex *vertices, unsigned int vertexCount, unsigned int *indices, unsigned int indexCount);
 			
 		public:
 			Mesh();
@@ -46,17 +46,17 @@ namespace Enco3D
 			Mesh(Vertex *vertices, unsigned int vertexCount, unsigned int *indices, unsigned int indexCount);
 			~Mesh();
 
-			void Render();
+			void render();
 
-			void UpdateVertices(unsigned int offsetInVertices, unsigned int sizeInVertices, Vertex *newVertexData);
+			void updateVertices(unsigned int offsetInVertices, unsigned int sizeInVertices, Vertex *newVertexData);
 
-			inline Vertex *GetVertices() const { return m_resource->GetVertices(); }
-			inline unsigned int GetVertexCount() const { return m_resource->GetVertexCount(); }
+			inline Vertex *getVertices() const { return m_resource->getVertices(); }
+			inline unsigned int getVertexCount() const { return m_resource->getVertexCount(); }
 
-			inline unsigned int *GetIndices() const { return m_resource->GetIndices(); }
-			inline unsigned int GetIndexCount() const { return m_resource->GetIndexCount(); }
+			inline unsigned int *getIndices() const { return m_resource->getIndices(); }
+			inline unsigned int getIndexCount() const { return m_resource->getIndexCount(); }
 
-			static void RenderErrorMesh(Rendering::Shader *shader, Core::Transform *transform, const Component::Camera *camera, Rendering::RenderingEngine *renderingEngine);
+			static void renderErrorMesh(Rendering::Shader *shader, Core::Transform *transform, const Component::Camera *camera, Rendering::RenderingEngine *renderingEngine);
 		};
 	}
 }

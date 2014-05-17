@@ -15,7 +15,7 @@ namespace Enco3D
 			TextureCubeMap(const std::string *filenames, unsigned int filter = GL_NEAREST, unsigned int wrap = GL_CLAMP);
 			~TextureCubeMap();
 
-			void Bind(unsigned int unit = 0) const;
+			void bind(unsigned int unit = 0) const;
 		};
 	}
 }

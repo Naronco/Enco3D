@@ -24,7 +24,7 @@ namespace Enco3D
 			static unsigned int s_numReferences;
 
 		private:
-			void ReleaseTexture();
+			void releaseTexture();
 
 		public:
 			GUITexture();
@@ -33,15 +33,15 @@ namespace Enco3D
 			GUITexture(const string &filename);
 			GUITexture(const string &filename, const Core::Vector3f &color);
 
-			void RenderGUI(const Camera *camera, Rendering::Shader *shader);
+			void renderGUI(const Camera *camera, Rendering::Shader *shader);
 
-			void Deinit();
+			void deinit();
 
-			inline void SetTexture(Rendering::Texture2D *texture) { ReleaseTexture(); m_material.SetTexture2D("diffuseTexture", texture); m_texture = texture; }
-			inline void SetColor(const Core::Vector3f &color) { m_material.SetVector3f("diffuseColor", color); m_color.Set(color); }
+			inline void setTexture(Rendering::Texture2D *texture) { releaseTexture(); m_material.setTexture2D("diffuseTexture", texture); m_texture = texture; }
+			inline void setColor(const Core::Vector3f &color) { m_material.setVector3f("diffuseColor", color); m_color.set(color); }
 
-			inline Rendering::Texture2D *GetTexture() const { return m_texture; }
-			inline Core::Vector3f GetColor() const { return m_color; }
+			inline Rendering::Texture2D *getTexture() const { return m_texture; }
+			inline Core::Vector3f getColor() const { return m_color; }
 		};
 	}
 }

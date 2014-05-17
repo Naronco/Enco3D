@@ -15,7 +15,7 @@ namespace Enco3D
 			bool m_mouseLocked{ false };
 
 		public:
-			void Update();
+			void update();
 		};
 	}
 }

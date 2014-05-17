@@ -42,18 +42,18 @@ namespace Enco3D
 			mutable Rendering::Mesh *m_staticConcaveMeshCollisionShape;
 
 		private:
-			bool InitFromScene(const aiScene *scene, const std::string &filename);
-			void InitMesh(unsigned int index, const aiMesh *mesh);
-			bool InitMaterials(const aiScene *scene, const std::string &filename);
+			bool initFromScene(const aiScene *scene, const std::string &filename);
+			void initMesh(unsigned int index, const aiMesh *mesh);
+			bool initMaterials(const aiScene *scene, const std::string &filename);
 			
 		public:
 			WavefrontMaterialMesh();
 			WavefrontMaterialMesh(const std::string &filename);
 			~WavefrontMaterialMesh();
 
-			void Render(const Component::Camera *camera, Rendering::Shader *shader);
+			void render(const Component::Camera *camera, Rendering::Shader *shader);
 
-			Physics::StaticConcaveMeshCollisionShape *GetStaticConcaveMeshCollisionShape() const;
+			Physics::StaticConcaveMeshCollisionShape *getStaticConcaveMeshCollisionShape() const;
 		};
 	}
 }

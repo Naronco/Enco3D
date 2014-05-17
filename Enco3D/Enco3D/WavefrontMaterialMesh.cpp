@@ -17,13 +17,13 @@ Enco3D::Component::WavefrontMaterialMesh::WavefrontMaterialMesh(const std::strin
 	if (scene)
 	{
 		m_successfullyLoadedMesh = true;
-		Core::DebugLogger::Log("Successfully loaded OBJ model " + filename);
-		InitFromScene(scene, filename);
+		Core::DebugLogger::log("Successfully loaded OBJ model " + filename);
+		initFromScene(scene, filename);
 	}
 	else
 	{
 		m_successfullyLoadedMesh = false;
-		Core::DebugLogger::Log("[ERROR] Failed to load OBJ model " + filename);
+		Core::DebugLogger::log("[ERROR] Failed to load OBJ model " + filename);
 	}
 }
 
@@ -41,11 +41,11 @@ Enco3D::Component::WavefrontMaterialMesh::~WavefrontMaterialMesh()
 		delete m_staticConcaveMeshCollisionShape;
 }
 
-void Enco3D::Component::WavefrontMaterialMesh::Render(const Component::Camera *camera, Rendering::Shader *shader)
+void Enco3D::Component::WavefrontMaterialMesh::render(const Component::Camera *camera, Rendering::Shader *shader)
 {
 	if (m_successfullyLoadedMesh)
 	{
-		shader->Bind();
+		shader->bind();
 
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
@@ -53,15 +53,15 @@ void Enco3D::Component::WavefrontMaterialMesh::Render(const Component::Camera *c
 
 		for (unsigned int i = 0; i < m_meshes.size(); i++)
 		{
-			shader->UpdateUniforms(GetTransform(), camera, GetRenderingEngine(), m_materials[m_meshes[i]->GetMaterialIndex()]);
+			shader->updateUniforms(getTransform(), camera, getRenderingEngine(), m_materials[m_meshes[i]->getMaterialIndex()]);
 
-			glBindBuffer(GL_ARRAY_BUFFER, m_meshes[i]->GetVBO());
+			glBindBuffer(GL_ARRAY_BUFFER, m_meshes[i]->getVBO());
 			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Rendering::Vertex), 0);
 			glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Rendering::Vertex), (GLvoid *)(sizeof(float)* 3));
 			glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Rendering::Vertex), (GLvoid *)(sizeof(float)* 6));
 
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_meshes[i]->GetIBO());
-			glDrawElements(GL_TRIANGLES, m_meshes[i]->GetIndexCount(), GL_UNSIGNED_INT, 0);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_meshes[i]->getIBO());
+			glDrawElements(GL_TRIANGLES, m_meshes[i]->getIndexCount(), GL_UNSIGNED_INT, 0);
 		}
 
 		glDisableVertexAttribArray(2);
@@ -69,12 +69,10 @@ void Enco3D::Component::WavefrontMaterialMesh::Render(const Component::Camera *c
 		glDisableVertexAttribArray(0);
 	}
 	else
-	{
-		Rendering::Mesh::RenderErrorMesh(shader, GetTransform(), camera, GetRenderingEngine());
-	}
+		Rendering::Mesh::renderErrorMesh(shader, getTransform(), camera, getRenderingEngine());
 }
 
-bool Enco3D::Component::WavefrontMaterialMesh::InitFromScene(const aiScene *scene, const std::string &filename)
+bool Enco3D::Component::WavefrontMaterialMesh::initFromScene(const aiScene *scene, const std::string &filename)
 {
 	m_meshes.resize(scene->mNumMeshes);
 	m_materials.resize(scene->mNumMaterials);
@@ -82,13 +80,13 @@ bool Enco3D::Component::WavefrontMaterialMesh::InitFromScene(const aiScene *scen
 	for (unsigned int i = 0; i < m_meshes.size(); i++)
 	{
 		const aiMesh *mesh = scene->mMeshes[i];
-		InitMesh(i, mesh);
+		initMesh(i, mesh);
 	}
 
-	return InitMaterials(scene, filename);
+	return initMaterials(scene, filename);
 }
 
-void Enco3D::Component::WavefrontMaterialMesh::InitMesh(unsigned int index, const aiMesh *mesh)
+void Enco3D::Component::WavefrontMaterialMesh::initMesh(unsigned int index, const aiMesh *mesh)
 {
 	std::vector<Rendering::Vertex> vertices;
 	std::vector<unsigned int> indices;
@@ -119,13 +117,13 @@ void Enco3D::Component::WavefrontMaterialMesh::InitMesh(unsigned int index, cons
 		arrIndices[i] = indices[i];
 
 	m_meshes[index] = new Rendering::MeshResource(arrVertices, vertices.size(), arrIndices, indices.size());
-	m_meshes[index]->SetMaterialIndex(mesh->mMaterialIndex);
+	m_meshes[index]->setMaterialIndex(mesh->mMaterialIndex);
 
 	delete arrVertices;
 	delete arrIndices;
 }
 
-bool Enco3D::Component::WavefrontMaterialMesh::InitMaterials(const aiScene *scene, const std::string &filename)
+bool Enco3D::Component::WavefrontMaterialMesh::initMaterials(const aiScene *scene, const std::string &filename)
 {
 	for (unsigned int i = 0; i < scene->mNumMaterials; i++)
 	{
@@ -135,29 +133,29 @@ bool Enco3D::Component::WavefrontMaterialMesh::InitMaterials(const aiScene *scen
 
 		aiColor3D diffuseColor;
 		if (material->Get(AI_MATKEY_COLOR_DIFFUSE, diffuseColor) == AI_SUCCESS)
-			meshMaterial->AddVector3f("diffuseColor", Core::Vector3f(diffuseColor.r, diffuseColor.g, diffuseColor.b));
+			meshMaterial->addVector3f("diffuseColor", Core::Vector3f(diffuseColor.r, diffuseColor.g, diffuseColor.b));
 		else
-			meshMaterial->AddVector3f("diffuseColor", Core::Vector3f(1, 1, 1));
+			meshMaterial->addVector3f("diffuseColor", Core::Vector3f(1, 1, 1));
 		
 		aiColor3D specularColor;
 		if (material->Get(AI_MATKEY_COLOR_SPECULAR, specularColor) == AI_SUCCESS)
-			meshMaterial->AddFloat("specularIntensity", (specularColor.r + specularColor.g + specularColor.b) / 3.0f);
+			meshMaterial->addFloat("specularIntensity", (specularColor.r + specularColor.g + specularColor.b) / 3.0f);
 		else
-			meshMaterial->AddFloat("specularIntensity", 0.0f);
+			meshMaterial->addFloat("specularIntensity", 0.0f);
 		
 		float specularExponent;
 		if (material->Get(AI_MATKEY_SHININESS, specularExponent) == AI_SUCCESS)
 		{
 			if (specularExponent == 0.0f)
 			{
-				meshMaterial->AddFloat("specularExponent", 1.0f);
-				meshMaterial->SetFloat("specularIntensity", 0.0f);
+				meshMaterial->addFloat("specularExponent", 1.0f);
+				meshMaterial->setFloat("specularIntensity", 0.0f);
 			}
 			else
-				meshMaterial->AddFloat("specularExponent", specularExponent);
+				meshMaterial->addFloat("specularExponent", specularExponent);
 		}
 		else
-			meshMaterial->AddFloat("specularExponent", 1.0f);
+			meshMaterial->addFloat("specularExponent", 1.0f);
 		
 		if (material->GetTextureCount(aiTextureType_DIFFUSE) > 0)
 		{
@@ -175,7 +173,7 @@ bool Enco3D::Component::WavefrontMaterialMesh::InitMaterials(const aiScene *scen
 					}
 				}
 
-				meshMaterial->AddTexture2D("diffuseTexture", new Rendering::Texture2D(basePath + std::string(path.data), Rendering::TextureFilter::MipmapLinear));
+				meshMaterial->addTexture2D("diffuseTexture", new Rendering::Texture2D(basePath + std::string(path.data), Rendering::TextureFilter::MipmapLinear));
 			}
 		}
 
@@ -185,12 +183,12 @@ bool Enco3D::Component::WavefrontMaterialMesh::InitMaterials(const aiScene *scen
 	return true;
 }
 
-Enco3D::Physics::StaticConcaveMeshCollisionShape *Enco3D::Component::WavefrontMaterialMesh::GetStaticConcaveMeshCollisionShape() const
+Enco3D::Physics::StaticConcaveMeshCollisionShape *Enco3D::Component::WavefrontMaterialMesh::getStaticConcaveMeshCollisionShape() const
 {
 	unsigned int vertexCount = 0, indexCount = 0;
 	for (unsigned int i = 0; i < m_meshes.size(); i++) {
-		vertexCount += m_meshes[i]->GetVertexCount();
-		indexCount += m_meshes[i]->GetIndexCount();
+		vertexCount += m_meshes[i]->getVertexCount();
+		indexCount += m_meshes[i]->getIndexCount();
 	}
 
 	Rendering::Vertex *vertices = new Rendering::Vertex[vertexCount];
@@ -199,14 +197,14 @@ Enco3D::Physics::StaticConcaveMeshCollisionShape *Enco3D::Component::WavefrontMa
 	unsigned int vertexCursor = 0, indexCursor = 0;
 
 	for (unsigned int i = 0; i < m_meshes.size(); i++) {
-		unsigned int meshVertexCount = m_meshes[i]->GetVertexCount();
-		unsigned int meshIndexCount = m_meshes[i]->GetIndexCount();
+		unsigned int meshVertexCount = m_meshes[i]->getVertexCount();
+		unsigned int meshIndexCount = m_meshes[i]->getIndexCount();
 
 		for (unsigned int j = 0; j < meshVertexCount; j++)
-			vertices[vertexCursor + j] = m_meshes[i]->GetVertices()[j];
+			vertices[vertexCursor + j] = m_meshes[i]->getVertices()[j];
 		
 		for (unsigned int j = 0; j < meshIndexCount; j++)
-			indices[indexCursor + j] = m_meshes[i]->GetIndices()[j];
+			indices[indexCursor + j] = m_meshes[i]->getIndices()[j];
 		
 		vertexCursor += meshVertexCount;
 		indexCursor += meshIndexCount;
