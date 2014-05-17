@@ -78,14 +78,22 @@ public:
 		};
 
 		Texture2D *terrainTexture = TextureBuilder().buildTexture2D(neededTextures, 4, 2, 2, 16, 16);
-//		Texture2D *terrainTexture = new Texture2D("texture/terrain/block/___.png");
+		//		Texture2D *terrainTexture = new Texture2D("texture/terrain/block/___.png");
 
 		Mesh *blockMesh = new Mesh(vertices, 24, indices, 36);
 		Material *blockMaterial = new Material(terrainTexture);
 
-		GameObject *blockObject = createGameObject("block");
-		blockObject->addComponent(new DefaultMesh(blockMesh, blockMaterial));
-		addGameObject(blockObject);
+		{
+			GameObject *blockObject = createGameObject("block");
+			blockObject->addComponent(new DefaultMesh(blockMesh, blockMaterial));
+			addGameObject(blockObject);
+		}
+		{
+			GameObject *blockObject = createGameObject("block");
+			blockObject->addComponent(new DefaultMesh(blockMesh, blockMaterial));
+			blockObject->getTransform()->translate(Vector3f(2, 0, 0));
+			addGameObject(blockObject);
+		}
 
 		getRenderingEngine()->setClearColor(0.5f, 0.8f, 1.0f);
 
