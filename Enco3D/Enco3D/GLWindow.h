@@ -82,8 +82,7 @@ namespace Enco3D
 			bool pollEvent(Event *e);
 
 			/// <summary>Updates the window and polls the event data into the pointer</summary>
-			/// <param name="e">Pointer to the event data to be stored</param>
-			bool update(Event *e);
+			bool update();
 
 			/// <summary>Hides or shows the cursor</summary>
 			/// <param name="visible">True = cursor is visible; False = cursor is not visible</param>

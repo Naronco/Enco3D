@@ -101,7 +101,7 @@ void Enco3D::Core::GLWindow::setPosition(int x, int y)
 bool Enco3D::Core::GLWindow::pollEvent(Event *e)
 {
 	SDL_Event ev;
-	SDL_PollEvent(&ev);
+	if (!SDL_PollEvent(&ev)) return false;
 
 	Event ne;
 
@@ -120,16 +120,16 @@ bool Enco3D::Core::GLWindow::pollEvent(Event *e)
 
 		if (ev.window.event == SDL_WINDOWEVENT_CLOSE)
 			m_running = false;
-		
+
 		if (ev.window.event == SDL_WINDOWEVENT_FOCUS_GAINED)
 			m_focused = true;
-		
+
 		if (ev.window.event == SDL_WINDOWEVENT_FOCUS_LOST)
 			m_focused = false;
-		
+
 		if (ev.window.event == SDL_WINDOWEVENT_RESIZED)
 			glViewport(0, 0, ev.window.data1, ev.window.data2);
-		
+
 		break;
 
 	case SDL_KEYDOWN:
@@ -274,7 +274,7 @@ bool Enco3D::Core::GLWindow::pollEvent(Event *e)
 	{
 		Input::setKey(ne.keyboard.keyCode, false);
 	}
-	
+
 	if (ne.type == EventType::MouseMove)
 	{
 		Input::setRelativeMouse(ne.mouseMove.relativeX, ne.mouseMove.relativeY);
@@ -300,9 +300,8 @@ bool Enco3D::Core::GLWindow::pollEvent(Event *e)
 	return true;
 }
 
-bool Enco3D::Core::GLWindow::update(Event *e)
+bool Enco3D::Core::GLWindow::update()
 {
-	pollEvent(e);
 	SDL_GL_SwapWindow(m_window);
 
 	return m_running;
