@@ -51,7 +51,7 @@ public:
 		sphereObject->AddComponent(sphereRigidBody);
 		AddGameObject(sphereObject);*/
 
-		WavefrontMaterialMesh *houseMesh = new WavefrontMaterialMesh("models/house/house.obj");
+		WavefrontMaterialMesh *houseMesh = new WavefrontMaterialMesh("models/house/house.wavefront");
 		StaticConcaveMeshCollisionShape *houseCollisionShape = houseMesh->getStaticConcaveMeshCollisionShape();
 		RigidBody *rigidBody = new RigidBody(0, 0.8f, 1.0f, 0.2f, 0.1f, houseCollisionShape);
 		GameObject *houseObject = new GameObject;
@@ -83,7 +83,7 @@ public:
 		//	mainCameraObject->AddComponent(spotLight);
 		addGameObject(mainCameraObject);
 
-		WavefrontMaterialMesh *linkMesh = new WavefrontMaterialMesh("models/link.obj");
+		WavefrontMaterialMesh *linkMesh = new WavefrontMaterialMesh("models/link.wavefront");
 		GameObject *linkObject = new GameObject;
 		linkObject->addComponent(linkMesh);
 		//		linkObject->GetTransform()->Translate(Vector3f(0.0f, 0.0f, 0.0f));
@@ -155,7 +155,7 @@ public:
 				greenRupeeMaterial->addVector3f("diffuseColor", Vector3f(1, 1, 1));
 				greenRupeeMaterial->addFloat("specularIntensity", 2.0f);
 				greenRupeeMaterial->addFloat("specularExponent", 16.0f);
-				WavefrontMesh *greenRupeeMesh = new WavefrontMesh("models/rupee.obj", greenRupeeMaterial);
+				WavefrontMesh *greenRupeeMesh = new WavefrontMesh("models/rupee.wavefront", greenRupeeMaterial);
 				CapsuleCollisionShape *greenRupeeCollisionShape = new CapsuleCollisionShape(0.3f, 1.0f);
 				RigidBody *greenRupeeRigidBody = new RigidBody(1, 0.8f, 1.0f, 0.2f, 0.1f, greenRupeeCollisionShape);
 				GameObject *greenRupeeObject = new GameObject("greenRupee");
