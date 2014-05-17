@@ -147,13 +147,13 @@ string Enco3D::Rendering::Shader::loadShader(const string &filename)
 {
 	ifstream file;
 	file.open(filename.c_str());
-	
+
 	string output, line;
 
 	if (file.is_open())
 	{
 		Core::DebugLogger::log("Successfully loaded shader: " + filename);
-	
+
 		while (file.good())
 		{
 			getline(file, line);
@@ -247,7 +247,7 @@ std::string Enco3D::Rendering::Shader::findUniformStructName(const std::string &
 
 std::vector<Enco3D::Rendering::__TypedData> Enco3D::Rendering::Shader::findUniformStructComponents(const std::string &openingBraceToClosingBrace)
 {
-	static const char charsToIgnore[] = {' ', '\n', '\t', '{'};
+	static const char charsToIgnore[] = { ' ', '\n', '\t', '{' };
 	static const size_t UNSIGNED_NEG_ONE = (size_t)-1;
 
 	std::vector<__TypedData> result;
@@ -384,7 +384,7 @@ void Enco3D::Rendering::Shader::addUniform(const std::string &uniformName, const
 		return;
 
 	unsigned int location = glGetUniformLocation(m_program, uniformName.c_str());
-	assert(location != INVALID_VALUE);
+	assert(location != 0xFFFFFFFF);
 	m_uniformMap.insert(std::pair<std::string, unsigned int>(uniformName, location));
 }
 
@@ -527,7 +527,7 @@ void Enco3D::Rendering::Shader::updateUniforms(Enco3D::Core::Transform *transfor
 	Core::Matrix4x4f worldViewMatrix = camera->getView() * worldMatrix;
 	Core::Matrix4x4f worldViewProjectionMatrix = camera->getViewProjection() * worldMatrix;
 	Core::Matrix4x4f viewProjectionMatrix = camera->getViewProjection();
-	
+
 	Core::Matrix4x4f prevWorldMatrix = transform->getPrevTransformation();
 	Core::Matrix4x4f prevWorldViewMatrix = camera->getPrevView() * prevWorldMatrix;
 	Core::Matrix4x4f prevWorldViewProjectionMatrix = camera->getPrevViewProjection() * prevWorldMatrix;
