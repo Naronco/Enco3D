@@ -379,5 +379,8 @@
     <ClInclude Include="Enco3D\ImageIO.h">
       <Filter>Headerdateien\IO</Filter>
     </ClInclude>
+    <ClInclude Include="Config.h">
+      <Filter>Headerdateien\IO</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

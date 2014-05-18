@@ -56,6 +56,7 @@
     <ClCompile Include="Enco3D\WavefrontMesh.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Config.h" />
     <ClInclude Include="Enco3D\AudioEngine.h" />
     <ClInclude Include="Enco3D\BloomPostProcessEffect.h" />
     <ClInclude Include="Enco3D\BoxCollisionShape.h" />
