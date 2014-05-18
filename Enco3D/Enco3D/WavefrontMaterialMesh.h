@@ -20,6 +20,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <memory>
 
 namespace Enco3D
 {
@@ -36,10 +37,10 @@ namespace Enco3D
 		class WavefrontMaterialMesh : public Core::IGameComponent
 		{
 		private:
-			std::vector<Rendering::MeshResource *> m_meshes;
-			std::vector<Rendering::Material *> m_materials;
+			std::vector<std::shared_ptr<Rendering::MeshResource>> m_meshes;
+			std::vector<std::shared_ptr<Rendering::Material>> m_materials;
 			bool m_successfullyLoadedMesh;
-			mutable Rendering::Mesh *m_staticConcaveMeshCollisionShape;
+			mutable std::shared_ptr<Rendering::Mesh> m_staticConcaveMeshCollisionShape;
 
 		private:
 			bool initFromScene(const aiScene *scene, const std::string &filename);
@@ -49,8 +50,7 @@ namespace Enco3D
 		public:
 			WavefrontMaterialMesh();
 			WavefrontMaterialMesh(const std::string &filename);
-			~WavefrontMaterialMesh();
-
+			
 			void render(const Component::Camera *camera, Rendering::Shader *shader);
 
 			Physics::StaticConcaveMeshCollisionShape *getStaticConcaveMeshCollisionShape() const;

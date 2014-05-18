@@ -29,16 +29,6 @@ Enco3D::Component::WavefrontMaterialMesh::WavefrontMaterialMesh(const std::strin
 
 Enco3D::Component::WavefrontMaterialMesh::~WavefrontMaterialMesh()
 {
-	for (unsigned int i = 0; i < m_meshes.size(); i++)
-		if (m_meshes[i])
-			delete m_meshes[i];
-	
-	for (unsigned int i = 0; i < m_materials.size(); i++)
-		if (m_materials[i])
-			delete m_materials[i];
-
-	if (m_staticConcaveMeshCollisionShape)
-		delete m_staticConcaveMeshCollisionShape;
 }
 
 void Enco3D::Component::WavefrontMaterialMesh::render(const Component::Camera *camera, Rendering::Shader *shader)
@@ -116,7 +106,7 @@ void Enco3D::Component::WavefrontMaterialMesh::initMesh(unsigned int index, cons
 	for (unsigned int i = 0; i < indices.size(); i++)
 		arrIndices[i] = indices[i];
 
-	m_meshes[index] = new Rendering::MeshResource(arrVertices, vertices.size(), arrIndices, indices.size());
+	m_meshes[index] = std::make_shared<Rendering::MeshResource>(new Rendering::MeshResource(arrVertices, vertices.size(), arrIndices, indices.size()));
 	m_meshes[index]->setMaterialIndex(mesh->mMaterialIndex);
 
 	delete arrVertices;
@@ -177,7 +167,7 @@ bool Enco3D::Component::WavefrontMaterialMesh::initMaterials(const aiScene *scen
 			}
 		}
 
-		m_materials[i] = meshMaterial;
+		m_materials[i] = std::make_shared<Rendering::Material>(meshMaterial);
 	}
 
 	return true;
@@ -186,7 +176,8 @@ bool Enco3D::Component::WavefrontMaterialMesh::initMaterials(const aiScene *scen
 Enco3D::Physics::StaticConcaveMeshCollisionShape *Enco3D::Component::WavefrontMaterialMesh::getStaticConcaveMeshCollisionShape() const
 {
 	unsigned int vertexCount = 0, indexCount = 0;
-	for (unsigned int i = 0; i < m_meshes.size(); i++) {
+	for (unsigned int i = 0; i < m_meshes.size(); i++)
+	{
 		vertexCount += m_meshes[i]->getVertexCount();
 		indexCount += m_meshes[i]->getIndexCount();
 	}
@@ -196,7 +187,8 @@ Enco3D::Physics::StaticConcaveMeshCollisionShape *Enco3D::Component::WavefrontMa
 
 	unsigned int vertexCursor = 0, indexCursor = 0;
 
-	for (unsigned int i = 0; i < m_meshes.size(); i++) {
+	for (unsigned int i = 0; i < m_meshes.size(); i++)
+	{
 		unsigned int meshVertexCount = m_meshes[i]->getVertexCount();
 		unsigned int meshIndexCount = m_meshes[i]->getIndexCount();
 
@@ -210,9 +202,9 @@ Enco3D::Physics::StaticConcaveMeshCollisionShape *Enco3D::Component::WavefrontMa
 		indexCursor += meshIndexCount;
 	}
 
-	m_staticConcaveMeshCollisionShape = new Rendering::Mesh(vertices, vertexCount, indices, indexCount);
+	m_staticConcaveMeshCollisionShape = std::make_shared<Physics::StaticConcaveMeshCollisionShape>(Rendering::Mesh(vertices, vertexCount, indices, indexCount));
 
-	Physics::StaticConcaveMeshCollisionShape *result = new Physics::StaticConcaveMeshCollisionShape(m_staticConcaveMeshCollisionShape);
+	Physics::StaticConcaveMeshCollisionShape *result = new Physics::StaticConcaveMeshCollisionShape(m_staticConcaveMeshCollisionShape.get());
 
 	delete[] indices;
 	delete[] vertices;
