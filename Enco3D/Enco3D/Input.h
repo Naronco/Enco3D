@@ -177,6 +177,12 @@ namespace Enco3D
 				Out = 160,
 				Oper = 161,
 				ClearAgain = 162,
+				Ctrl = 224,
+				RCtrl = 228,
+				Shift = 225,
+				RShift = 229,
+				Alt = 226,
+				RAlt = 230
 			};
 		}
 

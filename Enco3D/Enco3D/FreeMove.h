@@ -16,6 +16,8 @@ namespace Enco3D
 			unsigned int m_moveBackwardKey{ Core::Keyboard::S };
 			unsigned int m_moveLeftKey{ Core::Keyboard::A };
 			unsigned int m_moveRightKey{ Core::Keyboard::D };
+			unsigned int m_moveUpKey{ Core::Keyboard::Space };
+			unsigned int m_moveDownKey{ Core::Keyboard::Shift };
 
 		public:
 			FreeMove();
