@@ -6,7 +6,7 @@
 void Enco3D::Core::Enco3DEngine::init(char *windowTitle, unsigned int windowWidth, unsigned int windowHeight, bool multisampleEnabled, unsigned int aaSamples, IGame *game)
 {
 	Core::DebugLogger::init();
-	
+
 	m_window = new GLWindow(windowTitle, windowWidth, windowHeight, multisampleEnabled, aaSamples);
 	m_timer = new Timer(true);
 	m_game = game;
@@ -16,7 +16,7 @@ void Enco3D::Core::Enco3DEngine::init(char *windowTitle, unsigned int windowWidt
 
 	m_physicsEngine->setTimer(m_timer);
 	Random::setSeed(m_timer->getTime());
-	
+
 	m_window->show();
 
 	m_game->setRenderingEngine(m_renderingEngine);
@@ -72,24 +72,27 @@ void Enco3D::Core::Enco3DEngine::mainLoop()
 	float unprocessedSeconds = 0.0f;
 
 	Event event;
-	while (m_window->update(&event))
+	while (m_window->update())
 	{
 		if (!m_window->isFocused() && m_window->isFullscreen())
 			m_window->setFullscreen(false);
 
-		if (event.type == EventType::Window && event.windowEvent.event == SDL_WINDOWEVENT_RESIZED)
+		while (m_window->pollEvent(&event))
 		{
-			unsigned int newWidth = (unsigned int)event.windowEvent.data1;
-			unsigned int newHeight = (unsigned int)event.windowEvent.data2;
+			if (event.type == EventType::Window && event.windowEvent.event == SDL_WINDOWEVENT_RESIZED)
+			{
+				unsigned int newWidth = (unsigned int)event.windowEvent.data1;
+				unsigned int newHeight = (unsigned int)event.windowEvent.data2;
 
-			m_renderingEngine->resize(newWidth, newHeight);
-			m_game->getRootObject()->resize(newWidth, newHeight);
+				m_renderingEngine->resize(newWidth, newHeight);
+				m_game->getRootObject()->resize(newWidth, newHeight);
+			}
 		}
-		
+
 		m_timer->update();
 
 		m_renderingEngine->render(m_game->getRootObject());
-		
+
 		unprocessedSeconds += m_timer->getDeltaTime() * 60.0f;
 		while (unprocessedSeconds >= 1.0f)
 		{
