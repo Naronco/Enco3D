@@ -53,7 +53,7 @@ void Enco3D::Component::WavefrontMaterialMesh::render(const Component::Camera *c
 
 		for (unsigned int i = 0; i < m_meshes.size(); i++)
 		{
-			shader->updateUniforms(getTransform(), camera, getRenderingEngine(), m_materials[m_meshes[i]->getMaterialIndex()]);
+			shader->updateUniforms(getTransform(), camera, getRenderingEngine(), *m_materials[m_meshes[i]->getMaterialIndex()]);
 
 			glBindBuffer(GL_ARRAY_BUFFER, m_meshes[i]->getVBO());
 			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Rendering::Vertex), 0);

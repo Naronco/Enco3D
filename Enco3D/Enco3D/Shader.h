@@ -118,7 +118,7 @@ namespace Enco3D
 			void setUniformPointLight(const string &name, const Component::PointLight *pointLight);
 			void setUniformSpotLight(const string &name, const Component::SpotLight *spotLight);
 
-			void updateUniforms(Core::Transform *transform, const Component::Camera *camera, RenderingEngine *renderingEngine, Material *material);
+			void updateUniforms(Core::Transform *transform, const Component::Camera *camera, RenderingEngine *renderingEngine, const Material &material);
 		};
 	}
 }

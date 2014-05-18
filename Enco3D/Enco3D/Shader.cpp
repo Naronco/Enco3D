@@ -521,7 +521,7 @@ void Enco3D::Rendering::Shader::setUniformSpotLight(const string &name, const En
 	setUniformFloat(name + ".cutoff", spotLight->getCutoff());
 }
 
-void Enco3D::Rendering::Shader::updateUniforms(Enco3D::Core::Transform *transform, const Enco3D::Component::Camera *camera, Enco3D::Rendering::RenderingEngine *renderingEngine, Enco3D::Rendering::Material *material)
+void Enco3D::Rendering::Shader::updateUniforms(Enco3D::Core::Transform *transform, const Enco3D::Component::Camera *camera, Enco3D::Rendering::RenderingEngine *renderingEngine, const Enco3D::Rendering::Material &material)
 {
 	Core::Matrix4x4f worldMatrix = transform->getTransformation();
 	Core::Matrix4x4f worldViewMatrix = camera->getView() * worldMatrix;
@@ -592,12 +592,12 @@ void Enco3D::Rendering::Shader::updateUniforms(Enco3D::Core::Transform *transfor
 		{
 			string matComponentName = uniformName.substr(4, uniformName.size() - 4);
 			if (uniformType == "float")
-				setUniformFloat(uniformName, material->getFloat(matComponentName));
+				setUniformFloat(uniformName, material.getFloat(matComponentName));
 			else if (uniformType == "vec3")
-				setUniformVector3f(uniformName, material->getVector3f(matComponentName));
+				setUniformVector3f(uniformName, material.getVector3f(matComponentName));
 			else if (uniformType == "sampler2D")
 			{
-				material->getTexture2D(matComponentName)->bind(TextureSampler::Sampler0);
+				material.getTexture2D(matComponentName)->bind(TextureSampler::Sampler0);
 				setUniformInt(uniformName, 0);
 			}
 		}

@@ -38,6 +38,13 @@ bool Enco3D::Core::Transform::hasChanged() const
 	return true;
 }
 
+void Enco3D::Core::Transform::translate(float x, float y, float z)
+{
+	m_translation.x += x;
+	m_translation.y += y;
+	m_translation.z += z;
+}
+
 void Enco3D::Core::Transform::translate(const Vector3f &translation)
 {
 	m_translation += translation;
@@ -46,6 +53,16 @@ void Enco3D::Core::Transform::translate(const Vector3f &translation)
 void Enco3D::Core::Transform::rotate(const Quaternionf &rotation)
 {
 	m_rotation = (rotation * m_rotation).normalize();
+}
+
+void Enco3D::Core::Transform::scale(float x, float y, float z)
+{
+	m_scaling.set(m_scaling.x * x, m_scaling.y * y, m_scaling.z * z);
+}
+
+void Enco3D::Core::Transform::scale(float s)
+{
+	m_scaling.set(m_scaling.x * s, m_scaling.y * s, m_scaling.z * s);
 }
 
 void Enco3D::Core::Transform::scale(const Vector3f &scaling)

@@ -89,27 +89,27 @@ namespace Enco3D
 				texture2dValues[name] = texture;
 			}
 
-			inline float getFloat(const std::string &name)
+			inline float getFloat(const std::string &name) const
 			{
-				std::map<std::string, float>::iterator it = floatValues.find(name);
+				std::map<std::string, float>::const_iterator it = floatValues.find(name);
 				if (it != floatValues.end())
 					return it->second;
 				else
 					return 0.0f;
 			}
 
-			inline Core::Vector3f getVector3f(const std::string &name)
+			inline Core::Vector3f getVector3f(const std::string &name) const
 			{
-				std::map<std::string, Core::Vector3f>::iterator it = vector3fValues.find(name);
+				std::map<std::string, Core::Vector3f>::const_iterator it = vector3fValues.find(name);
 				if (it != vector3fValues.end())
 					return it->second;
 				else
 					return Core::Vector3Template::One;
 			}
 
-			inline Texture2D *getTexture2D(const std::string &name)
+			inline Texture2D *getTexture2D(const std::string &name) const
 			{
-				std::map<std::string, Texture2D *>::iterator it = texture2dValues.find(name);
+				std::map<std::string, Texture2D *>::const_iterator it = texture2dValues.find(name);
 				if (it != texture2dValues.end())
 					return it->second;
 				else

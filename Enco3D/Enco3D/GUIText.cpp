@@ -41,7 +41,7 @@ void Enco3D::Component::GUIText::initRendering()
 void Enco3D::Component::GUIText::renderGUI(const Component::Camera *camera, Rendering::Shader *shader)
 {
 	shader->bind();
-	shader->updateUniforms(getTransform(), camera, getRenderingEngine(), &m_material);
+	shader->updateUniforms(getTransform(), camera, getRenderingEngine(), m_material);
 
 	m_mesh->render();
 }

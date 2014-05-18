@@ -39,8 +39,13 @@ namespace Enco3D
 			void update();
 			bool hasChanged() const;
 
+			void translate(float x, float y, float z);
 			void translate(const Vector3f &translation);
+
 			void rotate(const Quaternionf &rotation);
+
+			void scale(float x, float y, float z);
+			void scale(float s);
 			void scale(const Vector3f &scaling);
 
 			Matrix4x4f getTransformation();
@@ -48,7 +53,12 @@ namespace Enco3D
 			inline void setParentTransform(Transform *parentTransform) { m_parentTransform = parentTransform; }
 
 			inline void setTranslation(const Vector3f &translation) { m_translation = translation; }
+			inline void setTranslation(float x, float y, float z) { m_translation.set(x, y, z); }
+
 			inline void setRotation(const Quaternionf &rotation) { m_rotation = rotation; }
+
+			inline void setScaling(float x, float y, float z) { m_scaling.set(x, y, z); }
+			inline void setScaling(float s) { m_scaling.set(s, s, s); }
 			inline void setScaling(const Vector3f &scaling) { m_scaling = scaling; }
 
 			inline void setBillboardEnabled(bool enabled) { m_billboardEnabled = enabled; }

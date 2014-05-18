@@ -40,7 +40,7 @@ void Enco3D::Component::WavefrontMesh::render(const Component::Camera *camera, R
 	if (m_successfullyLoadedMesh)
 	{
 		shader->bind();
-		shader->updateUniforms(getTransform(), camera, getRenderingEngine(), m_material);
+		shader->updateUniforms(getTransform(), camera, getRenderingEngine(), *m_material);
 
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
