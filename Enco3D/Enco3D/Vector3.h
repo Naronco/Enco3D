@@ -69,6 +69,12 @@ namespace Enco3D
 		{
 			static const Vector3f Zero(0, 0, 0);
 			static const Vector3f One(1, 1, 1);
+			static const Vector3f Up(0, 1, 0);
+			static const Vector3f Down(0, -1, 0);
+			static const Vector3f Left(-1, 0, 0);
+			static const Vector3f Right(1, 0, 0);
+			static const Vector3f Forward(0, 0, 1);
+			static const Vector3f Backward(0, 0, -1);
 		}
 
 		namespace Color3Template

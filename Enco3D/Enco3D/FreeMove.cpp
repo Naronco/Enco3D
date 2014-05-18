@@ -20,6 +20,10 @@ void Enco3D::Component::FreeMove::update()
 			movement -= getTransform()->getRotation().getRight();
 		if (Core::Input::isKeyDown(m_moveRightKey))
 			movement += getTransform()->getRotation().getRight();
+		if (Core::Input::isKeyDown(m_moveUpKey))
+			movement += Core::Vector3Template::Up;
+		if (Core::Input::isKeyDown(m_moveDownKey))
+			movement -= Core::Vector3Template::Up;
 
 		if (movement.getSquaredLength() > 0.0f)
 		{
