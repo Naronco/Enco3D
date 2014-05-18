@@ -4,7 +4,7 @@ Enco3D::Physics::StaticConcaveMeshCollisionShape::StaticConcaveMeshCollisionShap
 {
 }
 
-Enco3D::Physics::StaticConcaveMeshCollisionShape::StaticConcaveMeshCollisionShape(Enco3D::Rendering::Mesh* mesh)
+Enco3D::Physics::StaticConcaveMeshCollisionShape::StaticConcaveMeshCollisionShape(Enco3D::Rendering::Mesh *mesh)
 {
 	m_mesh = mesh;
 }

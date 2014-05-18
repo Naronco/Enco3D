@@ -5,6 +5,7 @@
 #include "Mesh.h"
 #include "Material.h"
 #include "Shader.h"
+#include <memory>
 
 namespace Enco3D
 {
@@ -13,21 +14,17 @@ namespace Enco3D
 		class DefaultMesh : public Core::IGameComponent
 		{
 		private:
-			Rendering::Mesh *m_mesh{ nullptr };
-			Rendering::Material *m_material{ nullptr };
+			std::shared_ptr<Rendering::Mesh> m_mesh;
+			std::shared_ptr<Rendering::Material> m_material;
 
 		public:
 			DefaultMesh();
 			DefaultMesh(Rendering::Mesh *mesh, Rendering::Material *material);
 
 			void render(const Camera *camera, Rendering::Shader *shader);
-			void deinit();
 
-			inline void setMesh(Rendering::Mesh *mesh) { m_mesh = mesh; }
-			inline void setMaterial(Rendering::Material *material) { m_material = material; }
-			
-			inline Rendering::Mesh *getMesh() const { return m_mesh; }
-			inline Rendering::Material *getMaterial() const { return m_material; }
+			inline std::shared_ptr<Rendering::Mesh> getMesh() const { return m_mesh; }
+			inline std::shared_ptr<Rendering::Material> getMaterial() const { return m_material; }
 		};
 	}
 }

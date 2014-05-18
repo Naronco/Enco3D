@@ -85,7 +85,7 @@ void Enco3D::Component::GUITexture::renderGUI(const Camera *camera, Enco3D::Rend
 	}
 
 	shader->bind();
-	shader->updateUniforms(getTransform(), camera, getRenderingEngine(), &m_material);
+	shader->updateUniforms(getTransform(), camera, getRenderingEngine(), m_material);
 
 	s_rectangleMesh->render();
 }

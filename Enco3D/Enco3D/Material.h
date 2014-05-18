@@ -16,6 +16,7 @@ namespace Enco3D
 			std::map<std::string, float> floatValues;
 			std::map<std::string, Core::Vector3f> vector3fValues;
 			std::map<std::string, Texture2D*> texture2dValues;
+			std::map<std::string, bool> boolValues;
 
 			Material()
 			{
@@ -24,17 +25,20 @@ namespace Enco3D
 			Material(Texture2D *diffuseTexture)
 			{
 				addTexture2D("diffuseTexture", diffuseTexture);
+				addBool("lightingEnabled", false);
 			}
 
 			Material(Texture2D *diffuseTexture, const Core::Vector3f &diffuseColor)
 			{
 				addTexture2D("diffuseTexture", diffuseTexture);
 				addVector3f("diffuseColor", diffuseColor);
+				addBool("lightingEnabled", false);
 			}
 
 			Material(const Core::Vector3f &diffuseColor)
 			{
 				addVector3f("diffuseColor", diffuseColor);
+				addBool("lightingEnabled", false);
 			}
 
 			Material(Texture2D *diffuseTexture, const Core::Vector3f &diffuseColor, float specularIntensity, float specularExponent)
@@ -43,6 +47,7 @@ namespace Enco3D
 				addVector3f("diffuseColor", diffuseColor);
 				addFloat("specularIntensity", specularIntensity);
 				addFloat("specularExponent", specularExponent);
+				addBool("lightingEnabled", true);
 			}
 
 			Material(const Core::Vector3f &diffuseColor, float specularIntensity, float specularExponent)
@@ -50,6 +55,7 @@ namespace Enco3D
 				addVector3f("diffuseColor", diffuseColor);
 				addFloat("specularIntensity", specularIntensity);
 				addFloat("specularExponent", specularExponent);
+				addBool("lightingEnabled", true);
 			}
 
 			~Material()
@@ -74,6 +80,11 @@ namespace Enco3D
 				texture2dValues.insert(std::pair<std::string, Texture2D*>(name, texture));
 			}
 
+			inline void addBool(const std::string &name, bool value)
+			{
+				boolValues.insert(std::pair<std::string, bool>(name, value));
+			}
+
 			inline void setFloat(const std::string &name, float value)
 			{
 				floatValues[name] = value;
@@ -89,27 +100,32 @@ namespace Enco3D
 				texture2dValues[name] = texture;
 			}
 
-			inline float getFloat(const std::string &name)
+			inline void setBool(const std::string &name, bool value)
 			{
-				std::map<std::string, float>::iterator it = floatValues.find(name);
+				boolValues[name] = value;
+			}
+
+			inline float getFloat(const std::string &name) const
+			{
+				std::map<std::string, float>::const_iterator it = floatValues.find(name);
 				if (it != floatValues.end())
 					return it->second;
 				else
 					return 0.0f;
 			}
 
-			inline Core::Vector3f getVector3f(const std::string &name)
+			inline Core::Vector3f getVector3f(const std::string &name) const
 			{
-				std::map<std::string, Core::Vector3f>::iterator it = vector3fValues.find(name);
+				std::map<std::string, Core::Vector3f>::const_iterator it = vector3fValues.find(name);
 				if (it != vector3fValues.end())
 					return it->second;
 				else
 					return Core::Vector3Template::One;
 			}
 
-			inline Texture2D *getTexture2D(const std::string &name)
+			inline Texture2D *getTexture2D(const std::string &name) const
 			{
-				std::map<std::string, Texture2D *>::iterator it = texture2dValues.find(name);
+				std::map<std::string, Texture2D *>::const_iterator it = texture2dValues.find(name);
 				if (it != texture2dValues.end())
 					return it->second;
 				else
@@ -127,6 +143,15 @@ namespace Enco3D
 
 					return blankTexture;
 				}
+			}
+
+			inline bool getBool(const std::string &name) const
+			{
+				std::map<std::string, bool>::const_iterator it = boolValues.find(name);
+				if (it != boolValues.end())
+					return it->second;
+				else
+					return false;
 			}
 		};
 	}

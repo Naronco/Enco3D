@@ -18,6 +18,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <memory>
 
 namespace Enco3D
 {
@@ -26,8 +27,8 @@ namespace Enco3D
 		class WavefrontMesh : public Core::IGameComponent
 		{
 		private:
-			std::vector<Rendering::MeshResource*> m_meshes;
-			Rendering::Material *m_material;
+			std::vector<std::shared_ptr<Rendering::MeshResource>> m_meshes;
+			std::shared_ptr<Rendering::Material> m_material;
 			bool m_successfullyLoadedMesh;
 
 		private:
@@ -37,12 +38,10 @@ namespace Enco3D
 		public:
 			WavefrontMesh();
 			WavefrontMesh(const std::string &filename, Rendering::Material *material);
-			~WavefrontMesh();
-
+			
 			void render(const Component::Camera *camera, Rendering::Shader *shader);
 
-			inline void setMaterial(Rendering::Material *material) { m_material = material; }
-			inline Rendering::Material *getMaterial() const { return m_material; }
+			inline std::shared_ptr<Rendering::Material> getMaterial() const { return m_material; }
 		};
 	}
 }

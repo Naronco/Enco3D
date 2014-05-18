@@ -6,7 +6,7 @@ Enco3D::Component::WavefrontMesh::WavefrontMesh()
 
 Enco3D::Component::WavefrontMesh::WavefrontMesh(const std::string &filename, Rendering::Material *material)
 {
-	m_material = material;
+	m_material = std::shared_ptr<Rendering::Material>(material);
 
 	Assimp::Importer importer;
 
@@ -25,22 +25,12 @@ Enco3D::Component::WavefrontMesh::WavefrontMesh(const std::string &filename, Ren
 	}
 }
 
-Enco3D::Component::WavefrontMesh::~WavefrontMesh()
-{
-	for (unsigned int i = 0; i < m_meshes.size(); i++)
-		if (m_meshes[i])
-			delete m_meshes[i];
-
-	if (m_material)
-		delete m_material;
-}
-
 void Enco3D::Component::WavefrontMesh::render(const Component::Camera *camera, Rendering::Shader *shader)
 {
 	if (m_successfullyLoadedMesh)
 	{
 		shader->bind();
-		shader->updateUniforms(getTransform(), camera, getRenderingEngine(), m_material);
+		shader->updateUniforms(getTransform(), camera, getRenderingEngine(), *m_material);
 
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
@@ -114,7 +104,7 @@ void Enco3D::Component::WavefrontMesh::initMesh(unsigned int index, const aiMesh
 		arrIndices[i] = indices[i];
 	}
 
-	m_meshes[index] = new Rendering::MeshResource(arrVertices, vertices.size(), arrIndices, indices.size());
+	m_meshes[index] = std::shared_ptr<Rendering::MeshResource>(new Rendering::MeshResource(arrVertices, vertices.size(), arrIndices, indices.size()));
 	m_meshes[index]->setMaterialIndex(mesh->mMaterialIndex);
 
 	delete arrVertices;

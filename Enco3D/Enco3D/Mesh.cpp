@@ -109,7 +109,7 @@ void Enco3D::Rendering::Mesh::renderErrorMesh(Rendering::Shader *shader, Core::T
 	billboardTransform.update();
 
 	shader->bind();
-	shader->updateUniforms(&billboardTransform, camera, renderingEngine, &errorMaterial);
+	shader->updateUniforms(&billboardTransform, camera, renderingEngine, errorMaterial);
 
 	errorMesh.render();
 }

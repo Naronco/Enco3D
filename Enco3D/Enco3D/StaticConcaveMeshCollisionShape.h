@@ -22,9 +22,6 @@ namespace Enco3D
 			StaticConcaveMeshCollisionShape(Rendering::Mesh *mesh);
 
 			btCollisionShape *toBulletPhysicsCollisionShape();
-
-			inline void setMesh(Rendering::Mesh *mesh) { m_mesh = mesh; }
-			inline Rendering::Mesh *getMesh() const { return m_mesh; }
 		};
 	}
 }
