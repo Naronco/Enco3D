@@ -27,10 +27,6 @@ Enco3D::Component::WavefrontMaterialMesh::WavefrontMaterialMesh(const std::strin
 	}
 }
 
-Enco3D::Component::WavefrontMaterialMesh::~WavefrontMaterialMesh()
-{
-}
-
 void Enco3D::Component::WavefrontMaterialMesh::render(const Component::Camera *camera, Rendering::Shader *shader)
 {
 	if (m_successfullyLoadedMesh)
@@ -106,7 +102,7 @@ void Enco3D::Component::WavefrontMaterialMesh::initMesh(unsigned int index, cons
 	for (unsigned int i = 0; i < indices.size(); i++)
 		arrIndices[i] = indices[i];
 
-	m_meshes[index] = std::make_shared<Rendering::MeshResource>(new Rendering::MeshResource(arrVertices, vertices.size(), arrIndices, indices.size()));
+	m_meshes[index] = std::shared_ptr<Rendering::MeshResource>(new Rendering::MeshResource(arrVertices, vertices.size(), arrIndices, indices.size()));
 	m_meshes[index]->setMaterialIndex(mesh->mMaterialIndex);
 
 	delete arrVertices;
@@ -167,7 +163,7 @@ bool Enco3D::Component::WavefrontMaterialMesh::initMaterials(const aiScene *scen
 			}
 		}
 
-		m_materials[i] = std::make_shared<Rendering::Material>(meshMaterial);
+		m_materials[i] = std::shared_ptr<Rendering::Material>(meshMaterial);
 	}
 
 	return true;
@@ -202,7 +198,7 @@ Enco3D::Physics::StaticConcaveMeshCollisionShape *Enco3D::Component::WavefrontMa
 		indexCursor += meshIndexCount;
 	}
 
-	m_staticConcaveMeshCollisionShape = std::make_shared<Physics::StaticConcaveMeshCollisionShape>(Rendering::Mesh(vertices, vertexCount, indices, indexCount));
+	m_staticConcaveMeshCollisionShape = std::shared_ptr<Rendering::Mesh>(new Rendering::Mesh(vertices, vertexCount, indices, indexCount));
 
 	Physics::StaticConcaveMeshCollisionShape *result = new Physics::StaticConcaveMeshCollisionShape(m_staticConcaveMeshCollisionShape.get());
 

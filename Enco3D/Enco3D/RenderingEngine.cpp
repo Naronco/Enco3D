@@ -13,6 +13,53 @@
 
 #include "IPostProcessEffect.h"
 
+void Enco3D::Rendering::RenderingEngine::initDeferredShading()
+{
+	m_gbuffer0 = new Texture2D(m_width, m_height, GL_RGBA, GL_RGBA, GL_NEAREST, GL_CLAMP_TO_EDGE);
+	m_gbuffer1 = new Texture2D(m_width, m_height, GL_RGBA, GL_RGBA, GL_NEAREST, GL_CLAMP_TO_EDGE);
+	m_depthBuffer = new Texture2D(m_width, m_height, GL_DEPTH_COMPONENT32F, GL_DEPTH_COMPONENT, GL_NEAREST, GL_CLAMP_TO_EDGE);
+
+	m_geometryFramebuffer = new Framebuffer;
+	m_geometryFramebuffer->attachTexture2D(m_gbuffer0, Attachment::Color0);
+	m_geometryFramebuffer->attachTexture2D(m_gbuffer1, Attachment::Color1);
+	m_geometryFramebuffer->attachTexture2D(m_depthBuffer, Attachment::Depth);
+	m_geometryFramebuffer->pack();
+
+	Vertex vertices[4] =
+	{
+		Vertex((float)m_width, 0, 0).setTexCoord(0, 0, 0).setNormal(0, 0, 1),
+		Vertex((float)m_width, (float)m_height, 0).setTexCoord(0, 1, 0).setNormal(0, 0, 1),
+		Vertex(0, (float)m_height, 0).setTexCoord(1, 1, 0).setNormal(0, 0, 1),
+		Vertex(0, 0, 0).setTexCoord(1, 0, 0).setNormal(0, 0, 1),
+	};
+
+	unsigned int indices[6] =
+	{
+		2, 0, 1,
+		3, 0, 2,
+	};
+
+	m_renderWindow = new Mesh(vertices, 4, indices, 6);
+}
+
+void Enco3D::Rendering::RenderingEngine::deinitDeferredShading()
+{
+	delete m_geometryFramebuffer;
+	m_geometryFramebuffer = nullptr;
+
+	delete m_depthBuffer;
+	m_depthBuffer = nullptr;
+
+	delete m_gbuffer1;
+	m_gbuffer1 = nullptr;
+
+	delete m_gbuffer0;
+	m_gbuffer0 = nullptr;
+
+	delete m_renderWindow;
+	m_renderWindow = nullptr;
+}
+
 Enco3D::Rendering::RenderingEngine::RenderingEngine()
 {
 }
@@ -23,28 +70,14 @@ Enco3D::Rendering::RenderingEngine::RenderingEngine(unsigned int width, unsigned
 	m_height = height;
 
 	m_globalAmbientColor.set(0.1f, 0.1f, 0.1f);
-	m_GUICamera = new Component::Camera;
 
+	m_GUICamera = new Component::Camera;
 	m_GUICamera->setOrthographicProjection(0, (float)width, (float)height, 0, -1, 1);
 
 	m_textureShader = ShaderPool::getInstance()->getShader("shaders/texture", ShaderType::VertexShader | ShaderType::FragmentShader);
-	m_geometryBufferShader = ShaderPool::getInstance()->getShader("shaders/geometryBuffer", ShaderType::VertexShader | ShaderType::FragmentShader);
-
-// POST PROCESS INITIALIZATION //
-
-	m_gbuffer0 = new Texture2D(m_width, m_height, GL_RGBA, GL_RGBA, GL_NEAREST, GL_CLAMP_TO_EDGE);
-	m_gbuffer1 = new Texture2D(m_width, m_height, GL_RGBA, GL_RGBA, GL_NEAREST, GL_CLAMP_TO_EDGE);
-	m_depthBuffer = new Texture2D(m_width, m_height, GL_DEPTH_COMPONENT32F, GL_DEPTH_COMPONENT, GL_NEAREST, GL_CLAMP_TO_EDGE);
-	
-	m_geometryFramebuffer = new Framebuffer;
-	m_geometryFramebuffer->attachTexture2D(m_gbuffer0, Attachment::Color0);
-	m_geometryFramebuffer->attachTexture2D(m_gbuffer1, Attachment::Color1);
-	m_geometryFramebuffer->attachTexture2D(m_depthBuffer, Attachment::Depth);
-	m_geometryFramebuffer->pack();
-
+	m_ambientShader = ShaderPool::getInstance()->getShader("shaders/forwardAmbient", ShaderType::VertexShader | ShaderType::FragmentShader);
 	m_finalShader = ShaderPool::getInstance()->getShader("shaders/final", ShaderType::VertexShader | ShaderType::FragmentShader);
-
-////////////////////////////
+	m_geometryBufferShader = ShaderPool::getInstance()->getShader("shaders/geometryBuffer", ShaderType::VertexShader | ShaderType::FragmentShader);
 
 	glViewport(0, 0, (GLsizei)width, (GLsizei)height);
 
@@ -60,22 +93,6 @@ Enco3D::Rendering::RenderingEngine::RenderingEngine(unsigned int width, unsigned
 	glEnable(GL_CULL_FACE);
 	glFrontFace(GL_CW);
 	glCullFace(GL_BACK);
-
-	Vertex vertices[4] =
-	{
-		Vertex((float)width, 0, 0).setTexCoord(0, 0, 0).setNormal(0, 0, 1),
-		Vertex((float)width, (float)height, 0).setTexCoord(0, 1, 0).setNormal(0, 0, 1),
-		Vertex(0, (float)height, 0).setTexCoord(1, 1, 0).setNormal(0, 0, 1),
-		Vertex(0, 0, 0).setTexCoord(1, 0, 0).setNormal(0, 0, 1),
-	};
-
-	unsigned int indices[6] =
-	{
-		2, 0, 1,
-		3, 0, 2,
-	};
-
-	m_renderWindow = new Mesh(vertices, 4, indices, 6);
 }
 
 #define SAFE_DELETE(x) { if(x) { delete x; x = nullptr; } }
@@ -105,8 +122,6 @@ void Enco3D::Rendering::RenderingEngine::resize(unsigned int width, unsigned int
 
 	m_renderWindow->updateVertices(0, 4, vertices);
 
-//	m_GUICamera->SetOrthographicProjection(0, (float)width, (float)height, 0, -1, 1);
-
 	delete m_depthBuffer;
 	delete m_gbuffer1;
 	delete m_gbuffer0;
@@ -131,7 +146,10 @@ void Enco3D::Rendering::RenderingEngine::render(Enco3D::Core::GameObject *gameOb
 		if (m_cameras[i] == nullptr)
 			continue;
 
-		renderCamera(gameObject, m_cameras[i]);
+		if (m_deferredShadingEnabled)
+			renderCamera_Deferred(gameObject, m_cameras[i]);
+		else
+			renderCamera_Forward(gameObject, m_cameras[i]);
 	}
 
 	// GUI Rendering
@@ -144,7 +162,37 @@ void Enco3D::Rendering::RenderingEngine::render(Enco3D::Core::GameObject *gameOb
 		cerr << "[GL_ERROR] GL reported an error with code: " << error << endl;
 }
 
-void Enco3D::Rendering::RenderingEngine::renderCamera(Enco3D::Core::GameObject *gameObject, Enco3D::Component::Camera *camera)
+void Enco3D::Rendering::RenderingEngine::renderCamera_Forward(Enco3D::Core::GameObject *gameObject, Enco3D::Component::Camera *camera)
+{
+	//////////////////////////////////////////////////////////////////////////////
+	////////////////////////// RENDER INTO FRAMEBUFFER ///////////////////////////
+	//////////////////////////////////////////////////////////////////////////////
+
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	if (m_skybox != nullptr)
+	{
+		glDisable(GL_DEPTH_TEST);
+		m_skybox->render(camera);
+		glEnable(GL_DEPTH_TEST);
+	}
+	
+	gameObject->render(camera, m_ambientShader);
+
+	glBlendFunc(GL_ONE, GL_ONE);
+	glDepthMask(GL_FALSE);
+
+	for (unsigned int i = 0; i < m_lights.size(); i++)
+	{
+		m_activeLight = m_lights[i];
+		gameObject->render(camera, m_lights[i]->getShader());
+	}
+
+	glDepthMask(GL_TRUE);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+}
+
+void Enco3D::Rendering::RenderingEngine::renderCamera_Deferred(Enco3D::Core::GameObject *gameObject, Enco3D::Component::Camera *camera)
 {
 	//////////////////////////////////////////////////////////////////////////////
 	////////////////////////// RENDER INTO FRAMEBUFFER ///////////////////////////
@@ -162,17 +210,17 @@ void Enco3D::Rendering::RenderingEngine::renderCamera(Enco3D::Core::GameObject *
 
 	gameObject->render(camera, m_geometryBufferShader);
 
-//	glBlendFunc(GL_ONE, GL_ONE);
-//	glDepthMask(GL_FALSE);
+	//	glBlendFunc(GL_ONE, GL_ONE);
+	//	glDepthMask(GL_FALSE);
 
-/*	for (unsigned int i = 0; i < m_lights.size(); i++)
+	/*	for (unsigned int i = 0; i < m_lights.size(); i++)
 	{
-		m_activeLight = m_lights[i];
-		gameObject->Render(m_mainCamera, m_lights[i]->GetShader());
+	m_activeLight = m_lights[i];
+	gameObject->Render(m_mainCamera, m_lights[i]->GetShader());
 	}*/
 
-//	glDepthMask(GL_TRUE);
-//	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	//	glDepthMask(GL_TRUE);
+	//	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	// Skybox Rendering
 
@@ -224,6 +272,32 @@ void Enco3D::Rendering::RenderingEngine::renderCamera(Enco3D::Core::GameObject *
 	m_finalShader->setUniformFloat("velocityScale", 1.0f);
 
 	m_renderWindow->render();
+}
+
+bool Enco3D::Rendering::RenderingEngine::setDeferredShadingEnabled(bool enabled)
+{
+	if (enabled && m_deferredShadingEnabled)
+	{
+		Core::DebugLogger::log("Deferred shading already enabled! Aborting");
+		return false;
+	}
+	else if (!enabled && !m_deferredShadingEnabled)
+	{
+		Core::DebugLogger::log("Deferred shading isn't enabled! Aborting");
+		return false;
+	}
+
+	m_deferredShadingEnabled = enabled;
+	if (enabled)
+	{
+		initDeferredShading();
+	}
+	else
+	{
+		deinitDeferredShading();
+	}
+
+	return true;
 }
 
 void Enco3D::Rendering::RenderingEngine::initializePostProcessEffect(Component::IPostProcessEffect *effect)

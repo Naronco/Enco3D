@@ -14,8 +14,8 @@ namespace Enco3D
 		class DefaultMesh : public Core::IGameComponent
 		{
 		private:
-			std::shared_ptr<Rendering::Mesh> m_mesh{ nullptr };
-			std::shared_ptr<Rendering::Material> m_material{ nullptr };
+			std::shared_ptr<Rendering::Mesh> m_mesh;
+			std::shared_ptr<Rendering::Material> m_material;
 
 		public:
 			DefaultMesh();

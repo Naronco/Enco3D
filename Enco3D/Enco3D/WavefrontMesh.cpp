@@ -6,7 +6,7 @@ Enco3D::Component::WavefrontMesh::WavefrontMesh()
 
 Enco3D::Component::WavefrontMesh::WavefrontMesh(const std::string &filename, Rendering::Material *material)
 {
-	m_material = std::make_shared<Rendering::Material>(material);
+	m_material = std::shared_ptr<Rendering::Material>(material);
 
 	Assimp::Importer importer;
 
@@ -104,7 +104,7 @@ void Enco3D::Component::WavefrontMesh::initMesh(unsigned int index, const aiMesh
 		arrIndices[i] = indices[i];
 	}
 
-	m_meshes[index] = std::make_shared<Rendering::MeshResource>(new Rendering::MeshResource(arrVertices, vertices.size(), arrIndices, indices.size()));
+	m_meshes[index] = std::shared_ptr<Rendering::MeshResource>(new Rendering::MeshResource(arrVertices, vertices.size(), arrIndices, indices.size()));
 	m_meshes[index]->setMaterialIndex(mesh->mMaterialIndex);
 
 	delete arrVertices;

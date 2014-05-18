@@ -16,6 +16,20 @@ namespace Enco3D
 			{
 				m_shader = Rendering::ShaderPool::getInstance()->getShader("shaders/forwardDirectionalLight", Rendering::ShaderType::VertexShader | Rendering::ShaderType::FragmentShader);
 			}
+
+			DirectionalLight(const Core::Vector3f &color, float intensity)
+			{
+				m_color.set(color);
+				m_intensity = intensity;
+				m_shader = Rendering::ShaderPool::getInstance()->getShader("shaders/forwardDirectionalLight", Rendering::ShaderType::VertexShader | Rendering::ShaderType::FragmentShader);
+			}
+
+			DirectionalLight(float r, float g, float b, float intensity)
+			{
+				m_color.set(r, g, b);
+				m_intensity = intensity;
+				m_shader = Rendering::ShaderPool::getInstance()->getShader("shaders/forwardDirectionalLight", Rendering::ShaderType::VertexShader | Rendering::ShaderType::FragmentShader);
+			}
 		};
 	}
 }

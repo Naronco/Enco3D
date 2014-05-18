@@ -60,7 +60,15 @@ namespace Enco3D
 			float m_zNearClippingPlane{ 0.0f }, m_zFarClippingPlane{ 0.0f };
 
 			Shader *m_textureShader{ nullptr };
-			Shader *m_geometryBufferShader{ nullptr };
+
+			// FORWARD RENDERING
+
+			Shader *m_basicShader{ nullptr };
+			Shader *m_ambientShader{ nullptr };
+
+			// POST PROCESSING - DEFERRED SHADING
+
+			bool m_deferredShadingEnabled{ false };
 
 			Framebuffer *m_geometryFramebuffer;
 			Texture2D *m_gbuffer0; // RGB = Albedo, A = Specular
@@ -71,8 +79,12 @@ namespace Enco3D
 			Core::Vector2f m_postProcessTexelSize;
 			
 			Shader *m_finalShader{ nullptr };
-
+			Shader *m_geometryBufferShader{ nullptr };
 			Mesh *m_renderWindow{ nullptr };
+
+		private:
+			void initDeferredShading();
+			void deinitDeferredShading();
 
 		public:
 			RenderingEngine();
@@ -82,10 +94,13 @@ namespace Enco3D
 			void resize(unsigned int width, unsigned int height);
 
 			void render(Core::GameObject *gameObject);
-			void renderCamera(Core::GameObject *gameObject, Component::Camera *camera);
+			void renderCamera_Forward(Core::GameObject *gameObject, Component::Camera *camera);
+			void renderCamera_Deferred(Core::GameObject *gameObject, Component::Camera *camera);
 
 			inline void addLight(Component::ILight *light) { m_lights.push_back(light); }
 			inline void removeLight(Component::ILight *light) { m_lights.erase(remove(m_lights.begin(), m_lights.end(), light), m_lights.end()); }
+
+			bool setDeferredShadingEnabled(bool enabled);
 
 			void initializePostProcessEffect(Component::IPostProcessEffect *effect);
 
@@ -94,7 +109,6 @@ namespace Enco3D
 
 			inline void setClearColor(float r, float g, float b) const { glClearColor(r, g, b, 0); }
 			inline void setRasterizationMode(const RasterizationMode &mode) { glPolygonMode(GL_FRONT_AND_BACK, mode); }
-
 			inline void setCamera(Component::Camera *camera, unsigned int index) { m_cameras[index] = camera; }
 			inline void setSkybox(Component::Skybox *skybox) { m_skybox = skybox; }
 			inline void setGlobalAmbientColor(const Core::Vector3f &globalAmbientColor) { m_globalAmbientColor = globalAmbientColor; }
@@ -114,7 +128,6 @@ namespace Enco3D
 			inline Mesh *getRenderWindow() const { return m_renderWindow; }
 			inline Core::Matrix4x4f getPostProcessWorldViewProjectionMatrix() const { return m_postProcessWorldViewProjectionMatrix; }
 			inline Core::Vector2f getPostProcessTexelSize() const { return m_postProcessTexelSize; }
-
 			inline unsigned int getWidth() const { return m_width; }
 			inline unsigned int getHeight() const { return m_height; }
 		};

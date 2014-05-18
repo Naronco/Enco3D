@@ -6,8 +6,8 @@ Enco3D::Component::DefaultMesh::DefaultMesh()
 
 Enco3D::Component::DefaultMesh::DefaultMesh(Rendering::Mesh *mesh, Rendering::Material *material)
 {
-	m_mesh = std::make_shared<Rendering::Mesh>(mesh);
-	m_material = std::make_shared<Rendering::Material>(material);
+	m_mesh = std::shared_ptr<Rendering::Mesh>(mesh);
+	m_material = std::shared_ptr<Rendering::Material>(material);
 }
 
 void Enco3D::Component::DefaultMesh::render(const Camera *camera, Rendering::Shader *shader)
