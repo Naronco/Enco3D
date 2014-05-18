@@ -96,9 +96,21 @@ namespace Enco3D
 				return set(r);
 			}
 
+			inline Matrix4x4<T> &setTranslation(T x, T y, T z)
+			{
+				return set(1, 0, 0, x, 0, 1, 0, y, 0, 0, 1, z, 0, 0, 0, 1);
+			}
+
 			inline Matrix4x4<T> &translate(T x, T y, T z)
 			{
 				return (*this *= Matrix4x4<T>(1, 0, 0, x, 0, 1, 0, y, 0, 0, 1, z, 0, 0, 0, 1));
+			}
+
+			inline Matrix4x4<T> &setRotationX(T angle)
+			{
+				T s = (T)sin(angle);
+				T c = (T)cos(angle);
+				return set(1, 0, 0, 0, 0, c, -s, 0, 0, s, c, 0, 0, 0, 0, 1);
 			}
 
 			inline Matrix4x4<T> &rotateX(T angle)
@@ -108,11 +120,25 @@ namespace Enco3D
 				return (*this *= Matrix4x4<T>(1, 0, 0, 0, 0, c, -s, 0, 0, s, c, 0, 0, 0, 0, 1));
 			}
 
+			inline Matrix4x4<T> &setRotationY(T angle)
+			{
+				T s = (T)sin(angle);
+				T c = (T)cos(angle);
+				return set(c, 0, s, 0, 0, 1, 0, 0, -s, 0, c, 0, 0, 0, 0, 1);
+			}
+
 			inline Matrix4x4<T> &rotateY(T angle)
 			{
 				T s = (T)sin(angle);
 				T c = (T)cos(angle);
 				return (*this *= Matrix4x4<T>(c, 0, s, 0, 0, 1, 0, 0, -s, 0, c, 0, 0, 0, 0, 1));
+			}
+
+			inline Matrix4x4<T> &setRotationZ(T angle)
+			{
+				T s = (T)sin(angle);
+				T c = (T)cos(angle);
+				return set(c, -s, 0, 0, s, c, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
 			}
 
 			inline Matrix4x4<T> &rotateZ(T angle)
@@ -122,9 +148,24 @@ namespace Enco3D
 				return (*this *= Matrix4x4<T>(c, -s, 0, 0, s, c, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1));
 			}
 
+			inline Matrix4x4<T> &setScaling(T x, T y, T z)
+			{
+				return set(x, 0, 0, 0, 0, y, 0, 0, 0, 0, z, 0, 0, 0, 0, 1);
+			}
+
+			inline Matrix4x4<T> &setScaling(T s)
+			{
+				return set(s, 0, 0, 0, 0, s, 0, 0, 0, 0, s, 0, 0, 0, 0, 1);
+			}
+
 			inline Matrix4x4<T> &scale(T x, T y, T z)
 			{
 				return (*this *= Matrix4x4<T>(x, 0, 0, 0, 0, y, 0, 0, 0, 0, z, 0, 0, 0, 0, 1));
+			}
+
+			inline Matrix4x4<T> &scale(T s)
+			{
+				return (*this *= Matrix4x4<T>(s, 0, 0, 0, 0, s, 0, 0, 0, 0, s, 0, 0, 0, 0, 1));
 			}
 
 			inline Matrix4x4<T> &setRotation(const Matrix3x3<T> &m)
@@ -176,9 +217,143 @@ namespace Enco3D
 				return set(m00, m10, m20, m30, m01, m11, m21, m31, m02, m12, m22, m32, m03, m13, m23, m33);
 			}
 
+			inline Matrix4x4<T> getTranspose()
+			{
+				return Matrix4x4<T>(m00, m10, m20, m30, m01, m11, m21, m31, m02, m12, m22, m32, m03, m13, m23, m33);
+			}
+
 			inline float getAtIndex(int index)
 			{
 				return m[index % 4][index >> 2];
+			}
+
+			inline Matrix4x4<T> inverse()
+			{
+				float inv[16];
+
+				inv[0] = getAtIndex(5) * getAtIndex(10) * getAtIndex(15) -
+					getAtIndex(5) * getAtIndex(11) * getAtIndex(14) -
+					getAtIndex(9) * getAtIndex(6) * getAtIndex(15) +
+					getAtIndex(9) * getAtIndex(7) * getAtIndex(14) +
+					getAtIndex(13) * getAtIndex(6) * getAtIndex(11) -
+					getAtIndex(13) * getAtIndex(7) * getAtIndex(10);
+
+				inv[4] = -getAtIndex(4) * getAtIndex(10) * getAtIndex(15) +
+					getAtIndex(4) * getAtIndex(11) * getAtIndex(14) +
+					getAtIndex(8) * getAtIndex(6) * getAtIndex(15) -
+					getAtIndex(8) * getAtIndex(7) * getAtIndex(14) -
+					getAtIndex(12) * getAtIndex(6) * getAtIndex(11) +
+					getAtIndex(12) * getAtIndex(7) * getAtIndex(10);
+
+				inv[8] = getAtIndex(4) * getAtIndex(9) * getAtIndex(15) -
+					getAtIndex(4) * getAtIndex(11) * getAtIndex(13) -
+					getAtIndex(8) * getAtIndex(5) * getAtIndex(15) +
+					getAtIndex(8) * getAtIndex(7) * getAtIndex(13) +
+					getAtIndex(12) * getAtIndex(5) * getAtIndex(11) -
+					getAtIndex(12) * getAtIndex(7) * getAtIndex(9);
+
+				inv[12] = -getAtIndex(4) * getAtIndex(9) * getAtIndex(14) +
+					getAtIndex(4) * getAtIndex(10) * getAtIndex(13) +
+					getAtIndex(8) * getAtIndex(5) * getAtIndex(14) -
+					getAtIndex(8) * getAtIndex(6) * getAtIndex(13) -
+					getAtIndex(12) * getAtIndex(5) * getAtIndex(10) +
+					getAtIndex(12) * getAtIndex(6) * getAtIndex(9);
+
+				inv[1] = -getAtIndex(1) * getAtIndex(10) * getAtIndex(15) +
+					getAtIndex(1) * getAtIndex(11) * getAtIndex(14) +
+					getAtIndex(9) * getAtIndex(2) * getAtIndex(15) -
+					getAtIndex(9) * getAtIndex(3) * getAtIndex(14) -
+					getAtIndex(13) * getAtIndex(2) * getAtIndex(11) +
+					getAtIndex(13) * getAtIndex(3) * getAtIndex(10);
+
+				inv[5] = getAtIndex(0) * getAtIndex(10) * getAtIndex(15) -
+					getAtIndex(0) * getAtIndex(11) * getAtIndex(14) -
+					getAtIndex(8) * getAtIndex(2) * getAtIndex(15) +
+					getAtIndex(8) * getAtIndex(3) * getAtIndex(14) +
+					getAtIndex(12) * getAtIndex(2) * getAtIndex(11) -
+					getAtIndex(12) * getAtIndex(3) * getAtIndex(10);
+
+				inv[9] = -getAtIndex(0) * getAtIndex(9) * getAtIndex(15) +
+					getAtIndex(0) * getAtIndex(11) * getAtIndex(13) +
+					getAtIndex(8) * getAtIndex(1) * getAtIndex(15) -
+					getAtIndex(8) * getAtIndex(3) * getAtIndex(13) -
+					getAtIndex(12) * getAtIndex(1) * getAtIndex(11) +
+					getAtIndex(12) * getAtIndex(3) * getAtIndex(9);
+
+				inv[13] = getAtIndex(0) * getAtIndex(9) * getAtIndex(14) -
+					getAtIndex(0) * getAtIndex(10) * getAtIndex(13) -
+					getAtIndex(8) * getAtIndex(1) * getAtIndex(14) +
+					getAtIndex(8) * getAtIndex(2) * getAtIndex(13) +
+					getAtIndex(12) * getAtIndex(1) * getAtIndex(10) -
+					getAtIndex(12) * getAtIndex(2) * getAtIndex(9);
+
+				inv[2] = getAtIndex(1) * getAtIndex(6) * getAtIndex(15) -
+					getAtIndex(1) * getAtIndex(7) * getAtIndex(14) -
+					getAtIndex(5) * getAtIndex(2) * getAtIndex(15) +
+					getAtIndex(5) * getAtIndex(3) * getAtIndex(14) +
+					getAtIndex(13) * getAtIndex(2) * getAtIndex(7) -
+					getAtIndex(13) * getAtIndex(3) * getAtIndex(6);
+
+				inv[6] = -getAtIndex(0) * getAtIndex(6) * getAtIndex(15) +
+					getAtIndex(0) * getAtIndex(7) * getAtIndex(14) +
+					getAtIndex(4) * getAtIndex(2) * getAtIndex(15) -
+					getAtIndex(4) * getAtIndex(3) * getAtIndex(14) -
+					getAtIndex(12) * getAtIndex(2) * getAtIndex(7) +
+					getAtIndex(12) * getAtIndex(3) * getAtIndex(6);
+
+				inv[10] = getAtIndex(0) * getAtIndex(5) * getAtIndex(15) -
+					getAtIndex(0) * getAtIndex(7) * getAtIndex(13) -
+					getAtIndex(4) * getAtIndex(1) * getAtIndex(15) +
+					getAtIndex(4) * getAtIndex(3) * getAtIndex(13) +
+					getAtIndex(12) * getAtIndex(1) * getAtIndex(7) -
+					getAtIndex(12) * getAtIndex(3) * getAtIndex(5);
+
+				inv[14] = -getAtIndex(0) * getAtIndex(5) * getAtIndex(14) +
+					getAtIndex(0) * getAtIndex(6) * getAtIndex(13) +
+					getAtIndex(4) * getAtIndex(1) * getAtIndex(14) -
+					getAtIndex(4) * getAtIndex(2) * getAtIndex(13) -
+					getAtIndex(12) * getAtIndex(1) * getAtIndex(6) +
+					getAtIndex(12) * getAtIndex(2) * getAtIndex(5);
+
+				inv[3] = -getAtIndex(1) * getAtIndex(6) * getAtIndex(11) +
+					getAtIndex(1) * getAtIndex(7) * getAtIndex(10) +
+					getAtIndex(5) * getAtIndex(2) * getAtIndex(11) -
+					getAtIndex(5) * getAtIndex(3) * getAtIndex(10) -
+					getAtIndex(9) * getAtIndex(2) * getAtIndex(7) +
+					getAtIndex(9) * getAtIndex(3) * getAtIndex(6);
+
+				inv[7] = getAtIndex(0) * getAtIndex(6) * getAtIndex(11) -
+					getAtIndex(0) * getAtIndex(7) * getAtIndex(10) -
+					getAtIndex(4) * getAtIndex(2) * getAtIndex(11) +
+					getAtIndex(4) * getAtIndex(3) * getAtIndex(10) +
+					getAtIndex(8) * getAtIndex(2) * getAtIndex(7) -
+					getAtIndex(8) * getAtIndex(3) * getAtIndex(6);
+
+				inv[11] = -getAtIndex(0) * getAtIndex(5) * getAtIndex(11) +
+					getAtIndex(0) * getAtIndex(7) * getAtIndex(9) +
+					getAtIndex(4) * getAtIndex(1) * getAtIndex(11) -
+					getAtIndex(4) * getAtIndex(3) * getAtIndex(9) -
+					getAtIndex(8) * getAtIndex(1) * getAtIndex(7) +
+					getAtIndex(8) * getAtIndex(3) * getAtIndex(5);
+
+				inv[15] = getAtIndex(0) * getAtIndex(5) * getAtIndex(10) -
+					getAtIndex(0) * getAtIndex(6) * getAtIndex(9) -
+					getAtIndex(4) * getAtIndex(1) * getAtIndex(10) +
+					getAtIndex(4) * getAtIndex(2) * getAtIndex(9) +
+					getAtIndex(8) * getAtIndex(1) * getAtIndex(6) -
+					getAtIndex(8) * getAtIndex(2) * getAtIndex(5);
+
+				float det = getAtIndex(0) * inv[0] + getAtIndex(1) * inv[4] + getAtIndex(2) * inv[8] + getAtIndex(3) * inv[12];
+
+				if (det == 0.0f)
+					return *this;
+
+				det = 1.0f / det;
+
+				for (int i = 0; i < 16; i++)
+					m[i % 4][i >> 2] = inv[i] * det;
+
+				return *this;
 			}
 
 			inline Matrix4x4<T> getInverse()
