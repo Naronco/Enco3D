@@ -36,9 +36,7 @@ Enco3D::Component::Camera::Camera(float left, float right, float bottom, float t
 void Enco3D::Component::Camera::initRendering()
 {
 	getRenderingEngine()->setCamera(this, m_depth);
-	getRenderingEngine()->setZNearClippingPlane(m_zNearClippingPlane);
-	getRenderingEngine()->setZFarClippingPlane(m_zFarClippingPlane);
-
+	
 	for (unsigned int i = 0; i < m_postProcessEffects.size(); i++)
 		getRenderingEngine()->initializePostProcessEffect(m_postProcessEffects[i]);
 }

@@ -48,7 +48,7 @@ namespace Enco3D
 			/// <param name="height">Height of the window</param>
 			/// <param name="multisampleEnabled"></param>
 			/// <param name="aaSamples"></param>
-			GLWindow(char *title, unsigned int width, unsigned int height, bool multisampleEnabled, unsigned int aaSamples);
+			GLWindow(char *title, unsigned int width, unsigned int height, bool multisampleEnabled, unsigned int aaSamples, const std::string &iconSource);
 
 			/// <summary>Shows the window, if it it's hided</summary>
 			void show();

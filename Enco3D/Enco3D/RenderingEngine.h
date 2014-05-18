@@ -41,7 +41,7 @@ namespace Enco3D
 	{
 		enum RasterizationMode : GLenum
 		{
-			Solid     = GL_FILL,
+			Solid = GL_FILL,
 			Wireframe = GL_LINE,
 		};
 
@@ -57,8 +57,7 @@ namespace Enco3D
 			Component::ILight *m_activeLight{ nullptr };
 			Core::Vector3f m_globalAmbientColor;
 			unsigned int m_width, m_height;
-			float m_zNearClippingPlane{ 0.0f }, m_zFarClippingPlane{ 0.0f };
-
+			
 			Shader *m_textureShader{ nullptr };
 
 			// FORWARD RENDERING
@@ -108,15 +107,14 @@ namespace Enco3D
 			Component::Camera *createOrthographicCamera(float zNear, float zFar, float size = 1.0f);
 
 			inline void setClearColor(float r, float g, float b) const { glClearColor(r, g, b, 0); }
-			inline void setRasterizationMode(const RasterizationMode &mode) { glPolygonMode(GL_FRONT_AND_BACK, mode); }
+			inline void setClearColor(const Core::Vector3f &color) const { glClearColor(color.x, color.y, color.z, 0); }
+			inline void setRasterizationMode(unsigned int mode) { glPolygonMode(GL_FRONT_AND_BACK, mode); }
 			inline void setCamera(Component::Camera *camera, unsigned int index) { m_cameras[index] = camera; }
 			inline void setSkybox(Component::Skybox *skybox) { m_skybox = skybox; }
 			inline void setGlobalAmbientColor(const Core::Vector3f &globalAmbientColor) { m_globalAmbientColor = globalAmbientColor; }
 			inline void setGlobalAmbientColor(float r, float g, float b) { m_globalAmbientColor.set(r, g, b); }
 			inline void setWidth(unsigned int width) { m_width = width; }
 			inline void setHeight(unsigned int height) { m_height = height; }
-			inline void setZNearClippingPlane(float val) { m_zNearClippingPlane = val; }
-			inline void setZFarClippingPlane(float val) { m_zFarClippingPlane = val; }
 
 			inline Component::Camera *getCamera(unsigned int depth) const { return m_cameras[depth]; }
 			inline Component::Skybox *getSkybox() const { return m_skybox; }
@@ -124,8 +122,6 @@ namespace Enco3D
 			inline vector<Component::ILight *> getLights() const { return m_lights; }
 			inline Core::Vector3f getGlobalAmbientColor() const { return m_globalAmbientColor; }
 			inline Component::ILight *getActiveLight() const { return m_activeLight; };
-			inline float getZNearClippingPlane() const { return m_zNearClippingPlane; }
-			inline float getZFarClippingPlane() const { return m_zFarClippingPlane; }
 			inline Mesh *getRenderWindow() const { return m_renderWindow; }
 			inline Core::Matrix4x4f getPostProcessWorldViewProjectionMatrix() const { return m_postProcessWorldViewProjectionMatrix; }
 			inline Core::Vector2f getPostProcessTexelSize() const { return m_postProcessTexelSize; }

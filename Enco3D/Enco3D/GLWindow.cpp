@@ -1,11 +1,12 @@
 #include "GLWindow.h"
+#include "ImageIO.h"
 
 Enco3D::Core::GLWindow::GLWindow()
 {
 	Input::Init();
 }
 
-Enco3D::Core::GLWindow::GLWindow(char *title, unsigned int width, unsigned int height, bool multisampleEnabled, unsigned int aaSamples)
+Enco3D::Core::GLWindow::GLWindow(char *title, unsigned int width, unsigned int height, bool multisampleEnabled, unsigned int aaSamples, const std::string &iconSource)
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
 
@@ -42,6 +43,24 @@ Enco3D::Core::GLWindow::GLWindow(char *title, unsigned int width, unsigned int h
 	{
 		Core::DebugLogger::log("Failed to create SDL window");
 		return;
+	}
+
+	if (iconSource.length() > 0)
+	{
+		IO::ImageIO_Output iconOutput;
+		IO::ImageIO::loadImage(iconSource, &iconOutput);
+
+		unsigned int numPixels = iconOutput.width * iconOutput.height;
+		unsigned int *pixels = new unsigned int[numPixels];
+
+		for (unsigned int i = 0; i < numPixels; i++)
+			pixels[i] = ((unsigned int)(iconOutput.pixels[(i << 2) + 3] * 255.0f)) << 24 | ((unsigned int)(iconOutput.pixels[i << 2] * 255.0f)) << 16 | ((unsigned int)(iconOutput.pixels[(i << 2) + 1] * 255.0f)) << 8 | ((unsigned int)(iconOutput.pixels[(i << 2) + 2] * 255.0f));
+		
+		SDL_Surface *iconSurface = SDL_CreateRGBSurfaceFrom(pixels, (int)iconOutput.width, (int)iconOutput.height, 32, sizeof(unsigned int)* (int)iconOutput.width, 0x00FF0000, 0x0000FF00, 0x000000FF, 0xFF000000);
+		SDL_SetWindowIcon(m_window, iconSurface);
+
+		delete[] pixels;
+		pixels = nullptr;
 	}
 
 	GLenum result = glewInit();

@@ -575,10 +575,10 @@ void Enco3D::Rendering::Shader::updateUniforms(Enco3D::Core::Transform *transfor
 			setUniformVector3f(uniformName, camera->getTransform()->getTranslation());
 		else if (uniformName == "rendering_globalAmbientLightColor")
 			setUniformVector3f(uniformName, renderingEngine->getGlobalAmbientColor());
-		else if (uniformName == "rendering_zNearClippingPlane")
-			setUniformFloat(uniformName, renderingEngine->getZNearClippingPlane());
-		else if (uniformName == "rendering_zFarClippingPlane")
-			setUniformFloat(uniformName, renderingEngine->getZFarClippingPlane());
+		else if (uniformName == "camera_zNearClippingPlane")
+			setUniformFloat(uniformName, camera->getZNearClippingPlane());
+		else if (uniformName == "camera_zFarClippingPlane")
+			setUniformFloat(uniformName, camera->getZFarClippingPlane());
 		else if (uniformName == "rendering_skybox")
 		{
 			if (renderingEngine->getSkybox() != nullptr)

@@ -30,7 +30,7 @@ namespace Enco3D
 		public:
 			inline Enco3DEngine() {  }
 
-			void init(char *windowTitle, unsigned int windowWidth, unsigned int windowHeight, bool multisampleEnabled, unsigned int aaSamples, IGame *game);
+			void init(char *windowTitle, unsigned int windowWidth, unsigned int windowHeight, bool multisampleEnabled, unsigned int aaSamples, const std::string &iconSource, IGame *game);
 			void deinit();
 			void mainLoop();
 

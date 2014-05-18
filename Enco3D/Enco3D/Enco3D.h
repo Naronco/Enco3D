@@ -102,18 +102,29 @@ typedef signed long long longlong;
 
 typedef struct __Enco3D_StartInstruction
 {
-	char *windowTitle;
-	unsigned int windowWidth, windowHeight;
-	bool multisampleEnabled;
-	unsigned int aaSamples;
-
+	char *windowTitle{ "Enco3D window" };
+	unsigned int windowWidth{ 640 }, windowHeight{ 480 };
+	bool multisampleEnabled{ false };
+	unsigned int aaSamples{ 0 };
+	std::string iconSource{ "" };
+	Enco3D::Core::Vector3f globalAmbientColor{ Enco3D::Core::Vector3f(0, 0, 0) };
+	Enco3D::Core::Vector3f clearColor{ Enco3D::Core::Vector3f(0, 0, 0) };
+	uint32 rasterizationMode{ Enco3D::Rendering::RasterizationMode::Solid };
+	bool deferredShading{ false };
 } Enco3D_StartInstruction;
 
 inline static int Enco3D_Main(const __Enco3D_StartInstruction *info, Enco3D::Core::IGame *game)
 {
-	Enco3D::Core::Enco3DEngine::getInstance()->init(info->windowTitle, info->windowWidth, info->windowHeight, info->multisampleEnabled, info->aaSamples, game);
-	Enco3D::Core::Enco3DEngine::getInstance()->mainLoop();
-	Enco3D::Core::Enco3DEngine::getInstance()->deinit();
+	Enco3D::Core::Enco3DEngine *engineInstance = Enco3D::Core::Enco3DEngine::getInstance();
+
+	engineInstance->init(info->windowTitle, info->windowWidth, info->windowHeight, info->multisampleEnabled, info->aaSamples, info->iconSource, game);
+	engineInstance->getRenderingEngine()->setDeferredShadingEnabled(info->deferredShading);
+	engineInstance->getRenderingEngine()->setClearColor(info->clearColor);
+	engineInstance->getRenderingEngine()->setGlobalAmbientColor(info->globalAmbientColor);
+	engineInstance->getRenderingEngine()->setRasterizationMode(info->rasterizationMode);
+	engineInstance->getGame()->init();
+	engineInstance->mainLoop();
+	engineInstance->deinit();
 
 	return 0;
 }

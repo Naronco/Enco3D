@@ -3,11 +3,11 @@
 #include "ShaderPool.h"
 #include "DebugLogger.h"
 
-void Enco3D::Core::Enco3DEngine::init(char *windowTitle, unsigned int windowWidth, unsigned int windowHeight, bool multisampleEnabled, unsigned int aaSamples, IGame *game)
+void Enco3D::Core::Enco3DEngine::init(char *windowTitle, unsigned int windowWidth, unsigned int windowHeight, bool multisampleEnabled, unsigned int aaSamples, const std::string &iconSource, IGame *game)
 {
 	Core::DebugLogger::init();
 
-	m_window = new GLWindow(windowTitle, windowWidth, windowHeight, multisampleEnabled, aaSamples);
+	m_window = new GLWindow(windowTitle, windowWidth, windowHeight, multisampleEnabled, aaSamples, iconSource);
 	m_timer = new Timer(true);
 	m_game = game;
 	m_renderingEngine = new Rendering::RenderingEngine(windowWidth, windowHeight);
@@ -26,8 +26,6 @@ void Enco3D::Core::Enco3DEngine::init(char *windowTitle, unsigned int windowWidt
 	m_game->setTimer(m_timer);
 
 	m_game->addGameComponent(m_renderingEngine->getGUICamera());
-
-	m_game->init();
 }
 
 void Enco3D::Core::Enco3DEngine::deinit()
