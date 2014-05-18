@@ -112,6 +112,7 @@ namespace Enco3D
 			inline void setCamera(Component::Camera *camera, unsigned int index) { m_cameras[index] = camera; }
 			inline void setSkybox(Component::Skybox *skybox) { m_skybox = skybox; }
 			inline void setGlobalAmbientColor(const Core::Vector3f &globalAmbientColor) { m_globalAmbientColor = globalAmbientColor; }
+			inline void setGlobalAmbientColor(float r, float g, float b) { m_globalAmbientColor.set(r, g, b); }
 			inline void setWidth(unsigned int width) { m_width = width; }
 			inline void setHeight(unsigned int height) { m_height = height; }
 			inline void setZNearClippingPlane(float val) { m_zNearClippingPlane = val; }

@@ -96,6 +96,7 @@ public:
 		}
 
 		getRenderingEngine()->setClearColor(0.5f, 0.8f, 1.0f);
+		getRenderingEngine()->setGlobalAmbientColor(0.11f, 0.18f, 0.22f);
 
 		Matrix4x4f rotationMatrix;
 		rotationMatrix.setOrthographicProjection(-10.0f, 10.0f, -10.0f, 10.0f, -1.0f, 1.0f);
