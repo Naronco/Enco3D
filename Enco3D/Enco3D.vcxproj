@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Config.cpp" />
     <ClCompile Include="Enco3D\AudioEngine.cpp" />
     <ClCompile Include="Enco3D\BloomPostProcessEffect.cpp" />
     <ClCompile Include="Enco3D\BoxCollisionShape.cpp" />
@@ -200,7 +201,7 @@
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;opengl32.lib;glu32.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;opengl32.lib;glu32.lib;glew32.lib;BulletCollision.lib;BulletDynamics.lib;LinearMath.lib;SDL2_mixer.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;opengl32.lib;glu32.lib;glew32.lib;BulletCollision.lib;BulletDynamics.lib;LinearMath.lib;SDL2_mixer.lib;assimp.lib;zlibwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <Lib>
       <AdditionalLibraryDirectories>..\Library\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>

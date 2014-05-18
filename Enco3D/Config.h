@@ -5,7 +5,6 @@
 #include <fstream>
 #include <streambuf>
 #include <rapidjson\document.h>
-#include <rapidxml\rapidxml.hpp>
 
 namespace Enco3D
 {
@@ -15,7 +14,6 @@ namespace Enco3D
 		{
 			enum ConfigTypes
 			{
-				XML,
 				JSON
 			};
 		}
@@ -29,7 +27,6 @@ namespace Enco3D
 			static Config FromFile(std::string file, ConfigType::ConfigTypes type);
 
 			rapidjson::Document JSONDocument;
-			rapidxml::xml_document<> XMLDocument;
 
 		protected:
 			ConfigType::ConfigTypes configType;
