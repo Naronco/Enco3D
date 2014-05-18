@@ -18,7 +18,9 @@ class IBlock
 public:
 	virtual std::string getName() = 0;
 	virtual std::string getTextureNameAtBlockSide(int blockSide) = 0;
-	virtual unsigned char getLightEmmission() = 0;
+	virtual unsigned char getLightEmission() = 0;
+	virtual bool isSolid() = 0;
+	virtual bool isFullBlock() = 0;
 };
 
 #endif
