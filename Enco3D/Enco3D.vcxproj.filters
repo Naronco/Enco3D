@@ -179,6 +179,9 @@
     <ClCompile Include="Enco3D\ImageIO.cpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
+    <ClCompile Include="Config.cpp">
+      <Filter>Quelldateien\IO</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enco3D\stb_image.h">
@@ -377,6 +380,9 @@
       <Filter>Headerdateien\Core</Filter>
     </ClInclude>
     <ClInclude Include="Enco3D\ImageIO.h">
+      <Filter>Headerdateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Config.h">
       <Filter>Headerdateien\IO</Filter>
     </ClInclude>
   </ItemGroup>
