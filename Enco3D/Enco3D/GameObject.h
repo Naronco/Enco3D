@@ -32,11 +32,11 @@ namespace Enco3D
 		{
 		private:
 			Transform *m_transform{ nullptr };
-			string m_name;
+			std::string m_name;
 			bool m_enabled{ true };
 
-			vector<GameObject *> m_children;
-			vector<IGameComponent *> m_components;
+			std::vector<GameObject*> m_children;
+			std::vector<IGameComponent*> m_components;
 
 			Rendering::RenderingEngine *m_renderingEngine{ nullptr };
 			Physics::PhysicsEngine *m_physicsEngine{ nullptr };
@@ -45,7 +45,7 @@ namespace Enco3D
 
 		public:
 			GameObject();
-			GameObject(const string &name);
+			GameObject(const std::string &name);
 			~GameObject();
 
 			void update();
@@ -63,10 +63,10 @@ namespace Enco3D
 			void setWindow(GLWindow *window);
 			void setTimer(Timer *timer);
 
-			inline void setName(const string &name) { m_name = name; }
+			inline void setName(const std::string &name) { m_name = name; }
 			inline void setEnabled(bool enabled) { m_enabled = enabled; }
 
-			GameObject *getChild(const string &name) const;
+			GameObject *getChild(const std::string &name) const;
 
 			template <typename T> IGameComponent *getGameComponent() const {
 				for (unsigned int i = m_components.size() - 1; i >= 0; i--)
@@ -76,10 +76,10 @@ namespace Enco3D
 			}
 
 			inline Transform *getTransform() const { return m_transform; }
-			inline string getName() const { return m_name; }
+			inline std::string getName() const { return m_name; }
 			inline bool isEnabled() const { return m_enabled; }
-			inline vector<GameObject *> getChildren() const { return m_children; }
-			inline vector<IGameComponent *> getComponents() const { return m_components; }
+			inline std::vector<GameObject *> getChildren() const { return m_children; }
+			inline std::vector<IGameComponent *> getComponents() const { return m_components; }
 			inline Rendering::RenderingEngine *getRenderingEngine() const { return m_renderingEngine; }
 			inline Physics::PhysicsEngine *getPhysicsEngine() const { return m_physicsEngine; }
 			inline GLWindow *getWindow() const { return m_window; }

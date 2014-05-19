@@ -1,17 +1,14 @@
 #include "RenderingEngine.h"
-
 #include "GameObject.h"
-
 #include "Camera.h"
 #include "ILight.h"
 #include "Skybox.h"
 #include "ShaderPool.h"
-
 #include "DirectionalLight.h"
 #include "PointLight.h"
 #include "SpotLight.h"
-
 #include "IPostProcessEffect.h"
+#include "DebugLogger.h"
 
 void Enco3D::Rendering::RenderingEngine::initDeferredShading()
 {
@@ -159,7 +156,7 @@ void Enco3D::Rendering::RenderingEngine::render(Enco3D::Core::GameObject *gameOb
 
 	GLenum error = glGetError();
 	if (error != GL_NO_ERROR)
-		cerr << "[GL_ERROR] GL reported an error with code: " << error << endl;
+		Core::DebugLogger::log("[GL_ERROR] GL reported an error with code: " + std::to_string(error));
 }
 
 void Enco3D::Rendering::RenderingEngine::renderCamera_Forward(Enco3D::Core::GameObject *gameObject, Enco3D::Component::Camera *camera)

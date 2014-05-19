@@ -28,6 +28,8 @@ Enco3D::Rendering::Mesh::Mesh(Vertex *vertices, unsigned int vertexCount, unsign
 
 Enco3D::Rendering::Mesh::~Mesh()
 {
+	if (m_resource)
+		delete m_resource;
 }
 
 void Enco3D::Rendering::Mesh::buildBuffers(Vertex *vertices, unsigned int vertexCount, unsigned int *indices, unsigned int indexCount)
@@ -75,7 +77,8 @@ void Enco3D::Rendering::Mesh::renderErrorMesh(Rendering::Shader *shader, Core::T
 	{
 		initializedMeshAndMaterial = true;
 
-		Vertex vertices[8] = {
+		Vertex vertices[8] =
+		{
 			Vertex(-1, -1, 0).setTexCoord(1, 1, 0).setNormal(0, 0, +1),
 			Vertex(+1, -1, 0).setTexCoord(0, 1, 0).setNormal(0, 0, +1),
 			Vertex(+1, +1, 0).setTexCoord(0, 0, 0).setNormal(0, 0, +1),
@@ -87,7 +90,8 @@ void Enco3D::Rendering::Mesh::renderErrorMesh(Rendering::Shader *shader, Core::T
 			Vertex(+1, +1, 0).setTexCoord(1, 0, 0).setNormal(0, 0, -1),
 		};
 
-		unsigned int indices[12] = {
+		unsigned int indices[12] =
+		{
 			0, 1, 2, 0, 2, 3,
 			4, 5, 6, 4, 6, 7,
 		};

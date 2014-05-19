@@ -7,7 +7,7 @@ Enco3D::Core::GameObject::GameObject()
 	m_transform = new Transform;
 }
 
-Enco3D::Core::GameObject::GameObject(const string &name)
+Enco3D::Core::GameObject::GameObject(const std::string &name)
 {
 	m_name = name;
 	m_transform = new Transform;
@@ -153,7 +153,7 @@ void Enco3D::Core::GameObject::setTimer(Timer *timer)
 		m_children[i]->setTimer(timer);
 }
 
-Enco3D::Core::GameObject *Enco3D::Core::GameObject::getChild(const string &name) const
+Enco3D::Core::GameObject *Enco3D::Core::GameObject::getChild(const std::string &name) const
 {
 	for (unsigned int i = m_children.size() - 1; i >= 0; i--)
 		if (m_children[i]->getName() == name)

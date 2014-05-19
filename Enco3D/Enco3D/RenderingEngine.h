@@ -11,8 +11,6 @@
 #include <GL/glew.h>
 #include <algorithm>
 
-using namespace std;
-
 namespace Enco3D
 {
 	namespace Core
@@ -53,7 +51,7 @@ namespace Enco3D
 			Component::Camera *m_GUICamera{ nullptr };
 			Component::Camera *m_cameras[MAX_CAMERAS];
 			Component::Skybox *m_skybox{ nullptr };
-			vector<Component::ILight *> m_lights;
+			std::vector<Component::ILight *> m_lights;
 			Component::ILight *m_activeLight{ nullptr };
 			Core::Vector3f m_globalAmbientColor;
 			unsigned int m_width, m_height;
@@ -119,7 +117,7 @@ namespace Enco3D
 			inline Component::Camera *getCamera(unsigned int depth) const { return m_cameras[depth]; }
 			inline Component::Skybox *getSkybox() const { return m_skybox; }
 			inline Component::Camera *getGUICamera() const { return m_GUICamera; }
-			inline vector<Component::ILight *> getLights() const { return m_lights; }
+			inline std::vector<Component::ILight*> getLights() const { return m_lights; }
 			inline Core::Vector3f getGlobalAmbientColor() const { return m_globalAmbientColor; }
 			inline Component::ILight *getActiveLight() const { return m_activeLight; };
 			inline Mesh *getRenderWindow() const { return m_renderWindow; }

@@ -7,14 +7,14 @@ Enco3D::Component::Skybox::Skybox()
 
 Enco3D::Component::Skybox::Skybox(const std::string &filename)
 {
-	string cubeMapFilenames[6] =
+	std::string cubeMapFilenames[6] =
 	{
-		filename + string("@x+.png"),
-		filename + string("@x-.png"),
-		filename + string("@y+.png"),
-		filename + string("@y-.png"),
-		filename + string("@z+.png"),
-		filename + string("@z-.png"),
+		filename + std::string("@x+.png"),
+		filename + std::string("@x-.png"),
+		filename + std::string("@y+.png"),
+		filename + std::string("@y-.png"),
+		filename + std::string("@z+.png"),
+		filename + std::string("@z-.png"),
 	};
 
 	m_skyboxTexture = new Rendering::TextureCubeMap(cubeMapFilenames, Rendering::TextureFilter::Nearest, Rendering::TextureWrap::Clamp);

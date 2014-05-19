@@ -72,6 +72,7 @@ void Enco3D::Component::Camera::resize(unsigned int width, unsigned int height)
 void Enco3D::Component::Camera::addPostProcessEffect(IPostProcessEffect *effect)
 {
 	m_gameObject->addComponent(effect);
+	getRenderingEngine()->initializePostProcessEffect(effect);
 	m_postProcessEffects.push_back(effect);
 }
 

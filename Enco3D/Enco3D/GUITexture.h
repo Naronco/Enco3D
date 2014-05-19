@@ -30,8 +30,8 @@ namespace Enco3D
 			GUITexture();
 			GUITexture(Rendering::Texture2D *texture);
 			GUITexture(Rendering::Texture2D *texture, const Core::Vector3f &color);
-			GUITexture(const string &filename);
-			GUITexture(const string &filename, const Core::Vector3f &color);
+			GUITexture(const std::string &filename);
+			GUITexture(const std::string &filename, const Core::Vector3f &color);
 
 			void renderGUI(const Camera *camera, Rendering::Shader *shader);
 

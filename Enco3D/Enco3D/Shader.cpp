@@ -16,7 +16,7 @@ Enco3D::Rendering::Shader::Shader()
 	}
 }
 
-Enco3D::Rendering::Shader::Shader(const string &filename, unsigned int shaderTypes)
+Enco3D::Rendering::Shader::Shader(const std::string &filename, unsigned int shaderTypes)
 {
 	m_program = glCreateProgram();
 
@@ -108,7 +108,7 @@ Enco3D::Rendering::Shader::~Shader()
 	glDeleteProgram(m_program);
 }
 
-void Enco3D::Rendering::Shader::addProgram(const string &text, int type)
+void Enco3D::Rendering::Shader::addProgram(const std::string &text, int type)
 {
 	int shader = glCreateShader(type);
 
@@ -143,12 +143,12 @@ void Enco3D::Rendering::Shader::addProgram(const string &text, int type)
 	m_shaders.push_back(shader);
 }
 
-string Enco3D::Rendering::Shader::loadShader(const string &filename)
+std::string Enco3D::Rendering::Shader::loadShader(const std::string &filename)
 {
-	ifstream file;
+	std::ifstream file;
 	file.open(filename.c_str());
 
-	string output, line;
+	std::string output, line;
 
 	if (file.is_open())
 	{
@@ -168,7 +168,7 @@ string Enco3D::Rendering::Shader::loadShader(const string &filename)
 	return output;
 }
 
-void Enco3D::Rendering::Shader::checkShaderError(int shader, int flag, bool isProgram, const string &errorMsg)
+void Enco3D::Rendering::Shader::checkShaderError(int shader, int flag, bool isProgram, const std::string &errorMsg)
 {
 	GLint success = 0;
 	GLchar error[1024] = { 0 };
@@ -397,52 +397,52 @@ void Enco3D::Rendering::Shader::bind() const
 	}
 }
 
-void Enco3D::Rendering::Shader::addVertexShader(const string &text)
+void Enco3D::Rendering::Shader::addVertexShader(const std::string &text)
 {
 	addProgram(text, GL_VERTEX_SHADER);
 }
 
-void Enco3D::Rendering::Shader::addFragmentShader(const string &text)
+void Enco3D::Rendering::Shader::addFragmentShader(const std::string &text)
 {
 	addProgram(text, GL_FRAGMENT_SHADER);
 }
 
-void Enco3D::Rendering::Shader::addGeometryShader(const string &text)
+void Enco3D::Rendering::Shader::addGeometryShader(const std::string &text)
 {
 	addProgram(text, GL_GEOMETRY_SHADER);
 }
 
-void Enco3D::Rendering::Shader::addTessellationControlShader(const string &text)
+void Enco3D::Rendering::Shader::addTessellationControlShader(const std::string &text)
 {
 	addProgram(text, GL_TESS_CONTROL_SHADER);
 }
 
-void Enco3D::Rendering::Shader::addTessellationEvaluationShader(const string &text)
+void Enco3D::Rendering::Shader::addTessellationEvaluationShader(const std::string &text)
 {
 	addProgram(text, GL_TESS_EVALUATION_SHADER);
 }
 
-void Enco3D::Rendering::Shader::addVertexShaderFromFile(const string &filename)
+void Enco3D::Rendering::Shader::addVertexShaderFromFile(const std::string &filename)
 {
 	addVertexShader(loadShader(filename));
 }
 
-void Enco3D::Rendering::Shader::addFragmentShaderFromFile(const string &filename)
+void Enco3D::Rendering::Shader::addFragmentShaderFromFile(const std::string &filename)
 {
 	addFragmentShader(loadShader(filename));
 }
 
-void Enco3D::Rendering::Shader::addGeometryShaderFromFile(const string &filename)
+void Enco3D::Rendering::Shader::addGeometryShaderFromFile(const std::string &filename)
 {
 	addGeometryShader(loadShader(filename));
 }
 
-void Enco3D::Rendering::Shader::addTessellationControlShaderFromFile(const string &filename)
+void Enco3D::Rendering::Shader::addTessellationControlShaderFromFile(const std::string &filename)
 {
 	addTessellationControlShader(loadShader(filename));
 }
 
-void Enco3D::Rendering::Shader::addTessellationEvaluationShaderFromFile(const string &filename)
+void Enco3D::Rendering::Shader::addTessellationEvaluationShaderFromFile(const std::string &filename)
 {
 	addTessellationEvaluationShader(loadShader(filename));
 }
@@ -456,54 +456,54 @@ void Enco3D::Rendering::Shader::compileShader()
 	checkShaderError(m_program, GL_VALIDATE_STATUS, true, "[ERROR] Invalid shader program");
 }
 
-void Enco3D::Rendering::Shader::setAttribLocation(const string &attributeName, int location)
+void Enco3D::Rendering::Shader::setAttribLocation(const std::string &attributeName, int location)
 {
 	glBindAttribLocation(m_program, location, attributeName.c_str());
 }
 
-void Enco3D::Rendering::Shader::setUniformInt(const string &name, int value)
+void Enco3D::Rendering::Shader::setUniformInt(const std::string &name, int value)
 {
 	glUniform1i(m_uniformMap.at(name), value);
 }
 
-void Enco3D::Rendering::Shader::setUniformFloat(const string &name, float value)
+void Enco3D::Rendering::Shader::setUniformFloat(const std::string &name, float value)
 {
 	glUniform1f(m_uniformMap.at(name), value);
 }
 
-void Enco3D::Rendering::Shader::setUniformVector2f(const string &name, const Enco3D::Core::Vector2f &v)
+void Enco3D::Rendering::Shader::setUniformVector2f(const std::string &name, const Enco3D::Core::Vector2f &v)
 {
 	glUniform2f(m_uniformMap.at(name), v.x, v.y);
 }
 
-void Enco3D::Rendering::Shader::setUniformVector3f(const string &name, const Enco3D::Core::Vector3f &v)
+void Enco3D::Rendering::Shader::setUniformVector3f(const std::string &name, const Enco3D::Core::Vector3f &v)
 {
 	glUniform3f(m_uniformMap.at(name), v.x, v.y, v.z);
 }
 
-void Enco3D::Rendering::Shader::setUniformVector4f(const string &name, const Enco3D::Core::Vector4f &v)
+void Enco3D::Rendering::Shader::setUniformVector4f(const std::string &name, const Enco3D::Core::Vector4f &v)
 {
 	glUniform4f(m_uniformMap.at(name), v.x, v.y, v.z, v.w);
 }
 
-void Enco3D::Rendering::Shader::setUniformMatrix3x3f(const string &name, const Enco3D::Core::Matrix3x3f &v)
+void Enco3D::Rendering::Shader::setUniformMatrix3x3f(const std::string &name, const Enco3D::Core::Matrix3x3f &v)
 {
 	glUniformMatrix3fv(m_uniformMap.at(name), 1, GL_TRUE, (const GLfloat *)v.m);
 }
 
-void Enco3D::Rendering::Shader::setUniformMatrix4x4f(const string &name, const Enco3D::Core::Matrix4x4f &v)
+void Enco3D::Rendering::Shader::setUniformMatrix4x4f(const std::string &name, const Enco3D::Core::Matrix4x4f &v)
 {
 	glUniformMatrix4fv(m_uniformMap.at(name), 1, GL_TRUE, (const GLfloat *)v.m);
 }
 
-void Enco3D::Rendering::Shader::setUniformDirectionalLight(const string &name, const Enco3D::Component::DirectionalLight *directionalLight)
+void Enco3D::Rendering::Shader::setUniformDirectionalLight(const std::string &name, const Enco3D::Component::DirectionalLight *directionalLight)
 {
 	setUniformVector3f(name + ".color", directionalLight->getColor());
 	setUniformFloat(name + ".intensity", directionalLight->getIntensity());
 	setUniformVector3f(name + ".direction", directionalLight->getTransform()->getRotation().getForward());
 }
 
-void Enco3D::Rendering::Shader::setUniformPointLight(const string &name, const Enco3D::Component::PointLight *pointLight)
+void Enco3D::Rendering::Shader::setUniformPointLight(const std::string &name, const Enco3D::Component::PointLight *pointLight)
 {
 	setUniformVector3f(name + ".color", pointLight->getColor());
 	setUniformFloat(name + ".intensity", pointLight->getIntensity());
@@ -511,7 +511,7 @@ void Enco3D::Rendering::Shader::setUniformPointLight(const string &name, const E
 	setUniformFloat(name + ".range", pointLight->getRange());
 }
 
-void Enco3D::Rendering::Shader::setUniformSpotLight(const string &name, const Enco3D::Component::SpotLight *spotLight)
+void Enco3D::Rendering::Shader::setUniformSpotLight(const std::string &name, const Enco3D::Component::SpotLight *spotLight)
 {
 	setUniformVector3f(name + ".color", spotLight->getColor());
 	setUniformFloat(name + ".intensity", spotLight->getIntensity());
@@ -590,7 +590,7 @@ void Enco3D::Rendering::Shader::updateUniforms(Enco3D::Core::Transform *transfor
 
 		if (uniformName.substr(0, 4) == "mat_")
 		{
-			string matComponentName = uniformName.substr(4, uniformName.size() - 4);
+			std::string matComponentName = uniformName.substr(4, uniformName.size() - 4);
 			if (uniformType == "float")
 				setUniformFloat(uniformName, material.getFloat(matComponentName));
 			else if (uniformType == "vec3")

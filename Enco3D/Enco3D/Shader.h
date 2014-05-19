@@ -69,9 +69,9 @@ namespace Enco3D
 			static const Shader *s_lastBind;
 
 		private:
-			void addProgram(const string &text, int type);
-			string loadShader(const string &filename);
-			void checkShaderError(int shader, int flag, bool isProgram, const string &errorMsg);
+			void addProgram(const std::string &text, int type);
+			std::string loadShader(const std::string &filename);
+			void checkShaderError(int shader, int flag, bool isProgram, const std::string &errorMsg);
 			
 			std::vector<__UniformStruct> findUniformStructs(const std::string &shaderText);
 			std::string findUniformStructName(const std::string &structStartToOpeningBrace);
@@ -83,40 +83,40 @@ namespace Enco3D
 
 		public:
 			Shader();
-			Shader(const string &filename, unsigned int shaderTypes);
-			Shader(const string &vertexFilename, const string &fragmentFilename);
+			Shader(const std::string &filename, unsigned int shaderTypes);
+			Shader(const std::string &vertexFilename, const std::string &fragmentFilename);
 			virtual ~Shader();
 
 			void bind() const;
 
-			void addVertexShader(const string &text);
-			void addFragmentShader(const string &text);
-			void addGeometryShader(const string &text);
-			void addTessellationControlShader(const string &text);
-			void addTessellationEvaluationShader(const string &text);
+			void addVertexShader(const std::string &text);
+			void addFragmentShader(const std::string &text);
+			void addGeometryShader(const std::string &text);
+			void addTessellationControlShader(const std::string &text);
+			void addTessellationEvaluationShader(const std::string &text);
 
-			void addVertexShaderFromFile(const string &filename);
-			void addFragmentShaderFromFile(const string &filename);
-			void addGeometryShaderFromFile(const string &filename);
-			void addTessellationControlShaderFromFile(const string &filename);
-			void addTessellationEvaluationShaderFromFile(const string &filename);
+			void addVertexShaderFromFile(const std::string &filename);
+			void addFragmentShaderFromFile(const std::string &filename);
+			void addGeometryShaderFromFile(const std::string &filename);
+			void addTessellationControlShaderFromFile(const std::string &filename);
+			void addTessellationEvaluationShaderFromFile(const std::string &filename);
 
 			void compileShader();
 
-			void setAttribLocation(const string &attributeName, int location);
-			void setUniformInt(const string &name, int value);
-			void setUniformFloat(const string &name, float value);
+			void setAttribLocation(const std::string &attributeName, int location);
+			void setUniformInt(const std::string &name, int value);
+			void setUniformFloat(const std::string &name, float value);
 
-			void setUniformVector2f(const string &name, const Core::Vector2f &v);
-			void setUniformVector3f(const string &name, const Core::Vector3f &v);
-			void setUniformVector4f(const string &name, const Core::Vector4f &v);
+			void setUniformVector2f(const std::string &name, const Core::Vector2f &v);
+			void setUniformVector3f(const std::string &name, const Core::Vector3f &v);
+			void setUniformVector4f(const std::string &name, const Core::Vector4f &v);
 
-			void setUniformMatrix3x3f(const string &name, const Core::Matrix3x3f &v);
-			void setUniformMatrix4x4f(const string &name, const Core::Matrix4x4f &v);
+			void setUniformMatrix3x3f(const std::string &name, const Core::Matrix3x3f &v);
+			void setUniformMatrix4x4f(const std::string &name, const Core::Matrix4x4f &v);
 
-			void setUniformDirectionalLight(const string &name, const Component::DirectionalLight *directionalLight);
-			void setUniformPointLight(const string &name, const Component::PointLight *pointLight);
-			void setUniformSpotLight(const string &name, const Component::SpotLight *spotLight);
+			void setUniformDirectionalLight(const std::string &name, const Component::DirectionalLight *directionalLight);
+			void setUniformPointLight(const std::string &name, const Component::PointLight *pointLight);
+			void setUniformSpotLight(const std::string &name, const Component::SpotLight *spotLight);
 
 			void updateUniforms(Core::Transform *transform, const Component::Camera *camera, RenderingEngine *renderingEngine, const Material &material);
 		};

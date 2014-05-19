@@ -1,6 +1,5 @@
 #include "GUITexture.h"
 #include <iostream>
-using namespace std;
 
 Enco3D::Rendering::Mesh *Enco3D::Component::GUITexture::s_rectangleMesh = nullptr;
 unsigned int Enco3D::Component::GUITexture::s_numReferences = 0;
@@ -32,7 +31,7 @@ Enco3D::Component::GUITexture::GUITexture(Enco3D::Rendering::Texture2D *texture,
 	s_numReferences++;
 }
 
-Enco3D::Component::GUITexture::GUITexture(const string &filename)
+Enco3D::Component::GUITexture::GUITexture(const std::string &filename)
 {
 	m_texture = new Rendering::Texture2D(filename);
 	m_color.set(1, 1, 1);
@@ -43,7 +42,7 @@ Enco3D::Component::GUITexture::GUITexture(const string &filename)
 	s_numReferences++;
 }
 
-Enco3D::Component::GUITexture::GUITexture(const string &filename, const Enco3D::Core::Vector3f &color)
+Enco3D::Component::GUITexture::GUITexture(const std::string &filename, const Enco3D::Core::Vector3f &color)
 {
 	m_texture = new Rendering::Texture2D(filename);
 	m_color.set(color);
