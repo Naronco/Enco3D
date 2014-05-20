@@ -14,7 +14,6 @@ void Enco3D::Core::DebugLogger::init()
 void Enco3D::Core::DebugLogger::deinit()
 {
 	s_outputStream.close();
-	std::cout << "HALLO 2" << std::endl;
 }
 
 void Enco3D::Core::DebugLogger::log(const std::string &text)
