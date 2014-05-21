@@ -4,7 +4,7 @@
 #include <string>
 #include <fstream>
 #include <streambuf>
-#include <rapidjson\document.h>
+#include <json\json.h>
 
 namespace Enco3D
 {
@@ -21,12 +21,13 @@ namespace Enco3D
 		class Config
 		{
 		public:
-			Config(std::string content, ConfigType::ConfigTypes type);
+			Config(const std::string& content, ConfigType::ConfigTypes type);
 			~Config();
 
-			static Config FromFile(std::string file, ConfigType::ConfigTypes type);
+			static Config FromFile(const std::string& file, ConfigType::ConfigTypes type);
 
-			rapidjson::Document JSONDocument;
+			Json::Value JSONDocument;
+			Json::Reader JSONReader;
 
 		protected:
 			ConfigType::ConfigTypes configType;
