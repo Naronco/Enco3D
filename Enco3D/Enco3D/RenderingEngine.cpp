@@ -166,7 +166,7 @@ void Enco3D::Rendering::RenderingEngine::renderCamera_Forward(Enco3D::Core::Game
 	//////////////////////////////////////////////////////////////////////////////
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+	
 	if (m_skybox != nullptr)
 	{
 		glDisable(GL_DEPTH_TEST);

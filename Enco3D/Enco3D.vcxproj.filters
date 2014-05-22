@@ -182,6 +182,12 @@
     <ClCompile Include="Config.cpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
+    <ClCompile Include="Enco3D\StopWatch.cpp">
+      <Filter>Quelldateien\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Enco3D\ErrorHandler.cpp">
+      <Filter>Quelldateien\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enco3D\stb_image.h">
@@ -384,6 +390,12 @@
     </ClInclude>
     <ClInclude Include="Config.h">
       <Filter>Headerdateien\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\StopWatch.h">
+      <Filter>Headerdateien\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\ErrorHandler.h">
+      <Filter>Headerdateien\Core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

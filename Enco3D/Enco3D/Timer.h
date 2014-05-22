@@ -4,10 +4,14 @@
 #ifdef _WIN32
 #	include <Windows.h>
 #	pragma comment (lib, "winmm.lib")
-#	define CURRENT_TIME(x) { *x = timeGetTime(); }
+#	ifndef CURRENT_TIME
+#		define CURRENT_TIME(x) { *x = timeGetTime(); }
+#	endif
 #elif __APPLE__
 #	include <sys/time.h>
-#	define CURRENT_TIME(x) { timeval time; gettimeofday(&time, nullptr); *x = time.wSecond * 1000 + time.wMilliseconds; }
+#	ifndef CURRENT_TIME
+#		define CURRENT_TIME(x) { timeval time; gettimeofday(&time, nullptr); *x = time.wSecond * 1000 + time.wMilliseconds; }
+#	endif
 #endif
 
 #include "DebugLogger.h"
