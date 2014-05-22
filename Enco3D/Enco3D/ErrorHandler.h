@@ -26,6 +26,7 @@ namespace Enco3D
 
 			void logError(const std::string &errorText);
 			bool logErrorAndShutdown(const std::string &errorText, bool forceShutdown = true);
+			void logErrorAndForceQuit(const std::string &errorText);
 
 			inline void setEngine(Enco3DEngine *engine) { m_engine = engine; }
 			inline void changeErrorPrefix(const std::string &errorPrefix) { m_errorPrefix = errorPrefix; }

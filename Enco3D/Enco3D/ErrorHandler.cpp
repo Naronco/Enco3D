@@ -21,11 +21,17 @@ bool Enco3D::Core::ErrorHandler::logErrorAndShutdown(const std::string &errorTex
 	}
 
 	DebugLogger::log(m_errorPrefix + " " + errorText);
-	
+
 	Event quitEvent;
 	quitEvent.type = EventType::Quit;
 
-	m_engine->getWindow()->pushEvent(quitEvent);
+	m_engine->getWindow()->postQuitMessage();
 
 	return true;
+}
+
+void Enco3D::Core::ErrorHandler::logErrorAndForceQuit(const std::string &errorText)
+{
+	DebugLogger::log(m_errorPrefix + " " + errorText);
+	exit(1);
 }
