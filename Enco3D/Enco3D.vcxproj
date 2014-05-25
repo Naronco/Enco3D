@@ -23,6 +23,7 @@
     <ClCompile Include="Enco3D\DebugLogger.cpp" />
     <ClCompile Include="Enco3D\DefaultMesh.cpp" />
     <ClCompile Include="Enco3D\Enco3DEngine.cpp" />
+    <ClCompile Include="Enco3D\ErrorHandler.cpp" />
     <ClCompile Include="Enco3D\Font.cpp" />
     <ClCompile Include="Enco3D\FontPool.cpp" />
     <ClCompile Include="Enco3D\Framebuffer.cpp" />
@@ -49,6 +50,7 @@
     <ClCompile Include="Enco3D\StaticConcaveMeshCollisionShape.cpp" />
     <ClCompile Include="Enco3D\StaticPlaneCollisionShape.cpp" />
     <ClCompile Include="Enco3D\stb_image.c" />
+    <ClCompile Include="Enco3D\StopWatch.cpp" />
     <ClCompile Include="Enco3D\Texture2D.cpp" />
     <ClCompile Include="Enco3D\TextureCubeMap.cpp" />
     <ClCompile Include="Enco3D\Timer.cpp" />
@@ -71,6 +73,7 @@
     <ClInclude Include="Enco3D\DirectionalLight.h" />
     <ClInclude Include="Enco3D\Enco3D.h" />
     <ClInclude Include="Enco3D\Enco3DEngine.h" />
+    <ClInclude Include="Enco3D\ErrorHandler.h" />
     <ClInclude Include="Enco3D\Event.h" />
     <ClInclude Include="Enco3D\Font.h" />
     <ClInclude Include="Enco3D\FontPool.h" />
@@ -113,6 +116,7 @@
     <ClInclude Include="Enco3D\StaticPlaneCollisionShape.h" />
     <ClInclude Include="Enco3D\stb_image.h" />
     <ClInclude Include="Enco3D\ITexture.h" />
+    <ClInclude Include="Enco3D\StopWatch.h" />
     <ClInclude Include="Enco3D\Texture2D.h" />
     <ClInclude Include="Enco3D\TextureCubeMap.h" />
     <ClInclude Include="Enco3D\Timer.h" />

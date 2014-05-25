@@ -55,7 +55,7 @@ Enco3D::Core::GLWindow::GLWindow(char *title, unsigned int width, unsigned int h
 
 		for (unsigned int i = 0; i < numPixels; i++)
 			pixels[i] = ((unsigned int)(iconOutput.pixels[(i << 2) + 3] * 255.0f)) << 24 | ((unsigned int)(iconOutput.pixels[i << 2] * 255.0f)) << 16 | ((unsigned int)(iconOutput.pixels[(i << 2) + 1] * 255.0f)) << 8 | ((unsigned int)(iconOutput.pixels[(i << 2) + 2] * 255.0f));
-		
+
 		SDL_Surface *iconSurface = SDL_CreateRGBSurfaceFrom(pixels, (int)iconOutput.width, (int)iconOutput.height, 32, sizeof(unsigned int)* (int)iconOutput.width, 0x00FF0000, 0x0000FF00, 0x000000FF, 0xFF000000);
 		SDL_SetWindowIcon(m_window, iconSurface);
 
@@ -317,6 +317,13 @@ bool Enco3D::Core::GLWindow::pollEvent(Event *e)
 
 	*e = ne;
 	return true;
+}
+
+void Enco3D::Core::GLWindow::postQuitMessage()
+{
+	SDL_Event e;
+	e.type = SDL_QUIT;
+	SDL_PushEvent(&e);
 }
 
 bool Enco3D::Core::GLWindow::update()

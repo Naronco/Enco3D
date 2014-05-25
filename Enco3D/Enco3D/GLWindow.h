@@ -73,9 +73,7 @@ namespace Enco3D
 			/// <param name="y">New y coordinate</param>
 			void setPosition(int x, int y);
 
-			/// <summary>Sends a new event to the event queue with user specific data</summary>
-			/// <param name="e">The event to push</param>
-			void pushEvent(const Event &e);
+			void postQuitMessage();
 
 			/// <summary>Gets a sended event width data</summary>
 			/// <param name="e">Pointer to the data to be stored</param>

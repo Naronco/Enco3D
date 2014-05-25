@@ -34,11 +34,11 @@ namespace Enco3D
 		private:
 			bool initFromScene(const aiScene *scene, const std::string &filename);
 			void initMesh(unsigned int index, const aiMesh *mesh);
-			
+
 		public:
 			WavefrontMesh();
 			WavefrontMesh(const std::string &filename, Rendering::Material *material);
-			
+
 			void render(const Component::Camera *camera, Rendering::Shader *shader);
 
 			inline std::shared_ptr<Rendering::Material> getMaterial() const { return m_material; }
