@@ -57,6 +57,7 @@
     <ClCompile Include="Enco3D\Transform.cpp" />
     <ClCompile Include="Enco3D\WavefrontMaterialMesh.cpp" />
     <ClCompile Include="Enco3D\WavefrontMesh.cpp" />
+    <ClCompile Include="HTTPRequest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enco3D\Config.h" />
@@ -128,6 +129,7 @@
     <ClInclude Include="Enco3D\Vertex.h" />
     <ClInclude Include="Enco3D\WavefrontMaterialMesh.h" />
     <ClInclude Include="Enco3D\WavefrontMesh.h" />
+    <ClInclude Include="HTTPRequest.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{1BAA0FBB-5D34-4483-8271-FC1A1C9346A9}</ProjectGuid>
