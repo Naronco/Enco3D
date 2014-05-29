@@ -209,7 +209,7 @@
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;opengl32.lib;glu32.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;opengl32.lib;glu32.lib;glew32.lib;BulletCollision.lib;BulletDynamics.lib;LinearMath.lib;SDL2_mixer.lib;assimp.lib;zlibwapi.lib;jsoncpp.lib;libboost_system-vc120-mt-1_55.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;opengl32.lib;glu32.lib;glew32.lib;BulletCollision.lib;BulletDynamics.lib;LinearMath.lib;SDL2_mixer.lib;assimp.lib;zlibwapi.lib;libboost_system-vc120-mt-1_55.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <Lib>
       <AdditionalLibraryDirectories>..\Library\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>

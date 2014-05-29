@@ -5,10 +5,6 @@ Enco3D::IO::Config::Config(const std::string& content, ConfigType::ConfigTypes t
 	configType = type;
 	if (type == ConfigType::JSON)
 	{
-		if (!JSONReader.parse(content, JSONDocument))
-		{
-			// Do something critical
-		}
 	}
 }
 
