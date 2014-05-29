@@ -2,10 +2,12 @@
 
 Enco3D::IO::Config::Config(const std::string& content, ConfigType::ConfigTypes type)
 {
+#ifdef JSON
 	configType = type;
 	if (type == ConfigType::JSON)
 	{
 	}
+#endif
 }
 
 Enco3D::IO::Config::~Config()
