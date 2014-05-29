@@ -35,6 +35,7 @@
     <ClCompile Include="Enco3D\GUITexture.cpp" />
     <ClCompile Include="Enco3D\ImageIO.cpp" />
     <ClCompile Include="Enco3D\Input.cpp" />
+    <ClCompile Include="Enco3D\json.cpp" />
     <ClCompile Include="Enco3D\Mesh.cpp" />
     <ClCompile Include="Enco3D\MeshResource.cpp" />
     <ClCompile Include="Enco3D\MouseLock.cpp" />
@@ -91,6 +92,7 @@
     <ClInclude Include="Enco3D\ILight.h" />
     <ClInclude Include="Enco3D\ImageIO.h" />
     <ClInclude Include="Enco3D\Input.h" />
+    <ClInclude Include="Enco3D\json.h" />
     <ClInclude Include="Enco3D\Material.h" />
     <ClInclude Include="Enco3D\MathUtil.h" />
     <ClInclude Include="Enco3D\Matrix3x3.h" />

@@ -197,6 +197,9 @@
     <ClCompile Include="HTTPRequest.cpp">
       <Filter>Quelldateien\Net</Filter>
     </ClCompile>
+    <ClCompile Include="Enco3D\json.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enco3D\stb_image.h">
@@ -408,6 +411,9 @@
     </ClInclude>
     <ClInclude Include="HTTPRequest.h">
       <Filter>Headerdateien\Net</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\json.h">
+      <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

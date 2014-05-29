@@ -16,7 +16,6 @@ namespace Enco3D
 			~HTTPRequest();
 
 			void connect(const std::string& host, const std::string& port);
-			void disconnect();
 
 			void setHost(const std::string& host);
 			std::string getHost();
@@ -28,7 +27,6 @@ namespace Enco3D
 			std::string del(const std::string& site);
 		protected:
 
-			bool m_IsConnected;
 			boost::asio::io_service io;
 			boost::asio::ip::tcp::socket m_Socket;
 			std::string m_Host;

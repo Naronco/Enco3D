@@ -1,17 +1,15 @@
 #include "HTTPRequest.h"
 
-Enco3D::Net::HTTPRequest::HTTPRequest() : io(), m_Socket(io), m_IsConnected(false)
+Enco3D::Net::HTTPRequest::HTTPRequest() : io(), m_Socket(io)
 {
 }
 
 Enco3D::Net::HTTPRequest::~HTTPRequest()
 {
-	disconnect();
 }
 
 void Enco3D::Net::HTTPRequest::connect(const std::string& host, const std::string& port)
 {
-	m_IsConnected = true;
 	m_Host = host;
 	try
 	{
@@ -23,12 +21,7 @@ void Enco3D::Net::HTTPRequest::connect(const std::string& host, const std::strin
 	}
 	catch (std::exception e)
 	{
-		m_IsConnected = false;
 	}
-}
-
-void Enco3D::Net::HTTPRequest::disconnect()
-{
 }
 
 void Enco3D::Net::HTTPRequest::setHost(const std::string& host)
@@ -53,17 +46,15 @@ std::string Enco3D::Net::HTTPRequest::get(const std::string& site)
 		boost::asio::write(m_Socket, sb);
 
 		boost::asio::streambuf response;
-
-		std::ostringstream ss;
 		boost::system::error_code error;
+		std::ostringstream ss;
 
-		while (boost::asio::read(m_Socket, response,
-			boost::asio::transfer_at_least(1), error))
-			ss << &response;
-		if (error != boost::asio::error::eof)
+		int headerLength = boost::asio::read_until(m_Socket, response, "\r\n\r\n", error);
+		if (error && error != boost::asio::error::eof)
 			throw boost::system::system_error(error);
+		ss << &response;
 
-		return ss.str();
+		return ss.str().substr(headerLength);
 	}
 	catch (std::exception& e)
 	{
@@ -76,7 +67,7 @@ std::string Enco3D::Net::HTTPRequest::post(const std::string& site, const std::s
 {
 	boost::asio::streambuf sb;
 	std::ostream req(&sb);
-	req << "GET " << site << " HTTP/1.0\r\n";
+	req << "POST " << site << " HTTP/1.0\r\n";
 	req << "Host: " << m_Host << "\r\n";
 	req << "Connection: close\r\n";
 	req << "Content-Type: " << contentType << "\r\n";
@@ -85,13 +76,15 @@ std::string Enco3D::Net::HTTPRequest::post(const std::string& site, const std::s
 	boost::asio::write(m_Socket, sb);
 
 	boost::asio::streambuf response;
-	boost::asio::read_until(m_Socket, response, "\r\n");
-
-	std::istream response_stream(&response);
+	boost::system::error_code error;
 	std::ostringstream ss;
-	ss << response_stream.rdbuf();
 
-	return ss.str();
+	int headerLength = boost::asio::read_until(m_Socket, response, "\r\n\r\n", error);
+	if (error && error != boost::asio::error::eof)
+		throw boost::system::system_error(error);
+	ss << &response;
+
+	return ss.str().substr(headerLength);
 }
 
 std::string Enco3D::Net::HTTPRequest::head(const std::string& site)
@@ -104,11 +97,13 @@ std::string Enco3D::Net::HTTPRequest::head(const std::string& site)
 	boost::asio::write(m_Socket, sb);
 
 	boost::asio::streambuf response;
-	boost::asio::read_until(m_Socket, response, "\r\n");
-
-	std::istream response_stream(&response);
+	boost::system::error_code error;
 	std::ostringstream ss;
-	ss << response_stream.rdbuf();
+
+	boost::asio::read_until(m_Socket, response, "\r\n\r\n", error);
+	if (error && error != boost::asio::error::eof)
+		throw boost::system::system_error(error);
+	ss << &response;
 
 	return ss.str();
 }
@@ -126,13 +121,15 @@ std::string Enco3D::Net::HTTPRequest::put(const std::string& site, const std::st
 	boost::asio::write(m_Socket, sb);
 
 	boost::asio::streambuf response;
-	boost::asio::read_until(m_Socket, response, "\r\n");
-
-	std::istream response_stream(&response);
+	boost::system::error_code error;
 	std::ostringstream ss;
-	ss << response_stream.rdbuf();
 
-	return ss.str();
+	int headerLength = boost::asio::read_until(m_Socket, response, "\r\n\r\n", error);
+	if (error && error != boost::asio::error::eof)
+		throw boost::system::system_error(error);
+	ss << &response;
+
+	return ss.str().substr(headerLength);
 }
 
 std::string Enco3D::Net::HTTPRequest::del(const std::string& site)
@@ -145,11 +142,13 @@ std::string Enco3D::Net::HTTPRequest::del(const std::string& site)
 	boost::asio::write(m_Socket, sb);
 
 	boost::asio::streambuf response;
-	boost::asio::read_until(m_Socket, response, "\r\n");
-
-	std::istream response_stream(&response);
+	boost::system::error_code error;
 	std::ostringstream ss;
-	ss << response_stream.rdbuf();
 
-	return ss.str();
+	int headerLength = boost::asio::read_until(m_Socket, response, "\r\n\r\n", error);
+	if (error && error != boost::asio::error::eof)
+		throw boost::system::system_error(error);
+	ss << &response;
+
+	return ss.str().substr(headerLength);
 }
