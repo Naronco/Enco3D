@@ -21,7 +21,6 @@ Thumbs.db
 *.ilk
 *.log
 [Bb]in
-!Library/*/[Dd]ebug/
 *.sbr
 obj/
 [Rr]elease*/
