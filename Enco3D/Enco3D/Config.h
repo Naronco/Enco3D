@@ -4,8 +4,6 @@
 #include <string>
 #include <fstream>
 #include <streambuf>
-#ifdef JSON
-#endif
 
 namespace Enco3D
 {
@@ -26,9 +24,6 @@ namespace Enco3D
 			~Config();
 
 			static Config FromFile(const std::string& file, ConfigType::ConfigTypes type);
-
-#ifdef JSON
-#endif
 
 		protected:
 			ConfigType::ConfigTypes configType;
