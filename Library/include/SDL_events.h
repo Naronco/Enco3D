@@ -111,7 +111,7 @@ extern "C" {
 																																																			  SDL_JOYDEVICEREMOVED,       /**< An opened joystick has been removed */
 
 																																																			  /* Game controller events */
-																																																			  EventType::ControllerAxisSDL_CONTROLLERAXISMOTION = 0x650, /**< Game controller axis motion */
+																																																			  SDL_CONTROLLERAXISMOTION = 0x650, /**< Game controller axis motion */
 																																																			  SDL_CONTROLLERBUTTONDOWN,          /**< Game controller button pressed */
 																																																			  SDL_CONTROLLERBUTTONUP,            /**< Game controller button released */
 																																																			  SDL_CONTROLLERDEVICEADDED,         /**< A new Game controller has been inserted into the system */

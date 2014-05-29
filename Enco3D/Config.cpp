@@ -2,6 +2,7 @@
 
 Enco3D::IO::Config::Config(const std::string& content, ConfigType::ConfigTypes type)
 {
+#ifdef JSON
 	configType = type;
 	if (type == ConfigType::JSON)
 	{
@@ -10,6 +11,7 @@ Enco3D::IO::Config::Config(const std::string& content, ConfigType::ConfigTypes t
 			// Do something critical
 		}
 	}
+#endif
 }
 
 Enco3D::IO::Config::~Config()

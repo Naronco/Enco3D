@@ -4,7 +4,9 @@
 #include <string>
 #include <fstream>
 #include <streambuf>
+#ifdef JSON
 #include <json\json.h>
+#endif
 
 namespace Enco3D
 {
@@ -26,8 +28,10 @@ namespace Enco3D
 
 			static Config FromFile(const std::string& file, ConfigType::ConfigTypes type);
 
+#ifdef JSON
 			Json::Value JSONDocument;
 			Json::Reader JSONReader;
+#endif
 
 		protected:
 			ConfigType::ConfigTypes configType;
