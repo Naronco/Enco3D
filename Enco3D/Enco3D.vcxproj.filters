@@ -48,6 +48,12 @@
     <Filter Include="Quelldateien\IO">
       <UniqueIdentifier>{4a8771e5-7e17-4675-a25b-95ef4e8b113e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Quelldateien\Net">
+      <UniqueIdentifier>{0e13437f-ba41-45cc-9e03-f09ddb8aa3bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Net">
+      <UniqueIdentifier>{8457a09f-dc7e-41d8-a1cf-4883bc526ef1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Enco3D\stb_image.c">
@@ -179,7 +185,7 @@
     <ClCompile Include="Enco3D\ImageIO.cpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
-    <ClCompile Include="Config.cpp">
+    <ClCompile Include="Enco3D\Config.cpp">
       <Filter>Quelldateien\IO</Filter>
     </ClCompile>
     <ClCompile Include="Enco3D\StopWatch.cpp">
@@ -187,6 +193,12 @@
     </ClCompile>
     <ClCompile Include="Enco3D\ErrorHandler.cpp">
       <Filter>Quelldateien\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="HTTPRequest.cpp">
+      <Filter>Quelldateien\Net</Filter>
+    </ClCompile>
+    <ClCompile Include="Enco3D\json.cpp">
+      <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -388,7 +400,7 @@
     <ClInclude Include="Enco3D\ImageIO.h">
       <Filter>Headerdateien\IO</Filter>
     </ClInclude>
-    <ClInclude Include="Config.h">
+    <ClInclude Include="Enco3D\Config.h">
       <Filter>Headerdateien\IO</Filter>
     </ClInclude>
     <ClInclude Include="Enco3D\StopWatch.h">
@@ -396,6 +408,12 @@
     </ClInclude>
     <ClInclude Include="Enco3D\ErrorHandler.h">
       <Filter>Headerdateien\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="HTTPRequest.h">
+      <Filter>Headerdateien\Net</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\json.h">
+      <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

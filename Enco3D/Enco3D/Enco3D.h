@@ -1,6 +1,8 @@
 #ifndef _ENCO3D_ENCO3D_H_
 #define _ENCO3D_ENCO3D_H_
 
+#define WIN32_LEAN_AND_MEAN
+
 #ifdef main
 #	undef main
 #endif
@@ -68,6 +70,9 @@ typedef signed long long longlong;
 #include "Vector2.h"
 #include "Vector3.h"
 #include "Vector4.h"
+
+// Network Headers
+#include "HTTPRequest.h"
 
 // IO Headers
 #include "ImageIO.h"

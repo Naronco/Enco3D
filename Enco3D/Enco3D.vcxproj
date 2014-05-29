@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Config.cpp" />
+    <ClCompile Include="Enco3D\Config.cpp" />
     <ClCompile Include="Enco3D\AudioEngine.cpp" />
     <ClCompile Include="Enco3D\BloomPostProcessEffect.cpp" />
     <ClCompile Include="Enco3D\BoxCollisionShape.cpp" />
@@ -35,6 +35,7 @@
     <ClCompile Include="Enco3D\GUITexture.cpp" />
     <ClCompile Include="Enco3D\ImageIO.cpp" />
     <ClCompile Include="Enco3D\Input.cpp" />
+    <ClCompile Include="Enco3D\json.cpp" />
     <ClCompile Include="Enco3D\Mesh.cpp" />
     <ClCompile Include="Enco3D\MeshResource.cpp" />
     <ClCompile Include="Enco3D\MouseLock.cpp" />
@@ -57,9 +58,10 @@
     <ClCompile Include="Enco3D\Transform.cpp" />
     <ClCompile Include="Enco3D\WavefrontMaterialMesh.cpp" />
     <ClCompile Include="Enco3D\WavefrontMesh.cpp" />
+    <ClCompile Include="HTTPRequest.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Config.h" />
+    <ClInclude Include="Enco3D\Config.h" />
     <ClInclude Include="Enco3D\AudioEngine.h" />
     <ClInclude Include="Enco3D\BloomPostProcessEffect.h" />
     <ClInclude Include="Enco3D\BoxCollisionShape.h" />
@@ -90,6 +92,7 @@
     <ClInclude Include="Enco3D\ILight.h" />
     <ClInclude Include="Enco3D\ImageIO.h" />
     <ClInclude Include="Enco3D\Input.h" />
+    <ClInclude Include="Enco3D\json.h" />
     <ClInclude Include="Enco3D\Material.h" />
     <ClInclude Include="Enco3D\MathUtil.h" />
     <ClInclude Include="Enco3D\Matrix3x3.h" />
@@ -128,6 +131,7 @@
     <ClInclude Include="Enco3D\Vertex.h" />
     <ClInclude Include="Enco3D\WavefrontMaterialMesh.h" />
     <ClInclude Include="Enco3D\WavefrontMesh.h" />
+    <ClInclude Include="HTTPRequest.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{1BAA0FBB-5D34-4483-8271-FC1A1C9346A9}</ProjectGuid>
@@ -206,7 +210,7 @@
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;opengl32.lib;glu32.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;opengl32.lib;glu32.lib;glew32.lib;BulletCollision.lib;BulletDynamics.lib;LinearMath.lib;SDL2_mixer.lib;assimp.lib;zlibwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;opengl32.lib;glu32.lib;glew32.lib;BulletCollision.lib;BulletDynamics.lib;LinearMath.lib;SDL2_mixer.lib;assimp.lib;zlibwapi.lib;libboost_system-vc120-mt-1_55.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <Lib>
       <AdditionalLibraryDirectories>..\Library\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
