@@ -48,6 +48,7 @@ typedef signed long long longlong;
 #include "SSAOPostProcessEffect.h"
 #include "WavefrontMaterialMesh.h"
 #include "WavefrontMesh.h"
+#include "LODMesh.h"
 
 // Core Engine Headers
 #include "DebugLogger.h"

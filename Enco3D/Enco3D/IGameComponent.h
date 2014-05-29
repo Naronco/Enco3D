@@ -18,6 +18,8 @@ namespace Enco3D
 		{
 		protected:
 			GameObject *m_gameObject;
+
+			bool m_enabled;
 			
 		public:
 			virtual void init() {  }
@@ -43,6 +45,8 @@ namespace Enco3D
 			inline GLWindow *getWindow() const { return m_gameObject->getWindow(); }
 			inline Timer *getTimer() const { return m_gameObject->getTimer(); }
 			inline Transform *getTransform() const { return m_gameObject->getTransform(); }
+			inline void enable() { m_enabled = true; }
+			inline void disable() { m_enabled = false; }
 		};
 	}
 }

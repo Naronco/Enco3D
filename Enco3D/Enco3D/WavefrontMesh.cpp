@@ -27,33 +27,36 @@ Enco3D::Component::WavefrontMesh::WavefrontMesh(const std::string &filename, Ren
 
 void Enco3D::Component::WavefrontMesh::render(const Component::Camera *camera, Rendering::Shader *shader)
 {
-	if (m_successfullyLoadedMesh)
+	if (m_enabled)
 	{
-		shader->bind();
-		shader->updateUniforms(getTransform(), camera, getRenderingEngine(), *m_material);
-
-		glEnableVertexAttribArray(0);
-		glEnableVertexAttribArray(1);
-		glEnableVertexAttribArray(2);
-
-		for (unsigned int i = 0; i < m_meshes.size(); i++)
+		if (m_successfullyLoadedMesh)
 		{
-			glBindBuffer(GL_ARRAY_BUFFER, m_meshes[i]->getVBO());
-			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Rendering::Vertex), 0);
-			glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Rendering::Vertex), (GLvoid *)(sizeof(float)* 3));
-			glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Rendering::Vertex), (GLvoid *)(sizeof(float)* 6));
+			shader->bind();
+			shader->updateUniforms(getTransform(), camera, getRenderingEngine(), *m_material);
 
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_meshes[i]->getIBO());
-			glDrawElements(GL_TRIANGLES, m_meshes[i]->getIndexCount(), GL_UNSIGNED_INT, 0);
+			glEnableVertexAttribArray(0);
+			glEnableVertexAttribArray(1);
+			glEnableVertexAttribArray(2);
+
+			for (unsigned int i = 0; i < m_meshes.size(); i++)
+			{
+				glBindBuffer(GL_ARRAY_BUFFER, m_meshes[i]->getVBO());
+				glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Rendering::Vertex), 0);
+				glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Rendering::Vertex), (GLvoid *)(sizeof(float) * 3));
+				glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Rendering::Vertex), (GLvoid *)(sizeof(float) * 6));
+
+				glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_meshes[i]->getIBO());
+				glDrawElements(GL_TRIANGLES, m_meshes[i]->getIndexCount(), GL_UNSIGNED_INT, 0);
+			}
+
+			glDisableVertexAttribArray(2);
+			glDisableVertexAttribArray(1);
+			glDisableVertexAttribArray(0);
 		}
-
-		glDisableVertexAttribArray(2);
-		glDisableVertexAttribArray(1);
-		glDisableVertexAttribArray(0);
-	}
-	else
-	{
-		Rendering::Mesh::renderErrorMesh(shader, getTransform(), camera, getRenderingEngine());
+		else
+		{
+			Rendering::Mesh::renderErrorMesh(shader, getTransform(), camera, getRenderingEngine());
+		}
 	}
 }
 

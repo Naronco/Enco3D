@@ -33,9 +33,11 @@
     <ClCompile Include="Enco3D\GLWindow.cpp" />
     <ClCompile Include="Enco3D\GUIText.cpp" />
     <ClCompile Include="Enco3D\GUITexture.cpp" />
+    <ClCompile Include="Enco3D\HTTPRequest.cpp" />
     <ClCompile Include="Enco3D\ImageIO.cpp" />
     <ClCompile Include="Enco3D\Input.cpp" />
     <ClCompile Include="Enco3D\json.cpp" />
+    <ClCompile Include="Enco3D\LODMesh.cpp" />
     <ClCompile Include="Enco3D\Mesh.cpp" />
     <ClCompile Include="Enco3D\MeshResource.cpp" />
     <ClCompile Include="Enco3D\MouseLock.cpp" />
@@ -58,7 +60,6 @@
     <ClCompile Include="Enco3D\Transform.cpp" />
     <ClCompile Include="Enco3D\WavefrontMaterialMesh.cpp" />
     <ClCompile Include="Enco3D\WavefrontMesh.cpp" />
-    <ClCompile Include="HTTPRequest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enco3D\Config.h" />
@@ -86,6 +87,7 @@
     <ClInclude Include="Enco3D\GLWindow.h" />
     <ClInclude Include="Enco3D\GUIText.h" />
     <ClInclude Include="Enco3D\GUITexture.h" />
+    <ClInclude Include="Enco3D\HTTPRequest.h" />
     <ClInclude Include="Enco3D\ICollisionShape.h" />
     <ClInclude Include="Enco3D\IGame.h" />
     <ClInclude Include="Enco3D\IGameComponent.h" />
@@ -93,6 +95,7 @@
     <ClInclude Include="Enco3D\ImageIO.h" />
     <ClInclude Include="Enco3D\Input.h" />
     <ClInclude Include="Enco3D\json.h" />
+    <ClInclude Include="Enco3D\LODMesh.h" />
     <ClInclude Include="Enco3D\Material.h" />
     <ClInclude Include="Enco3D\MathUtil.h" />
     <ClInclude Include="Enco3D\Matrix3x3.h" />
@@ -131,7 +134,6 @@
     <ClInclude Include="Enco3D\Vertex.h" />
     <ClInclude Include="Enco3D\WavefrontMaterialMesh.h" />
     <ClInclude Include="Enco3D\WavefrontMesh.h" />
-    <ClInclude Include="HTTPRequest.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{1BAA0FBB-5D34-4483-8271-FC1A1C9346A9}</ProjectGuid>

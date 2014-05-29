@@ -194,11 +194,14 @@
     <ClCompile Include="Enco3D\ErrorHandler.cpp">
       <Filter>Quelldateien\Core</Filter>
     </ClCompile>
-    <ClCompile Include="HTTPRequest.cpp">
-      <Filter>Quelldateien\Net</Filter>
-    </ClCompile>
     <ClCompile Include="Enco3D\json.cpp">
       <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Enco3D\HTTPRequest.cpp">
+      <Filter>Quelldateien\Net</Filter>
+    </ClCompile>
+    <ClCompile Include="Enco3D\LODMesh.cpp">
+      <Filter>Quelldateien\Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -409,11 +412,14 @@
     <ClInclude Include="Enco3D\ErrorHandler.h">
       <Filter>Headerdateien\Core</Filter>
     </ClInclude>
-    <ClInclude Include="HTTPRequest.h">
-      <Filter>Headerdateien\Net</Filter>
-    </ClInclude>
     <ClInclude Include="Enco3D\json.h">
       <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\LODMesh.h">
+      <Filter>Headerdateien\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\HTTPRequest.h">
+      <Filter>Headerdateien\Net</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
