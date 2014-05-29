@@ -21,7 +21,7 @@ Thumbs.db
 *.ilk
 *.log
 [Bb]in
-[Dd]ebug*/
+!Library/*/[Dd]ebug/
 *.sbr
 obj/
 [Rr]elease*/
@@ -30,3 +30,4 @@ _ReSharper*/
 Architektur/
 TODO.txt
 Cubeshaft/
+*/Debug/
