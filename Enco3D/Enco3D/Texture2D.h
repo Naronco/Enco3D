@@ -12,7 +12,7 @@ namespace Enco3D
 		{
 		public:
 			Texture2D();
-			Texture2D(unsigned int width, unsigned int height, GLint internalFormat, GLenum format, unsigned int filter = GL_NEAREST, unsigned int wrap = GL_REPEAT, float *values = nullptr);
+			Texture2D(unsigned int width, unsigned int height, GLint internalFormat, GLenum format, unsigned int filter = GL_NEAREST, unsigned int wrap = GL_REPEAT, float *values = nullptr, bool anisotropicFiltering = false);
 			Texture2D(const std::string &filename, unsigned int filter = GL_NEAREST, unsigned int wrap = GL_REPEAT);
 			~Texture2D();
 

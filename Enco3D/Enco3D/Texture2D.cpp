@@ -4,7 +4,7 @@ Enco3D::Rendering::Texture2D::Texture2D()
 {
 }
 
-Enco3D::Rendering::Texture2D::Texture2D(unsigned int width, unsigned int height, GLint internalFormat, GLenum format, unsigned int filter, unsigned int wrap, float *values)
+Enco3D::Rendering::Texture2D::Texture2D(unsigned int width, unsigned int height, GLint internalFormat, GLenum format, unsigned int filter, unsigned int wrap, float *values, bool anisotropicFiltering)
 {
 	m_width = width;
 	m_height = height;
@@ -28,6 +28,13 @@ Enco3D::Rendering::Texture2D::Texture2D(unsigned int width, unsigned int height,
 	{
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filter);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filter);
+	}
+
+	if (anisotropicFiltering)
+	{
+		float maxA;
+		glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &maxA);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, maxA);
 	}
 
 	glBindTexture(GL_TEXTURE_2D, 0);
