@@ -30,6 +30,7 @@ namespace Enco3D
 			RigidBody();
 			RigidBody(float mass, Physics::ICollisionShape *collisionShape);
 			RigidBody(float mass, float restitution, float friction, float linearDamping, float angularDamping, Physics::ICollisionShape *collisionShape);
+			~RigidBody();
 
 			void initPhysics();
 			void deinit();

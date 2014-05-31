@@ -12,6 +12,10 @@ Enco3D::Component::RigidBody::RigidBody(float mass, float restitution, float fri
 {
 }
 
+Enco3D::Component::RigidBody::~RigidBody()
+{
+}
+
 void Enco3D::Component::RigidBody::initPhysics()
 {
 	getPhysicsEngine()->addRigidBody(this);

@@ -203,6 +203,9 @@
     <ClCompile Include="Enco3D\LODMesh.cpp">
       <Filter>Quelldateien\Component</Filter>
     </ClCompile>
+    <ClCompile Include="Enco3D\Frustum.cpp">
+      <Filter>Quelldateien\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enco3D\stb_image.h">
@@ -420,6 +423,24 @@
     </ClInclude>
     <ClInclude Include="Enco3D\HTTPRequest.h">
       <Filter>Headerdateien\Net</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\Frustum.h">
+      <Filter>Headerdateien\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\Plane.h">
+      <Filter>Headerdateien\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\BoundingBox.h">
+      <Filter>Headerdateien\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\BoundingSphere.h">
+      <Filter>Headerdateien\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\Contains.h">
+      <Filter>Headerdateien\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\PlaneIntersectionType.h">
+      <Filter>Headerdateien\Core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

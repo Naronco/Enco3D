@@ -29,6 +29,7 @@
     <ClCompile Include="Enco3D\Framebuffer.cpp" />
     <ClCompile Include="Enco3D\FreeLook.cpp" />
     <ClCompile Include="Enco3D\FreeMove.cpp" />
+    <ClCompile Include="Enco3D\Frustum.cpp" />
     <ClCompile Include="Enco3D\GameObject.cpp" />
     <ClCompile Include="Enco3D\GLWindow.cpp" />
     <ClCompile Include="Enco3D\GUIText.cpp" />
@@ -62,6 +63,8 @@
     <ClCompile Include="Enco3D\WavefrontMesh.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Enco3D\BoundingBox.h" />
+    <ClInclude Include="Enco3D\BoundingSphere.h" />
     <ClInclude Include="Enco3D\Config.h" />
     <ClInclude Include="Enco3D\AudioEngine.h" />
     <ClInclude Include="Enco3D\BloomPostProcessEffect.h" />
@@ -69,6 +72,7 @@
     <ClInclude Include="Enco3D\Camera.h" />
     <ClInclude Include="Enco3D\CapsuleCollisionShape.h" />
     <ClInclude Include="Enco3D\ConeCollisionShape.h" />
+    <ClInclude Include="Enco3D\Contains.h" />
     <ClInclude Include="Enco3D\ConvexMeshCollisionShape.h" />
     <ClInclude Include="Enco3D\CylinderCollisionShape.h" />
     <ClInclude Include="Enco3D\DebugLogger.h" />
@@ -83,6 +87,7 @@
     <ClInclude Include="Enco3D\Framebuffer.h" />
     <ClInclude Include="Enco3D\FreeLook.h" />
     <ClInclude Include="Enco3D\FreeMove.h" />
+    <ClInclude Include="Enco3D\Frustum.h" />
     <ClInclude Include="Enco3D\GameObject.h" />
     <ClInclude Include="Enco3D\GLWindow.h" />
     <ClInclude Include="Enco3D\GUIText.h" />
@@ -105,6 +110,8 @@
     <ClInclude Include="Enco3D\MouseLock.h" />
     <ClInclude Include="Enco3D\PhysicsEngine.h" />
     <ClInclude Include="Enco3D\PhysicsHelper.h" />
+    <ClInclude Include="Enco3D\Plane.h" />
+    <ClInclude Include="Enco3D\PlaneIntersectionType.h" />
     <ClInclude Include="Enco3D\PointLight.h" />
     <ClInclude Include="Enco3D\IPostProcessEffect.h" />
     <ClInclude Include="Enco3D\Quaternion.h" />

@@ -75,12 +75,32 @@ namespace Enco3D
 				Matrix4x4<T> r;
 
 				for (int y = 0; y < 4; y++)
-				for (int x = 0; x < 4; x++)
-				{
+					for (int x = 0; x < 4; x++)
+					{
 					r.m[x][y] = (m[x][0] * mat.m[0][y]) + (m[x][1] * mat.m[1][y]) + (m[x][2] * mat.m[2][y]) + (m[x][3] * mat.m[3][y]);
-				}
+					}
 
 				return r;
+			}
+
+			inline bool operator == (const Matrix4x4<T> &other) const
+			{
+				return other.m00 == m00 &&
+					other.m01 == m01 &&
+					other.m02 == m02 &&
+					other.m03 == m03 &&
+					other.m10 == m10 &&
+					other.m11 == m11 &&
+					other.m12 == m12 &&
+					other.m13 == m13 &&
+					other.m20 == m20 &&
+					other.m21 == m21 &&
+					other.m22 == m22 &&
+					other.m23 == m23 &&
+					other.m30 == m30 &&
+					other.m31 == m31 &&
+					other.m32 == m32 &&
+					other.m33 == m33;
 			}
 
 			inline Matrix4x4<T> &operator *= (const Matrix4x4<T> &mat)
@@ -88,10 +108,10 @@ namespace Enco3D
 				Matrix4x4<T> r;
 
 				for (int y = 0; y < 4; y++)
-				for (int x = 0; x < 4; x++)
-				{
+					for (int x = 0; x < 4; x++)
+					{
 					r.m[x][y] = (m[x][0] * mat.m[0][y]) + (m[x][1] * mat.m[1][y]) + (m[x][2] * mat.m[2][y]) + (m[x][3] * mat.m[3][y]);
-				}
+					}
 
 				return set(r);
 			}

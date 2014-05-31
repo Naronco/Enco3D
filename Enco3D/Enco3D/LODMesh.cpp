@@ -15,7 +15,7 @@ Enco3D::Component::LODMesh::LODMesh(const std::string& file, int count, Renderin
 
 Enco3D::Component::LODMesh::~LODMesh()
 {
-	for (int i = 0; i < m_meshes.size(); i++)
+	for (unsigned int i = 0; i < m_meshes.size(); i++)
 	{
 		delete m_meshes[i];
 	}
@@ -25,7 +25,7 @@ void Enco3D::Component::LODMesh::setup()
 {
 	if (!added)
 	{
-		for (int i = 0; i < m_meshes.size(); i++)
+		for (unsigned int i = 0; i < m_meshes.size(); i++)
 		{
 			std::cout << i << std::endl;
 			getGameObject()->addComponent(m_meshes[i]);
@@ -40,7 +40,7 @@ void Enco3D::Component::LODMesh::render(const Component::Camera *camera, Renderi
 	if (added)
 	{
 		int n = min(m_maxMeshes - 1, m_maxMeshes - min(m_maxMeshes, ((int)camera->getTransform()->getTranslation().getSquaredDistance(getTransform()->getTranslation())) / (m_meshDiff * m_meshDiff) + 1));
-		for (int i = 0; i < m_meshes.size(); i++)
+		for (unsigned int i = 0; i < m_meshes.size(); i++)
 		{
 			m_meshes[i]->disable();
 		}
