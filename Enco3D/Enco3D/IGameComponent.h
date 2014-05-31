@@ -19,8 +19,8 @@ namespace Enco3D
 		protected:
 			GameObject *m_gameObject;
 
-			bool m_enabled;
-			
+			bool m_enabled{ true };
+
 		public:
 			virtual void init() {  }
 			virtual void deinit() {  }
