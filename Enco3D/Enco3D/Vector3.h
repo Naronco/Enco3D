@@ -58,13 +58,6 @@ namespace Enco3D
 				T c = (T)(cos(angle));
 				return set(cross(axis * s) + (*this * c) + (axis * (dot(axis * (1 - c)))));
 			}
-
-			inline Vector3<T> &transform(const Matrix4x4f& matrix)
-			{
-				return set((x * matrix.m00) + (y * matrix.m10) + (z * matrix.m20) + matrix.m30,
-					(x * matrix.m01) + (y * matrix.m11) + (z * matrix.m21) + matrix.m31,
-					(x * matrix.m02) + (y * matrix.m12) + (z * matrix.m22) + matrix.m32);
-			}
 		};
 
 		template <typename T, typename S> inline Vector3<T> operator * (S val, const Vector3<T> &v) { return Vector3<T>(v.x * val, v.y * val, v.z * val); }
