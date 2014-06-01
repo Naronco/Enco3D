@@ -1,0 +1,64 @@
+#version 120
+
+varying vec3 texCoord;
+varying vec3 normal;
+varying vec3 worldPos;
+
+struct SpotLight
+{
+	vec3 color;
+	float intensity;
+	vec3 position;
+	vec3 direction;
+	float range;
+	float cutoff;
+};
+
+uniform SpotLight spotLight;
+
+uniform vec3 mat_diffuseColor;
+uniform sampler2D mat_diffuseTexture;
+uniform float mat_specularIntensity;
+uniform float mat_specularExponent;
+
+uniform vec3 camera_translation;
+
+void main()
+{
+	vec3 diffuse = vec3(0.0f, 0.0f, 0.0f);
+	vec3 specular = vec3(0.0f, 0.0f, 0.0f);
+	
+	vec3 lightDirection = worldPos - spotLight.position;
+	float distanceToLight = length(lightDirection);
+	
+	if(distanceToLight < spotLight.range)
+	{
+		lightDirection = normalize(lightDirection);
+		float spotLightFactor = dot(lightDirection, spotLight.direction);
+		
+		if(spotLightFactor > spotLight.cutoff)
+		{
+			spotLightFactor = 1.0f - (1.0f - spotLightFactor) / (1.0f - spotLight.cutoff);
+			float attenuation = 1.0f - (distanceToLight / spotLight.range);
+			
+			vec3 diffuseColor = texture2D(mat_diffuseTexture, texCoord.xy).xyz * mat_diffuseColor.rgb;
+			float diffuseIntensity = max(dot(-lightDirection, normal), 0.0) * attenuation * spotLightFactor;
+			diffuse = diffuseColor * diffuseIntensity * spotLight.color.rgb;
+			
+			if(diffuseIntensity > 0.0 && mat_specularIntensity > 0.0)
+			{
+				vec3 reflectionDirection = normalize(reflect(lightDirection, normal));
+				vec3 viewDirection = normalize(camera_translation - worldPos);
+				float specularIntensity = dot(viewDirection, reflectionDirection);
+				specularIntensity = pow(specularIntensity, mat_specularExponent);
+				
+				if(specularIntensity > 0.0)
+				{
+					specular = mat_specularIntensity * specularIntensity * spotLight.color.rgb * spotLightFactor;
+				}
+			}
+		}
+	}
+	
+	gl_FragColor = vec4(diffuse + specular, 1.0f);
+}

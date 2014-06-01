@@ -1,0 +1,101 @@
+#version 120
+
+varying vec3 texCoord;
+
+uniform sampler2D gbuffer_depth;
+uniform sampler2D gbuffer_1;
+
+uniform sampler2D compositeTexture;
+
+uniform sampler2D randomTexture;
+uniform float ssaoRadius;
+uniform float ssaoPower;
+uniform float ssaoStrength;
+
+uniform vec2 postProcess_texelSize;
+
+uniform mat4 matrix_projectionMatrix;
+
+uniform float camera_tanHalfFov;
+uniform float camera_aspectRatio;
+uniform float camera_zNearClippingPlane;
+uniform float camera_zFarClippingPlane;
+
+float getLinearizedDepth(float depth)
+{
+	return matrix_projectionMatrix[3][2] / (depth - matrix_projectionMatrix[2][2]);
+}
+
+const int kernelSize = 16;
+const vec3 kernel[kernelSize] = vec3[kernelSize](
+	vec3(0.077945106f, -0.061053485f, 0.014036859f),
+	vec3(-0.08384405f, -0.028399609f, 0.053657454f),
+	vec3(-0.004039867f, -0.027854506f, 0.11053533f),
+	vec3(0.097606786f, 0.06001419f, 0.06481101f),
+	vec3(-0.0672832f, 0.09737754f, 0.10200317f),
+	vec3(-0.0785101f, 0.11607586f, 0.12516166f),
+	vec3(-0.19076593f, -0.11599512f, 0.038523417f),
+	vec3(-0.11795171f, -0.15194176f, 0.19269057f),
+	vec3(0.31868264f, 0.018373642f, 0.061063714f),
+	vec3(-0.14289808f, 0.24981354f, 0.25537792f),
+	vec3(-0.25719944f, 0.2942028f, 0.22627823f),
+	vec3(-0.35590807f, 0.21350536f, 0.3221494f),
+	vec3(-0.24056065f, 0.22175303f, 0.5103873f),
+	vec3(-0.3149033f, 0.31358418f, 0.533228f),
+	vec3(0.21448529f, -0.38854223f, 0.6524191f),
+	vec3(0.67499924f, -0.5722854f, 0.10379912f)
+);
+
+void main()
+{
+	float startDepth = getLinearizedDepth(texture2D(gbuffer_depth, texCoord.xy).r);
+
+	if(startDepth >= (camera_zFarClippingPlane - 2.0f * camera_zNearClippingPlane))
+	{
+		gl_FragColor = vec4(1.0f, 1.0f, 1.0f, 1.0f);
+	}
+	else
+	{
+		vec3 viewRay = vec3((texCoord.x * 2.0f - 1.0f) * camera_tanHalfFov * camera_aspectRatio, (texCoord.y * 2.0f - 1.0f) * camera_tanHalfFov, 1.0f);
+		vec3 origin = viewRay * startDepth;
+		
+		vec2 noiseScale = 1.0f / (postProcess_texelSize * 4.0f);
+		vec3 randomVector = texture2D(randomTexture, texCoord.xy * noiseScale).xyz * 2.0f - 1.0f;
+//		vec2 noiseCoord = vec2(fract(texCoord.x * noiseScale.x) * 4.0f, fract(texCoord.y * noiseScale.y) * 4.0f);
+//		vec3 randomVector = normalize(vec3(fract(sin(dot(noiseCoord, vec2(12.9898f, 78.233f))) * 24754.2343f),
+//										   fract(sin(dot(noiseCoord, vec2(34.2346f, 23.357f))) * 43758.6774f),
+//										   fract(sin(dot(noiseCoord, vec2(86.8532f, 74.746f))) * 65698.5453f)) * 2.0f - 1.0f);
+		
+		vec3 normal = normalize(texture2D(gbuffer_1, texCoord.xy).xyz * 2.0f - 1.0f);
+		vec3 tangent = normalize(randomVector - normal * dot(randomVector, normal));
+		vec3 bitangent = cross(normal, tangent);
+		
+		mat3 tbn = mat3(tangent, bitangent, normal);
+		
+		float occlusion = 0.0f;
+		for(int i = 0; i < kernelSize; i++)
+		{
+			vec3 direction = tbn * kernel[i];
+			vec3 sample = direction * ssaoRadius + origin;
+			
+			vec4 offset = vec4(sample, 1.0f);
+			offset = matrix_projectionMatrix * offset;
+			offset.xy /= offset.w;
+			offset.xy = offset.xy * 0.5f + 0.5f;
+			
+			float sampleDepth = getLinearizedDepth(texture2D(gbuffer_depth, offset.xy).r);
+			
+			float rangeCheck = smoothstep(0.0f, 1.0f, ssaoRadius / abs(origin.z - sampleDepth));
+			float add = rangeCheck * step(sampleDepth, sample.z);
+			occlusion += add;
+		}
+		
+		occlusion /= float(kernelSize);
+		occlusion = 1.0f - occlusion;
+		
+		occlusion = pow(occlusion, ssaoPower);
+		occlusion = ssaoStrength * occlusion + (1.0f - ssaoStrength);
+		
+		gl_FragColor = vec4(occlusion, occlusion, occlusion, 1.0f);
+	}
+}

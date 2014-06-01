@@ -55,7 +55,8 @@ namespace Enco3D
 			Component::ILight *m_activeLight{ nullptr };
 			Core::Vector3f m_globalAmbientColor;
 			unsigned int m_width, m_height;
-			
+			unsigned int m_rasterizerMode{ GL_FILL };
+
 			Shader *m_textureShader{ nullptr };
 
 			// FORWARD RENDERING
@@ -74,7 +75,7 @@ namespace Enco3D
 
 			Core::Matrix4x4f m_postProcessWorldViewProjectionMatrix;
 			Core::Vector2f m_postProcessTexelSize;
-			
+
 			Shader *m_finalShader{ nullptr };
 			Shader *m_geometryBufferShader{ nullptr };
 			Mesh *m_renderWindow{ nullptr };
@@ -106,7 +107,7 @@ namespace Enco3D
 
 			inline void setClearColor(float r, float g, float b) const { glClearColor(r, g, b, 0); }
 			inline void setClearColor(const Core::Vector3f &color) const { glClearColor(color.x, color.y, color.z, 0); }
-			inline void setRasterizationMode(unsigned int mode) { glPolygonMode(GL_FRONT_AND_BACK, mode); }
+			inline void setRasterizationMode(unsigned int mode) { m_rasterizerMode = mode; }
 			inline void setCamera(Component::Camera *camera, unsigned int index) { m_cameras[index] = camera; }
 			inline void setSkybox(Component::Skybox *skybox) { m_skybox = skybox; }
 			inline void setGlobalAmbientColor(const Core::Vector3f &globalAmbientColor) { m_globalAmbientColor = globalAmbientColor; }

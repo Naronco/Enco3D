@@ -1,0 +1,10 @@
+#version 120
+
+varying vec3 worldPos;
+
+uniform samplerCube rendering_skybox;
+
+void main()
+{
+	gl_FragColor = vec4(textureCube(rendering_skybox, normalize(worldPos)).rgb, 1.0f);
+}

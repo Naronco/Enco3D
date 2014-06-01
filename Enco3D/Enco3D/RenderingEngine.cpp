@@ -84,8 +84,8 @@ Enco3D::Rendering::RenderingEngine::RenderingEngine(unsigned int width, unsigned
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-//	glEnable(GL_ALPHA_TEST);
-//	glAlphaFunc(GL_GREATER, 0.5f);
+	//	glEnable(GL_ALPHA_TEST);
+	//	glAlphaFunc(GL_GREATER, 0.5f);
 
 	glEnable(GL_CULL_FACE);
 	glFrontFace(GL_CW);
@@ -93,7 +93,7 @@ Enco3D::Rendering::RenderingEngine::RenderingEngine(unsigned int width, unsigned
 }
 
 #define SAFE_DELETE(x) { if(x) { delete x; x = nullptr; } }
- 
+
 Enco3D::Rendering::RenderingEngine::~RenderingEngine()
 {
 	SAFE_DELETE(m_renderWindow);
@@ -138,6 +138,7 @@ void Enco3D::Rendering::RenderingEngine::resize(unsigned int width, unsigned int
 
 void Enco3D::Rendering::RenderingEngine::render(Enco3D::Core::GameObject *gameObject)
 {
+	glPolygonMode(GL_FRONT_AND_BACK, m_rasterizerMode);
 	for (int i = 0; i < MAX_CAMERAS; i++)
 	{
 		if (m_cameras[i] == nullptr)
@@ -151,6 +152,7 @@ void Enco3D::Rendering::RenderingEngine::render(Enco3D::Core::GameObject *gameOb
 
 	// GUI Rendering
 
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	gameObject->renderGUI(m_GUICamera, m_textureShader);
 	glEnable(GL_DEPTH_TEST);
 
@@ -166,14 +168,14 @@ void Enco3D::Rendering::RenderingEngine::renderCamera_Forward(Enco3D::Core::Game
 	//////////////////////////////////////////////////////////////////////////////
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	
+
 	if (m_skybox != nullptr)
 	{
 		glDisable(GL_DEPTH_TEST);
 		m_skybox->render(camera);
 		glEnable(GL_DEPTH_TEST);
 	}
-	
+
 	gameObject->render(camera, m_ambientShader);
 
 	glBlendFunc(GL_ONE, GL_ONE);
