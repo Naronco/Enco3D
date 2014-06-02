@@ -54,6 +54,12 @@
     <Filter Include="Headerdateien\Net">
       <UniqueIdentifier>{8457a09f-dc7e-41d8-a1cf-4883bc526ef1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headerdateien\Algorithm">
+      <UniqueIdentifier>{16a4767e-7a28-4835-b495-7c1cec46025d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Algorithm">
+      <UniqueIdentifier>{f497783e-582d-492f-ba0a-a394ef37b6a0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Enco3D\stb_image.c">

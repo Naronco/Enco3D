@@ -109,9 +109,9 @@ public:
 
 		GameObject *heightmap = createGameObject("heightmap");
 
-		int featuresize = 16;
+		int featuresize = 32;
 
-		int samplesize = featuresize;
+		int samplesize = 128;
 
 		for (int y = 0; y < height; y += featuresize)
 			for (int x = 0; x < width; x += featuresize)
@@ -119,7 +119,7 @@ public:
 			setSample(x, y, frand());
 			}
 
-		double scale = 1.0;
+		double scale = 2.0;
 
 		while (samplesize > 1)
 		{
@@ -145,10 +145,13 @@ public:
 				minV = min(minV, min(height00, min(height10, min(height11, height10))));
 				maxV = max(minV, max(height00, max(height10, max(height11, height10))));
 
-				Vector3f a = Vector3f(x * 0.02f, height00 * 0.1f, y * 0.02f);
-				Vector3f b = Vector3f(x * 0.02f + 0.02f, height10 * 0.1f, y * 0.02f);
-				Vector3f c = Vector3f(x * 0.02f + 0.02f, height11 * 0.1f, y * 0.02f + 0.02f);
-				Vector3f d = Vector3f(x * 0.02f, height01 * 0.1f, y * 0.02f + 0.02f);
+				float xscale = 0.1f;
+				float yscale = 0.1f;
+
+				Vector3f a = Vector3f(x * xscale, height00, y * yscale);
+				Vector3f b = Vector3f(x * xscale + xscale, height10, y * yscale);
+				Vector3f c = Vector3f(x * xscale + xscale, height11, y * yscale + yscale);
+				Vector3f d = Vector3f(x * xscale, height01, y * yscale + yscale);
 
 				Vector3f n1 = calcNormal(c, b, a);
 				Vector3f n2 = calcNormal(d, c, a);
@@ -194,7 +197,7 @@ public:
 		GameObject *sun = createGameObject("sun");
 		DirectionalLight* sunlight = new DirectionalLight(1, 1, 1, 2);
 		sun->addComponent(sunlight);
-		sun->getTransform()->setRotation(Quaternionf(0.16306f, -0.40604f, 0.073881f, 0.89615f));
+		sun->getTransform()->setRotation(Quaternionf(0.16306f, -0.90604f, 0.073881f, 0.89615f));
 		addGameObject(sun);
 
 		getRenderingEngine()->setGlobalAmbientColor(0.3f, 0.3f, 0.3f);

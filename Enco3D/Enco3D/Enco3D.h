@@ -75,6 +75,9 @@ typedef signed long long longlong;
 // Network Headers
 #include "HTTPRequest.h"
 
+// Algorithm Headers
+//#include "DiamondSquareAlgorithm.h"
+
 // IO Headers
 #include "ImageIO.h"
 
