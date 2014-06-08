@@ -15,6 +15,7 @@ public:
 	double values[256 * 256];
 	int width{ 256 };
 	int height{ 256 };
+	Random random;
 
 	double sample(int x, int y)
 	{
@@ -28,7 +29,7 @@ public:
 
 	double frand()
 	{
-		return Random::NextDouble() * 2 - 1;
+		return random.NextDouble() * 2 - 1;
 	}
 
 	void sampleSquare(int x, int y, int size, double value)

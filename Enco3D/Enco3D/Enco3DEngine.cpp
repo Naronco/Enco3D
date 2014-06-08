@@ -15,7 +15,6 @@ void Enco3D::Core::Enco3DEngine::init(char *windowTitle, unsigned int windowWidt
 	m_audioEngine = new Audio::AudioEngine;
 
 	m_physicsEngine->setTimer(m_timer);
-	Random::setSeed(m_timer->getTime());
 
 	m_window->show();
 

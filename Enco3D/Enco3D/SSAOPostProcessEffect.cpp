@@ -6,18 +6,20 @@ void Enco3D::Component::SSAOPostProcessEffect::initRendering()
 {
 	m_ssaoBuffer = new Rendering::Texture2D(getWidth(), getHeight(), GL_RGBA, GL_RGBA, GL_NEAREST, GL_CLAMP_TO_EDGE);
 	m_blurBuffer = new Rendering::Texture2D(getWidth(), getHeight(), GL_RGBA, GL_RGBA, GL_NEAREST, GL_CLAMP_TO_EDGE);
-	
+
 	m_ssaoFramebuffer = new Rendering::Framebuffer; m_ssaoFramebuffer->attachTexture2D(m_ssaoBuffer, Rendering::Attachment::Color0); m_ssaoFramebuffer->pack();
 	m_blurFramebuffer = new Rendering::Framebuffer; m_blurFramebuffer->attachTexture2D(m_blurBuffer, Rendering::Attachment::Color0); m_blurFramebuffer->pack();
-	
+
 	m_ssaoShader = Rendering::ShaderPool::getInstance()->getShader("shaders/ssao", Rendering::ShaderType::VertexShader | Rendering::ShaderType::FragmentShader);
 	m_blurShader = Rendering::ShaderPool::getInstance()->getShader("shaders/ssaoBlur", Rendering::ShaderType::VertexShader | Rendering::ShaderType::FragmentShader);
-	
+
+	Core::Random random;
+
 	float randomValues[64];
 	unsigned int pixelIndex = 0;
 	for (unsigned int i = 0; i < 16; i++)
 	{
-		Core::Vector3f randomVec(Core::Random::nextFloat() * 2.0f - 1.0f, Core::Random::nextFloat() * 2.0f - 1.0f, 0.0f);
+		Core::Vector3f randomVec(random.nextFloat() * 2.0f - 1.0f, random.nextFloat() * 2.0f - 1.0f, 0.0f);
 		randomVec = randomVec.normalize();
 
 		randomVec.x = randomVec.x * 0.5f + 0.5f;
@@ -70,7 +72,7 @@ void Enco3D::Component::SSAOPostProcessEffect::postProcess(const Camera *camera)
 	m_randomTexture->bind(Rendering::TextureSampler::Sampler2); m_ssaoShader->setUniformInt("randomTexture", Rendering::TextureSampler::Sampler2);
 	m_depthBuffer->bind(Rendering::TextureSampler::Sampler1); m_ssaoShader->setUniformInt("gbuffer_depth", Rendering::TextureSampler::Sampler1);
 	m_gbuffer1->bind(Rendering::TextureSampler::Sampler0); m_ssaoShader->setUniformInt("gbuffer_1", Rendering::TextureSampler::Sampler0);
-	
+
 	renderScreen();
 
 	// BLUR THE SSAO TEXTURE //
@@ -93,13 +95,13 @@ void Enco3D::Component::SSAOPostProcessEffect::resize(unsigned int width, unsign
 {
 	delete m_ssaoBuffer;
 	delete m_blurBuffer;
-	
+
 	delete m_ssaoFramebuffer;
 	delete m_blurFramebuffer;
-	
+
 	m_ssaoBuffer = new Rendering::Texture2D(width, height, GL_RGBA, GL_RGBA, GL_NEAREST, GL_CLAMP_TO_EDGE);
 	m_blurBuffer = new Rendering::Texture2D(width, height, GL_RGBA, GL_RGBA, GL_NEAREST, GL_CLAMP_TO_EDGE);
-	
+
 	m_ssaoFramebuffer = new Rendering::Framebuffer; m_ssaoFramebuffer->attachTexture2D(m_ssaoBuffer, Rendering::Attachment::Color0); m_ssaoFramebuffer->pack();
 	m_blurFramebuffer = new Rendering::Framebuffer; m_blurFramebuffer->attachTexture2D(m_blurBuffer, Rendering::Attachment::Color0); m_blurFramebuffer->pack();
 }
