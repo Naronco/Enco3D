@@ -212,6 +212,12 @@
     <ClCompile Include="Enco3D\Frustum.cpp">
       <Filter>Quelldateien\Core</Filter>
     </ClCompile>
+    <ClCompile Include="Enco3D\PerlinNoise.cpp">
+      <Filter>Quelldateien\Algorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Enco3D\Billboard.cpp">
+      <Filter>Quelldateien\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enco3D\stb_image.h">
@@ -447,6 +453,15 @@
     </ClInclude>
     <ClInclude Include="Enco3D\PlaneIntersectionType.h">
       <Filter>Headerdateien\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\INoise.h">
+      <Filter>Headerdateien\Algorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\PerlinNoise.h">
+      <Filter>Headerdateien\Algorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\Billboard.h">
+      <Filter>Headerdateien\Component</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

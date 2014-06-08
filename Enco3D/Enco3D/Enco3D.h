@@ -49,6 +49,7 @@ typedef signed long long longlong;
 #include "WavefrontMaterialMesh.h"
 #include "WavefrontMesh.h"
 #include "LODMesh.h"
+#include "Billboard.h"
 
 // Core Engine Headers
 #include "DebugLogger.h"
@@ -77,6 +78,8 @@ typedef signed long long longlong;
 
 // Algorithm Headers
 //#include "DiamondSquareAlgorithm.h"
+#include "INoise.h"
+#include "PerlinNoise.h"
 
 // IO Headers
 #include "ImageIO.h"

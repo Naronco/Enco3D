@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Enco3D\Billboard.cpp" />
     <ClCompile Include="Enco3D\Config.cpp" />
     <ClCompile Include="Enco3D\AudioEngine.cpp" />
     <ClCompile Include="Enco3D\BloomPostProcessEffect.cpp" />
@@ -61,6 +62,7 @@
     <ClCompile Include="Enco3D\Transform.cpp" />
     <ClCompile Include="Enco3D\WavefrontMaterialMesh.cpp" />
     <ClCompile Include="Enco3D\WavefrontMesh.cpp" />
+    <ClCompile Include="Enco3D\PerlinNoise.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enco3D\BoundingBox.h" />
@@ -141,6 +143,9 @@
     <ClInclude Include="Enco3D\Vertex.h" />
     <ClInclude Include="Enco3D\WavefrontMaterialMesh.h" />
     <ClInclude Include="Enco3D\WavefrontMesh.h" />
+    <ClInclude Include="Enco3D\INoise.h" />
+    <ClInclude Include="Enco3D\PerlinNoise.h" />
+    <ClInclude Include="Enco3D\Billboard.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{1BAA0FBB-5D34-4483-8271-FC1A1C9346A9}</ProjectGuid>
