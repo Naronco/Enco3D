@@ -19,8 +19,8 @@ void Enco3D::Core::DebugLogger::deinit()
 void Enco3D::Core::DebugLogger::log(const std::string &text)
 {
 	if (s_flags[WriteToConsole])
-		std::cout << text << std::endl;
+		printf((text + "\n").c_str());
 
 	if (s_flags[WriteToFile])
-		s_outputStream << text << std::endl;
+		s_outputStream.write((text + "\n").c_str(), text.length() + 1);
 }
