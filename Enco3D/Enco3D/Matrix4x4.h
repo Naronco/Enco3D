@@ -237,6 +237,47 @@ namespace Enco3D
 				return set(m00, m10, m20, m30, m01, m11, m21, m31, m02, m12, m22, m32, m03, m13, m23, m33);
 			}
 
+			inline Matrix4x4<T> createBillboard(const Vector3<T>& objectPosition, const Vector3<T>& cameraPosition, const Vector3<T>& cameraUpVector)
+			{
+				Vector3<T> vector;
+				Vector3<T> vector2;
+				Vector3<T> vector3;
+				vector = objectPosition - cameraPosition;
+				float num = vector.getSquaredLength();
+				if (num < 0.0001f)
+				{
+					vector = Vector3Template::Forward;
+				}
+				else
+				{
+					vector = (float)(1.0f / ((float)sqrt((double)num))) * vector;
+				}
+				vector3 = cameraUpVector.cross(vector);
+				vector3.normalize();
+				vector2 = vector.cross(vector3);
+
+				Vector3<T> result;
+
+				result.m00 = vector3.x;
+				result.m01 = vector3.y;
+				result.m02 = vector3.z;
+				result.m03 = 0;
+				result.m10 = vector2.x;
+				result.m11 = vector2.y;
+				result.m12 = vector2.z;
+				result.m13 = 0;
+				result.m20 = vector.x;
+				result.m21 = vector.y;
+				result.m22 = vector.z;
+				result.m23 = 0;
+				result.m30 = objectPosition.x;
+				result.m31 = objectPosition.y;
+				result.m32 = objectPosition.z;
+				result.m33 = 1;
+
+				return result;
+			}
+
 			inline Matrix4x4<T> getTranspose()
 			{
 				return Matrix4x4<T>(m00, m10, m20, m30, m01, m11, m21, m31, m02, m12, m22, m32, m03, m13, m23, m33);
