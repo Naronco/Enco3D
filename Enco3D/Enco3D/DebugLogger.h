@@ -9,18 +9,16 @@ namespace Enco3D
 {
 	namespace Core
 	{
-		enum DebugLoggerFlag : unsigned int
+		enum DebugLoggerFlag : unsigned char
 		{
-			WriteToConsole,
-			WriteToFile,
-
-			NumDebugLoggerFlags
+			WriteToConsole = 1 << 0,
+			WriteToFile = 1 << 1,
 		};
 
 		class DebugLogger
 		{
 		private:
-			static bool s_flags[NumDebugLoggerFlags];
+			static DebugLoggerFlag s_flags;
 			static std::ofstream s_outputStream;
 
 		public:
@@ -29,8 +27,8 @@ namespace Enco3D
 
 			static void log(const std::string &text);
 
-			static void setFlag(unsigned int flag, bool enabled) { s_flags[flag] = enabled; }
-			static bool isFlagEnabled(unsigned int flag) { return s_flags[flag]; }
+			static void setFlag(DebugLoggerFlag flag, bool enabled) { if (isFlagEnabled(flag) && !enabled) { s_flags = (DebugLoggerFlag)(s_flags & flag); } else { s_flags = (DebugLoggerFlag)(s_flags | flag); } }
+			static bool isFlagEnabled(DebugLoggerFlag flag) { return (s_flags & flag) != 0; }
 		};
 	}
 }
