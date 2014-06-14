@@ -9,7 +9,7 @@ namespace Enco3D
 {
 	namespace Core
 	{
-		enum DebugLoggerFlag : unsigned char
+		enum DebugLoggerFlag
 		{
 			WriteToConsole = 1 << 0,
 			WriteToFile = 1 << 1,

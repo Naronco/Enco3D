@@ -1,14 +1,13 @@
 #include "DebugLogger.h"
 
-bool Enco3D::Core::DebugLogger::s_flags[Enco3D::Core::DebugLoggerFlag::NumDebugLoggerFlags];
+Enco3D::Core::DebugLoggerFlag Enco3D::Core::DebugLogger::s_flags;
 std::ofstream Enco3D::Core::DebugLogger::s_outputStream;
 
 void Enco3D::Core::DebugLogger::init()
 {
 	s_outputStream.open("debug.log", std::ios::out);
 
-	s_flags[WriteToConsole] = true;
-	s_flags[WriteToFile] = true;
+	s_flags = (DebugLoggerFlag)(WriteToConsole | WriteToFile);
 }
 
 void Enco3D::Core::DebugLogger::deinit()
@@ -18,9 +17,9 @@ void Enco3D::Core::DebugLogger::deinit()
 
 void Enco3D::Core::DebugLogger::log(const std::string &text)
 {
-	if (s_flags[WriteToConsole])
+	if (isFlagEnabled(WriteToConsole))
 		printf((text + "\n").c_str());
 
-	if (s_flags[WriteToFile])
+	if (isFlagEnabled(WriteToFile))
 		s_outputStream.write((text + "\n").c_str(), text.length() + 1);
 }
