@@ -5,6 +5,7 @@
 #include "Texture2D.h"
 #include "Mesh.h"
 #include "Shader.h"
+#include "DLLExport.h"
 
 #include <string>
 
@@ -12,7 +13,7 @@ namespace Enco3D
 {
 	namespace Component
 	{
-		class GUITexture : public Core::IGameComponent
+		class DLL_EXPORT GUITexture : public Core::IGameComponent
 		{
 		private:
 			Rendering::Texture2D *m_texture;

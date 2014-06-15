@@ -2,12 +2,13 @@
 #define _ENCO3D_FRUSTUM_H_
 
 #include "Matrix4x4.h"
+#include "DLLExport.h"
 
 namespace Enco3D
 {
 	namespace Core
 	{
-		class Frustum
+		class DLL_EXPORT Frustum
 		{
 		public:
 			Frustum(Matrix4x4f matrix);

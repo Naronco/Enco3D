@@ -6,12 +6,13 @@
 #include "Material.h"
 #include "Shader.h"
 #include <memory>
+#include "DLLExport.h"
 
 namespace Enco3D
 {
 	namespace Component
 	{
-		class DefaultMesh : public Core::IGameComponent
+		class DLL_EXPORT DefaultMesh : public Core::IGameComponent
 		{
 		private:
 			std::shared_ptr<Rendering::Mesh> m_mesh;

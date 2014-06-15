@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Cubeshaft", "Cubeshaft\Cube
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ExampleDiamondSquareAlgorithm", "ExampleDiamondShape\ExampleDiamondShape.vcxproj", "{D2952C7B-3CA7-4477-934F-A93B08E7964D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enco3D.Net", "Enco3D.Net\Enco3D.Net.csproj", "{3678ED53-0A87-4EF3-B408-311EF85CBFD3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +75,16 @@ Global
 		{D2952C7B-3CA7-4477-934F-A93B08E7964D}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{D2952C7B-3CA7-4477-934F-A93B08E7964D}.Release|Win32.ActiveCfg = Release|Win32
 		{D2952C7B-3CA7-4477-934F-A93B08E7964D}.Release|Win32.Build.0 = Release|Win32
+		{3678ED53-0A87-4EF3-B408-311EF85CBFD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3678ED53-0A87-4EF3-B408-311EF85CBFD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3678ED53-0A87-4EF3-B408-311EF85CBFD3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{3678ED53-0A87-4EF3-B408-311EF85CBFD3}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{3678ED53-0A87-4EF3-B408-311EF85CBFD3}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{3678ED53-0A87-4EF3-B408-311EF85CBFD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3678ED53-0A87-4EF3-B408-311EF85CBFD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3678ED53-0A87-4EF3-B408-311EF85CBFD3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{3678ED53-0A87-4EF3-B408-311EF85CBFD3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{3678ED53-0A87-4EF3-B408-311EF85CBFD3}.Release|Win32.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

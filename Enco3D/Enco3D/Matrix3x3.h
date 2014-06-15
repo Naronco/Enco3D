@@ -2,13 +2,14 @@
 #define _ENCO3D_MATRIX3X3_H_
 
 #include "Vector3.h"
+#include "DLLExport.h"
 
 namespace Enco3D
 {
 	namespace Core
 	{
 		/// <summary>A 3x3 Matrix structure</summary>
-		template <typename T> struct Matrix3x3
+		template <typename T> struct DLL_EXPORT Matrix3x3
 		{
 			union
 			{
@@ -75,10 +76,10 @@ namespace Enco3D
 				Matrix3x3<T> r;
 
 				for (int y = 0; y < 3; y++)
-				for (int x = 0; x < 3; x++)
-				{
+					for (int x = 0; x < 3; x++)
+					{
 					r.m[x][y] = (m[x][0] * mat.m[0][y]) + (m[x][1] * mat.m[1][y]) + (m[x][2] * mat.m[2][y]);
-				}
+					}
 
 				return r;
 			}
@@ -89,10 +90,10 @@ namespace Enco3D
 				Matrix3x3<T> r;
 
 				for (int y = 0; y < 3; y++)
-				for (int x = 0; x < 3; x++)
-				{
+					for (int x = 0; x < 3; x++)
+					{
 					r.m[x][y] = (m[x][0] * mat.m[0][y]) + (m[x][1] * mat.m[1][y]) + (m[x][2] * mat.m[2][y]);
-				}
+					}
 
 				return Set(r);
 			}

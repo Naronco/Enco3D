@@ -3,12 +3,13 @@
 
 #include "ICollisionShape.h"
 #include "Vector3.h"
+#include "DLLExport.h"
 
 namespace Enco3D
 {
 	namespace Physics
 	{
-		class SphereCollisionShape : public ICollisionShape
+		class DLL_EXPORT SphereCollisionShape : public ICollisionShape
 		{
 		private:
 			float m_radius;

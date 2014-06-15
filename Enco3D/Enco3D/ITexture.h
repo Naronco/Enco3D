@@ -10,26 +10,27 @@
 #include <map>
 
 #include "stb_image.h"
+#include "DLLExport.h"
 
 namespace Enco3D
 {
 	namespace Rendering
 	{
-		enum TextureFilter : unsigned int
+		enum DLL_EXPORT TextureFilter : unsigned int
 		{
 			Nearest = GL_NEAREST,
 			Linear = GL_LINEAR,
 			MipmapLinear = 1,
 		};
 
-		enum TextureWrap : unsigned int
+		enum DLL_EXPORT TextureWrap : unsigned int
 		{
 			Clamp = GL_CLAMP,
 			Repeat = GL_REPEAT,
 			ClampToEdge = GL_CLAMP_TO_EDGE,
 		};
 
-		enum TextureSampler : unsigned int
+		enum DLL_EXPORT TextureSampler : unsigned int
 		{
 			Sampler0,
 			Sampler1,
@@ -65,7 +66,7 @@ namespace Enco3D
 			Sampler31,
 		};
 
-		class ITexture
+		class DLL_EXPORT ITexture
 		{
 		protected:
 			GLuint m_id;
@@ -75,7 +76,7 @@ namespace Enco3D
 			virtual ~ITexture() {  }
 
 			virtual void bind(unsigned int unit = 0) const = 0;
-			
+
 			inline GLuint getID() const { return m_id; }
 			inline unsigned int getWidth() const { return m_width; }
 			inline unsigned int getHeight() const { return m_height; }

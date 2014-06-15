@@ -4,12 +4,13 @@
 #include "ICollisionShape.h"
 #include "Vector3.h"
 #include "PhysicsHelper.h"
+#include "DLLExport.h"
 
 namespace Enco3D
 {
 	namespace Physics
 	{
-		class BoxCollisionShape : public ICollisionShape
+		class DLL_EXPORT BoxCollisionShape : public ICollisionShape
 		{
 		private:
 			Core::Vector3f m_halfSize;

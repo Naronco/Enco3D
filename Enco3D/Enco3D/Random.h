@@ -4,13 +4,14 @@
 #include <limits.h>
 #include <time.h>
 #include <random>
+#include "DLLExport.h"
 
 namespace Enco3D
 {
 	namespace Core
 	{
 		/// <summary>Random class, need to be instanced</summary>
-		class Random
+		class DLL_EXPORT Random
 		{
 		private:
 			/// <summary> Random values (internal use) </summary>

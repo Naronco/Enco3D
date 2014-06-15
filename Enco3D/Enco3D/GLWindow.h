@@ -4,6 +4,7 @@
 #include <SDL.h>
 #include <GL\glew.h>
 #include <iostream>
+#include "DLLExport.h"
 
 #include "Event.h"
 #include "Input.h"
@@ -15,7 +16,7 @@ namespace Enco3D
 	namespace Core
 	{
 		/// <summary>OpenGL window</summary>
-		class GLWindow
+		class DLL_EXPORT GLWindow
 		{
 		private:
 			/// <summary>Checks, if the window is running</summary>

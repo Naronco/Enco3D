@@ -5,12 +5,13 @@
 #include "ShaderPool.h"
 #include <vector>
 #include <string>
+#include "DLLExport.h"
 
 namespace Enco3D
 {
 	namespace Component
 	{
-		class IPostProcessEffect : public Core::IGameComponent
+		class DLL_EXPORT IPostProcessEffect : public Core::IGameComponent
 		{
 		protected:
 			Rendering::Texture2D *m_gbuffer0;
@@ -27,7 +28,7 @@ namespace Enco3D
 
 		public:
 			virtual void postProcess(const Camera *camera) = 0;
-			
+
 			virtual Rendering::Texture2D *getFinalBuffer() = 0;
 
 			inline void setGBuffer0(Rendering::Texture2D *buffer) { m_gbuffer0 = buffer; }

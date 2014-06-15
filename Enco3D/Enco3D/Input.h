@@ -2,6 +2,7 @@
 #define _ENCO3D_INPUT_H_
 
 #include <SDL.h>
+#include "DLLExport.h"
 
 namespace Enco3D
 {
@@ -10,7 +11,7 @@ namespace Enco3D
 		namespace Mouse
 		{
 			/// <summary>Enumeration of the mouse button ids</summary>
-			enum MouseButton : unsigned int
+			enum DLL_EXPORT MouseButton : unsigned int
 			{
 				Left = 1,
 				Middle = 2,
@@ -20,7 +21,7 @@ namespace Enco3D
 
 		namespace Keyboard
 		{
-			enum KeyboardKey : unsigned int
+			enum DLL_EXPORT KeyboardKey : unsigned int
 			{
 				Unknown = 0,
 				A = 4,
@@ -187,7 +188,7 @@ namespace Enco3D
 		}
 
 		/// <summary>The wrapper of the input events, doens't needs to be instanced</summary>
-		class Input
+		class DLL_EXPORT Input
 		{
 		private:
 			/// <summary>Array of all the keys</summary>

@@ -2,6 +2,7 @@
 #define _ENCO3D_QUATERNION_H_
 
 #include <math.h>
+#include "DLLExport.h"
 
 #include "Vector3.h"
 #include "Matrix3x3.h"
@@ -11,7 +12,7 @@ namespace Enco3D
 {
 	namespace Core
 	{
-		template <typename T> struct Quaternion
+		template <typename T> struct DLL_EXPORT Quaternion
 		{
 			T x, y, z, w;
 
@@ -31,7 +32,7 @@ namespace Enco3D
 			{
 				T srx = (T)sin(rotX * 0.5);
 				T crx = (T)cos(rotX * 0.5);
-				
+
 				T sry = (T)sin(rotY * 0.5);
 				T cry = (T)cos(rotY * 0.5);
 

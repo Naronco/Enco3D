@@ -3,15 +3,13 @@
 
 #include "WavefrontMesh.h"
 #include "GameObject.h"
+#include "DLLExport.h"
 
 namespace Enco3D
 {
 	namespace Component
 	{
-		/// <summary>
-		/// WIP - Not working
-		/// </summary>
-		class LODMesh : public Core::IGameComponent
+		class DLL_EXPORT LODMesh : public Core::IGameComponent
 		{
 		public:
 			LODMesh();

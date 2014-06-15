@@ -3,12 +3,13 @@
 
 #include "IGameComponent.h"
 #include "MathUtil.h"
+#include "DLLExport.h"
 
 namespace Enco3D
 {
 	namespace Component
 	{
-		class FreeLook : public Core::IGameComponent
+		class DLL_EXPORT FreeLook : public Core::IGameComponent
 		{
 		private:
 			bool m_rotationEnabled{ false };

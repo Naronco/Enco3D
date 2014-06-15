@@ -3,12 +3,13 @@
 
 #include "ITexture.h"
 #include "DebugLogger.h"
+#include "DLLExport.h"
 
 namespace Enco3D
 {
 	namespace Rendering
 	{
-		class TextureCubeMap : public ITexture
+		class DLL_EXPORT TextureCubeMap : public ITexture
 		{
 		public:
 			TextureCubeMap();

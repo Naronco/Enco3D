@@ -3,12 +3,13 @@
 
 #include "ICollisionShape.h"
 #include "Vector3.h"
+#include "DLLExport.h"
 
 namespace Enco3D
 {
 	namespace Physics
 	{
-		class StaticPlaneCollisionShape : public ICollisionShape
+		class DLL_EXPORT StaticPlaneCollisionShape : public ICollisionShape
 		{
 		private:
 			Core::Vector3f m_normal;

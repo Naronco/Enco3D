@@ -7,6 +7,7 @@
 
 #include "Vertex.h"
 #include "MeshResource.h"
+#include "DLLExport.h"
 
 namespace Enco3D
 {
@@ -32,14 +33,14 @@ namespace Enco3D
 {
 	namespace Rendering
 	{
-		class Mesh
+		class DLL_EXPORT Mesh
 		{
 		protected:
 			MeshResource *m_resource{ nullptr };
-			
+
 		protected:
 			void buildBuffers(Vertex *vertices, unsigned int vertexCount, unsigned int *indices, unsigned int indexCount);
-			
+
 		public:
 			Mesh();
 			Mesh(Vertex *vertices, unsigned int vertexCount);

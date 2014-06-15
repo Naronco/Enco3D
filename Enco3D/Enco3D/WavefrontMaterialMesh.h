@@ -12,6 +12,7 @@
 #include "Vertex.h"
 #include "Texture2D.h"
 #include "DebugLogger.h"
+#include "DLLExport.h"
 
 #include <assimp\Importer.hpp>
 #include <assimp\scene.h>
@@ -26,7 +27,7 @@ namespace Enco3D
 {
 	namespace Physics
 	{
-		class StaticConcaveMeshCollisionShape;
+		class DLL_EXPORT StaticConcaveMeshCollisionShape;
 	}
 }
 
@@ -34,7 +35,7 @@ namespace Enco3D
 {
 	namespace Component
 	{
-		class WavefrontMaterialMesh : public Core::IGameComponent
+		class DLL_EXPORT WavefrontMaterialMesh : public Core::IGameComponent
 		{
 		private:
 			std::vector<std::shared_ptr<Rendering::MeshResource>> m_meshes;
@@ -46,11 +47,11 @@ namespace Enco3D
 			bool initFromScene(const aiScene *scene, const std::string &filename);
 			void initMesh(unsigned int index, const aiMesh *mesh);
 			bool initMaterials(const aiScene *scene, const std::string &filename);
-			
+
 		public:
 			WavefrontMaterialMesh();
 			WavefrontMaterialMesh(const std::string &filename);
-			
+
 			void render(const Component::Camera *camera, Rendering::Shader *shader);
 
 			Physics::StaticConcaveMeshCollisionShape *getStaticConcaveMeshCollisionShape() const;

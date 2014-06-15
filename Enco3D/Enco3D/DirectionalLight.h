@@ -4,12 +4,13 @@
 #include "ILight.h"
 #include "Skybox.h"
 #include "ShaderPool.h"
+#include "DLLExport.h"
 
 namespace Enco3D
 {
 	namespace Component
 	{
-		class DirectionalLight : public ILight
+		class DLL_EXPORT DirectionalLight : public ILight
 		{
 		public:
 			DirectionalLight()

@@ -8,6 +8,7 @@
 #include "Mesh.h"
 #include "Material.h"
 #include "TextureCubeMap.h"
+#include "DLLExport.h"
 
 #include <string>
 
@@ -15,7 +16,7 @@ namespace Enco3D
 {
 	namespace Component
 	{
-		class Skybox : public Core::IGameComponent
+		class DLL_EXPORT Skybox : public Core::IGameComponent
 		{
 		private:
 			Rendering::Mesh *m_mesh{ nullptr };

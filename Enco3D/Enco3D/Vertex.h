@@ -3,12 +3,13 @@
 
 #include "Vector2.h"
 #include "Vector3.h"
+#include "DLLExport.h"
 
 namespace Enco3D
 {
 	namespace Rendering
 	{
-		struct Vertex
+		struct DLL_EXPORT Vertex
 		{
 			float x, y, z;
 			float u, v, w;

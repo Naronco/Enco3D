@@ -2,12 +2,13 @@
 #define _ENCO3D_CAPSULECOLLISIONSHAPE_H_
 
 #include "ICollisionShape.h"
+#include "DLLExport.h"
 
 namespace Enco3D
 {
 	namespace Physics
 	{
-		class CapsuleCollisionShape : public ICollisionShape
+		class DLL_EXPORT CapsuleCollisionShape : public ICollisionShape
 		{
 		private:
 			float m_radius, m_height;

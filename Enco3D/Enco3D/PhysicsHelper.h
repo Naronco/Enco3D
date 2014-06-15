@@ -3,6 +3,7 @@
 
 #include "Vector3.h"
 #include "Quaternion.h"
+#include "DLLExport.h"
 
 #include <btBulletDynamicsCommon.h>
 
@@ -13,7 +14,7 @@ namespace Enco3D
 		namespace PhysicsHelper
 		{
 			template <typename T>
-			inline static btVector3 toBulletPhysicsVec3(const Core::Vector3<T> &v)
+			inline static DLL_EXPORT btVector3 toBulletPhysicsVec3(const Core::Vector3<T> &v)
 			{
 				btVector3 result;
 
@@ -25,7 +26,7 @@ namespace Enco3D
 			}
 
 			template <typename T>
-			inline static btQuaternion toBulletPhysicsQuat(const Core::Quaternion<T> &q)
+			inline static DLL_EXPORT btQuaternion toBulletPhysicsQuat(const Core::Quaternion<T> &q)
 			{
 				btQuaternion result;
 
@@ -38,13 +39,13 @@ namespace Enco3D
 			}
 
 			template <typename T>
-			inline static Core::Vector3<T> toEnco3DVec3(const btVector3 &v)
+			inline static DLL_EXPORT Core::Vector3<T> toEnco3DVec3(const btVector3 &v)
 			{
 				return Core::Vector3<T>(v.x(), v.y(), v.z());
 			}
 
 			template <typename T>
-			inline static Core::Quaternion<T> toEnco3DQuat(const btQuaternion &q)
+			inline static DLL_EXPORT Core::Quaternion<T> toEnco3DQuat(const btQuaternion &q)
 			{
 				return Core::Quaternion<T>(q.x(), q.y(), q.z(), q.w());
 			}

@@ -4,12 +4,13 @@
 #include "Vector3.h"
 #include "Vector4.h"
 #include "BoundingSphere.h"
+#include "DLLExport.h"
 
 namespace Enco3D
 {
 	namespace Core
 	{
-		class Plane
+		class DLL_EXPORT Plane
 		{
 		public:
 			Plane(Vector4f value);

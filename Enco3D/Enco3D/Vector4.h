@@ -2,12 +2,13 @@
 #define _ENCO3D_VECTOR4_H_
 
 #include "Vector3.h"
+#include "DLLExport.h"
 
 namespace Enco3D
 {
 	namespace Core
 	{
-		template <typename T> struct Vector4
+		template <typename T> struct DLL_EXPORT Vector4
 		{
 			union
 			{

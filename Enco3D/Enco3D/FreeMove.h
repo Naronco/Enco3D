@@ -2,12 +2,13 @@
 #define _ENCO3D_FREEMOVE_H_
 
 #include "IGameComponent.h"
+#include "DLLExport.h"
 
 namespace Enco3D
 {
 	namespace Component
 	{
-		class FreeMove : public Core::IGameComponent
+		class DLL_EXPORT FreeMove : public Core::IGameComponent
 		{
 		private:
 			float m_moveSpeed{ 0.01f };

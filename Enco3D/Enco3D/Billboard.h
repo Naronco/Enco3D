@@ -2,12 +2,13 @@
 #define _ENCO3D_BILLBOARD_H_
 
 #include "IGameComponent.h"
+#include "DLLExport.h"
 
 namespace Enco3D
 {
 	namespace Component
 	{
-		class Billboard : public Core::IGameComponent
+		class DLL_EXPORT Billboard : public Core::IGameComponent
 		{
 		public:
 			Billboard();

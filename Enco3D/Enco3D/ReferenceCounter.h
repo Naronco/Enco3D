@@ -1,12 +1,14 @@
 #ifndef _ENCO3D_REFERENCECOUNTER_H_
 #define _ENCO3D_REFERENCECOUNTER_H_
 
+#include "DLLExport.h"
+
 namespace Enco3D
 {
 	namespace Core
 	{
 		template <typename T>
-		class ReferenceCounter
+		class DLL_EXPORT ReferenceCounter
 		{
 		private:
 			T m_refCount;

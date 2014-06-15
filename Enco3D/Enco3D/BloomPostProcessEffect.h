@@ -1,13 +1,14 @@
 #ifndef _ENCO3D_BLOOMPOSTPROCESSEFFECT_H_
 #define _ENCO3D_BLOOMPOSTPROCESSEFFECT_H_
 
+#include "DLLExport.h"
 #include "IPostProcessEffect.h"
 
 namespace Enco3D
 {
 	namespace Component
 	{
-		class BloomPostProcessEffect : public IPostProcessEffect
+		class DLL_EXPORT BloomPostProcessEffect : public IPostProcessEffect
 		{
 		private:
 			Rendering::Framebuffer *m_thresholdFramebuffer, *m_horizontalBlurFramebuffer, *m_verticalBlurFramebuffer;

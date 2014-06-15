@@ -2,6 +2,7 @@
 #define _ENCO3D_ERRORHANDLER_H_
 
 #include <string>
+#include "DLLExport.h"
 
 namespace Enco3D
 {
@@ -15,7 +16,7 @@ namespace Enco3D
 {
 	namespace Core
 	{
-		class ErrorHandler
+		class DLL_EXPORT ErrorHandler
 		{
 		private:
 			std::string m_errorPrefix{ std::string("[ERROR]") };

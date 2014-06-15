@@ -26,6 +26,9 @@ typedef signed long long longlong;
 
 // HEADER FILE INCLUDES
 
+// DLL File
+#include "DLLExport.h"
+
 // Audio Engine Headers
 #include "AudioEngine.h"
 

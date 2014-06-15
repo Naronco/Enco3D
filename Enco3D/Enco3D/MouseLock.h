@@ -4,12 +4,13 @@
 #include "IGameComponent.h"
 #include "FreeMove.h"
 #include "FreeLook.h"
+#include "DLLExport.h"
 
 namespace Enco3D
 {
 	namespace Component
 	{
-		class MouseLock : public Core::IGameComponent
+		class DLL_EXPORT MouseLock : public Core::IGameComponent
 		{
 		private:
 			bool m_mouseLocked{ false };

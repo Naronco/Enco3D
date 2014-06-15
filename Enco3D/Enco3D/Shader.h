@@ -18,6 +18,7 @@
 #include "Camera.h"
 #include "Transform.h"
 #include "DebugLogger.h"
+#include "DLLExport.h"
 
 namespace Enco3D
 {
@@ -33,30 +34,28 @@ namespace Enco3D
 {
 	namespace Rendering
 	{
-		enum ShaderType : unsigned int
+		enum DLL_EXPORT ShaderType : unsigned int
 		{
-			VertexShader                 = 0x000001,
-			FragmentShader               = 0x000010,
-			GeometryShader               = 0x000100,
-			TessellationControlShader    = 0x001000,
+			VertexShader = 0x000001,
+			FragmentShader = 0x000010,
+			GeometryShader = 0x000100,
+			TessellationControlShader = 0x001000,
 			TessellationEvaluationShader = 0x010000,
 		};
 
-		typedef struct __TypedData
+		typedef struct DLL_EXPORT __TypedData
 		{
 			std::string name;
 			std::string type;
-
 		} TypedData;
 
-		typedef struct __UniformStruct
+		typedef struct DLL_EXPORT __UniformStruct
 		{
 			std::string name;
 			std::vector<__TypedData> memberNames;
-
 		} UniformStruct;
 
-		class Shader
+		class DLL_EXPORT Shader
 		{
 		private:
 			GLuint m_program;
@@ -72,7 +71,7 @@ namespace Enco3D
 			void addProgram(const std::string &text, int type);
 			std::string loadShader(const std::string &filename);
 			void checkShaderError(int shader, int flag, bool isProgram, const std::string &errorMsg);
-			
+
 			std::vector<__UniformStruct> findUniformStructs(const std::string &shaderText);
 			std::string findUniformStructName(const std::string &structStartToOpeningBrace);
 			std::vector<__TypedData> findUniformStructComponents(const std::string &openingBraceToClosingBrace);

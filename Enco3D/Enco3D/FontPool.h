@@ -3,6 +3,7 @@
 
 #include "Font.h"
 #include "TSingleton.h"
+#include "DLLExport.h"
 
 #include <map>
 
@@ -10,7 +11,7 @@ namespace Enco3D
 {
 	namespace Rendering
 	{
-		class FontPool : public TSingleton<FontPool>
+		class DLL_EXPORT FontPool : public TSingleton < FontPool >
 		{
 		private:
 			std::map<std::string, Font*> m_loadedFonts;

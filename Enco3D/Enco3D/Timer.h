@@ -15,12 +15,13 @@
 #endif
 
 #include "DebugLogger.h"
+#include "DLLExport.h"
 
 namespace Enco3D
 {
 	namespace Core
 	{
-		class Timer
+		class DLL_EXPORT Timer
 		{
 		private:
 			unsigned int m_lastTime, m_time, m_fpsCounter{ 0 }, m_fps{ 0 };

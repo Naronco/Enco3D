@@ -3,6 +3,7 @@
 
 #include "Texture2D.h"
 #include "DebugLogger.h"
+#include "DLLExport.h"
 
 #include <string>
 #include <fstream>
@@ -12,14 +13,14 @@ namespace Enco3D
 {
 	namespace Rendering
 	{
-		typedef struct __CharacterData
+		typedef struct DLL_EXPORT __CharacterData
 		{
 			float startU, startV, endU, endV;
 			int offsX, offsY;
 			unsigned int advanceX, width, height;
 		} CharacterData;
 
-		enum FontType : unsigned char
+		enum DLL_EXPORT FontType : unsigned char
 		{
 			Default,
 			Italic,
@@ -27,7 +28,7 @@ namespace Enco3D
 			BoldAndItalic,
 		};
 
-		class Font
+		class DLL_EXPORT Font
 		{
 		private:
 			Texture2D *m_texture{ nullptr };

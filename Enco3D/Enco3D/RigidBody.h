@@ -7,12 +7,13 @@
 #include "PhysicsHelper.h"
 #include "IGameComponent.h"
 #include "PhysicsEngine.h"
+#include "DLLExport.h"
 
 namespace Enco3D
 {
 	namespace Component
 	{
-		class RigidBody : public Core::IGameComponent
+		class DLL_EXPORT RigidBody : public Core::IGameComponent
 		{
 		private:
 			float m_mass{ 0.0f };

@@ -5,6 +5,7 @@
 #include "Vector3.h"
 #include "PhysicsHelper.h"
 #include "Mesh.h"
+#include "DLLExport.h"
 
 #include <vector>
 
@@ -12,7 +13,7 @@ namespace Enco3D
 {
 	namespace Physics
 	{
-		class ConvexMeshCollisionShape : public ICollisionShape
+		class DLL_EXPORT ConvexMeshCollisionShape : public ICollisionShape
 		{
 		private:
 			Rendering::Mesh *m_mesh{ nullptr };

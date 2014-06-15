@@ -3,13 +3,14 @@
 
 #include "Matrix3x3.h"
 #include "Vector4.h"
+#include "DLLExport.h"
 
 namespace Enco3D
 {
 	namespace Core
 	{
 		/// <summary>A 4x4 matrix structure</summary>
-		template <typename T> struct Matrix4x4
+		template <typename T> struct DLL_EXPORT Matrix4x4
 		{
 			union
 			{

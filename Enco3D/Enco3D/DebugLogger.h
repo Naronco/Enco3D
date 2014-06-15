@@ -4,18 +4,19 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include "DLLExport.h"
 
 namespace Enco3D
 {
 	namespace Core
 	{
-		enum DebugLoggerFlag
+		enum DLL_EXPORT DebugLoggerFlag
 		{
 			WriteToConsole = 1 << 0,
 			WriteToFile = 1 << 1,
 		};
 
-		class DebugLogger
+		class DLL_EXPORT DebugLogger
 		{
 		private:
 			static DebugLoggerFlag s_flags;

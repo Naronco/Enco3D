@@ -6,12 +6,13 @@
 
 #include "Vector3.h"
 #include "Texture2D.h"
+#include "DLLExport.h"
 
 namespace Enco3D
 {
 	namespace Rendering
 	{
-		struct Material
+		struct DLL_EXPORT Material
 		{
 			std::map<std::string, float> floatValues;
 			std::map<std::string, Core::Vector3f> vector3fValues;
@@ -135,9 +136,9 @@ namespace Enco3D
 					if (blankTexture == nullptr)
 					{
 						float values[16] = { 1.0f, 0.0f, 1.0f, 1.0f,
-											 0.0f, 0.0f, 0.0f, 1.0f, 
-											 0.0f, 0.0f, 0.0f, 1.0f, 
-											 1.0f, 0.0f, 1.0f, 1.0f, };
+							0.0f, 0.0f, 0.0f, 1.0f,
+							0.0f, 0.0f, 0.0f, 1.0f,
+							1.0f, 0.0f, 1.0f, 1.0f, };
 						blankTexture = new Texture2D(2, 2, GL_RGBA, GL_RGBA, GL_NEAREST, GL_REPEAT, values);
 					}
 

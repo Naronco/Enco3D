@@ -6,6 +6,7 @@
 #include "PhysicsEngine.h"
 #include "GLWindow.h"
 #include "Timer.h"
+#include "DLLExport.h"
 
 #include <vector>
 #include <iostream>
@@ -28,7 +29,7 @@ namespace Enco3D
 {
 	namespace Core
 	{
-		class GameObject
+		class DLL_EXPORT GameObject
 		{
 		private:
 			Transform *m_transform{ nullptr };

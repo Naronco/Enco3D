@@ -6,6 +6,7 @@
 #include "Quaternion.h"
 #include "IGameComponent.h"
 #include <vector>
+#include "DLLExport.h"
 
 namespace Enco3D
 {
@@ -25,7 +26,7 @@ namespace Enco3D
 			Orthographic = 1,
 		};
 
-		class Camera : public Core::IGameComponent
+		class DLL_EXPORT Camera : public Core::IGameComponent
 		{
 		private:
 			Core::Matrix4x4f m_projection, m_inverseProjection;
@@ -48,7 +49,7 @@ namespace Enco3D
 			unsigned int m_projectionMode{ ProjectionMode::Perspective };
 
 			std::vector<IPostProcessEffect*> m_postProcessEffects;
-			
+
 		public:
 			Camera();
 			Camera(float fov, float aspect, float zNear, float zFar);

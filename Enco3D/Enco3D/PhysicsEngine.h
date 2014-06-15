@@ -3,6 +3,7 @@
 
 #include "Vector3.h"
 #include "Timer.h"
+#include "DLLExport.h"
 
 #include <btBulletDynamicsCommon.h>
 
@@ -18,7 +19,7 @@ namespace Enco3D
 {
 	namespace Physics
 	{
-		class PhysicsEngine
+		class DLL_EXPORT PhysicsEngine
 		{
 		private:
 			btBroadphaseInterface *m_broadphase{ nullptr };

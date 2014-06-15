@@ -6,6 +6,7 @@
 #include "Mesh.h"
 #include "Material.h"
 #include "Framebuffer.h"
+#include "DLLExport.h"
 
 #include <vector>
 #include <GL/glew.h>
@@ -37,7 +38,7 @@ namespace Enco3D
 {
 	namespace Rendering
 	{
-		enum RasterizationMode : GLenum
+		enum DLL_EXPORT RasterizationMode : GLenum
 		{
 			Solid = GL_FILL,
 			Wireframe = GL_LINE,
@@ -45,7 +46,7 @@ namespace Enco3D
 
 #		define MAX_CAMERAS 5
 
-		class RenderingEngine
+		class DLL_EXPORT RenderingEngine
 		{
 		private:
 			Component::Camera *m_GUICamera{ nullptr };

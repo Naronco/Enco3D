@@ -10,6 +10,7 @@
 #include "Shader.h"
 #include "Vertex.h"
 #include "DebugLogger.h"
+#include "DLLExport.h"
 
 #include <assimp\Importer.hpp>
 #include <assimp\scene.h>
@@ -24,7 +25,7 @@ namespace Enco3D
 {
 	namespace Component
 	{
-		class WavefrontMesh : public Core::IGameComponent
+		class DLL_EXPORT WavefrontMesh : public Core::IGameComponent
 		{
 		private:
 			std::vector<std::shared_ptr<Rendering::MeshResource>> m_meshes;

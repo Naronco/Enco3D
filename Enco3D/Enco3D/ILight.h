@@ -5,12 +5,13 @@
 #include "Shader.h"
 #include "Matrix4x4.h"
 #include "IGameComponent.h"
+#include "DLLExport.h"
 
 namespace Enco3D
 {
 	namespace Component
 	{
-		class ILight : public Core::IGameComponent
+		class DLL_EXPORT ILight : public Core::IGameComponent
 		{
 		protected:
 			Core::Vector3f m_color;

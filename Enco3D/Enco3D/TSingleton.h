@@ -2,12 +2,13 @@
 #define _ENCO3D_TSINGLETON_H_
 
 #include <memory>
+#include "DLLExport.h"
 
 template <typename T>
 class TSingleton
 {
 public:
-	inline static T *getInstance()
+	inline static DLL_EXPORT T *getInstance()
 	{
 		static std::unique_ptr<T> instance(nullptr);
 		if (instance.get() == nullptr)

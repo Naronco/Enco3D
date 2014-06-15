@@ -4,12 +4,13 @@
 #include "BoundingSphere.h"
 #include "Contains.h"
 #include "Frustum.h"
+#include "DLLExport.h"
 
 namespace Enco3D
 {
 	namespace Core
 	{
-		class BoundingBox
+		class DLL_EXPORT BoundingBox
 		{
 		public:
 			BoundingBox(Vector3f min, Vector3f max) : m_min(min), m_max(max) { }

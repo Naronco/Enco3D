@@ -7,6 +7,7 @@
 #include "Timer.h"
 #include "Transform.h"
 #include "GameObject.h"
+#include "DLLExport.h"
 
 #include <string>
 
@@ -14,7 +15,7 @@ namespace Enco3D
 {
 	namespace Core
 	{
-		class IGameComponent
+		class DLL_EXPORT IGameComponent
 		{
 		protected:
 			GameObject *m_gameObject;

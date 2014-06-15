@@ -2,12 +2,13 @@
 #define _ENCO3D_SSAOPOSTPROCESSEFFECT_H_
 
 #include "IPostProcessEffect.h"
+#include "DLLExport.h"
 
 namespace Enco3D
 {
 	namespace Component
 	{
-		class SSAOPostProcessEffect : public IPostProcessEffect
+		class DLL_EXPORT SSAOPostProcessEffect : public IPostProcessEffect
 		{
 		private:
 			Rendering::Framebuffer *m_ssaoFramebuffer, *m_blurFramebuffer;

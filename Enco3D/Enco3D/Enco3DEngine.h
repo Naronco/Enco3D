@@ -10,6 +10,7 @@
 #include "Random.h"
 #include "TSingleton.h"
 #include "GUIText.h"
+#include "DLLExport.h"
 
 #include <string>
 
@@ -17,7 +18,7 @@ namespace Enco3D
 {
 	namespace Core
 	{
-		class Enco3DEngine : public TSingleton<Enco3DEngine>
+		class DLL_EXPORT Enco3DEngine : public TSingleton < Enco3DEngine >
 		{
 		private:
 			GLWindow *m_window{ nullptr };

@@ -9,12 +9,13 @@
 #include "Frustum.h"
 #include "Plane.h"
 #include "PlaneIntersectionType.h"
+#include "DLLExport.h"
 
 namespace Enco3D
 {
 	namespace Core
 	{
-		class BoundingSphere
+		class DLL_EXPORT BoundingSphere
 		{
 		public:
 			BoundingSphere(Vector3f center, float radius) : m_center(center), m_radius(radius) { }

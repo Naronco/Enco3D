@@ -7,13 +7,14 @@
 #include "GLWindow.h"
 #include "Timer.h"
 #include "GameObject.h"
+#include "DLLExport.h"
 
 namespace Enco3D
 {
 	namespace Core
 	{
 		/// <summary>Main interface class for a game</summary>
-		class IGame
+		class DLL_EXPORT IGame
 		{
 		private:
 			/// <summary>Pointer to the rendering engine</summary>
@@ -124,7 +125,7 @@ namespace Enco3D
 			inline GameObject *createGameObject(const std::string &name)
 			{
 				GameObject *go = new GameObject(name);
-//				addGameObject(go);
+				//				addGameObject(go);
 				return go;
 			}
 		};

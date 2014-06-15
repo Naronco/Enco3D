@@ -2,12 +2,13 @@
 #define _ENCO3D_POINTLIGHT_H_
 
 #include "ILight.h"
+#include "DLLExport.h"
 
 namespace Enco3D
 {
 	namespace Component
 	{
-		class PointLight : public ILight
+		class DLL_EXPORT PointLight : public ILight
 		{
 		private:
 			float m_range{ 0.0f };

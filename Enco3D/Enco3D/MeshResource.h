@@ -5,12 +5,13 @@
 #include <iostream>
 #include "Vertex.h"
 #include "DebugLogger.h"
+#include "DLLExport.h"
 
 namespace Enco3D
 {
 	namespace Rendering
 	{
-		class MeshResource
+		class DLL_EXPORT MeshResource
 		{
 		private:
 			GLuint m_vbo{ 0 }, m_ibo{ 0 };

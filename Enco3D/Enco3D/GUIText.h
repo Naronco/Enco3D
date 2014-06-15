@@ -8,6 +8,7 @@
 #include "Mesh.h"
 #include "Shader.h"
 #include "FontPool.h"
+#include "DLLExport.h"
 
 #include <string>
 
@@ -17,7 +18,7 @@ namespace Enco3D
 	{
 		const unsigned int __defaultFontSize = 32;
 
-		class GUIText : public Core::IGameComponent
+		class DLL_EXPORT GUIText : public Core::IGameComponent
 		{
 		private:
 			std::string m_text;

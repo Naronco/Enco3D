@@ -4,12 +4,13 @@
 #include <string>
 #include <boost\asio.hpp>
 #include <iostream>
+#include "DLLExport.h"
 
 namespace Enco3D
 {
 	namespace Net
 	{
-		class HTTPRequest
+		class DLL_EXPORT HTTPRequest
 		{
 		public:
 			HTTPRequest();

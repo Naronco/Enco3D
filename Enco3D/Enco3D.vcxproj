@@ -80,6 +80,7 @@
     <ClInclude Include="Enco3D\DebugLogger.h" />
     <ClInclude Include="Enco3D\DefaultMesh.h" />
     <ClInclude Include="Enco3D\DirectionalLight.h" />
+    <ClInclude Include="Enco3D\DLLExport.h" />
     <ClInclude Include="Enco3D\Enco3D.h" />
     <ClInclude Include="Enco3D\Enco3DEngine.h" />
     <ClInclude Include="Enco3D\ErrorHandler.h" />

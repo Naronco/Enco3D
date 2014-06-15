@@ -3,12 +3,13 @@
 
 #include "ILight.h"
 #include "ShaderPool.h"
+#include "DLLExport.h"
 
 namespace Enco3D
 {
 	namespace Component
 	{
-		class SpotLight : public ILight
+		class DLL_EXPORT SpotLight : public ILight
 		{
 		private:
 			float m_range, m_cutoff;

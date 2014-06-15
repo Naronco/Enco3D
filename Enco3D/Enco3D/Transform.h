@@ -3,6 +3,7 @@
 
 #include "Vector3.h"
 #include "Quaternion.h"
+#include "DLLExport.h"
 
 namespace Enco3D
 {
@@ -16,7 +17,7 @@ namespace Enco3D
 {
 	namespace Core
 	{
-		class Transform
+		class DLL_EXPORT Transform
 		{
 		private:
 			Transform *m_parentTransform{ nullptr };

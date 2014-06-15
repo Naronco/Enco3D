@@ -14,11 +14,13 @@
 #	endif
 #endif
 
+#include "DLLExport.h"
+
 namespace Enco3D
 {
 	namespace Core
 	{
-		class StopWatch
+		class DLL_EXPORT StopWatch
 		{
 		private:
 			bool m_stopping{ false };

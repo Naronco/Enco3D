@@ -4,6 +4,7 @@
 #include <string>
 #include <fstream>
 #include <streambuf>
+#include "DLLExport.h"
 
 namespace Enco3D
 {
@@ -11,13 +12,13 @@ namespace Enco3D
 	{
 		namespace ConfigType
 		{
-			enum ConfigTypes
+			enum DLL_EXPORT ConfigTypes
 			{
 				JSON
 			};
 		}
 
-		class Config
+		class DLL_EXPORT Config
 		{
 		public:
 			Config(const std::string& content, ConfigType::ConfigTypes type);

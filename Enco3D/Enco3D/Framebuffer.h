@@ -5,12 +5,13 @@
 #include <vector>
 #include "Texture2D.h"
 #include "DebugLogger.h"
+#include "DLLExport.h"
 
 namespace Enco3D
 {
 	namespace Rendering
 	{
-		enum Attachment : unsigned int
+		enum DLL_EXPORT Attachment : unsigned int
 		{
 			Color0,
 			Color1,
@@ -25,7 +26,7 @@ namespace Enco3D
 			Depth,
 		};
 
-		class Framebuffer
+		class DLL_EXPORT Framebuffer
 		{
 		private:
 			GLuint m_id;

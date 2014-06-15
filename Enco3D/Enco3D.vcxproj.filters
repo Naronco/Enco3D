@@ -463,5 +463,8 @@
     <ClInclude Include="Enco3D\Billboard.h">
       <Filter>Headerdateien\Component</Filter>
     </ClInclude>
+    <ClInclude Include="Enco3D\DLLExport.h">
+      <Filter>Headerdateien\Core</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
