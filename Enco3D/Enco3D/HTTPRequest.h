@@ -5,18 +5,17 @@
 #include <boost\asio.hpp>
 #include <iostream>
 #include "DLLExport.h"
+#include "TextBasedProtocol.h"
 
 namespace Enco3D
 {
 	namespace Net
 	{
-		class DLL_EXPORT HTTPRequest
+		class DLL_EXPORT HTTPRequest : public TextBasedProtocol
 		{
 		public:
 			HTTPRequest();
 			~HTTPRequest();
-
-			void connect(const std::string& host, const std::string& port);
 
 			void setHost(const std::string& host);
 			std::string getHost();
@@ -26,11 +25,6 @@ namespace Enco3D
 			std::string head(const std::string& site);
 			std::string put(const std::string& site, const std::string& content, const std::string& contentType = "text/plain");
 			std::string del(const std::string& site);
-		protected:
-
-			boost::asio::io_service io;
-			boost::asio::ip::tcp::socket m_Socket;
-			std::string m_Host;
 		};
 	}
 }

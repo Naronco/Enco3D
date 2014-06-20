@@ -12,7 +12,7 @@ namespace Enco3D
 {
 	namespace Rendering
 	{
-		class DLL_EXPORT ShaderPool : public TSingleton < ShaderPool >
+		class ShaderPool : public TSingleton < ShaderPool >
 		{
 		private:
 			std::map<std::string, Shader*> m_loadedShaders;

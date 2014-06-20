@@ -11,7 +11,7 @@ namespace Enco3D
 {
 	namespace Rendering
 	{
-		class DLL_EXPORT FontPool : public TSingleton < FontPool >
+		class FontPool : public TSingleton < FontPool >
 		{
 		private:
 			std::map<std::string, Font*> m_loadedFonts;

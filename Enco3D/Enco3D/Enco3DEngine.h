@@ -18,7 +18,7 @@ namespace Enco3D
 {
 	namespace Core
 	{
-		class DLL_EXPORT Enco3DEngine : public TSingleton < Enco3DEngine >
+		class Enco3DEngine : public TSingleton < Enco3DEngine >
 		{
 		private:
 			GLWindow *m_window{ nullptr };

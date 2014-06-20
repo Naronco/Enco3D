@@ -11,7 +11,7 @@ namespace Enco3D
 		namespace Mouse
 		{
 			/// <summary>Enumeration of the mouse button ids</summary>
-			enum DLL_EXPORT MouseButton : unsigned int
+			enum MouseButton : unsigned int
 			{
 				Left = 1,
 				Middle = 2,
@@ -21,7 +21,7 @@ namespace Enco3D
 
 		namespace Keyboard
 		{
-			enum DLL_EXPORT KeyboardKey : unsigned int
+			enum KeyboardKey : unsigned int
 			{
 				Unknown = 0,
 				A = 4,

@@ -10,13 +10,13 @@ namespace Enco3D
 {
 	namespace Core
 	{
-		enum DLL_EXPORT DebugLoggerFlag
+		enum DebugLoggerFlag
 		{
 			WriteToConsole = 1 << 0,
 			WriteToFile = 1 << 1,
 		};
 
-		class DLL_EXPORT DebugLogger
+		class DebugLogger
 		{
 		private:
 			static DebugLoggerFlag s_flags;

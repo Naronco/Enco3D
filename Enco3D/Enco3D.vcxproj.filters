@@ -218,6 +218,12 @@
     <ClCompile Include="Enco3D\Billboard.cpp">
       <Filter>Quelldateien\Component</Filter>
     </ClCompile>
+    <ClCompile Include="Enco3D\TextBasedProtocol.cpp">
+      <Filter>Quelldateien\Net</Filter>
+    </ClCompile>
+    <ClCompile Include="Enco3D\FTPClient.cpp">
+      <Filter>Quelldateien\Net</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enco3D\stb_image.h">
@@ -465,6 +471,12 @@
     </ClInclude>
     <ClInclude Include="Enco3D\DLLExport.h">
       <Filter>Headerdateien\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\TextBasedProtocol.h">
+      <Filter>Headerdateien\Net</Filter>
+    </ClInclude>
+    <ClInclude Include="Enco3D\FTPClient.h">
+      <Filter>Headerdateien\Net</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
